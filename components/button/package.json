@@ -1,6 +1,6 @@
 {
   "name": "@shared-test/button",
-  "version": "1.0.3",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
