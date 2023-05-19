@@ -1,0 +1,25 @@
+{
+  "name": "@shared-test/button",
+  "version": "1.0.3",
+  "description": "",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bundle": "rollup -w -c --bundleConfigAsCjs",
+    "build": "rollup -c --bundleConfigAsCjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "tailwind-merge": "^1.12.0"
+  }
+}

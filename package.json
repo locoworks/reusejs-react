@@ -1,0 +1,57 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "web:dev": "turbo run web#dev",
+    "button:bundle": "turbo run @shared-test/button#bundle",
+    "build:watch": "turbo run components#build:watch",
+    "build:all": "concurrently \"cd ./packages/TextInput && yarn bundle\" \"cd ./packages/LoginForm && yarn bundle \" \"cd ./packages/ButtonGroup && yarn bundle\"",
+    "gen:comp": "node ./scripts/scaffoldComponent.mjs",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build && changeset publish",
+    "button:dev": "turbo run button-app#dev"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.1",
+    "autoprefixer": "^10.4.14",
+    "concurrently": "^8.0.1",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "*",
+    "fs-extra": "^11.1.1",
+    "path": "^0.12.7",
+    "postcss": "^8.4.23",
+    "prettier": "^2.5.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tailwindcss": "^3.3.2"
+  },
+  "name": "reusev2-sample",
+  "packageManager": "yarn@1.22.19",
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "components/*",
+    "dev-apps/*"
+  ],
+  "dependencies": {
+    "@mdx-js/loader": "^2.3.0",
+    "@mdx-js/react": "^2.3.0",
+    "@next/mdx": "^13.4.2",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@tailwindcss/typography": "^0.5.9",
+    "@types/mdx": "^2.0.5",
+    "@types/node": "^20.2.0",
+    "gray-matter": "^4.0.3",
+    "next-mdx-remote": "^4.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.21.0",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "tailwind-merge": "^1.12.0",
+    "turbo": "^1.9.8"
+  }
+}

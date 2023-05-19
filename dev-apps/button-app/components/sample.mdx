@@ -1,0 +1,44 @@
+---
+title: "Hello World"
+author: "Shrey Dhyani"
+---
+
+import { ReuseLoginForm } from "@shared-test/reusejsv2-sample-login-form";
+import CodePreview from "./CodePreview";
+import ReuseExample from "./ReuseExample";
+import { ReuseButton } from "@shared-test/button";
+
+# Hello World
+
+This is a sample MDX FIle that we are using to test rendering mdx files.
+
+#### Heading 4: This will be a to do list
+
+- [ ] One
+- [ ] Two
+
+{/* <CodePreview> */}
+
+```ts
+console.log("Hello");
+```
+
+```bash {{ title: 'cURL' }}
+  curl -G https://api.protocol.chat/v1/attachments \
+    -H "Authorization: Bearer {token}" \
+    -d conversation_id="xgQQXg3hrtjh7AvZ" \
+    -d limit=10
+```
+
+{/* </CodePreview> */}
+
+<button className="bg-red-400 px-4 py-1 text-white font-bold rounded-lg">Hello</button>
+
+<ReuseButton onClick={()=>{console.log("Hello from reuse button")}}>Check!!</ReuseButton>
+
+<ReuseButton onClick={()=>{console.log("Hello from reuse button")}}>Hello!!</ReuseButton>
+
+
+<div className="w-full mt-4">
+  <ReuseLoginForm wrapperClasses="w-full" />
+</div>

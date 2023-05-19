@@ -1,0 +1,26 @@
+{
+  "name": "button-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.14",
+    "@shared-test/reusejsv2-sample-login-form": "^1.1.2",
+    "next": "13.4.2",
+    "react-dom": "18.2.0",
+    "@shared-test/button": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.5"
+  }
+}
