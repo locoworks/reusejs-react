@@ -19,6 +19,9 @@
     },
     "@locoworks/reusejs-react-button#build": {
       "cache": false
+    },
+    "@locoworks/reusejs-react-button#publish": {
+      "cache": false
     }
   }
 }

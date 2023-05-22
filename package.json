@@ -14,7 +14,8 @@
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish",
     "button:dev": "turbo run @locoworks/reusejs-react-button#dev",
-    "button:build": "turbo run @locoworks/reusejs-react-button#build"
+    "button:build": "turbo run @locoworks/reusejs-react-button#build",
+    "button:publish": "turbo run @locoworks/reusejs-react-button#publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
