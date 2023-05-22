@@ -1,11 +1,10 @@
 {
-  "name": "@shared-test/button",
+  "name": "@locoworks/reusejs-react-button",
   "version": "0.0.1",
-  "description": "",
+  "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/types",
-  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
@@ -13,13 +12,25 @@
     "dist/**"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "rollup -w -c --bundleConfigAsCjs",
+    "dev": "vite",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
     "build": "rollup -c --bundleConfigAsCjs"
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
-    "tailwind-merge": "^1.12.0"
+    "@mdx-js/rollup": "^2.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "vite": "^4.3.2"
   }
 }

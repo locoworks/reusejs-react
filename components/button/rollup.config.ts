@@ -1,12 +1,12 @@
-/* eslint-disable import/no-anonymous-default-export */
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
+// import mdx from "rollup-plugin-mdx";
 
 export default [
   {
-    input: "index.ts",
+    input: "./src/core/index.ts",
     output: [
       {
         file: "dist/index.cjs.js",
@@ -24,6 +24,7 @@ export default [
       typescript({
         useTsconfigDeclarationDir: true,
       }),
+      // mdx(),
       postcss({
         extract: "styles.css",
         config: {

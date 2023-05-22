@@ -1,16 +1,15 @@
 {
-    "compilerOptions": {
-      "lib": ["dom", "dom.iterable"],
-      "declaration": true,
-      "declarationDir": "dist/types",
-      "esModuleInterop": true,
-      "moduleResolution": "Node",
-      "jsx": "react",
-      "resolveJsonModule": true,
-      "strict": true,
-      "target": "ESNext"
-    },
-    "include": ["","src"],
-    "exclude": ["dist/**"]
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable","ES2016"],
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "ESNext"
+  },
+  "include": ["","src"],
+  "exclude": ["dist/**"]
 }
-  

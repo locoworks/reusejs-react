@@ -1,0 +1,26 @@
+---
+title: "ReuseJS Button"
+author: "Shrey Dhyani"
+---
+
+import { ReuseButton } from "../core/index";
+
+# Hello World
+
+This is a sample
+
+<button className="bg-red-600 hover:bg-red-700 px-3 py-2 text-white font-bold rounded" onClick={()=>{console.log("Hello!!!")}}>Clicky!!</button>
+
+<ReuseButton onClick={()=>{console.log("Hello")}}>Click</ReuseButton>
+
+```ts
+console.log("Hello");
+```
+
+```bash {{ title: 'cURL' }}
+  curl -G https://api.protocol.chat/v1/attachments \
+    -H "Authorization: Bearer {token}" \
+    -d conversation_id="xgQQXg3hrtjh7AvZ" \
+    -d limit=10
+```
+

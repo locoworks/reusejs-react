@@ -14,13 +14,10 @@
       "cache": true,
       "persistent": true
     },
-    "@shared-test/reusejsv2-sample-button#bundle": {
+    "@locoworks/reusejs-react-button#dev": {
       "cache": false
     },
-    "@shared-test/button#bundle": {
-      "cache": false
-    },
-    "button-app#dev": {
+    "@locoworks/reusejs-react-button#build": {
       "cache": false
     }
   }
