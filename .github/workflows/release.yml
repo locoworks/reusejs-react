@@ -33,3 +33,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN_LOCOWORKS }}
+          
+      - name: Discord notification
+        if: steps.changesets.outputs.published == 'true'
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.REACTJS_DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'A new version of @locoworks/reusejs-react is released!'
