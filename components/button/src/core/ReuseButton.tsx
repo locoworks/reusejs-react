@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import HeadlessButton, { HeadlessButtonProps } from "./HeadlessButton";
 import { twMerge } from "tailwind-merge";
 
-export interface ReuseMergeExampleButtonProps extends HeadlessButtonProps {
+export interface ReuseButtonProps extends HeadlessButtonProps {
   //   variant?: string;
   buttonPrefix?: React.ReactNode;
   buttonSuffix?: React.ReactNode;
 }
 
-const ReuseMergeExampleButton: FC<ReuseMergeExampleButtonProps> = (props) => {
+const ReuseButton: FC<ReuseButtonProps> = (props) => {
   const defaultStyleClasses =
     "inline-flex justify-center items-center focus:outline-none font-normal text-sm bg-red-500 hover:bg-blue-700 text-white rounded-md px-4 py-2 border border-transparent";
 
@@ -34,4 +34,4 @@ const ReuseMergeExampleButton: FC<ReuseMergeExampleButtonProps> = (props) => {
   );
 };
 
-export default ReuseMergeExampleButton;
+export default ReuseButton;
