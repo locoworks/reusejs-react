@@ -4,6 +4,7 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/types",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
