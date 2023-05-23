@@ -13,7 +13,7 @@ export default [
         format: "cjs",
       },
       {
-        file: "dist/index.es.js",
+        file: "dist/index.esm.js",
         format: "es",
       },
     ],
