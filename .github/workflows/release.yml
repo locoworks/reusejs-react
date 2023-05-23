@@ -40,9 +40,4 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.REACTJS_DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: |
-            echo "Printing messages..."
-            var messages=${{steps.changesets.outputs.publishedPackages}}
-            for message in "${messages[@]}"; do
-              echo "@locoworks/${{message.name}} released version : ${{message.version}}"
-            done
+          args: "A new version of @locoworks/reusejs-react is released!"
