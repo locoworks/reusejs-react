@@ -42,7 +42,7 @@ jobs:
         with:
           args: |
             echo "Printing messages..."
-            messages=${{steps.changesets.outputs.publishedPackages}}
+            var messages=${{steps.changesets.outputs.publishedPackages}}
             for message in "${messages[@]}"; do
               echo "@locoworks/${{message.name}} released version : ${{message.version}}"
             done
