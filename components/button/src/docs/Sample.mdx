@@ -3,15 +3,17 @@ title: "ReuseJS Button"
 author: "Shrey Dhyani"
 ---
 
-import { ReuseButton } from "../core/index";
+import { ReuseButton, RedButton,YellowButton } from "../core/index";
 
 # Hello World
 
 This is a sample
 
-<button className="bg-red-600 hover:bg-red-700 px-3 py-2 text-white font-bold rounded" onClick={()=>{console.log("Hello!!!")}}>Clicky!!</button>
 
 <ReuseButton onClick={()=>{console.log("Hello")}}>Click</ReuseButton>
+<RedButton onClick={()=>{console.log("Hello")}}>Click</RedButton>
+<YellowButton onClick={()=>{console.log("Hello")}}>Click</YellowButton>
+
 
 ```ts
 console.log("Hello");

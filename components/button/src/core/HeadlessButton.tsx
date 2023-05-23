@@ -12,6 +12,7 @@ export interface HeadlessButtonProps {
   onBlur?: (e: React.FocusEvent<HTMLButtonElement, Element>) => void;
   onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   onMouseLeave?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  styles?: any;
 }
 
 const HeadlessButton: FC<HeadlessButtonProps> = (props) => {
@@ -25,6 +26,7 @@ const HeadlessButton: FC<HeadlessButtonProps> = (props) => {
       onMouseLeave={props.onMouseLeave}
       onFocus={props.onFocus}
       onBlur={props.onBlur}
+      style={props.styles}
     >
       {props.busy ? props.busyText : props.children}
     </button>

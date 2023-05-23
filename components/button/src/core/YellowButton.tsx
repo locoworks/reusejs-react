@@ -2,18 +2,17 @@ import React, { FC } from "react";
 import HeadlessButton, { HeadlessButtonProps } from "./HeadlessButton";
 import { twMerge } from "tailwind-merge";
 
-export interface ReuseButtonProps extends HeadlessButtonProps {
-  //   variant?: string;
+export interface YellowButtonProps extends HeadlessButtonProps {
   buttonPrefix?: React.ReactNode;
   buttonSuffix?: React.ReactNode;
 }
 
-const ReuseButton: FC<ReuseButtonProps> = (props) => {
+const YellowButton: FC<YellowButtonProps> = (props) => {
   const defaultStyleClasses =
-    "inline-flex justify-center items-center focus:outline-none font-normal text-sm bg-blue-500 hover:bg-blue-700 text-white rounded-md px-4 py-2 border border-transparent";
+    "inline-flex justify-center items-center focus:outline-none font-normal text-sm bg-yellow-500 hover:bg-yellow-700 text-white rounded-md px-4 py-2 border border-transparent";
 
   const finalClassNames = twMerge(defaultStyleClasses, props.className);
-  console.log("Reuse Button");
+  console.log("Yello Button");
 
   return (
     <HeadlessButton
@@ -35,4 +34,4 @@ const ReuseButton: FC<ReuseButtonProps> = (props) => {
   );
 };
 
-export default ReuseButton;
+export default YellowButton;
