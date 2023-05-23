@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-button
 
+## 0.0.5
+
+### Patch Changes
+
+- 6a35b06: Rollup Config fix
+
 ## 0.0.4
 
 ### Patch Changes
