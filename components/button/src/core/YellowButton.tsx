@@ -12,7 +12,6 @@ const YellowButton: FC<YellowButtonProps> = (props) => {
     "inline-flex justify-center items-center focus:outline-none font-normal text-sm bg-yellow-500 hover:bg-yellow-700 text-white rounded-md px-4 py-2 border border-transparent";
 
   const finalClassNames = twMerge(defaultStyleClasses, props.className);
-  console.log("Yello Button");
 
   return (
     <HeadlessButton

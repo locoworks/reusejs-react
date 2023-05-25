@@ -12,7 +12,6 @@ const RedButton: FC<RedButtonProps> = (props) => {
     "inline-flex justify-center items-center focus:outline-none font-normal text-sm bg-red-500 hover:bg-red-700 text-white rounded-md px-4 py-2 border border-transparent";
 
   const finalClassNames = twMerge(defaultStyleClasses, props.className);
-  console.log("Red Button");
 
   return (
     <HeadlessButton
