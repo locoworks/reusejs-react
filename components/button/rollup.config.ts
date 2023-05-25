@@ -2,11 +2,10 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "rollup-plugin-typescript2";
 import postcss from "rollup-plugin-postcss";
-// import mdx from "rollup-plugin-mdx";
 
 export default [
   {
-    input: "./src/core/index.ts",
+    input: "./index.ts",
     output: [
       {
         file: "dist/index.cjs.js",

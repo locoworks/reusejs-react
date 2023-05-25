@@ -13,7 +13,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish",
-    "button:dev": "turbo run @locoworks/reusejs-react-button#dev",
+    "button:dev": "turbo run dev --filter=button-app...",
     "button:build": "turbo run @locoworks/reusejs-react-button#build",
     "textInput:dev": "turbo run @locoworks/reusejs-react-text-input#dev",
     "textInput:build": "turbo run @locoworks/reusejs-react-text-input#build"
@@ -36,7 +36,8 @@
   "packageManager": "yarn@1.22.19",
   "workspaces": [
     "apps/*",
-    "components/*"
+    "components/*",
+    "development/*"
   ],
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",

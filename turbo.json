@@ -14,7 +14,7 @@
       "cache": true,
       "persistent": true
     },
-    "@locoworks/reusejs-react-button#dev": {
+    "button-app#dev": {
       "cache": false
     },
     "@locoworks/reusejs-react-button#build": {
