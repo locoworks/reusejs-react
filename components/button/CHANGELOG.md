@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-button
 
+## 0.0.6
+
+### Patch Changes
+
+- 0aa06fe: Testing Package.json modules
+
 ## 0.0.5
 
 ### Patch Changes
