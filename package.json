@@ -14,9 +14,11 @@
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish",
     "button:dev": "turbo run dev --filter=button-app...",
-    "button:build": "turbo run @locoworks/reusejs-react-button#build",
-    "textInput:dev": "turbo run @locoworks/reusejs-react-text-input#dev",
-    "textInput:build": "turbo run @locoworks/reusejs-react-text-input#build"
+    "button:build": "turbo run build --filter=@locoworks/reusejs-react-button",
+    "textInput:dev": "turbo run dev --filter=text-input-app...",
+    "textInput:build": "turbo run build --filter=@locoworks/reusejs-react-text-input",
+    "docs:dev": "turbo run dev --filter=reuse-docs...",
+    "autogen:comp": "node ./scripts/scaffoldComponent.cjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
@@ -37,7 +39,8 @@
   "workspaces": [
     "apps/*",
     "components/*",
-    "development/*"
+    "development/*",
+    "docs"
   ],
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
@@ -49,6 +52,7 @@
     "@types/mdx": "^2.0.5",
     "@types/node": "^20.2.0",
     "gray-matter": "^4.0.3",
+    "ncp": "^2.0.0",
     "next-mdx-remote": "^4.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

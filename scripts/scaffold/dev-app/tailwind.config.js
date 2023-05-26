@@ -4,7 +4,7 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../components/text-input/**/*.{js,jsx.ts.tsx,mdx}",
+    "../../components/<to-replace>/**/*.{js,jsx.ts.tsx,mdx}",
   ],
   theme: {
     extend: {
