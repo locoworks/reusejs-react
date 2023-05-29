@@ -12,20 +12,19 @@ const path = require("path");
 
 const replacementText = process.argv[2];
 
-// const pack = fs.readFileSync(
-//   "./scripts/scaffold/component/<to-replace>/package.json",
-//   "utf-8"
-// );
-
-// console.log(">>>>>>", pack);
-
 function reformat(folderPath) {
-  fs.readdirSync(folderPath).forEach((file) => {
-    const filePath = path.join(folderPath, file);
-    let fileContent = fs.readFileSync(filePath, "utf-8");
-    fileContent = fileContent.replace(/<to-replace>/g, replacementText);
-    fs.writeFileSync(filePath, fileContent, "utf-8");
-  });
+  try {
+    fs.readdirSync(folderPath).forEach((file) => {
+      const filePath = path.join(folderPath, file);
+      if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+        let fileContent = fs.readFileSync(filePath, "utf-8");
+        fileContent = fileContent.replace(/<to-replace>/g, replacementText);
+        fs.writeFileSync(filePath, fileContent, "utf-8");
+      }
+    });
+  } catch (error) {
+    console.log("Error is >>", error);
+  }
 }
 
 const componentSourceFolderPath = "./scripts/scaffold/component"; // Replace with the actual source folder path
@@ -33,7 +32,7 @@ const componentTargetFolderPath = "./components/" + process.argv[2]; // Replace 
 const devAppSourceFolderPath = "./scripts/scaffold/dev-app"; // Replace with the actual source folder path
 const devAppTargetFolderPath = "./development/" + process.argv[2] + "-app"; // Replace with the actual target folder path
 
-// Copy the folder and its contents
+// Copy the folder and its contents for component repo
 ncp(componentSourceFolderPath, componentTargetFolderPath, function (err) {
   if (err) {
     console.error(err);
@@ -51,3 +50,17 @@ ncp(devAppSourceFolderPath, devAppTargetFolderPath, function (err) {
     reformat(devAppTargetFolderPath);
   }
 });
+
+const filePath = "./package.json";
+const lineToAdd = `"${replacementText}-app:dev": "turbo run dev --filter=${replacementText}-app...",`;
+
+const fileContent = fs.readFileSync(filePath, "utf-8");
+
+const lines = fileContent.split("\n");
+
+const insertionIndex = 19;
+lines.splice(insertionIndex, 0, lineToAdd);
+
+const updatedContent = lines.join("\n");
+
+fs.writeFileSync(filePath, updatedContent, "utf-8");
