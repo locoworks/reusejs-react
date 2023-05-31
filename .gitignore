@@ -3,6 +3,8 @@ dist
 
 package-lock.json
 
+git status
+/components/**/node_modules/
 
 # dependencies
 /node_modules

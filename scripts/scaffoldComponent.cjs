@@ -52,14 +52,16 @@ ncp(devAppSourceFolderPath, devAppTargetFolderPath, function (err) {
 });
 
 const filePath = "./package.json";
-const lineToAdd = `"${replacementText}-app:dev": "turbo run dev --filter=${replacementText}-app...",`;
+const lineToAdd1 = `"${replacementText}:dev": "turbo run dev --filter=${replacementText}-app...",`;
+const lineToAdd2 = `"${replacementText}:build": "turbo run build --filter=@locoworks/reusejs-react-${replacementText}...",`;
 
 const fileContent = fs.readFileSync(filePath, "utf-8");
 
 const lines = fileContent.split("\n");
 
 const insertionIndex = 19;
-lines.splice(insertionIndex, 0, lineToAdd);
+lines.splice(insertionIndex, 0, lineToAdd2);
+lines.splice(insertionIndex, 0, lineToAdd1);
 
 const updatedContent = lines.join("\n");
 

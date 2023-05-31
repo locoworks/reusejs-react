@@ -5,9 +5,9 @@ import { MDXProvider } from "@mdx-js/react";
 export default function App({ Component, pageProps }: any) {
   return (
     <MDXProvider>
-      <div className="prose">
-        <Component {...pageProps} />
-      </div>
+      {/* <div className="prose max-w-full"> */}
+      <Component {...pageProps} />
+      {/* </div> */}
     </MDXProvider>
   );
 }
