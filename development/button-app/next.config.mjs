@@ -2,7 +2,7 @@ import createMDX from "@next/mdx";
 import remarkToc from "remark-toc";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import codeImport from "remark-folder-import";
+import codeImport from "@locoworks/remark-folder-import";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,

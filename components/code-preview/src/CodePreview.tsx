@@ -16,7 +16,14 @@ const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
   const [showCopied, setShowCopied] = useState(false);
 
   const handlingShowCopied = () => {
-    navigator.clipboard.writeText(shownCode === "JS" ? js : ts);
+    const code_to_be_copied = showCode
+      ? shownCode === "JS"
+        ? js
+        : ts
+      : preview
+      ? preview
+      : "NO preview Available";
+    navigator.clipboard.writeText(code_to_be_copied);
     setShowCopied(true);
     setTimeout(() => {
       setShowCopied(false);
@@ -55,15 +62,15 @@ const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
           <div />
         )}
         <div className="flex justify-center items-center">
-          {preview ? (
+          {preview || showCode ? (
             <button
               className="relative h-10 w-10 px-2 py-1 mx-2 border border-gray-100 hover:bg-gray-200 rounded font-extrabold bg-gray-50"
               onClick={handlingShowCopied}
             >
               <div
                 className={
-                  "absolute -top-9 -left-5 bg-black opacity-75  px-3 py-2 border border-gray-400 rounded text-white font-normal transition-all " +
-                  (showCopied ? "" : "opacity-0")
+                  "absolute -top-9 -left-5 bg-black px-3 py-2 border border-gray-400 rounded text-white font-normal transition-all " +
+                  (showCopied ? "opacity-75" : "opacity-0 ")
                 }
               >
                 Copied
