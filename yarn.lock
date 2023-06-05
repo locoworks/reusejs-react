@@ -6464,15 +6464,6 @@ rehype-slug@^5.1.0:
     unified "^10.0.0"
     unist-util-visit "^4.0.0"
 
-remark-code-import@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/remark-code-import/-/remark-code-import-1.2.0.tgz#2f879c05909eb5f7cf5a1236bab415010eec69dd"
-  integrity sha512-fgwLruqlZbVOIhCJFjY+JDwPZhA4/eK3InJzN8Ox8UDdtudpG212JwtRj6la+lAzJU7JmSEyewZSukVZdknt3Q==
-  dependencies:
-    strip-indent "^4.0.0"
-    to-gatsby-remark-plugin "^0.1.0"
-    unist-util-visit "^4.1.0"
-
 remark-mdx@^2.0.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/remark-mdx/-/remark-mdx-2.3.0.tgz"
