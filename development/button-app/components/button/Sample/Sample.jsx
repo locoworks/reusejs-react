@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  ReuseButton,
-  RedButton,
-  YellowButton,
-} from "@locoworks/reusejs-react-button";
+import { ReuseButton } from "@locoworks/reusejs-react-button";
 
 const Sample = () => {
   return (
@@ -15,21 +11,6 @@ const Sample = () => {
       >
         Reuse!
       </ReuseButton>
-      <RedButton
-        onClick={() => {
-          console.log("Hello");
-        }}
-      >
-        Red!
-      </RedButton>
-
-      <YellowButton
-        onClick={() => {
-          console.log("Hello");
-        }}
-      >
-        Yellow!
-      </YellowButton>
     </div>
   );
 };

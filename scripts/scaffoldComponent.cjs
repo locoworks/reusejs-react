@@ -51,6 +51,7 @@ ncp(devAppSourceFolderPath, devAppTargetFolderPath, function (err) {
   }
 });
 
+//Add Files to package.json
 const filePath = "./package.json";
 const lineToAdd1 = `"${replacementText}:dev": "turbo run dev --filter=${replacementText}-app...",`;
 const lineToAdd2 = `"${replacementText}:build": "turbo run build --filter=@locoworks/reusejs-react-${replacementText}...",`;
@@ -59,10 +60,30 @@ const fileContent = fs.readFileSync(filePath, "utf-8");
 
 const lines = fileContent.split("\n");
 
-const insertionIndex = 19;
+const insertionIndex = 17;
 lines.splice(insertionIndex, 0, lineToAdd2);
 lines.splice(insertionIndex, 0, lineToAdd1);
 
 const updatedContent = lines.join("\n");
-
 fs.writeFileSync(filePath, updatedContent, "utf-8");
+
+//Rename folders in dev-app
+const folderpath2 = `./development/${replacementText}-app/pages/<to-replace>`;
+const foldernewName2 = `./development/${replacementText}-app/pages/${replacementText}`;
+
+const folderpath3 = `./development/${replacementText}-app/components/<to-replace>`;
+const foldernewName3 = `./development/${replacementText}-app/components/${replacementText}`;
+
+const renameFolder = (oldFolderPath, newFolderPath) => {
+  fs.rename(path.resolve(oldFolderPath), path.resolve(newFolderPath), (err) => {
+    if (err) {
+      console.error(`Error renaming folder: ${err}`);
+      return;
+    }
+
+    console.log("Folder renamed successfully.");
+  });
+};
+
+renameFolder(folderpath2, foldernewName2);
+renameFolder(folderpath3, foldernewName3);

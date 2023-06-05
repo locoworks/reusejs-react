@@ -1,0 +1,3 @@
+<ReuseButton onClick={() => console.log("Hello")}>
+    Red!
+</ReuseButton>

@@ -80,7 +80,7 @@ const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
           ) : null}
 
           <button
-            className=" h-10 w-10 px-2 py-1 mx-2 border border-gray-100 hover:bg-gray-200 rounded font-extrabold bg-gray-50"
+            className="h-10 w-10 px-2 py-1 mx-2 border border-gray-100 hover:bg-gray-200 rounded font-extrabold bg-gray-50"
             onClick={() => {
               setShowCode(!showCode);
             }}

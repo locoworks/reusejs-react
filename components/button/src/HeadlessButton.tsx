@@ -1,36 +1,18 @@
-import React, { CSSProperties, FC } from "react";
+import React, { CSSProperties, FC, ButtonHTMLAttributes } from "react";
 
-export interface HeadlessButtonProps {
-  children: React.ReactNode;
-  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  className?: string;
+export interface HeadlessButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  busyText?: string;
   busy?: boolean;
-  busyText?: React.ReactNode;
-  disabled?: boolean;
-  type?: "submit" | "reset" | "button";
-  onFocus?: (e: React.FocusEvent<HTMLButtonElement, Element>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLButtonElement, Element>) => void;
-  onMouseEnter?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  onMouseLeave?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-  styles?: CSSProperties;
 }
 
-const HeadlessButton: FC<HeadlessButtonProps> = (props) => {
-  return (
-    <button
-      type={props.type}
-      disabled={props.disabled || props.busy}
-      className={props.className}
-      onClick={props.onClick}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
-      onFocus={props.onFocus}
-      onBlur={props.onBlur}
-      style={props.styles}
-    >
-      {props.busy ? props.busyText : props.children}
-    </button>
-  );
+const HeadlessButton: FC<HeadlessButtonProps> = ({
+  children,
+  busyText,
+  busy,
+  ...rest
+}) => {
+  return <button {...rest}>{busy ? busyText : children}</button>;
 };
 
 HeadlessButton.defaultProps = {
