@@ -1,0 +1,11 @@
+<RedButton onClick={() => console.log("Hello")}>
+    Red!
+</RedButton>
+
+<ReuseButton onClick={() => console.log("Hello")}>
+    Reuse!
+</ReuseButton>
+
+<YellowButton onClick={() => console.log("Hello")}>
+  Yellow!
+</YellowButton>

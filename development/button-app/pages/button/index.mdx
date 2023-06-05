@@ -4,186 +4,31 @@ author: "Shrey Dhyani"
 ---
 
 import { ReuseButton, RedButton,YellowButton } from "@locoworks/reusejs-react-button";
+import LiveSample from "../../components/LiveSample"
+import Sample from "../../components/button/Sample/Sample.tsx"
+import OutlineButton from "../../components/button/OutlineButton/OutlineButton.tsx"
 
 ## Table of contents
 
-# Hello World
+## Sample Code Demo
 
-## ONE
-## TWO
-```ts
-console.log("Hello");
-```
+<Sample/>
 
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
+```js path=../../components/button/Sample name=Sample
 ```
 
-```ts
-console.log("Hello");
-```
-## THREE
-## FOUR
-```ts
-console.log("Hello");
+## Outline Button Demo
+
+<OutlineButton/>
+
+```js path=../../components/button/OutlineButton name=OutlineButton
 ```
 
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
+## Live Playground
 
-```ts
-console.log("Hello");
-```
-## FIVE
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-
-```ts
-console.log("Hello");
-```
-## SIX
-
-# Second
-
-## Sample 1
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-
-```ts
-console.log("Hello");
-```
-## Sample 2
-
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-
-```ts
-console.log("Hello");
-```
-## Sample 3
-## Sample 4
-## Sample 5
-
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-
-```ts
-console.log("Hello");
-``````ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-
-```ts
-console.log("Hello");
-```
-## Sample 6
-## Sample 7
-## Sample 8
-This is a sample
+<LiveSample/>
 
 
-<ReuseButton onClick={()=>{console.log("Hello")}}>Click</ReuseButton>
-<RedButton onClick={()=>{console.log("Hello")}}>Click</RedButton>
-<YellowButton onClick={()=>{console.log("Hello")}}>Click</YellowButton>
-
-
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
-```ts
-console.log("Hello");
-```
-
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
-```
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4" >{children}</div>

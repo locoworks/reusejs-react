@@ -36,7 +36,8 @@
     "apps/*",
     "components/*",
     "development/*",
-    "docs"
+    "docs",
+    "packages/*"
   ],
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",

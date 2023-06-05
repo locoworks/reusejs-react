@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@locoworks/reusejs-react-button": "*",
+    "@locoworks/reusejs-react-code-preview": "*",
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.4.3",
@@ -21,12 +22,20 @@
     "autoprefixer": "10.4.14",
     "next": "13.4.3",
     "postcss": "8.4.23",
+    "prismjs": "^1.29.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-live": "^4.1.2",
+    "react-syntax-highlighter": "^15.5.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-slug": "^5.1.0",
+    "remark-code-import": "^1.2.0",
     "remark-toc": "^8.0.1",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "remark-folder-import": "*"
+  },
+  "devDependencies": {
+    "@types/react-syntax-highlighter": "^15.5.7"
   }
 }
