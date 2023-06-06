@@ -1,0 +1,86 @@
+---
+title: "ReuseJS Input"
+author: "Shrey Dhyani"
+---
+
+import SampleInput from "../../components/input/SampleInput/SampleInput.tsx";
+import DisabledInput from "../../components/input/DisabledInput/DisabledInput.tsx";
+import PasswordInput from "../../components/input/PasswordInput/PasswordInput.tsx";
+import PasswordShowHide from "../../components/input/PasswordShowHide/PasswordShowHide.tsx";
+import NumberInput from "../../components/input/NumberInput/NumberInput.tsx";
+
+
+## Table of contents
+
+Input component is the precursor of `input-group` component which provides functionality specific to input component like placeholder, disable input, autocomplet etc. Along with some additional features like **show/hide passwords** using props showPassword.
+Additionally since **reusejs-input** extends **html-input** it supports all the functionality of a default browser input like types, autocomplete, form, alt, for etc.
+
+
+## Form Styles: @tailwindcss/forms
+
+If you have been using input elements for long, especially if using tailwind for styling, you will have encountered the issue of overridding the default styles in input, especially on focus, such as ring focus-border etc. Tailwind form provide an easy to
+use set of utilities that allow users to override these styles quite easily.
+
+To use `form-input` tailwind classes in an input element you have to follow the following steps.
+
+
+1. Add `@tailwindcss/forms` to dev-dependencies.
+```shell
+npm install -D @tailwindcss/forms
+```
+
+2. Add to `require('@tailwindcss/forms')` to Tailwind Configuration
+```json
+// tailwind.config.js
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    // ...
+  ],
+}
+```
+
+
+## Examples
+
+### Sample Code Demo
+
+<SampleInput/>
+
+```js path=../../components/input/SampleInput name=SampleInput
+```
+
+### Disabled Input
+
+<DisabledInput/>
+
+```js path=../../components/input/DisabledInput name=DisabledInput
+```
+
+### Password Input
+
+<PasswordInput/>
+
+```js path=../../components/input/PasswordInput name=PasswordInput
+```
+
+### Password Show/Hide Input
+
+<PasswordShowHide/>
+
+```js path=../../components/input/PasswordShowHide name=PasswordShowHide
+```
+
+### Number Input
+
+<NumberInput/>
+
+```js path=../../components/input/NumberInput name=NumberInput
+```
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};

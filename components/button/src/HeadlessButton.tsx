@@ -1,18 +1,35 @@
-import React, { CSSProperties, FC, ButtonHTMLAttributes } from "react";
+import React, { FC, ButtonHTMLAttributes } from "react";
 
 export interface HeadlessButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   busyText?: string;
   busy?: boolean;
+  buttonPrefix?: React.ReactNode;
+  buttonSuffix?: React.ReactNode;
 }
 
 const HeadlessButton: FC<HeadlessButtonProps> = ({
   children,
   busyText,
   busy,
+  disabled,
+  buttonPrefix,
+  buttonSuffix,
   ...rest
 }) => {
-  return <button {...rest}>{busy ? busyText : children}</button>;
+  return (
+    <button disabled={busy ? true : disabled} {...rest}>
+      {busy ? (
+        busyText
+      ) : (
+        <>
+          {buttonPrefix ? buttonPrefix : <></>}
+          {children}
+          {buttonSuffix ? buttonSuffix : <></>}
+        </>
+      )}
+    </button>
+  );
 };
 
 HeadlessButton.defaultProps = {

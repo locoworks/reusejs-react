@@ -14,7 +14,9 @@
     "text-input:build": "turbo run build --filter=@locoworks/reusejs-react-text-input...",
     "docs:dev": "turbo run dev --filter=reuse-docs...",
     "autogen:comp": "node ./scripts/scaffoldComponent.cjs",
-    "list:comp": "node ./scripts/getAllComponentsList.cjs"
+    "list:comp": "node ./scripts/getAllComponentsList.cjs",
+    "input:dev": "turbo run dev --filter=input-app...",
+    "input:build": "turbo run build --filter=@locoworks/reusejs-react-input..."
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",

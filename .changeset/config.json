@@ -7,5 +7,5 @@
   "access": "restricted",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["button-app", "text-input-app"]
+  "ignore": ["button-app", "input-app"]
 }

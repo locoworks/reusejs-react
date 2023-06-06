@@ -6,8 +6,24 @@ author: "Shrey Dhyani"
 import LiveSample from "../../components/LiveSample"
 import Sample from "../../components/button/Sample/Sample.tsx"
 import OutlineButton from "../../components/button/OutlineButton/OutlineButton.tsx"
+import SuccessSample from "../../components/button/SuccessSample/SuccessSample.tsx"
+import HeadlessSample from "../../components/button/HeadlessSample/HeadlessSample.tsx"
+import TextButton from "../../components/button/TextButton/TextButton.tsx"
+import CSSStyledButton from "../../components/button/CSSStyledButton/CSSStyledButton.tsx";
 
 ## Table of contents
+
+## Headless Button
+This is the button component with no inherent styles, so to render this component user will have to provide styles to the component.
+
+This Button provides the feature of adding **busy state**, **busy text** which will be shown in busy state, ability to add button **Prefix** and button **Suffix**.
+
+It uses following tailwind classes for providing styles: ** ``` w-1/2 bg-red-400 hover:bg-red-500 py-2 rounded-lg text-white font-bold ``` **
+
+<HeadlessSample/>
+
+```js path=../../components/button/HeadlessSample name=HeadlessSample
+```
 
 ## Sample Code Demo
 
@@ -22,6 +38,28 @@ import OutlineButton from "../../components/button/OutlineButton/OutlineButton.t
 
 ```js path=../../components/button/OutlineButton name=OutlineButton
 ```
+
+## Success Sample Button Demo
+
+<SuccessSample/>
+
+```js path=../../components/button/SuccessSample name=SuccessSample
+```
+
+## Text Button Demo
+
+<TextButton/>
+
+```js path=../../components/button/TextButton name=TextButton
+```
+
+## CSSStyledButton
+
+<CSSStyledButton/>
+
+```js path=../../components/button/CSSStyledButton name=CSSStyledButton
+```
+
 
 ## Live Playground
 

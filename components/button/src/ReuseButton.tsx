@@ -2,15 +2,10 @@ import React, { FC } from "react";
 import HeadlessButton, { HeadlessButtonProps } from "./HeadlessButton";
 import { twMerge } from "tailwind-merge";
 
-export interface ReuseButtonProps extends HeadlessButtonProps {
-  buttonPrefix?: React.ReactNode;
-  buttonSuffix?: React.ReactNode;
-}
+export interface ReuseButtonProps extends HeadlessButtonProps {}
 
 const ReuseButton: FC<ReuseButtonProps> = ({
   className,
-  buttonPrefix,
-  buttonSuffix,
   children,
   ...rest
 }) => {
@@ -21,9 +16,7 @@ const ReuseButton: FC<ReuseButtonProps> = ({
 
   return (
     <HeadlessButton className={finalClassNames} {...rest}>
-      {buttonPrefix ? buttonPrefix : <></>}
       {children}
-      {buttonSuffix ? buttonSuffix : <></>}
     </HeadlessButton>
   );
 };

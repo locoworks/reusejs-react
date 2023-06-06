@@ -7,7 +7,7 @@
   resolved "https://registry.npmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
-"@ampproject/remapping@^2.1.0", "@ampproject/remapping@^2.2.0":
+"@ampproject/remapping@^2.1.0":
   version "2.2.1"
   resolved "https://registry.npmjs.org/@ampproject/remapping/-/remapping-2.2.1.tgz"
   integrity sha512-lFMjJTrFL3j7L9yBxwYfCq2k6qqwHyzuUl/XBnif78PWTJYyL/dfowQHWE3sp6U6ZzqWiiIZnpTMO96zhkjwtg==
@@ -53,27 +53,6 @@
     debug "^4.1.0"
     gensync "^1.0.0-beta.2"
     json5 "^2.2.1"
-    semver "^6.3.0"
-
-"@babel/core@^7.21.4":
-  version "7.21.8"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.21.8.tgz#2a8c7f0f53d60100ba4c32470ba0281c92aa9aa4"
-  integrity sha512-YeM22Sondbo523Sz0+CirSPnbj9bG3P0CdHcBZdqUuaeOaYEFbOLoGU7lebvGP6P5J/WE9wOn7u7C4J9HvS1xQ==
-  dependencies:
-    "@ampproject/remapping" "^2.2.0"
-    "@babel/code-frame" "^7.21.4"
-    "@babel/generator" "^7.21.5"
-    "@babel/helper-compilation-targets" "^7.21.5"
-    "@babel/helper-module-transforms" "^7.21.5"
-    "@babel/helpers" "^7.21.5"
-    "@babel/parser" "^7.21.8"
-    "@babel/template" "^7.20.7"
-    "@babel/traverse" "^7.21.5"
-    "@babel/types" "^7.21.5"
-    convert-source-map "^1.7.0"
-    debug "^4.1.0"
-    gensync "^1.0.0-beta.2"
-    json5 "^2.2.2"
     semver "^6.3.0"
 
 "@babel/eslint-parser@^7.16.3":
@@ -284,7 +263,7 @@
     "@babel/traverse" "^7.20.5"
     "@babel/types" "^7.20.5"
 
-"@babel/helpers@^7.17.9", "@babel/helpers@^7.21.5":
+"@babel/helpers@^7.17.9":
   version "7.21.5"
   resolved "https://registry.npmjs.org/@babel/helpers/-/helpers-7.21.5.tgz"
   integrity sha512-BSY+JSlHxOmGsPTydUkPf1MdMQ3M81x5xGCOVgWM3G8XH77sJ292Y2oqcp0CbbgxhqBuI46iUz1tT7hqP7EfgA==
@@ -302,7 +281,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.17.12", "@babel/parser@^7.20.7", "@babel/parser@^7.21.5", "@babel/parser@^7.21.8":
+"@babel/parser@^7.17.12", "@babel/parser@^7.20.7", "@babel/parser@^7.21.5":
   version "7.21.8"
   resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.21.8.tgz"
   integrity sha512-6zavDGdzG3gUqAdWvlLFfk+36RilI+Pwyuuh7HItyeScCWP3k6i8vKclAQ0bM/0y/Kz/xiwvxhMv9MgTJP5gmA==
@@ -809,20 +788,6 @@
   integrity sha512-SA6HEjwYFKF7WDjWcMcMGUimmw/nhNRDWxr+KaLSCrkD/LMDBvWRmHAYgE1HDeF8KUuI8OAu+RT6EOtKxSW2qA==
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.18.6"
-
-"@babel/plugin-transform-react-jsx-self@^7.21.0":
-  version "7.21.0"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.21.0.tgz#ec98d4a9baafc5a1eb398da4cf94afbb40254a54"
-  integrity sha512-f/Eq+79JEu+KUANFks9UZCcvydOOGMgF7jBrcwjHa5jTZD8JivnhCJYvmlhR/WTXBWonDExPoW0eO/CR4QJirA==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.20.2"
-
-"@babel/plugin-transform-react-jsx-source@^7.19.6":
-  version "7.19.6"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.19.6.tgz#88578ae8331e5887e8ce28e4c9dc83fb29da0b86"
-  integrity sha512-RpAi004QyMNisst/pvSanoRdJ4q+jMCWyk9zdw/CyLB9j8RXEahodR6l2GyttDRyEVWZtbN+TpLiHJ3t34LbsQ==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.19.0"
 
 "@babel/plugin-transform-react-jsx@^7.18.6":
   version "7.21.5"
@@ -1522,6 +1487,13 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@locoworks/reusejs-react-text-input@*":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@locoworks/reusejs-react-text-input/-/reusejs-react-text-input-0.0.2.tgz#035a80bcb5aa1dc2cb665bcaacfd33fbc2afade5"
+  integrity sha512-UK4Rd2h2EdG36RLPQpWSgFO8DxChxhaWU80yCzMbV5QC510drirN3SRCKN2wEqdFI6dGyD/how9SEMHIjFlrnA==
+  dependencies:
+    tailwind-merge "^1.12.0"
+
 "@manypkg/find-root@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@manypkg/find-root/-/find-root-1.1.0.tgz"
@@ -1582,16 +1554,6 @@
   dependencies:
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
-
-"@mdx-js/rollup@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@mdx-js/rollup/-/rollup-2.3.0.tgz#9dbdfc64e3ce4a1af041da963e1cb6f2b6450cbf"
-  integrity sha512-wLvRfJS/M4UmdqTd+WoaySEE7q4BIejYf1xAHXYvtT1du/1Tl/z2450Gg2+Hu7fh05KwRRiehiTP9Yc/Dtn0fA==
-  dependencies:
-    "@mdx-js/mdx" "^2.0.0"
-    "@rollup/pluginutils" "^5.0.0"
-    source-map "^0.7.0"
-    vfile "^5.0.0"
 
 "@next/env@13.4.3":
   version "13.4.3"
@@ -1724,7 +1686,7 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@rollup/pluginutils@^5.0.0", "@rollup/pluginutils@^5.0.1":
+"@rollup/pluginutils@^5.0.1":
   version "5.0.2"
   resolved "https://registry.npmjs.org/@rollup/pluginutils/-/pluginutils-5.0.2.tgz"
   integrity sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==
@@ -1744,6 +1706,13 @@
   integrity sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==
   dependencies:
     tslib "^2.4.0"
+
+"@tailwindcss/forms@^0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.3.tgz#e4d7989686cbcaf416c53f1523df5225332a86e7"
+  integrity sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==
+  dependencies:
+    mini-svg-data-uri "^1.2.3"
 
 "@tailwindcss/typography@^0.5.9":
   version "0.5.9"
@@ -2050,16 +2019,6 @@
   dependencies:
     "@typescript-eslint/types" "5.59.6"
     eslint-visitor-keys "^3.3.0"
-
-"@vitejs/plugin-react@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-4.0.0.tgz#46d1c37c507447d10467be1c111595174555ef28"
-  integrity sha512-HX0XzMjL3hhOYm+0s95pb0Z7F8O81G7joUHgfDd/9J/ZZf5k4xX6QAMFkKsHFxaHlf6X7GD7+XuaZ66ULiJuhQ==
-  dependencies:
-    "@babel/core" "^7.21.4"
-    "@babel/plugin-transform-react-jsx-self" "^7.21.0"
-    "@babel/plugin-transform-react-jsx-source" "^7.19.6"
-    react-refresh "^0.14.0"
 
 "@vitest/expect@0.31.4":
   version "0.31.4"
@@ -4659,7 +4618,7 @@ json5@^1.0.2:
   dependencies:
     minimist "^1.2.0"
 
-json5@^2.2.1, json5@^2.2.2:
+json5@^2.2.1:
   version "2.2.3"
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
@@ -5373,6 +5332,11 @@ min-indent@^1.0.0, min-indent@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
+
+mini-svg-data-uri@^1.2.3:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz#8ab0aabcdf8c29ad5693ca595af19dd2ead09939"
+  integrity sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==
 
 minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
@@ -6297,11 +6261,6 @@ react-live@^4.1.2:
     prism-react-renderer "*"
     sucrase "^3.31.0"
     use-editable "^2.3.3"
-
-react-refresh@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
-  integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
 react-syntax-highlighter@^15.5.0:
   version "15.5.0"
@@ -7592,17 +7551,6 @@ vite-node@0.31.4:
   version "4.3.9"
   resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.9.tgz#db896200c0b1aa13b37cdc35c9e99ee2fdd5f96d"
   integrity sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==
-  dependencies:
-    esbuild "^0.17.5"
-    postcss "^8.4.23"
-    rollup "^3.21.0"
-  optionalDependencies:
-    fsevents "~2.3.2"
-
-vite@^4.3.2:
-  version "4.3.8"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.8.tgz#70cd6a294ab52d7fb8f37f5bc63d117dd19e9918"
-  integrity sha512-uYB8PwN7hbMrf4j1xzGDk/lqjsZvCDbt/JC5dyfxc19Pg8kRm14LinK/uq+HSLNswZEoKmweGdtpbnxRtrAXiQ==
   dependencies:
     esbuild "^0.17.5"
     postcss "^8.4.23"
