@@ -1,18 +1,10 @@
 import React from "react";
 import { HeadlessInput } from "@locoworks/reusejs-react-input";
-// import { HeadlessInputProps } from "@locoworks/reusejs-react-input/dist/types/src/HeadlessInput";
+import { HeadlessInputProps } from "@locoworks/reusejs-react-input/dist/types/src/HeadlessInput";
 
-// export interface HeadlessInputGroupProps
-//   extends Omit<HeadlessInputProps, "prefix"> {
-//   header?: React.ReactNode;
-//   prefix?: React.ReactNode;
-//   suffix?: React.ReactNode;
-//   error?: React.ReactNode;
-//   helper?: React.ReactNode;
-//   wrapperClasses?: string;
-// }
-
-export interface HeadlessInputGroupProps {
+type ExtendedHeadlessInputInterface = Omit<HeadlessInputProps, "prefix">;
+export interface HeadlessInputGroupProps
+  extends ExtendedHeadlessInputInterface {
   header?: React.ReactNode;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -32,14 +24,13 @@ const HeadlessInputGroup: React.FC<HeadlessInputGroupProps> = ({
 }) => {
   return (
     <>
-      {header && header}
       <div className={wrapperClasses}>
+        {header}
         {prefix && prefix}
         <HeadlessInput {...rest} />
         {suffix && suffix}
+        {error || helper}
       </div>
-      {error && error}
-      {helper && helper}
     </>
   );
 };
