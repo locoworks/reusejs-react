@@ -3,7 +3,7 @@ import { ReuseInputGroup } from "@locoworks/reusejs-react-input-group";
 
 const Prefix = () => {
   return (
-    <div className="absolute top-1/2 -translate-y-1/2 left-1 font-bold">
+    <div className="absolute top-1/2 -translate-y-1/2 left-2 font-bold">
       Pre
     </div>
   );
@@ -12,7 +12,7 @@ const Prefix = () => {
 const Suffix = () => {
   return (
     <button
-      className="absolute top-1/2 -translate-y-1/2 right-1 font-bold"
+      className="absolute top-1/2 -translate-y-1/2 right-2 font-bold"
       onClick={() => {
         alert("Suffix button Clicked!!!");
       }}
@@ -36,7 +36,7 @@ const ReuseSample = () => {
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
       <ReuseInputGroup
-        className="pl-8 pr-14"
+        className="pl-10 pr-14"
         headerText="Reuse Input Group"
         helperStyles="mt-2"
         helperText="This text is for Helping!!"
