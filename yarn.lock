@@ -1487,13 +1487,6 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@locoworks/reusejs-react-text-input@*":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@locoworks/reusejs-react-text-input/-/reusejs-react-text-input-0.0.2.tgz#035a80bcb5aa1dc2cb665bcaacfd33fbc2afade5"
-  integrity sha512-UK4Rd2h2EdG36RLPQpWSgFO8DxChxhaWU80yCzMbV5QC510drirN3SRCKN2wEqdFI6dGyD/how9SEMHIjFlrnA==
-  dependencies:
-    tailwind-merge "^1.12.0"
-
 "@manypkg/find-root@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@manypkg/find-root/-/find-root-1.1.0.tgz"

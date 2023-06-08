@@ -12,22 +12,6 @@
     "dev": {
       "cache": false,
       "persistent": true
-    },
-    "web#dev": {
-      "cache": true,
-      "persistent": true
-    },
-    "button-app#dev": {
-      "cache": false
-    },
-    "@locoworks/reusejs-react-button#build": {
-      "cache": false
-    },
-    "@locoworks/reusejs-react-text-input#dev": {
-      "cache": false
-    },
-    "@locoworks/reusejs-react-text-input#build": {
-      "cache": false
     }
   }
 }
