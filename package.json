@@ -10,8 +10,6 @@
     "release": "turbo run bundle && changeset publish",
     "button:dev": "turbo run dev --filter=button-app...",
     "button:build": "turbo run build --filter=@locoworks/reusejs-react-button...",
-    "text-input:dev": "turbo run dev --filter=text-input-app...",
-    "text-input:build": "turbo run build --filter=@locoworks/reusejs-react-text-input...",
     "docs:dev": "turbo run dev --filter=reuse-docs...",
     "autogen:comp": "node ./scripts/scaffoldComponent.cjs",
     "input-group:dev": "turbo run dev --filter=input-group-app...",
