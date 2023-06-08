@@ -5,7 +5,6 @@
     "bundle": "turbo run bundle",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run bundle && changeset publish",
@@ -15,9 +14,12 @@
     "text-input:build": "turbo run build --filter=@locoworks/reusejs-react-text-input...",
     "docs:dev": "turbo run dev --filter=reuse-docs...",
     "autogen:comp": "node ./scripts/scaffoldComponent.cjs",
-    "list:comp": "node ./scripts/getAllComponentsList.cjs",
+    "input-group:dev": "turbo run dev --filter=input-group-app...",
+    "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
     "input:dev": "turbo run dev --filter=input-app...",
-    "input:build": "turbo run build --filter=@locoworks/reusejs-react-input..."
+    "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "list:comp": "node ./scripts/getAllComponentsList.cjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
