@@ -2,9 +2,12 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "bundle": "turbo run bundle",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run bundle && changeset publish",
     "button:dev": "turbo run dev --filter=button-app...",
     "button:build": "turbo run build --filter=@locoworks/reusejs-react-button...",
     "text-input:dev": "turbo run dev --filter=text-input-app...",
@@ -15,8 +18,6 @@
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
     "input:dev": "turbo run dev --filter=input-app...",
     "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
-    "version-packages": "changeset version",
-    "release": "turbo run build && changeset publish",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "list:comp": "node ./scripts/getAllComponentsList.cjs"
   },
