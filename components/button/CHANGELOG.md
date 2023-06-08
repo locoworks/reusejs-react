@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-button
 
+## 0.1.1
+
+### Patch Changes
+
+- ab8f32a: Testing npm publish
+
 ## 0.1.0
 
 ### Minor Changes
