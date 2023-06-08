@@ -24,12 +24,16 @@ The available layers of props for the HeadlessInputGroup component include:
 When rendering the components, they follow the rendering order outlined below:
 
 ```
-{ HeaderLevel1 }
-{ HeaderLevel2 }
-{ Input Component }
-{ FooterLevel1 }
-{ FooterLevel2 }
+<div className={wrapperClasses}>
+  { HeaderLevel1 }
+  { HeaderLevel2 }
+  { Input Component }
+  { FooterLevel1 }
+  { FooterLevel2 }
+</div>
 ```
+
+The prop `wrapperClasses` is used to style the componnets relative to each other and is helpful to allow designs like relative positionings, layout using flex or grid etc.
 
 By following this rendering order, users can seamlessly integrate the desired components into the Headless Input Group, creating a cohesive and customized input experience.
  
