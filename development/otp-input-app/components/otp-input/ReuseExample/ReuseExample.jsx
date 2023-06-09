@@ -11,15 +11,7 @@ const ReuseExample = () => {
         numInputs={5}
         renderSeparator={null}
         renderInput={(props) => <input {...props} />}
-        inputStyle={{
-          width: "48px",
-          height: "56px",
-          backgroundColor: "#D3D3D3",
-          border: "1px solid green",
-          borderRadius: "12px",
-          fontSize: "23px",
-          fontWeight: 600,
-        }}
+        inputStyle="w-16 h-14 bg-slate-300 border border-green-600 rounded-sm text-2xl font-semibold"
         containerStyle={{ gap: "8px" }}
       />
     </div>
