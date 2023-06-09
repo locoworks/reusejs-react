@@ -1,0 +1,46 @@
+---
+title: "ReuseJS otp-input"
+---
+
+import Sample from "../../components/otp-input/Sample/Sample.tsx"
+import ReuseExample from "../../components/otp-input/ReuseExample/ReuseExample.tsx";
+
+
+## Table of contents
+
+
+## Sample Code Demo
+
+`numInputs:number`: Number of OTP inputs to be rendered.
+
+`onChange: function`: Returns OTP code typed in inputs.
+
+`value: string/number`: The value of the OTP passed into the component.
+
+`separator: component`: Provide a custom separator between inputs by passing a component. For instance, <span>-</span> would add - between each input.
+
+`isDisabled: boolean`: Disables all the inputs.
+
+`shouldAutoFocus: boolean`: Auto focuses input on initial page load.
+
+`inputStyle: object`: Style applied or class passed to each input.
+
+`containerStyle: object`: Style applied or class passed to container of inputs.
+
+<Sample/>
+
+```js path=../../components/otp-input/Sample name=Sample
+```
+
+## Reuse Code Demo
+
+<ReuseExample/>
+
+```js path=../../components/otp-input/ReuseExample name=ReuseExample
+```
+
+
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};

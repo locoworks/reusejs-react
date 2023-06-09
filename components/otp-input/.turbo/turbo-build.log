@@ -1,0 +1,20 @@
+$ rollup -c --bundleConfigAsCjs
+[36m
+[1m./index.ts[22m → [1mdist/index.cjs.js, dist/index.esm.js[22m...[39m
+[1m[31m[!] [1m(plugin rpt2) RollupError: [31mEmit skipped for '/Users/betalectic/projects1/reusejs-react-1/components/otp-input/index.ts'. See https://github.com/microsoft/TypeScript/issues/49790 for potential reasons why this may occur[31m[22m[1m[39m[22m
+index.ts
+[2m
+    at error (/Users/betalectic/projects1/reusejs-react-1/node_modules/rollup/dist/shared/rollup.js:279:30)
+    at Object.error (/Users/betalectic/projects1/reusejs-react-1/node_modules/rollup/dist/shared/rollup.js:24825:20)
+    at Object.error (/Users/betalectic/projects1/reusejs-react-1/node_modules/rollup/dist/shared/rollup.js:24019:42)
+    at /Users/betalectic/projects1/reusejs-react-1/node_modules/rollup-plugin-typescript2/dist/rollup-plugin-typescript2.cjs.js:28097:30
+    at TsCache.getCached (/Users/betalectic/projects1/reusejs-react-1/node_modules/rollup-plugin-typescript2/dist/rollup-plugin-typescript2.cjs.js:27786:31)
+    at TsCache.getCompiled (/Users/betalectic/projects1/reusejs-react-1/node_modules/rollup-plugin-typescript2/dist/rollup-plugin-typescript2.cjs.js:27745:21)
+    at Object.<anonymous> (/Users/betalectic/projects1/reusejs-react-1/node_modules/rollup-plugin-typescript2/dist/rollup-plugin-typescript2.cjs.js:28090:38)
+    at Generator.next (<anonymous>)
+    at /Users/betalectic/projects1/reusejs-react-1/node_modules/rollup-plugin-typescript2/dist/rollup-plugin-typescript2.cjs.js:63:71
+    at new Promise (<anonymous>)[22m
+
+
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
