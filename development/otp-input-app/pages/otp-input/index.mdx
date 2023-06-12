@@ -4,43 +4,96 @@ title: "ReuseJS otp-input"
 
 import Sample from "../../components/otp-input/Sample/Sample.tsx"
 import ReuseExample from "../../components/otp-input/ReuseExample/ReuseExample.tsx";
+import ReuseNumberExample from "../../components/otp-input/ReuseNumberExample/ReuseNumberExample.tsx";
+import ReuseNumberWithPasteExample from "../../components/otp-input/ReuseNumberWithPasteExample/ReuseNumberWithPasteExample.tsx";
 
 
 ## Table of contents
 
+## List of exported Components:
 
-## Sample Code Demo
+### HeadlessOtpInput 
+
+This is the OTP input component with no inherit styles. user will have to provide styles to the component.
+
+This OTP input component we can customize the number of inputs based on requirements we can pass the prop `numInputs` with value.
+
+We need to use the HTML input element to render the boxes. and if we need to add wrapper to input components with help of renderInput prop. and `InputProps` It allows the basic HTML input element allowed props.
+
+Here is the list of all available props for the HeadlessOtpInput
 
 `numInputs:number`: Number of OTP inputs to be rendered.
 
-`onChange: function`: Returns OTP code typed in inputs.
+`renderInput:function`: A function that returns the input that is supposed to be rendered for each of the input fields. The function will get two arguments: `inputProps` and index. `inputProps` is an object that contains all the props that should be passed to the input being rendered index is the index of the input being rendered.
+
+`onChange:function`: Returns OTP code typed in inputs.
 
 `value: string/number`: The value of the OTP passed into the component.
 
-`separator: component`: Provide a custom separator between inputs by passing a component. For instance, <span>-</span> would add - between each input.
+`placeholder:string`: Specify an expected value of each input. The length of this string should be equal to numInputs.
 
-`isDisabled: boolean`: Disables all the inputs.
+`renderSeparator:component/function`: Provide a custom separator between inputs by passing a component. For instance, <span>-</span> would add - between each input.
 
-`shouldAutoFocus: boolean`: Auto focuses input on initial page load.
+`containerStyle:style (object)/className (string)`: Style applied or class passed to container of inputs.
 
-`inputStyle: object`: Style applied or class passed to each input.
+`inputStyle:style (object)/className (string)`: Style applied or class passed to each input.
 
-`containerStyle: object`: Style applied or class passed to container of inputs.
+`inputType:<input> type`: The type of the input that will be passed to the input element being rendered.
+
+`shouldAutoFocus: boolean`: This is optional prop and it Auto focuses input on initial page load.
+
+
+
+#### Sample Code Demo
 
 <Sample/>
 
 ```js path=../../components/otp-input/Sample name=Sample
 ```
 
-## Reuse Code Demo
+
+### ReuseOtpInput
+
+The **`ReuseOtpInput`** component extends the functionality of **`HeadlessOtpInput`** by providing additional features and default styling options, which can be overridden to customize components according to your specific use case.
+
+User can pass the custom styles using this prop `wrapperClassName`  and `inputClassName`. 
+
+By leveraging these props, users can fully customize the **ReuseOtpInput** component to suit their specific requirements and design preferences.
+
+
+#### ReuseExample
 
 <ReuseExample/>
 
 ```js path=../../components/otp-input/ReuseExample name=ReuseExample
 ```
 
+#### ReuseNumberExample
+
+This example demonstrating the accepting the only number type values. and we have added css to hide the default html number arrows (up and down).
+
+* It won't support the paste the value. 
+
+<ReuseNumberExample/>
+
+```js path=../../components/otp-input/ReuseNumberExample name=ReuseNumberExample
+```
+
+
+#### ReuseNumberWithPasteExample
+
+This example demonstrating the accepting the only number type values with support the past the values.
+
+<ReuseNumberWithPasteExample/>
+
+```js path=../../components/otp-input/ReuseNumberWithPasteExample name=ReuseNumberWithPasteExample
+```
+
+
 
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };
+
+

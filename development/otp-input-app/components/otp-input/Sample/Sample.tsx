@@ -11,17 +11,8 @@ const Sample = () => {
         numInputs={6}
         renderSeparator={null}
         renderInput={(props: any) => <input {...props} />}
-        inputStyle={{
-          width: "48px",
-          height: "56px",
-          backgroundColor: "#D3D3D3",
-          border: "none",
-          borderStyle: "none",
-          borderRadius: "12px",
-          fontSize: "23px",
-          fontWeight: 600,
-        }}
-        containerStyle={{ gap: "8px" }}
+        containerStyle="gap-2"
+        inputStyle="w-12 h-14 bg-slate-300 text-center border rounded-xl text-2xl font-semibold"
       />
     </div>
   );

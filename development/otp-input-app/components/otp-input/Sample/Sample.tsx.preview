@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { HeadlessOTPInput } from "@locoworks/reusejs-react-otp-input";
 
 const [otp, setOtp] = useState("");

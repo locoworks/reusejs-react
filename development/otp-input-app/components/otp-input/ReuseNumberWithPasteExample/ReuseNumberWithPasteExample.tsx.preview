@@ -5,9 +5,7 @@ const [otp, setOtp] = useState("");
 <ReuseOTPInput
   value={otp}
   onChange={setOtp}
-  numInputs={5}
+  numInputs={4}
   renderSeparator={null}
-  renderInput={(props: any) => <input {...props} />}
-  inputStyle={}
-  containerStyle={}
+  renderInput={(props: any) => <input {...props} type="number" />}
 />

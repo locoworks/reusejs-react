@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { ReuseOTPInput } from "@locoworks/reusejs-react-otp-input";
 
-const ReuseExample = () => {
+const ReuseNumberExample = () => {
   const [otp, setOtp] = useState("");
 
   return (
     <ReuseOTPInput
       value={otp}
       onChange={setOtp}
-      numInputs={5}
+      numInputs={4}
       renderSeparator={null}
-      renderInput={(props: any) => <input {...props} />}
-      inputClassName="border-red-600 text-center"
+      renderInput={(props) => <input {...props} />}
       containerStyle="gap-2"
+      inputType="number"
     />
   );
 };
 
-export default ReuseExample;
+export default ReuseNumberExample;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 type AllowedInputTypes = "password" | "text" | "number" | "tel";
 
@@ -24,25 +24,15 @@ type InputProps = Required<
 >;
 
 export interface HeadlessOTPInputProps {
-  /** Value of the OTP input */
   value?: string;
-  /** Number of OTP inputs to be rendered */
   numInputs?: number;
-  /** Callback to be called when the OTP value changes */
   onChange: (otp: string) => void;
-  /** Function to render the input */
   renderInput: (inputProps: InputProps, index: number) => React.ReactNode;
-  /** Whether the first input should be auto focused */
   shouldAutoFocus?: boolean;
-  /** Placeholder for the inputs */
   placeholder?: string;
-  /** Function to render the separator */
   renderSeparator?: ((index: number) => React.ReactNode) | React.ReactNode;
-  /** Style for the container */
   containerStyle?: React.CSSProperties | string;
-  /** Style for the input */
   inputStyle?: React.CSSProperties | string;
-  /** The type that will be passed to the input being rendered */
   inputType?: AllowedInputTypes;
 }
 
@@ -111,8 +101,6 @@ const HeadlessOTPInput: React.FC<HeadlessOTPInputProps> = ({
       focusInput(activeInput + 1);
     } else {
       const { nativeEvent } = event;
-      // for dealing with keyCode "229 Unidentified" on Android. Check if this is
-      // still needed.
 
       if (
         nativeEvent.data === null &&
@@ -151,10 +139,7 @@ const HeadlessOTPInput: React.FC<HeadlessOTPInputProps> = ({
     } else if (event.code === "ArrowRight") {
       event.preventDefault();
       focusInput(activeInput + 1);
-    }
-    // React does not trigger onChange when the same value is entered
-    // again. So we need to focus the next input manually in this case.
-    else if (event.key === otp[activeInput]) {
+    } else if (event.key === otp[activeInput]) {
       event.preventDefault();
       focusInput(activeInput + 1);
     } else if (
@@ -200,18 +185,15 @@ const HeadlessOTPInput: React.FC<HeadlessOTPInputProps> = ({
     const otp = getOTPValue();
     let nextActiveInput = activeInput;
 
-    // Get pastedData in an array of max size (num of inputs - current position)
     const pastedData = event.clipboardData
       .getData("text/plain")
       .slice(0, numInputs - activeInput)
       .split("");
 
-    // Prevent pasting if the clipboard data contains non-numeric values for number inputs
     if (isInputNum && pastedData.some((value) => isNaN(Number(value)))) {
       return;
     }
 
-    // Paste data from focused input onwards
     for (let pos = 0; pos < numInputs; ++pos) {
       if (pos >= activeInput && pastedData.length > 0) {
         otp[pos] = pastedData.shift() ?? "";
@@ -248,10 +230,9 @@ const HeadlessOTPInput: React.FC<HeadlessOTPInputProps> = ({
                 autoComplete: "off",
                 maxLength: 1,
                 "aria-label": `Please enter OTP character ${index + 1}`,
-                style: Object.assign(
-                  { width: "1em", textAlign: "center" } as const,
-                  isStyleObject(inputStyle) && inputStyle
-                ),
+                style: isStyleObject(inputStyle)
+                  ? (inputStyle as CSSProperties)
+                  : {},
                 className:
                   typeof inputStyle === "string" ? inputStyle : undefined,
                 type: inputType,
