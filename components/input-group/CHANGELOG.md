@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-input-group
 
+## 0.1.3
+
+### Patch Changes
+
+- 03f3a2d: Bug Fix for ClassName Overwrite
+
 ## 0.1.1
 
 ### Patch Changes
