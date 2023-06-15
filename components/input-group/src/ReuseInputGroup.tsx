@@ -47,8 +47,8 @@ const ReuseInputGroup: React.FC<ReuseInputGroupProps> = ({
 
   const finalWrapperClasses = twMerge(defaultWrapperClasses, wrapperClasses);
   const finalClassName = twMerge(
-    className,
     defaultCommonClassName,
+    className,
     error || errorText ? twMerge(defaultErrorClasses, errorInputStyles) : ""
   );
 
