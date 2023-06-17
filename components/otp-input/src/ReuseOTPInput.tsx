@@ -9,27 +9,15 @@ export interface ReuseOTPInputProps extends HeadlessOTPInputProps {
   inputClassName?: string;
 }
 
-const defaultWrapperClassName =
-  "flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50";
-
 const defaultInputClassName =
   "w-12 h-14 bg-slate-300 border rounded-xl text-2xl font-semibold";
 
 const ReuseOTPInput: React.FC<ReuseOTPInputProps> = (props) => {
-  const finalWrapperClassName = twMerge(
-    defaultWrapperClassName,
-    props.wrapperClassName
-  );
-
   const finalInputClassName = twMerge(
     defaultInputClassName,
     props.inputClassName
   );
 
-  return (
-    <div className={finalWrapperClassName}>
-      <HeadlessOTPInput {...props} inputStyle={finalInputClassName} />
-    </div>
-  );
+  return <HeadlessOTPInput {...props} inputStyle={finalInputClassName} />;
 };
 export default ReuseOTPInput;

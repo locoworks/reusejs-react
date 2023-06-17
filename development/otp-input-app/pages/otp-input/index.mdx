@@ -16,9 +16,9 @@ import ReuseNumberWithPasteExample from "../../components/otp-input/ReuseNumberW
 
 This is the OTP input component with no inherit styles. user will have to provide styles to the component.
 
-This OTP input component we can customize the number of inputs based on requirements we can pass the prop `numInputs` with value.
+In this OTP input component, we can pass  number of inputs with the prop `numInputs`.
 
-We need to use the HTML input element to render the boxes. and if we need to add wrapper to input components with help of renderInput prop. and `InputProps` It allows the basic HTML input element allowed props.
+We need to use the HTML input element to render the boxes. if we need to add a wrapper to input components with help of renderInput prop. 
 
 Here is the list of all available props for the HeadlessOtpInput
 
@@ -56,7 +56,7 @@ Here is the list of all available props for the HeadlessOtpInput
 
 The **`ReuseOtpInput`** component extends the functionality of **`HeadlessOtpInput`** by providing additional features and default styling options, which can be overridden to customize components according to your specific use case.
 
-User can pass the custom styles using this prop `wrapperClassName`  and `inputClassName`. 
+User can pass the custom styles using this prop `inputClassName: "w-12 h-14 bg-slate-300 border rounded-xl text-2xl font-semibold"`. 
 
 By leveraging these props, users can fully customize the **ReuseOtpInput** component to suit their specific requirements and design preferences.
 
@@ -70,9 +70,11 @@ By leveraging these props, users can fully customize the **ReuseOtpInput** compo
 
 #### ReuseNumberExample
 
-This example demonstrating the accepting the only number type values. and we have added css to hide the default html number arrows (up and down).
+This example demonstrates an OTP component that accepts only number type values.
 
-* It won't support the paste the value. 
+ We have added css to hide the default html number arrows (up and down)
+
+* It won't support the Copy and paste of the OTP value. 
 
 <ReuseNumberExample/>
 
