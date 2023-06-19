@@ -15,8 +15,8 @@
     "input-group:dev": "turbo run dev --filter=input-group-app...",
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
     "input:dev": "turbo run dev --filter=input-app...",
-"select-dropdown:dev": "turbo run dev --filter=select-dropdown-app...",
-"select-dropdown:build": "turbo run build --filter=@locoworks/reusejs-react-select-dropdown...",
+    "select-dropdown:dev": "turbo run dev --filter=select-dropdown-app...",
+    "select-dropdown:build": "turbo run build --filter=@locoworks/reusejs-react-select-dropdown...",
     "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "list:comp": "node ./scripts/getAllComponentsList.cjs"
@@ -42,7 +42,10 @@
     "components/*",
     "development/*",
     "docs",
-    "packages/*"
+    "packages/*",
+    "utils",
+    "hooks",
+    "tsconfig"
   ],
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",

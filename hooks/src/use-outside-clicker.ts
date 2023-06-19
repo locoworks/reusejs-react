@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function useOutsideClicker(callback: () => void) {
+export let useOutsideClicker = (callback: () => void) => {
   const visRef = React.useRef<any>(null);
 
   const handleClickOutside = (event: { target: any }) => {
@@ -18,7 +18,7 @@ export default function useOutsideClicker(callback: () => void) {
         document.removeEventListener("click", handleClickOutside, true);
       }
     };
-  });
+  }, []);
 
   return visRef;
-}
+};
