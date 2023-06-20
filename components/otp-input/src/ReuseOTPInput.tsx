@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { HeadlessOTPInput } from "@locoworks/reusejs-react-otp-input";
-import { HeadlessOTPInputProps } from "./HeadlessOTPInput";
+import HeadlessOTPInput, { HeadlessOTPInputProps } from "./HeadlessOTPInput";
 
 export interface ReuseOTPInputProps extends HeadlessOTPInputProps {
-  wrapperClassName?: string;
   inputClassName?: string;
 }
 
@@ -20,4 +18,5 @@ const ReuseOTPInput: React.FC<ReuseOTPInputProps> = (props) => {
 
   return <HeadlessOTPInput {...props} inputStyle={finalInputClassName} />;
 };
+
 export default ReuseOTPInput;
