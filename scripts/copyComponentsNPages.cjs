@@ -3,7 +3,6 @@ const ncp = require("ncp").ncp;
 
 const devAppsPath = "./development";
 
-//Get Component Folder of each Development app
 const getComponentFoldersList = () => {
   const componentList = fs
     .readdirSync(devAppsPath)
@@ -12,26 +11,30 @@ const getComponentFoldersList = () => {
     .readdirSync(devAppsPath)
     .map((app) => "./development/" + app + "/pages");
   console.log(">>>", componentList);
-  // console.log("dev>>", {
-  //   componentsPathList: [...componentList],
-  //   pagesPathList: [...pagesList],
-  // });
   componentList.forEach((sourcePath) =>
     copyToFolder(sourcePath, "./docs/components")
   );
   pagesList.forEach((sourcePath) => copyToFolder(sourcePath, "./docs/pages"));
-  // copyToFolder();
 };
 
 const copyToFolder = (source, target) => {
-  ncp(source, target, function (err) {
+  const filterFn = (source) => {
+    if (
+      source.includes("_app.tsx") ||
+      source.includes("_document.tsx") ||
+      source.includes("index.tsx")
+    )
+      return false;
+    return true;
+  };
+
+  ncp(source, target, { filter: filterFn }, function (err) {
     if (err) {
       console.error(err);
     } else {
       console.log("Component Folder created successfully.");
-      // reformat(componentTargetFolderPath);
     }
   });
 };
 
-getComponentFoldersList();
+module.exports = getComponentFoldersList;

@@ -1,36 +1,46 @@
 const fs = require("fs");
 const devAppsPath = "./development";
+const _ = require("lodash");
 
 const getTailWindFromDevApps = async () => {
   const devappList = fs.readdirSync(devAppsPath);
-  const devAppsPaths = devappList.map(
-    (app) => devAppsPath + "/" + app + "/tailwind.config.js"
+  const devAppsPaths = [
+    ...devappList.map((app) => devAppsPath + "/" + app + "/tailwind.config.js"),
+    "./docs/tailwind.config.js",
+  ];
+
+  const newTailwindObject = await readTailwindConfig(devAppsPaths);
+  writeToDocsTailwindConfig(
+    newTailwindObject.content,
+    newTailwindObject.theme,
+    newTailwindObject.plugins
   );
+};
 
-  readTailwindConfig(devAppsPaths);
-
-  //   const tailwindConfigPath = "./docs/tailwind.config.js";
-  //   const tailwindConfigFile = fs.readFileSync(tailwindConfigPath, "utf8");
-  //   const updatedConfigFile = tailwindConfigFile
-  //     .replace(
-  //       /content: \[.*?\]/,
-  //       `content: ${JSON.stringify([...contentArray])}`
-  //     )
-  //     .replace(
-  //       /plugins: \[.*?\]/,
-  //       `plugins: ${JSON.stringify([...pluginArray])}`
-  //     );
-  //   console.log("updatedConfigFile>>", updatedConfigFile);
-  //   fs.writeFileSync(tailwindConfigPath, updatedConfigFile, "utf8");
-
-  //   console.log("tailwind.config.js file updated successfully.");
+const writeToDocsTailwindConfig = (contentArray, themeObject, pluginsArray) => {
+  try {
+    const replacementContent =
+      "content: [\n" + contentArray.join(",\n") + "\n]";
+    const replacementTheme =
+      "theme: " + JSON.stringify(themeObject) + ",\nplugins";
+    const replacementPlugins = "plugins: [" + pluginsArray.join(",") + "]";
+    const tailwindConfigPath = "./docs/tailwind.config.js";
+    const tailwindConfigFile = fs.readFileSync(tailwindConfigPath, "utf8");
+    const updatedConfigFile = tailwindConfigFile
+      .replace(/content:\s*\[(.*?)\]/s, `${replacementContent}`)
+      .replace(/theme:\s*(.*?)plugins/s, `${replacementTheme}`)
+      .replace(/plugins:\s*\[(.*?)\]/s, `${replacementPlugins}`);
+    fs.writeFileSync(tailwindConfigPath, updatedConfigFile, "utf8");
+  } catch (error) {
+    console.log("error>>", error);
+  }
 };
 
 const readTailwindConfig = async (paths) => {
   const contentRegex = /content:\s*\[(.*?)\]/s;
   const themeRegex = /theme:\s*(.*?)plugins/s;
   const pluginRegex = /plugins:\s*\[(.*?)\]/s;
-  const generatedTailwindObject = { content: "", plugin: "", theme: "" };
+  const generatedTailwindObject = { content: "", plugins: "", theme: "" };
   const contentPrommisesArray = paths.map(async (path) => {
     return contentFetcher(path, contentRegex);
   });
@@ -40,22 +50,21 @@ const readTailwindConfig = async (paths) => {
   const pluginsPromiseArray = paths.map(async (path) => {
     return pluginsFetcher(path, pluginRegex);
   });
-  Promise.all(contentPrommisesArray).then((values) => {
-    console.log("Resolved content values are>>>", [...new Set(values.flat())]);
+  const contentPromise = Promise.all(contentPrommisesArray).then((values) => {
     generatedTailwindObject["content"] = [...new Set(values.flat())];
   });
-  Promise.all(themePromiseArray).then((values) => {
-    console.log(
-      "Resolved theme values are>>>",
-      values.map((val) => JSON.parse(val))
+  const themePromise = Promise.all(themePromiseArray).then((values) => {
+    generatedTailwindObject["theme"] = _.merge(
+      ...values.map((val) => JSON.parse(val))
     );
-    generatedTailwindObject["theme"] = [values];
   });
-  Promise.all(pluginsPromiseArray).then((values) => {
-    console.log("Resolved content values are>>>", [...new Set(values.flat())]);
-    generatedTailwindObject["content"] = [...new Set(values.flat())];
+  const pluginsPromise = Promise.all(pluginsPromiseArray).then((values) => {
+    generatedTailwindObject["plugins"] = [...new Set(values.flat())];
   });
-  // return returnArray;
+
+  await Promise.all([contentPromise, themePromise, pluginsPromise]);
+
+  return generatedTailwindObject;
 };
 
 const contentFetcher = (path, regex) => {
@@ -93,20 +102,13 @@ const themeFetcher = (path, regex) => {
         let array = contentResult[1]
           .replaceAll("},\n", "}")
           .replaceAll("\n", "")
-          .replaceAll(" ", "")
+          .replaceAll(/\s{2,}/g, "")
           .replaceAll(",}", "}")
           .replace(/,\s*$/, "");
-
-        // Remove the trailing comma (if any) after the closing curly brace
-        // const stringWithoutTrailingComma = array.replace(/,\s*$/, "");
-
-        // Wrap the property names and string values with double quotes
         const validString = array.replace(
           /(['"])?([a-zA-Z0-9_-]+)(['"])?:/g,
           '"$2": '
         );
-
-        // console.log(validString);
         resolve(validString);
       } catch (error) {
         reject(error);
@@ -136,4 +138,4 @@ const pluginsFetcher = (path, regex) => {
   });
 };
 
-getTailWindFromDevApps();
+module.exports = getTailWindFromDevApps;
