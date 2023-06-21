@@ -1,6 +1,6 @@
 {
-  "name": "@locoworks/reusejs-react-input-group",
-  "version": "0.1.3",
+  "name": "@locoworks/reusejs-react-otp-input",
+  "version": "0.1.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
@@ -14,11 +14,11 @@
   "scripts": {
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "build": "rollup -c --bundleConfigAsCjs",
+    "bundle": "rollup -c --bundleConfigAsCjs",
     "dev": "rollup -c -w --bundleConfigAsCjs"
   },
   "dependencies": {
-    "tailwind-merge": "^1.12.0",
-    "@locoworks/reusejs-react-input": "*"
+    "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

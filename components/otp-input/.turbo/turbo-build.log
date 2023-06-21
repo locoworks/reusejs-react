@@ -1,0 +1,6 @@
+$ rollup -c --bundleConfigAsCjs
+[36m
+[1m./index.ts[22m → [1mdist/index.cjs.js, dist/index.esm.js[22m...[39m
+[1m[33m(!) Circular dependency[39m[22m
+index.ts -> src/ReuseOTPInput.tsx -> index.ts
+[32mcreated [1mdist/index.cjs.js, dist/index.esm.js[22m in [1m1s[22m[39m

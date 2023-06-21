@@ -17,6 +17,8 @@
     "input:dev": "turbo run dev --filter=input-app...",
     "select-dropdown:dev": "turbo run dev --filter=select-dropdown-app...",
     "select-dropdown:build": "turbo run build --filter=@locoworks/reusejs-react-select-dropdown...",
+    "otp-input:dev": "turbo run dev --filter=otp-input-app...",
+    "otp-input:build": "turbo run build --filter=@locoworks/reusejs-react-otp-input...",
     "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "list:comp": "node ./scripts/getAllComponentsList.cjs"

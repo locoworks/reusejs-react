@@ -1,0 +1,15 @@
+import React, { useState } from "react";
+import { HeadlessOTPInput } from "@locoworks/reusejs-react-otp-input";
+
+const [otp, setOtp] = useState("");
+
+<HeadlessOTPInput
+  value={otp}
+  onChange={setOtp}
+  numInputs={6}
+  renderSeparator={null}
+  renderInput={(props: any) => <input {...props} />}
+  inputStyle={}
+  containerStyle={} 
+/>
+
