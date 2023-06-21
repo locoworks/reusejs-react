@@ -4,7 +4,12 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "../components/button/**/*.{js,jsx.ts.tsx,mdx}",
+    "../../components/button/**/*.{js,jsx.ts.tsx,mdx}",
+    "../../components/input/**/*.{js,jsx.ts.tsx,mdx}",
+    "../../components/input-group/**/*.{js,jsx.ts.tsx,mdx}",
+    "../../components/otp-input/**/*.{js,jsx.ts.tsx,mdx}",
+    "../../components/code-preview/**/*.{js,jsx.ts.tsx,mdx}",
+    "../node_modules/@locoworks/**/*.{js,jsx.ts.tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -15,5 +20,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };

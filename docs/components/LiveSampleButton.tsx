@@ -3,7 +3,7 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 // import Sample from "./button/Sample/Sample.tsx";
 import { HeadlessButton } from "@locoworks/reusejs-react-button";
 
-const LiveSample = () => {
+const LiveSampleButton = () => {
   const scope = { HeadlessButton };
 
   const code = `
@@ -26,4 +26,4 @@ const LiveSample = () => {
   );
 };
 
-export default LiveSample;
+export default LiveSampleButton;

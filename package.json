@@ -19,7 +19,10 @@
     "otp-input:build": "turbo run build --filter=@locoworks/reusejs-react-otp-input...",
     "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "list:comp": "node ./scripts/getAllComponentsList.cjs"
+    "list:comp": "node ./scripts/getAllComponentsList.cjs",
+    "build:docs": "node ./scripts/buildDocs.cjs",
+    "cpCP": "node ./scripts/copyComponentsNPages.cjs",
+    "tail": "node ./scripts/genTailwind.cjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",

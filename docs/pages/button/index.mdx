@@ -3,21 +3,68 @@ title: "ReuseJS Button"
 author: "Shrey Dhyani"
 ---
 
+import LiveSampleButton from "../../components/LiveSampleButton"
+import Sample from "../../components/button/Sample/Sample.tsx"
+import OutlineButton from "../../components/button/OutlineButton/OutlineButton.tsx"
+import SuccessSample from "../../components/button/SuccessSample/SuccessSample.tsx"
+import HeadlessSample from "../../components/button/HeadlessSample/HeadlessSample.tsx"
+import TextButton from "../../components/button/TextButton/TextButton.tsx"
+import CSSStyledButton from "../../components/button/CSSStyledButton/CSSStyledButton.tsx";
 
-# Hello World
+## Table of contents
 
-This is a sample
+## Headless Button
+This is the button component with no inherent styles, so to render this component user will have to provide styles to the component.
 
-<ReuseButton onClick={()=>{console.log("Hello")}}>Click</ReuseButton>
+This Button provides the feature of adding **busy state**, **busy text** which will be shown in busy state, ability to add button **Prefix** and button **Suffix**.
 
-```ts
-console.log("Hello");
+It uses following tailwind classes for providing styles: ** ``` w-1/2 bg-red-400 hover:bg-red-500 py-2 rounded-lg text-white font-bold ``` **
+
+<HeadlessSample/>
+
+```js path=../../components/button/HeadlessSample name=HeadlessSample
 ```
 
-```bash {{ title: 'cURL' }}
-  curl -G https://api.protocol.chat/v1/attachments \
-    -H "Authorization: Bearer {token}" \
-    -d conversation_id="xgQQXg3hrtjh7AvZ" \
-    -d limit=10
+## Sample Code Demo
+
+<Sample/>
+
+```js path=../../components/button/Sample name=Sample
 ```
 
+## Outline Button Demo
+
+<OutlineButton/>
+
+```js path=../../components/button/OutlineButton name=OutlineButton
+```
+
+## Success Sample Button Demo
+
+<SuccessSample/>
+
+```js path=../../components/button/SuccessSample name=SuccessSample
+```
+
+## Text Button Demo
+
+<TextButton/>
+
+```js path=../../components/button/TextButton name=TextButton
+```
+
+## CSSStyledButton
+
+<CSSStyledButton/>
+
+```js path=../../components/button/CSSStyledButton name=CSSStyledButton
+```
+
+
+## Live Playground
+
+<LiveSampleButton/>
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
