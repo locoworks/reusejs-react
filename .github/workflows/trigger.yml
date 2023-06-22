@@ -1,0 +1,17 @@
+name: Trigger Deploy Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Deploy Workflow in Repo-A
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: ShreyDhyani/@locoworks/home
+          event-type: deploy
