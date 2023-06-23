@@ -11,6 +11,7 @@
   "dependencies": {
     "@locoworks/reusejs-react-button": "*",
     "@locoworks/reusejs-react-code-preview": "*",
+    "@locoworks/remark-ts-interface": "",
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.4.3",
