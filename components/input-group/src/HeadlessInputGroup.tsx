@@ -1,6 +1,6 @@
 import React from "react";
 import { HeadlessInput } from "@locoworks/reusejs-react-input";
-import { HeadlessInputProps } from "@locoworks/reusejs-react-input/dist/types/src/HeadlessInput";
+import { HeadlessInputProps } from "@locoworks/reusejs-react-input/src/HeadlessInput";
 
 type ExtendedHeadlessInputInterface = Omit<HeadlessInputProps, "prefix">;
 export interface HeadlessInputGroupProps

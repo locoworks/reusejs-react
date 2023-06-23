@@ -12,7 +12,6 @@ type InputProps = Required<
     | "onKeyDown"
     | "onPaste"
     | "aria-label"
-    | "maxLength"
     | "autoComplete"
     | "style"
   > & {
@@ -90,15 +89,23 @@ const HeadlessOTPInput: React.FC<HeadlessOTPInputProps> = ({
   };
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement> &
-      React.CompositionEvent<HTMLInputElement>
+    event:
+      | React.ChangeEvent<HTMLInputElement> &
+          React.CompositionEvent<HTMLInputElement> &
+          React.ClipboardEvent<HTMLInputElement>
   ) => {
     const { value } = event.target;
 
     const temp = false;
+
     if (isInputValueValid(value)) {
       changeCodeAtFocus(value);
       focusInput(activeInput + 1);
+    } else if (value && value.trim().length > 1) {
+      event.clipboardData = {
+        getData: () => value.trim(),
+      } as unknown as DataTransfer;
+      handlePaste(event);
     } else {
       const { nativeEvent } = event;
 
@@ -228,7 +235,6 @@ const HeadlessOTPInput: React.FC<HeadlessOTPInputProps> = ({
                 onKeyDown: handleKeyDown,
                 onPaste: handlePaste,
                 autoComplete: "off",
-                maxLength: 1,
                 "aria-label": `Please enter OTP character ${index + 1}`,
                 style: isStyleObject(inputStyle)
                   ? (inputStyle as CSSProperties)

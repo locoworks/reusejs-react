@@ -1,8 +1,8 @@
 import React, { CSSProperties } from "react";
-import useHeadlessSelectHook from "./useHeadlessSelectHook";
 import { twMerge } from "tailwind-merge";
+import { useHeadlessSelectHook } from "@locoworks/reusejs-toolkit-react-hooks";
 
-interface OptionInterface {
+export interface OptionInterface {
   [key: string]: any;
 }
 export interface ReuseSelectProps {

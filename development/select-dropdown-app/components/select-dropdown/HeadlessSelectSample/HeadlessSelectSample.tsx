@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from "react";
-import { useHeadlessSelectHook } from "@locoworks/reusejs-react-select-dropdown";
+import React from "react";
+import { useHeadlessSelectHook } from "@locoworks/reusejs-toolkit-react-hooks";
 
 const NoOptionsRenderer = () => {
   return <div className="flex justify-center my-2">No Options found</div>;
@@ -122,12 +122,12 @@ const HeadlessSelectSample: React.FC = ({}) => {
             <div
               className="bg-white border border-black rounded px-4 flex items-center w-48 h-10 cursor-pointer"
               onClick={() => {
-                setOpen((prev) => !prev);
+                setOpen((prev: any) => !prev);
               }}
             >
               <p className="overflow-hidden text-ellipsis whitespace-nowrap">
                 {selectedValues?.length !== 0
-                  ? selectedValues.map((option) => option.label).join(", ")
+                  ? selectedValues.map((option: any) => option.label).join(", ")
                   : "Open Dropdown"}
               </p>
             </div>
@@ -150,7 +150,7 @@ const HeadlessSelectSample: React.FC = ({}) => {
               {filteredOptions?.map((option: any, index: number) => {
                 if (
                   selectedValues
-                    .map((val) => val[valueKey])
+                    .map((val: any) => val[valueKey])
                     .includes(option[valueKey])
                 ) {
                   return (

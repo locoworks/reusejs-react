@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useOutsideClicker, useDebounceEffect, useDidMountEffect } from "hooks";
+import { useOutsideClicker } from "./use-outside-clicker";
+import { useDebounceEffect } from "./use-debounce-effect";
+import { useDidMountEffect } from "./use-did-mount-effect";
 
-interface OptionInterface {
+export interface OptionInterface {
   [key: string]: any;
 }
 
@@ -32,7 +34,7 @@ export interface HeadlessSelectHook {
   outsideClickRef: React.MutableRefObject<any>;
 }
 
-export default function ({
+export let useHeadlessSelectHook = ({
   options,
   valueKey,
   onChange,
@@ -42,7 +44,7 @@ export default function ({
   defaultOpen = false,
   defaultQuery = "",
   refresh = "",
-}: HeadlessSelectProps): HeadlessSelectHook {
+}: HeadlessSelectProps): HeadlessSelectHook => {
   const [open, setOpen] = useState<boolean>(defaultOpen);
   const [query, setQuery] = useState<string>(defaultQuery);
   const [selectedValues, setSelectedValues] =
@@ -125,4 +127,4 @@ export default function ({
     addOrRemove,
     outsideClickRef,
   };
-}
+};

@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-input-group
 
+## 0.1.4
+
+### Patch Changes
+
+- af0a483: Bundle issue fix for input-group
+
 ## 0.1.3
 
 ### Patch Changes
