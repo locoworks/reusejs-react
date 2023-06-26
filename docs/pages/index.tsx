@@ -4,17 +4,130 @@ import React from "react";
 import SiteWrapper from "@/components/support/SiteWrapper";
 
 export default function Home() {
-  const content = `What is Lorem Ipsum?
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-  
-  Why do we use it?
-  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+  const toc = [
+    {
+      depth: 2,
+      value: "Reuse Component Library Documentation",
+      children: [],
+    },
+    {
+      depth: 3,
+      value: "Get Started",
+      children: [],
+    },
+    {
+      depth: 3,
+      value: "Available Components",
+      children: [],
+    },
+    {
+      depth: 3,
+      value: "Documentation and Examples",
+      children: [],
+    },
+    {
+      depth: 3,
+      value: "Contributing",
+      children: [],
+    },
+    {
+      depth: 3,
+      value: "Support",
+      children: [],
+    },
+  ];
 
-  
-  Where does it come from?
-  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-  
-  The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.`;
-
-  return <SiteWrapper>{content + content + content}</SiteWrapper>;
+  return (
+    <SiteWrapper toc={toc}>
+      <div className="px-4 mb-10">
+        <h1
+          className="text-3xl font-bold mt-6"
+          id="reuse-component-library-documentation"
+        >
+          Reuse Component Library Documentation
+        </h1>
+        <p className="mt-3">
+          Welcome to the documentation for the Reuse Component Library! Reuse is
+          a collection of reusable React components designed to enhance your web
+          development experience. Each component in the library is published
+          individually, allowing you to pick and choose the ones you need for
+          your projects.
+        </p>
+        <h1 className="text-2xl font-bold mt-6 " id="get-started">
+          Get Started
+        </h1>
+        <p className="mt-3">
+          To start using the Reuse Component Library, you can simply install the
+          desired components from npm. Each component has its own npm package
+          with the naming convention{" "}
+          <span className="font-bold">{`@locoworks/reusejs-react-<component-name>`}</span>
+          . You can install them using npm or yarn:
+        </p>
+        <pre className="w-full bg-[#1f2937] rounded px-2 py-4 mt-4">
+          <code className=" text-white">{`npm install @locoworks/reusejs-react-<component-name>`}</code>
+        </pre>
+        <p>or</p>
+        <pre className="w-full bg-[#1f2937] rounded px-2 py-4 mt-4">
+          <code className=" text-white">{`yarn add @locoworks/reusejs-react-<component-name>`}</code>
+        </pre>
+        <p>
+          Once installed, you can import and use the components in your React
+          application.
+        </p>
+        <h2 className="text-2xl font-bold mt-5" id="available-components">
+          Available Components
+        </h2>
+        <p>
+          The Reuse Component Library offers a wide range of components to cater
+          to various UI needs. Some of the key components available in the
+          library are:
+        </p>
+        <ul className="home-list px-4 mt-2">
+          <li>Button</li>
+          <li>Input</li>
+          <li>Input-Group</li>
+          <li>OTP-Input</li>
+          <li>Select-Dropdown</li>
+        </ul>
+        <h2 className="mt-5 text-2xl font-bold" id="documentation-and-examples">
+          Documentation and Examples
+        </h2>
+        <p className="mt-3">
+          In the documentation, you will find detailed information about each
+          component, including usage examples, props, and customization options.
+          We strive to provide clear and concise documentation to make it easier
+          for you to integrate Reuse components into your projects.
+        </p>
+        <p className="mt-3">
+          Additionally, you can explore the examples section to see live demos
+          of the components in action. These examples will help you understand
+          how to utilize the components effectively and demonstrate their
+          versatility.
+        </p>
+        <h2 className="mt-5 text-2xl font-bold" id="contributing">
+          Contributing
+        </h2>
+        <p className="mt-3">
+          Reuse is an open-source project, and we welcome contributions from the
+          community. If you encounter any issues, have suggestions for
+          improvements, or want to contribute code, please visit our GitHub
+          repository. We appreciate your support in making Reuse even better.
+        </p>
+        <h2 className="mt-5 text-2xl font-bold" id="support">
+          Support
+        </h2>
+        <p className="mt-3">
+          If you need any assistance or have any questions related to the Reuse
+          Component Library, you can reach out to our support team or join our
+          community forum. We are here to help and ensure a smooth experience
+          for you.
+        </p>
+        <p className="mt-3">
+          Thank you for choosing the Reuse Component Library! We hope it
+          simplifies your development process and helps you build amazing
+          applications. Happy coding!
+        </p>
+      </div>
+    </SiteWrapper>
+  );
 }
