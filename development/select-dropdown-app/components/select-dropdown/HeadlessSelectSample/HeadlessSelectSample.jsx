@@ -15,7 +15,7 @@ const HeadlessSelectSample = ({
   header,
   footer,
   onChange,
-  valueKey,
+  // valueKey,
   filterFunction,
   clearQuery,
   defaultQuery = "",
