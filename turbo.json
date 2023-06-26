@@ -6,7 +6,8 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "bundle": {
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "dependsOn": ["^bundle"]
     },
     "lint": {},
     "dev": {
