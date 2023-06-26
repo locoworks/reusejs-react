@@ -125,7 +125,7 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
       <div className="z-10 h-[6%] flex items-center py-4 pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
         <label
           className="text-lg text-[#5501BF] cursor-pointer"
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/reusejs-react")}
         >
           <span className="font-bold">LOCO</span>WORKS
         </label>
