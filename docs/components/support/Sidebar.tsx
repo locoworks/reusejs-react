@@ -43,8 +43,10 @@ const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
               <h2
                 className="ml-6 w-fit "
                 onClick={() => {
+                  const route = val.split(" ").join("-").toLowerCase();
+                  console.log("route>>>");
                   heading === "Components" &&
-                    router.push("/" + val.split(" ").join("-").toLowerCase());
+                    router.push("/reusejs-react/" + route);
                 }}
               >
                 {val}
