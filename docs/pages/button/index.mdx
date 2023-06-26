@@ -3,16 +3,14 @@ title: "ReuseJS Button"
 author: "Shrey Dhyani"
 ---
 
-import SiteWrapper from "../../components/support/SiteWrapper"
-import LiveSampleButton from "../../components/LiveSampleButton"
-import Sample from "../../components/button/Sample/Sample.tsx"
-import OutlineButton from "../../components/button/OutlineButton/OutlineButton.tsx"
-import SuccessSample from "../../components/button/SuccessSample/SuccessSample.tsx"
-import HeadlessSample from "../../components/button/HeadlessSample/HeadlessSample.tsx"
-import TextButton from "../../components/button/TextButton/TextButton.tsx"
+import LiveSampleButton from "../../components/LiveSampleButton";
+import Sample from "../../components/button/Sample/Sample.tsx";
+import OutlineButton from "../../components/button/OutlineButton/OutlineButton.tsx";
+import SuccessSample from "../../components/button/SuccessSample/SuccessSample.tsx";
+import HeadlessSample from "../../components/button/HeadlessSample/HeadlessSample.tsx";
+import TextButton from "../../components/button/TextButton/TextButton.tsx";
 import CSSStyledButton from "../../components/button/CSSStyledButton/CSSStyledButton.tsx";
 
-## Table of contents
 
 ## Headless Button
 This is the button component with no inherent styles, so to render this component user will have to provide styles to the component.
@@ -64,8 +62,10 @@ It uses following tailwind classes for providing styles: ** ``` w-1/2 bg-red-400
 
 ## Live Playground
 
+This is a live playground sample that you can use to create a working sample of your code and copy to use in your own application.
+
 <LiveSampleButton/>
 
 export default ({ children }) => {
-  return <SiteWrapper><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };

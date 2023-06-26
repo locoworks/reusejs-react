@@ -3,8 +3,6 @@ title: "ReuseJS Button"
 author: "Shrey Dhyani"
 ---
 
-import toc from "../../public/toc.json"
-import SiteWrapper from "../../../../docs/components/support/SiteWrapper";
 import LiveSampleButton from "../../components/LiveSampleButton";
 import Sample from "../../components/button/Sample/Sample.tsx";
 import OutlineButton from "../../components/button/OutlineButton/OutlineButton.tsx";
@@ -69,8 +67,5 @@ This is a live playground sample that you can use to create a working sample of 
 <LiveSampleButton/>
 
 export default ({ children }) => {
-  // console.log(">>>>>Children from mdx", children);
-  // console.log(">",exportToC())
-  // console.log(">>>>", toc)
-  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };

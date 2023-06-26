@@ -6,6 +6,7 @@ module.exports = {
 "./app/**/*.{js,ts,jsx,tsx,mdx}",
 "../../components/button/**/*.{js,jsx.ts.tsx,mdx}",
 "../../components/code-preview/**/*.{js,jsx.ts.tsx,mdx}",
+"../../docs/**/*.{js,jsx,ts,tsx,mdx}",
 "../../components/input/**/*.{js,jsx.ts.tsx,mdx}",
 "../../components/input-group/**/*.{js,jsx.ts.tsx,mdx}",
 "../../components/otp-input/**/*.{js,jsx.ts.tsx,mdx}",

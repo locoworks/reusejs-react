@@ -16,7 +16,7 @@ const getAllMDX = () => {
     );
     console.log("data", data);
     const jsonData = JSON.stringify(data, null, 2);
-    fs.writeFile(path + "/" + ele + "-app/public/toc.json", jsonData, (err) => {
+    fs.writeFile("./docs/public/" + ele + "-toc.json", jsonData, (err) => {
       if (err) {
         console.error("Error writing JSON file:", err);
       } else {
