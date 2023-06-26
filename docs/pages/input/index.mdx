@@ -3,6 +3,7 @@ title: "ReuseJS Input"
 author: "Shrey Dhyani"
 ---
 
+import SiteWrapper from "../../components/support/SiteWrapper"
 import SampleInput from "../../components/input/SampleInput/SampleInput.tsx";
 import DisabledInput from "../../components/input/DisabledInput/DisabledInput.tsx";
 import PasswordInput from "../../components/input/PasswordInput/PasswordInput.tsx";
@@ -81,5 +82,5 @@ module.exports = {
 ```
 
 export default ({ children }) => {
-  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+  return  <SiteWrapper><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
 };

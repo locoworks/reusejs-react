@@ -9,6 +9,7 @@ module.exports = {
 "../../components/input/**/*.{js,jsx.ts.tsx,mdx}",
 "../../components/input-group/**/*.{js,jsx.ts.tsx,mdx}",
 "../../components/otp-input/**/*.{js,jsx.ts.tsx,mdx}",
+"../../components/select-dropdown/**/*.{js,jsx.ts.tsx,mdx}",
 "../node_modules/@locoworks/**/*.{js,jsx.ts.tsx,mdx}",
 "../**/*/reusejs-react-code-preview/**/*.{js,ts,jsx,tsx,mdx}"
 ],
