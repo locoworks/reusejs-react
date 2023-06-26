@@ -1,6 +1,8 @@
-const fs = require("fs");
+// const fs = require("fs");
 const devAppsPath = "./development";
-const _ = require("lodash");
+// const _ = require("lodash");
+import _ from "lodash";
+import fs from "node:fs";
 
 const getTailWindFromDevApps = async () => {
   const devappList = fs.readdirSync(devAppsPath);
@@ -138,4 +140,4 @@ const pluginsFetcher = (path, regex) => {
   });
 };
 
-module.exports = getTailWindFromDevApps;
+export default getTailWindFromDevApps;

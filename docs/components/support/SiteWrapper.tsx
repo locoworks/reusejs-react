@@ -16,67 +16,112 @@ interface SiteWrapperProps {
   children: React.ReactNode;
   toc?: TocNode[];
 }
+interface ListElementProps {
+  margin: string;
+  value: string;
+  key_value: string;
+}
 
-const renderToC = (toc: TocNode[]) => {
-  return toc.map((node) => {
-    if (node.value.includes("title") && node.value.includes("author")) return;
-    const link = (
-      <a href={`#${node.value.toLowerCase().split(" ").join("-")}`}>
+const ListElement = ({ margin, value, key_value }: ListElementProps) => {
+  return (
+    <li className={"text-md font-light " + margin} key={key_value}>
+      <a href={`#${value.toLowerCase().split(" ").join("-")}`}>
         <p className="overflow-hidden text-ellipsis whitespace-nowrap hover:underline">
-          {node.value}
+          {value}
         </p>
       </a>
-    );
-    switch (node.depth) {
-      case 1:
+    </li>
+  );
+};
+
+const renderToC = (toc: TocNode[]): any => {
+  const components = toc
+    .filter(
+      (ele) => !ele.value.includes("title") && !ele.value.includes("author")
+    )
+    .map((node: TocNode) => {
+      if (node.value.includes("title") && node.value.includes("author")) return;
+      var listElement;
+
+      switch (node.depth) {
+        case 1:
+          listElement = (
+            <ListElement
+              key_value={node.depth + node.value}
+              margin=""
+              value={node.value}
+            />
+          );
+          break;
+        case 2:
+          listElement = (
+            <ListElement
+              key_value={node.depth + node.value}
+              margin={"ml-2"}
+              value={node.value}
+            />
+          );
+          break;
+        case 3:
+          listElement = (
+            <ListElement
+              key_value={node.depth + node.value}
+              margin={"ml-4"}
+              value={node.value}
+            />
+          );
+          break;
+        case 4:
+          listElement = (
+            <ListElement
+              key_value={node.depth + node.value}
+              margin="ml-6"
+              value={node.value}
+            />
+          );
+          break;
+        case 5:
+          listElement = (
+            <ListElement
+              key_value={node.depth + node.value}
+              margin="ml-8"
+              value={node.value}
+            />
+          );
+          break;
+        case 6:
+          listElement = (
+            <ListElement
+              key_value={node.depth + node.value}
+              margin="ml-10"
+              value={node.value}
+            />
+          );
+          break;
+        default:
+          listElement = (
+            <ListElement
+              key_value={node.depth + node.value}
+              margin=""
+              value={node.value}
+            />
+          );
+      }
+      if (node.children) {
         return (
-          <li className="text-md font-light " key={"ele" + node.value}>
-            {link}
-          </li>
+          <>
+            {listElement}
+            {renderToC(node.children)}
+          </>
         );
-      case 2:
-        return (
-          <li className="text-md font-light" key={"ele" + node.value}>
-            {link}
-          </li>
-        );
-      case 3:
-        return (
-          <li className="text-md font-light ml-4" key={"ele" + node.value}>
-            {link}
-          </li>
-        );
-      case 4:
-        return (
-          <li className="text-md font-light ml-6" key={"ele" + node.value}>
-            {link}
-          </li>
-        );
-      case 5:
-        return (
-          <li className="text-md font-light ml-8" key={"ele" + node.value}>
-            {link}
-          </li>
-        );
-      case 6:
-        return (
-          <li className="text-md font-light ml-10" key={"ele" + node.value}>
-            {link}
-          </li>
-        );
-      default:
-        return (
-          <li className="text-md font-light ml" key={"ele" + node.value}>
-            {link}
-          </li>
-        );
-    }
-  });
+      }
+      return listElement;
+    });
+  // console.log(">>>", components);
+  return components;
 };
 
 export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
-  // console.log(">>>>>", toc);
-
   const content = `What is Lorem Ipsum?
   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
   
@@ -91,7 +136,6 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
 
   return (
     <main className="h-screen">
-      {/* <div>This will be the home site for docs</div> */}
       <div className="z-10 h-[6%] flex items-center py-4 pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
         <label className="text-lg text-[#5501BF]">
           <span className="font-bold">LOCO</span>WORKS

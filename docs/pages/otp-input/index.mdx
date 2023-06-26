@@ -2,6 +2,8 @@
 title: "ReuseJS otp-input"
 ---
 
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../public/otp-input-toc.json" 
 import Sample from "../../components/otp-input/Sample/Sample.tsx"
 import ReuseExample from "../../components/otp-input/ReuseExample/ReuseExample.tsx";
 import ReuseNumberExample from "../../components/otp-input/ReuseNumberExample/ReuseNumberExample.tsx";
@@ -97,7 +99,7 @@ This example demonstrating the accepting the only number type values with suppor
 
 
 export default ({ children }) => {
-  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
 };
 
 

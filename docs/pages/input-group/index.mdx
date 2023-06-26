@@ -3,10 +3,11 @@ title: "ReuseJS input-group"
 author: "Shrey Dhyani"
 ---
 
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../public/input-group-toc.json" 
 import Sample from "../../components/input-group/Sample/Sample.tsx";
 import ReuseExample from "../../components/input-group/ReuseExample/ReuseExample.tsx";
 
-## Table of contents
 
 ## Headless Input Group
 
@@ -82,5 +83,5 @@ By leveraging these props, users can fully customize the **ReuseInputGroup** com
 
 
 export default ({ children }) => {
-  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
 };

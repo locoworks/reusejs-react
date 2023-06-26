@@ -3,7 +3,7 @@ import markdown from "remark-parse";
 import extractToc from "remark-extract-toc";
 import fs from "node:fs";
 
-const getAllMDX = () => {
+const createTocJSON = () => {
   const path = "./development";
   const dir = fs.readdirSync(path);
   dir.map((ele) => {
@@ -19,7 +19,7 @@ const getAllMDX = () => {
       if (err) {
         console.error("Error writing JSON file:", err);
       } else {
-        console.log("JSON file created successfully!");
+        // console.log("JSON file created successfully!");
       }
     });
   });
@@ -35,6 +35,4 @@ const exportToC = (path) => {
   return tree;
 };
 
-getAllMDX();
-
-export default exportToC;
+export default createTocJSON;

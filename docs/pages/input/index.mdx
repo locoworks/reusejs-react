@@ -3,14 +3,14 @@ title: "ReuseJS Input"
 author: "Shrey Dhyani"
 ---
 
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../public/input-toc.json" 
 import SampleInput from "../../components/input/SampleInput/SampleInput.tsx";
 import DisabledInput from "../../components/input/DisabledInput/DisabledInput.tsx";
 import PasswordInput from "../../components/input/PasswordInput/PasswordInput.tsx";
 import PasswordShowHide from "../../components/input/PasswordShowHide/PasswordShowHide.tsx";
 import NumberInput from "../../components/input/NumberInput/NumberInput.tsx";
 
-
-## Table of contents
 
 Input component is the precursor of `input-group` component which provides functionality specific to input component like placeholder, disable input, autocomplet etc. Along with some additional features like **show/hide passwords** using props showPassword.
 Additionally since **reusejs-input** extends **html-input** it supports all the functionality of a default browser input like types, autocomplete, form, alt, for etc.
@@ -81,5 +81,5 @@ module.exports = {
 ```
 
 export default ({ children }) => {
-  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
 };

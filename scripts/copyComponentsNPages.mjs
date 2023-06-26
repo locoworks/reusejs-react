@@ -1,5 +1,8 @@
-const fs = require("node:fs");
-const ncp = require("ncp").ncp;
+// const fs = require("node:fs");
+// const ncp = require("ncp").ncp;
+import fs from "node:fs";
+import pkg from "ncp";
+const { ncp } = pkg;
 
 const devAppsPath = "./development";
 
@@ -10,7 +13,6 @@ const getComponentFoldersList = () => {
   const pagesList = fs
     .readdirSync(devAppsPath)
     .map((app) => "./development/" + app + "/pages");
-  console.log(">>>", componentList);
   componentList.forEach((sourcePath) =>
     copyToFolder(sourcePath, "./docs/components")
   );
@@ -32,9 +34,10 @@ const copyToFolder = (source, target) => {
     if (err) {
       console.error(err);
     } else {
-      console.log("Component Folder created successfully.");
+      // console.log("Component Folder created successfully.");
     }
   });
 };
 
-module.exports = getComponentFoldersList;
+// module.exports = getComponentFoldersList;
+export default getComponentFoldersList;
