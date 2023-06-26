@@ -48,8 +48,8 @@ const HeadlessSelectSample = ({
     addOrRemove,
     outsideClickRef,
   } = useHeadlessSelectHook({
-    options: options,
-    valueKey: valueKey,
+    options,
+    valueKey,
     onChange,
     filterFunction,
     clearQuery,
