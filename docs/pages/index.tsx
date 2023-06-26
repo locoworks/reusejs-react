@@ -1,6 +1,4 @@
-import Image from "next/image";
 import React from "react";
-// import Sidebar from "@/components/support/Sidebar";
 import SiteWrapper from "@/components/support/SiteWrapper";
 
 export default function Home() {
@@ -70,7 +68,7 @@ export default function Home() {
         <pre className="w-full bg-[#1f2937] rounded px-2 py-4 mt-4">
           <code className=" text-white">{`yarn add @locoworks/reusejs-react-<component-name>`}</code>
         </pre>
-        <p>
+        <p className="mt-3">
           Once installed, you can import and use the components in your React
           application.
         </p>

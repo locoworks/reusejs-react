@@ -1,7 +1,8 @@
-import Image from "next/image";
 import React from "react";
 import Sidebar from "./Sidebar";
 import { useRouter } from "next/router";
+import GitHubIcon from "./GitHubIcon";
+import Link from "next/link";
 
 interface TocNode {
   depth: number;
@@ -114,7 +115,6 @@ const renderToC = (toc: TocNode[]): any => {
       }
       return listElement;
     });
-  // console.log(">>>", components);
   return components;
 };
 
@@ -130,9 +130,9 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
           <span className="font-bold">LOCO</span>WORKS
         </label>
         <div className="flex gap-x-10">
-          {/* <Link href={"https://github.com/locoworks"}> */}
-          {/* <GitHubIcon /> */}
-          {/* </Link> */}
+          <Link href={"https://github.com/locoworks/reusejs-react"}>
+            <GitHubIcon />
+          </Link>
         </div>
       </div>
       <div className="flex h-[94%]">
