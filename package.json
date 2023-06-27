@@ -11,7 +11,7 @@
     "button:dev": "turbo run dev --filter=button-app...",
     "button:build": "turbo run build --filter=@locoworks/reusejs-react-button...",
     "docs:dev": "turbo run dev --filter=reuse-docs...",
-    "autogen:comp": "node ./scripts/scaffoldComponent.cjs",
+    "autogen:comp": "node ./scripts/scaffoldComponent.mjs",
     "input-group:dev": "turbo run dev --filter=input-group-app...",
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
     "input:dev": "turbo run dev --filter=input-app...",
