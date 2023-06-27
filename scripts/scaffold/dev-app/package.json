@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@locoworks/reusejs-react-code-preview": "*",
+    "@locoworks/reusejs-react-<to-replace>": "*",
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.4.3",

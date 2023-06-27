@@ -1,0 +1,206 @@
+---
+HEAD OBJECT
+title: "ReuseJS Select-Dropdown"
+author: "Shrey Dhyani"
+---
+
+import HeadlessSelectSample from "../../components/select-dropdown/HeadlessSelectSample/HeadlessSelectSample.tsx"
+import ReuseSelect from "../../components/select-dropdown/ReuseSelect/ReuseSelect.tsx"
+
+
+
+## Table of contents
+
+## useHeadlessSelectHook
+
+The `useHeadlessSelectHook` is a custom hook that provides a set of state variables and functions for managing the behavior of a headless select component in React applications.
+
+### Parameters
+
+The `useHeadlessSelectHook` accepts an options object with the following properties:
+
+- `options` (array): An array of options for the select. Each option is an object with key-value pairs representing the option's properties.
+- `valueKey` (string): The key in each option object that represents the unique identifier for the option. It is used to determine if an option is selected or not.
+- `onChange` (function): An optional callback function invoked when the selected option(s) change. It receives the selected option(s) as an argument.
+- `filterFunction` (function): An optional custom filter function used to filter the options based on the query entered by the user. It takes an option object and the query as arguments and should return a boolean indicating whether the option matches the query or not.
+- `clearQuery` (boolean): If set to `true`, the query is cleared when the select is closed.
+- `defaultSelected` (array): An optional array of option objects representing the initially selected option(s). This value is used as the initial state for `selectedValues`.
+- `defaultOpen` (boolean): An optional boolean indicating whether the select should be initially open or not.
+- `defaultQuery` (string): An optional string representing the initial query value for filtering the options.
+- `refresh` (any): An optional value used to trigger a refresh of the select options or behavior when it changes.
+
+### Return Value
+
+The `useHeadlessSelectHook` returns an object with the following properties and functions:
+
+- `open` (boolean): A boolean representing the current open/close state of the select.
+- `setOpen` (function): A function to update the open/close state of the select.
+- `query` (string): The current query value for filtering the options.
+- `setQuery` (function): A function to update the query value.
+- `selectedValues` (array): An array of option objects representing the currently selected option(s).
+- `setSelectedValues` (function): A function to update the selected option(s).
+- `filteredOptions` (array): An array of option objects representing the filtered options based on the current query.
+
+### Usage
+
+To use the `useHeadlessSelectHook`, import it and invoke it within a functional component. It returns an object containing the state variables and functions needed to control the headless select component.
+
+Example usage:
+
+```jsx
+import { useHeadlessSelectHook } from './hooks';
+
+// Define options for the select
+const options = [
+  { value: 'option1', label: 'Option 1' },
+  { value: 'option2', label: 'Option 2' },
+  // ...
+];
+
+// Define a change handler function
+const handleChange = (selectedOption) => {
+  console.log('Selected option:', selectedOption);
+};
+
+// Use the useHeadlessSelectHook
+const MyComponent = () => {
+  const {
+    open,
+    setOpen,
+    query,
+    setQuery,
+    selectedValues,
+    setSelectedValues,
+    filteredOptions,
+    setFilteredOptions,
+    addOrRemove,
+    outsideClickRef,
+  } = useHeadlessSelectHook({
+    options,
+    valueKey: 'value',
+    onChange: handleChange,
+    defaultSelected: [],
+    defaultOpen: false,
+    defaultQuery: '',
+    refresh: '',
+  });
+
+  // ... render the select component and use the hook values and functions ...
+};
+```
+
+
+<HeadlessSelectSample />
+
+```js path=../../components/select-dropdown/HeadlessSelectSample name=HeadlessSelectSample
+```
+
+
+## ReuseSample
+
+## ReuseSelectDropDown
+
+The `ReuseSelectDropDown` component is a reusable dropdown select component in React that provides a customizable and headless dropdown select functionality.
+
+### Props
+
+The `ReuseSelectDropDown` component accepts the following props:
+
+- `options` (required, array): An array of objects representing the selectable options for the dropdown. Each object should contain properties corresponding to the option's attributes.
+
+- `optionsRenderer` (optional, function): A custom renderer function that overrides the default rendering of the options. It receives the following parameters:
+
+  - `selectedValues` (array): An array of selected option objects.
+  - `filteredOptions` (array): An array of filtered option objects.
+  - `addOrRemove` (function): A function to add or remove an option from the selected values.
+  - `setQuery` (function): A function to update the query for filtering options. It accepts a new query as an argument.
+
+  The `optionsRenderer` function should return a React node representing the custom options rendering.
+
+- `noOptionsRenderer` (optional, React node): A custom component or message to display when no options are available or when the filtering does not yield any results.
+
+- `multiple` (optional, boolean): A flag indicating whether multiple options can be selected. By default, this is set to `false`, meaning only a single option can be selected.
+
+- `defaultSelected` (optional, array): An array of objects representing the initially selected option(s). Each object should correspond to an option from the `options` array.
+
+- `header` (optional, React node): Additional content to be displayed above the dropdown select component.
+
+- `footer` (optional, React node): Additional content to be displayed below the dropdown select component.
+
+- `onChange` (optional, function): A callback function invoked when the selected option(s) change.
+
+- `valueKey` (required, string): The key in each option object that represents the unique identifier for the option.
+
+- `displayKey` (required, string): The key in each option object that represents the value to be displayed as the option label.
+
+- `filterFunction` (optional, function): A custom filter function used to filter the options based on the query entered by the user. It takes an option object and the query as arguments and should return a boolean indicating whether the option matches the query or not.
+
+- `clearQuery` (optional, boolean): A flag indicating whether the query should be cleared when the dropdown is closed. By default, this is set to `true`.
+
+- `defaultOpen` (optional, boolean): A flag indicating whether the dropdown should be initially open. By default, this is set to `false`.
+
+- `defaultQuery` (optional, string): The initial query value for filtering the options.
+
+- `enableSearch` (optional, boolean): A flag indicating whether to enable the search input within the dropdown. By default, this is set to `false`.
+
+- `dropDownText` (optional, string): The text to be displayed in the dropdown button when no option is selected. By default, this is set to "Open Dropdown".
+
+- `optionsWrapper` (optional, string or CSSProperties): Additional CSS classes or inline styles to be applied to the options wrapper element.
+
+- `selectWrapper` (optional, string or CSSProperties): Additional CSS classes or inline styles to be applied to the select wrapper element.
+
+- `selectButtonStyles` (optional, string or CSSProperties): Additional CSS classes or inline styles to be applied to the select button element.
+
+- `selectButtonOverflowWrappper` (optional, string or CSSProperties): Additional CSS classes or inline styles to
+
+ be applied to the select button's overflow wrapper element.
+
+- `inputStyles` (optional, string or CSSProperties): Additional CSS classes or inline styles to be applied to the search input element.
+
+- `refresh` (optional, any): A value used to trigger a refresh of the dropdown options or behavior when it changes.
+
+### Usage
+
+```jsx
+import ReuseSelectDropDown from "./ReuseSelectDropDown";
+
+// Example options array
+const options = [
+  { value: 'option1', label: 'Option 1' },
+  { value: 'option2', label: 'Option 2' },
+  // ...
+];
+
+// Example usage
+const MyComponent = () => {
+  const handleChange = () => {
+    // Handle selected options change
+  };
+
+  return (
+    <ReuseSelectDropDown
+      options={options}
+      optionsRenderer={(selectedValues, filteredOptions, addOrRemove, setQuery) => {
+        // Custom options rendering logic
+        return (
+          // Return the custom options rendering
+        );
+      }}
+      // Other props...
+    />
+  );
+};
+```
+
+This is a basic usage example of the `ReuseSelectDropDown` component. You can customize the appearance and behavior of the component by providing different props and using the available customization options.
+
+<ReuseSelect/>
+
+```js path=../../components/select-dropdown/ReuseSelect name=ReuseSelect
+```
+
+
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
