@@ -1,5 +1,5 @@
 import React from "react";
-// Import component New Componnet created here
+// Import New Component created here
 // import <component-name> from "@locoworks/remark-folder-<component-name>"
 
 const Example = () => {
