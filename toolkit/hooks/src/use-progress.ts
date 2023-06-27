@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 
-// Auto compute progress
-// Manual progress
+interface UseProgresInterface {
+    progressInterval?: number,
+    running?: true | false
+    defaultProgress?: number
+    totalFileSize?: number,
+    processedFileSize?: number
+
+}
 
 const useProgress = ({
   progressInterval = 4000,
@@ -9,19 +15,19 @@ const useProgress = ({
   defaultProgress = 0,
   totalFileSize = 0,
   processedFileSize = 0,
-}: any) => {
-  const [progress, setProgress] = useState<number>(defaultProgress); // 0
+}: UseProgresInterface) => {
+  const [progress, setProgress] = useState<number>(defaultProgress);
   const [currentFileProcessed, setCurrentFileProcessed] = useState<number>(0);
 
-  let currentProgressRef = useRef<number>(0); //0
+  let currentProgressRef = useRef<number>(0);
 
-  const intervalRef = useRef<any>(null);
-  const increment = (100 / progressInterval) * 10; //0.03
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const increment = (100 / progressInterval) * 10;
 
   const updateProgress = () => {
     if (totalFileSize == 0) {
       currentProgressRef.current += increment;
-      const currentProgress = Number(currentProgressRef.current.toFixed(0)); // Convert to number
+      const currentProgress = Number(currentProgressRef.current.toFixed(0));
       setProgress(Math.min(currentProgress, 100));
     }
     if (totalFileSize > 0) {
@@ -31,7 +37,6 @@ const useProgress = ({
   };
 
   const start = () => {
-    // Always start a new interval
     intervalRef.current = setInterval(() => {
       updateProgress();
     }, 10);
@@ -39,23 +44,22 @@ const useProgress = ({
 
   const pause = () => {
     if (progress > 0 && progress < 100) {
-      const currentProgress: any = currentProgressRef.current.toFixed(0);
+      const currentProgress:number = Number(currentProgressRef.current.toFixed(0));
       setProgress(currentProgress);
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current as NodeJS.Timeout);
     }
   };
 
   const stop = () => {
-    clearInterval(intervalRef.current);
+    clearInterval(intervalRef.current as NodeJS.Timeout);
   };
 
   useEffect(() => {
     if (running == true) {
       if (progress < 100) {
-        clearInterval(intervalRef.current);
+        clearInterval(intervalRef.current as NodeJS.Timeout);
         start();
       }
-      // If progress is full, let's stop "clearInterval"
       if (progress >= 100) {
         stop();
       }
@@ -66,7 +70,7 @@ const useProgress = ({
       }
 
       if (totalFileSize > 0) {
-        clearInterval(intervalRef.current);
+        clearInterval(intervalRef.current as NodeJS.Timeout);
         start();
       }
     }
@@ -74,12 +78,12 @@ const useProgress = ({
 
   useEffect(() => {
     if (progress < 100 && totalFileSize !== 0) {
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current as NodeJS.Timeout);
       start();
     }
-    const processedFileInPercent: any =
+    const processedFileInPercent:number =
       (processedFileSize / totalFileSize) * 100;
-    setCurrentFileProcessed(processedFileInPercent.toFixed(0));
+    setCurrentFileProcessed(Number(processedFileInPercent.toFixed(0)));
     console.log("processedFile", processedFileInPercent);
   }, [processedFileSize]);
 
