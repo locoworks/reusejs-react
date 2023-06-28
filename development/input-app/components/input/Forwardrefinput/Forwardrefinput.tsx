@@ -1,9 +1,8 @@
-import React, { useEffect,Ref, InputHTMLAttributes } from "react";
+import React, { useEffect,Ref, useRef } from "react";
 import { ReuseInput } from "@locoworks/reusejs-react-input";
-import { useRef } from "react";
 import { HeadlessButton } from "@locoworks/reusejs-react-button";
 const Forwardrefinput = () => {
-    const sampleref = useRef<HTMLInputElement>(null);    
+  const sampleref = useRef<HTMLInputElement>(null);    
 
        useEffect(() => {
       if(sampleref.current){
@@ -13,9 +12,6 @@ const Forwardrefinput = () => {
     const handleClick = () => {
         // Access the input value using the ref
         if(sampleref.current){
-
-            console.log(">>>",sampleref.current,sampleref.current.value)
-            // alert("The Value of the input is " , sampleref.current)
             let a = sampleref.current.value;
             alert(`${a} is the value of input `)
         }

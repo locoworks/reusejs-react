@@ -10,9 +10,7 @@ const Forwardrefinput = () => {
       }
      }, []);
     const handleClick = () => {
-        // Access the input value using the ref
-        console.log(">>>",sampleref.current,sampleref.current.value)
-        // alert("The Value of the input is " , sampleref.current)
+        
         let a = sampleref.current.value;
         alert(`${a} is the value of input `)
 

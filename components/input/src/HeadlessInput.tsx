@@ -5,6 +5,7 @@ export interface HeadlessInputProps extends InputHTMLAttributes<HTMLInputElement
 }
 
 const HeadlessInput: React.ForwardRefRenderFunction<HTMLInputElement, HeadlessInputProps> = ({ type, showPassword, ...props }, ref) => {
+  console.log(ref)
   return (
     <input
       type={showPassword && type === "password" ? "text" : type}
