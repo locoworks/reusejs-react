@@ -17,6 +17,7 @@ const addSiteWrapper = () => {
       fs.readFile(path + "/" + file + "/index.mdx", "utf8", (err, data) => {
         if (err) {
           console.error(`Error reading file ${file}:`, err);
+
           return;
         }
 
@@ -24,6 +25,10 @@ const addSiteWrapper = () => {
 
         if (importIndex === -1) {
           console.log(`No import statement found in file ${file}`);
+          return;
+        }
+        if (data.includes(lineToAdd)) {
+          console.log("Already configured");
           return;
         }
 
