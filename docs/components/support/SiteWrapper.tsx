@@ -125,12 +125,12 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
       <div className="z-10 h-[6%] flex items-center py-4 pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
         <label
           className="text-lg text-[#5501BF] cursor-pointer"
-          onClick={() => router.push("/reusejs-react")}
+          onClick={() => router.push("/")}
         >
           <span className="font-bold">LOCO</span>WORKS
         </label>
         <div className="flex gap-x-10">
-          <Link href={"https://github.com/locoworks/reusejs-react"}>
+          <Link href={"https://github.com/locoworks/reusejs-react"} as="a">
             <GitHubIcon />
           </Link>
         </div>

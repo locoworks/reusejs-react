@@ -18,9 +18,19 @@ function lowercaseFirstLetter(string: string) {
   return string.charAt(0).toLowerCase() + string.slice(1);
 }
 
+function returnVal(pathname: string) {
+  console.log(">>", pathname);
+  if (pathname.includes("/hooks")) return "hooks";
+  if (pathname.includes("/utils")) return "utils";
+  if (pathname === "/reusejs-react") return "home";
+  return "components";
+}
+
 const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
-  const [open, setOpen] = useState(heading === "Components" ? true : false);
   const router = useRouter();
+  const [open, setOpen] = useState(
+    returnVal(router.pathname) === heading.toLowerCase()
+  );
   return (
     <div className="mb-3">
       <div
@@ -49,14 +59,12 @@ const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
                 onClick={() => {
                   let route = "";
                   heading === "Components"
-                    ? (route = val.split(" ").join("-").toLowerCase())
+                    ? (route = "/" + val.split(" ").join("-").toLowerCase())
                     : heading === "Hooks"
-                    ? (route = "hooks/" + lowercaseFirstLetter(val))
-                    : (route = "utils" + val);
-                  console.log("route>>>", route);
-                  // heading === "Components" &&
-                  // router.push("/reusejs-react/" + route);
-                  router.push(route);
+                    ? (route = "/hooks/" + lowercaseFirstLetter(val))
+                    : (route = "/utils/" + val);
+                  router.push("/reusejs-react/" + route);
+                  // router.push(route);
                 }}
               >
                 {val}
