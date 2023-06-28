@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 
 export default function index() {
   const router = useRouter();
+
   router.push("/reusejs-react");
-  return <div>Hooks</div>;
+  return <div>Utilities</div>;
 }
 
 {
@@ -16,7 +17,7 @@ author: "John Doe"
 
 ## Table of contents
 
-# Reusejs Toolkit
+# Reusejs Utils Toolkit
 
 
 export default ({ children }) => {
