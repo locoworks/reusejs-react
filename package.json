@@ -22,7 +22,8 @@
     "otp-input:build": "turbo run build --filter=@locoworks/reusejs-react-otp-input...",
     "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "list:comp": "node ./scripts/getAllComponentsList.cjs"
+    "list:comp": "node ./scripts/getAllComponentsList.cjs",
+    "toolkit:dev": "turbo run dev --filter=toolkit-app..."
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
