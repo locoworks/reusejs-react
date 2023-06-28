@@ -24,10 +24,10 @@ The `useIsoMorphicEffect` hook determines the execution environment and selects 
 1. Import `useIsoMorphicEffect` hook to your React project:
 
 ```jsx
-import { useHeadlessSelectHook } from '@locoworks/reusejs-toolkit-react-hook';
+import { useIsoMorphicEffect } from '@locoworks/reusejs-toolkit-react-hook';
 ```
 
-To utilize the `useIsoMorphicEffect` hook, import it into your React component and call it with your effect function and dependencies. The hook will handle the underlying effect hook selection, ensuring that the effect is executed appropriately in both server-side and client-side environments.
+2. To utilize the `useIsoMorphicEffect` hook, import it into your React component and call it with your effect function and dependencies. The hook will handle the underlying effect hook selection, ensuring that the effect is executed appropriately in both server-side and client-side environments.
 
 ```jsx
 useIsoMorphicEffect(() => {
@@ -35,7 +35,7 @@ useIsoMorphicEffect(() => {
 }, [dependency1, dependency2]);
 ```
 
-It's recommended to provide the necessary dependencies in the `deps` array to control the effect's re-execution. Omitting the `deps` parameter will cause the effect to be executed on every render.
+3. It's recommended to provide the necessary dependencies in the `deps` array to control the effect's re-execution. Omitting the `deps` parameter will cause the effect to be executed on every render.
 
 By leveraging the `useIsoMorphicEffect` hook, you can write React components with effects that function consistently and correctly across different rendering scenarios, enhancing the reliability and predictability of your application.
 

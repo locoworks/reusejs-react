@@ -24,6 +24,13 @@ The `useOutsideClicker` hook sets up an event listener on the document to captur
 
 ### **Usage**
 
+1. Import `useOutsideClicker` hook to your react project.
+
+```jsx
+import { useOutsideClicker } from '@locoworks/reusejs-toolkit-react-hook';
+```
+
+2. To utilize the `useOutsideClicker` hook, assign the returned `visRef` to the component or element that you want to track for outside clicks. When a click occurs outside that element, the provided `callback` function will be invoked.
 ```jsx
 const Component = () => {
   const outsideClickRef = useOutsideClicker(() => {
@@ -34,9 +41,7 @@ const Component = () => {
 };
 ```
 
-To utilize the `useOutsideClicker` hook, assign the returned `visRef` to the component or element that you want to track for outside clicks. When a click occurs outside that element, the provided `callback` function will be invoked.
-
-Ensure that you assign the `visRef` to the appropriate component or element using the `ref` attribute.
+3. Ensure that you assign the `visRef` to the appropriate component or element using the `ref` attribute.
 
 The `useOutsideClicker` hook provides a convenient way to handle outside clicks in React components, allowing you to implement custom behaviors, such as closing menus or modals, whenever a user clicks outside a specific element.
 
