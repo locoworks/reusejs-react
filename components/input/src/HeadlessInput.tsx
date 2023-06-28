@@ -1,28 +1,20 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 
-export interface HeadlessInputProps
-  extends InputHTMLAttributes<HTMLInputElement> {
+export interface HeadlessInputProps extends InputHTMLAttributes<HTMLInputElement> {
   showPassword?: boolean;
 }
 
-const HeadlessInput: React.FC<HeadlessInputProps> = ({
-  type,
-  showPassword,
-  ...props
-}) => {
+const HeadlessInput: React.ForwardRefRenderFunction<HTMLInputElement, HeadlessInputProps> = ({ type, showPassword, ...props }, ref) => {
+  console.log(ref)
   return (
     <input
       type={showPassword && type === "password" ? "text" : type}
       {...props}
+      ref={ref}
     />
   );
 };
 
-HeadlessInput.defaultProps = {
-  type: "text",
-  disabled: false,
-  placeholder: "Placeholder",
-  showPassword: false,
-};
 
-export default HeadlessInput;
+
+export default forwardRef<HTMLInputElement, HeadlessInputProps>(HeadlessInput);
