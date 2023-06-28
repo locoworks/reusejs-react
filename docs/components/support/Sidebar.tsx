@@ -14,6 +14,10 @@ interface SideBarSectionProps {
   heading: string;
 }
 
+function lowercaseFirstLetter(string: string) {
+  return string.charAt(0).toLowerCase() + string.slice(1);
+}
+
 const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
   const [open, setOpen] = useState(heading === "Components" ? true : false);
   const router = useRouter();
@@ -43,10 +47,16 @@ const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
               <h2
                 className="ml-6 w-fit "
                 onClick={() => {
-                  const route = val.split(" ").join("-").toLowerCase();
-                  console.log("route>>>");
-                  heading === "Components" &&
-                    router.push("/reusejs-react/" + route);
+                  let route = "";
+                  heading === "Components"
+                    ? (route = val.split(" ").join("-").toLowerCase())
+                    : heading === "Hooks"
+                    ? (route = "hooks/" + lowercaseFirstLetter(val))
+                    : (route = "utils" + val);
+                  console.log("route>>>", route);
+                  // heading === "Components" &&
+                  // router.push("/reusejs-react/" + route);
+                  router.push(route);
                 }}
               >
                 {val}

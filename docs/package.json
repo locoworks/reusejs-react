@@ -41,6 +41,7 @@
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@locoworks/reusejs-react-select-dropdown": "*",
-    "@locoworks/reusejs-toolkit-react-hooks": "*"
+    "@locoworks/reusejs-toolkit-react-hooks": "*",
+    "@locoworks/reusejs-toolkit-utils": "*"
   }
 }

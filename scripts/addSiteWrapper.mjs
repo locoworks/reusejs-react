@@ -4,20 +4,22 @@ const addSiteWrapper = () => {
   const path = "./docs/pages";
 
   const dirs = fs.readdirSync(path);
+  const temp = dirs
+    .filter((ele) => !ele.includes("hooks"))
+    .filter((ele) => !ele.includes("utils"));
+  // console.log(">>>>>>", temp);
 
-  dirs.forEach((file) => {
+  const lineToAdd = `import SiteWrapper from "../../components/support/SiteWrapper.tsx"`;
+  const snippetToWrap =
+    '<div className="prose max-w-full mx-4 pb-10" >{children}</div>';
+  const wrapperEnd = "</SiteWrapper>";
+  const wrapperStart = `<SiteWrapper toc={toc}>`;
+  temp.forEach((file) => {
     if (fs.statSync(path + "/" + file).isDirectory()) {
-      const lineToAdd = `import SiteWrapper from "../../components/support/SiteWrapper.tsx"`;
-      const tocImport = `import toc from "../../public/${file}-toc.json" `;
-      const snippetToWrap =
-        '<div className="prose max-w-full mx-4 pb-10" >{children}</div>';
-      const wrapperEnd = "</SiteWrapper>";
-      const wrapperStart = `<SiteWrapper toc={toc}>`;
-
       fs.readFile(path + "/" + file + "/index.mdx", "utf8", (err, data) => {
+        const tocImport = `import toc from "../../public/${file}-toc.json" `;
         if (err) {
           console.error(`Error reading file ${file}:`, err);
-
           return;
         }
 
@@ -56,10 +58,66 @@ const addSiteWrapper = () => {
               );
               return;
             }
+          }
+        );
+      });
+    }
+  });
 
-            // console.log(
-            //   `Code wrapped in file ${path + "/" + file + "/index.mdx"}`
-            // );
+  const toolkitsFolder = ["hooks", "utils"];
+
+  toolkitsFolder.forEach((file) => {
+    if (fs.statSync(path + "/" + file).isDirectory()) {
+      const files = fs.readdirSync(path + "/" + file);
+      // console.log("Files", files);
+      files.forEach((toolkitFile) => {
+        // console.log(">>>>", path + "/" + file + "/" + toolkitFile);
+        const tocImport = `import toc from "../../public/${toolkitFile.replace(
+          ".mdx",
+          ""
+        )}-toc.json"\n\n`;
+        fs.readFile(
+          path + "/" + file + "/" + toolkitFile,
+          "utf8",
+          (err, data) => {
+            if (err) {
+              console.error(`Error reading file ${toolkitFile}:`, err);
+              return;
+            }
+            if (data.includes(lineToAdd)) {
+              console.log("Already configured");
+              return;
+            }
+            const importIndex = data.indexOf("##");
+            let updatedContent =
+              data.slice(0, importIndex) +
+              lineToAdd +
+              "\n" +
+              tocImport +
+              data.slice(importIndex);
+
+            updatedContent = updatedContent.replace(
+              new RegExp(snippetToWrap, "g"),
+              `${wrapperStart}${snippetToWrap}${wrapperEnd}`
+            );
+
+            // console.log("DATA>>>", updatedContent);
+            fs.writeFile(
+              path + "/" + file + "/" + toolkitFile,
+              updatedContent,
+              "utf8",
+              (err) => {
+                if (err) {
+                  console.error(
+                    `Error writing to file ${
+                      path + "/" + file + "/" + toolkitFile
+                    }:`,
+                    err
+                  );
+                  return;
+                }
+              }
+            );
           }
         );
       });
@@ -68,3 +126,4 @@ const addSiteWrapper = () => {
 };
 
 export default addSiteWrapper;
+addSiteWrapper();

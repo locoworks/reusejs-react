@@ -115,6 +115,7 @@ const HeadlessSelectSample: React.FC = ({}) => {
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
       <div className="flex flex-col  w-full px-4">
+        {/* {header && header} */}
         <div>Select</div>
         <div className="relative" ref={outsideClickRef}>
           {!open ? (
@@ -149,8 +150,8 @@ const HeadlessSelectSample: React.FC = ({}) => {
               {filteredOptions?.map((option: any, index: number) => {
                 if (
                   selectedValues
-                    .map((val: any) => val["value"])
-                    .includes(option["value"])
+                    .map((val: any) => val[valueKey])
+                    .includes(option[valueKey])
                 ) {
                   return (
                     <MemoizedSelectedOption

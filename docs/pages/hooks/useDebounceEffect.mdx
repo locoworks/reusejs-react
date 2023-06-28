@@ -1,0 +1,65 @@
+---
+HEAD OBJECT
+title: "ReuseJS Debounce"
+author: "Shrey Dhyani"
+---
+
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../public/useDebounceEffect-toc.json"
+
+## Table of contents
+
+## Reusejs Debounce Hook
+
+### Description
+
+The `useDebounceEffect` is a custom hook for creating a debounce effect in React. It delays the execution of a callback function until a specified amount of time has passed without any additional triggers.
+
+Parameters:
+- `callback` (Function): The callback function to be executed after the debounce delay.
+- `delay` (number): The debounce delay in milliseconds.
+- `deps` (Array): An array of dependencies that determines when the effect should re-run. The effect will re-run if any of the dependencies in the array change.
+
+### Usage
+
+1. Import the `useDebounceEffect` hook from the appropriate location.
+
+```jsx
+import { useDebounceEffect } from '@locoworks/reusejs-toolkit-react-hook';
+```
+
+2. Use the `useDebounceEffect` hook within a functional component.
+
+```jsx
+useDebounceEffect(callback, delay, deps);
+```
+
+- `callback` is the function to be executed after the debounce delay.
+- `delay` is the debounce delay in milliseconds.
+- `deps` is an array of dependencies that trigger the effect when they change.
+
+### Example
+
+```jsx
+import React from 'react';
+import { useDebounceEffect } from '@locoworks/reusejs-toolkit-react-hook';
+
+const MyComponent = () => {
+  // Define a callback function
+  const handleDebouncedSearch = () => {
+    // Perform some search operation
+    // ...
+  };
+
+  // Use the useDebounceEffect hook
+  useDebounceEffect(handleDebouncedSearch, 500, [searchQuery]);
+
+  // ...
+};
+```
+
+In this example, the `handleDebouncedSearch` function will be executed 500 milliseconds after the `searchQuery` dependency has changed. The debounce effect ensures that the search operation is not triggered repeatedly while the user is typing, but only after a brief pause in typing.
+
+export default ({ children }) => {
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
+};
