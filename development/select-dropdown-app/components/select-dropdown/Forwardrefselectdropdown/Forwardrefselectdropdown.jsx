@@ -1,8 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReuseSelectDropdown } from "@locoworks/reusejs-react-select-dropdown";
 import { HeadlessButton } from "@locoworks/reusejs-react-button";
 const ReuseSample = () => {
     const selectRef = useRef();
+    useEffect(()=>{if(selectRef.current){
+        const inputElement = selectRef.current.childNodes[0].childNodes[0];
+        inputElement.style.border="solid red 3px";
+    }},[])
   const options = [
     { label: "One", value: "1" },
     { label: "Two", value: "2" },
@@ -124,9 +128,6 @@ const ReuseSample = () => {
         enableSearch
         refresh={refresher}
       />
-      <HeadlessButton onClick={()=>{console.log(selectRef)}}>
-        click me 
-      </HeadlessButton>
     </div>
   );
 };
