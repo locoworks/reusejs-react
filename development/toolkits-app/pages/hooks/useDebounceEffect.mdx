@@ -1,7 +1,7 @@
 ---
 HEAD OBJECT
 title: "ReuseJS Debounce"
-author: "John Doe"
+author: "Shrey Dhyani"
 ---
 
 ## Table of contents
@@ -18,10 +18,11 @@ Parameters:
 - `deps` (Array): An array of dependencies that determines when the effect should re-run. The effect will re-run if any of the dependencies in the array change.
 
 ### Usage
+
 1. Import the `useDebounceEffect` hook from the appropriate location.
 
 ```jsx
-import { useDebounceEffect } from './useDebounceEffect';
+import { useDebounceEffect } from '@locoworks/reusejs-toolkit-react-hook';
 ```
 
 2. Use the `useDebounceEffect` hook within a functional component.
@@ -38,7 +39,7 @@ useDebounceEffect(callback, delay, deps);
 
 ```jsx
 import React from 'react';
-import { useDebounceEffect } from './useDebounceEffect';
+import { useDebounceEffect } from '@locoworks/reusejs-toolkit-react-hook';
 
 const MyComponent = () => {
   // Define a callback function
@@ -55,7 +56,6 @@ const MyComponent = () => {
 ```
 
 In this example, the `handleDebouncedSearch` function will be executed 500 milliseconds after the `searchQuery` dependency has changed. The debounce effect ensures that the search operation is not triggered repeatedly while the user is typing, but only after a brief pause in typing.
-
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
