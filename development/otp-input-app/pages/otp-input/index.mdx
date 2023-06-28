@@ -8,7 +8,8 @@ import Sample from "../../components/otp-input/Sample/Sample.tsx"
 import ReuseExample from "../../components/otp-input/ReuseExample/ReuseExample.tsx";
 import ReuseNumberExample from "../../components/otp-input/ReuseNumberExample/ReuseNumberExample.tsx";
 import ReuseNumberWithPasteExample from "../../components/otp-input/ReuseNumberWithPasteExample/ReuseNumberWithPasteExample.tsx";
-
+import EmailVerification from "../../components/otp-input/EmailVerification/EmailVerification.tsx";
+import ColorFill from "../../components/otp-input/ColorFill/ColorFill.tsx";
 
 ## Table of contents
 
@@ -95,8 +96,17 @@ This example demonstrating the accepting the only number type values with suppor
 ```js path=../../components/otp-input/ReuseNumberWithPasteExample name=ReuseNumberWithPasteExample
 ```
 
+#### Email Verification
+We have made a email verification component using ReuseOTPInput. We have already made the email state for you. Just give your email state and add the functionality to this component and you can use it in your application.
+<EmailVerification/>
 
-
+```js path=../../components/otp-input/EmailVerification name=EmailVerification
+```
+#### Round and Color Fill
+We made this OTP component to have a beautiful rose color background with red borders on focus which you can customize to whatever color you want in inputClassname prop. Also the OTP container is made to be rounded.
+<ColorFill/>
+```js path=../../components/otp-input/ColorFill name=ColorFill
+```
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
