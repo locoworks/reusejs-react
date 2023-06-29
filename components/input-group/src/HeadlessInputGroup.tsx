@@ -10,6 +10,7 @@ export interface HeadlessInputGroupProps
   footerLevel1?: React.ReactNode;
   footerLevel2?: React.ReactNode;
   wrapperClasses?: string;
+  inputRef: React.Ref<HTMLInputElement>;
 }
 
 const HeadlessInputGroup: React.FC<HeadlessInputGroupProps> = ({
@@ -18,6 +19,7 @@ const HeadlessInputGroup: React.FC<HeadlessInputGroupProps> = ({
   headerLevel2,
   footerLevel1,
   footerLevel2,
+  inputRef,
   ...rest
 }) => {
   return (
@@ -25,7 +27,7 @@ const HeadlessInputGroup: React.FC<HeadlessInputGroupProps> = ({
       <div className={wrapperClasses}>
         {headerLevel1 && headerLevel1}
         {headerLevel2 && headerLevel2}
-        <HeadlessInput {...rest} />
+        <HeadlessInput ref={inputRef} {...rest} />
         {footerLevel1 && footerLevel1}
         {footerLevel2 && footerLevel2}
       </div>
