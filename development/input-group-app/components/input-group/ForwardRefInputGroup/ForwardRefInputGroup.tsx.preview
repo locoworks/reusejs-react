@@ -41,7 +41,7 @@ const Forwardrefinput = () => {
         helperText="This text is for Helping!!"
         prefix={<Prefix />}
         suffix={<Suffix />}
-        inputRef = {inputRef}
+        reuseinputRef = {inputRef}
       />
       <div className="flex mt-6 gap-x-10">
             <HeadlessButton className="px-3 py-1 border border-blue-500 bg-blue-200 rounded" onClick={handleClick}>

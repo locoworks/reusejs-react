@@ -25,12 +25,14 @@ const Suffix = () => {
 };
 
 const Forwardrefinput = () => {
-    const inputRef = useRef(null);    
+    const forwardinputRef = useRef(null);    
 
     console.log(inputRef,"this is the forwardrefinputgruop.jsx")
 
     const handleClick = ()=>{
-      alert(inputRef.current.value)
+      console.log("i have been clicked")
+      console.log(forwardinputRef)
+      alert(forwardinputRef.current.value)
     }
 
   return (
@@ -42,7 +44,7 @@ const Forwardrefinput = () => {
         helperText="This text is for Helping!!"
         prefix={<Prefix />}
         suffix={<Suffix />}
-        inputRef = {inputRef}
+        reuseinputRef = {forwardinputRef}
       />
       <div className="flex mt-6 gap-x-10">
             <HeadlessButton className="px-3 py-1 border border-blue-500 bg-blue-200 rounded" onClick={handleClick}>
