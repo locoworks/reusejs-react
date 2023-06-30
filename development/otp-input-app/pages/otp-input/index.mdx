@@ -104,6 +104,7 @@ We have made a email verification component using ReuseOTPInput. We have already
 ```
 #### Round and Color Fill
 We made this OTP component to have a beautiful rose color background with red borders on focus which you can customize to whatever color you want in inputClassname prop. Also the OTP container is made to be rounded.
+This component has inputClassName prop with the following style: **inputClassName="rounded-full text-center flex flex-col items-center justify-center text-center outline-none text-white-600 focus:bg-rose-200 focus:ring-1 focus-text-white-600 ring-red-300"**
 <ColorFill/>
 ```js path=../../components/otp-input/ColorFill name=ColorFill
 ```
@@ -111,5 +112,3 @@ We made this OTP component to have a beautiful rose color background with red bo
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };
-
-
