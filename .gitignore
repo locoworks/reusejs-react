@@ -17,6 +17,7 @@ git status
 # next.js
 /.next/
 /out/
+./devlopment/toolkits-app/.next
 
 # production
 /build

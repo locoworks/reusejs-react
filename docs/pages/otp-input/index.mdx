@@ -10,7 +10,8 @@ import Sample from "../../components/otp-input/Sample/Sample.tsx"
 import ReuseExample from "../../components/otp-input/ReuseExample/ReuseExample.tsx";
 import ReuseNumberExample from "../../components/otp-input/ReuseNumberExample/ReuseNumberExample.tsx";
 import ReuseNumberWithPasteExample from "../../components/otp-input/ReuseNumberWithPasteExample/ReuseNumberWithPasteExample.tsx";
-
+import EmailVerification from "../../components/otp-input/EmailVerification/EmailVerification.tsx";
+import ColorFill from "../../components/otp-input/ColorFill/ColorFill.tsx";
 
 ## Table of contents
 
@@ -97,11 +98,19 @@ This example demonstrating the accepting the only number type values with suppor
 ```js path=../../components/otp-input/ReuseNumberWithPasteExample name=ReuseNumberWithPasteExample
 ```
 
+#### Email Verification
+We have made a email verification component using ReuseOTPInput.Just give the email and add the functionality to this component and you can use it in your application.
+<EmailVerification/>
 
-
+```js path=../../components/otp-input/EmailVerification name=EmailVerification
+```
+#### Round and Color Fill
+We made this OTP component to have a beautiful rose color background with red borders on focus which you can customize to whatever color you want in inputClassname prop. Also the OTP container is made to be rounded.
+This component has inputClassName prop with the following style: **inputClassName="rounded-full text-center flex flex-col items-center justify-center text-center outline-none text-white-600 focus:bg-rose-200 focus:ring-1 focus-text-white-600 ring-red-300"**
+<ColorFill/>
+```js path=../../components/otp-input/ColorFill name=ColorFill
+```
 
 export default ({ children }) => {
   return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
 };
-
-

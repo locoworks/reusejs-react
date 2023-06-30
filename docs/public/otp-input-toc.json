@@ -42,6 +42,16 @@
             "depth": 4,
             "value": "ReuseNumberWithPasteExample",
             "children": []
+          },
+          {
+            "depth": 4,
+            "value": "Email Verification",
+            "children": []
+          },
+          {
+            "depth": 4,
+            "value": "Round and Color Fill",
+            "children": []
           }
         ]
       }

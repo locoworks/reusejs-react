@@ -6,6 +6,11 @@
   },
   {
     "depth": 2,
+    "value": "Overview",
+    "children": []
+  },
+  {
+    "depth": 2,
     "value": "Headless Button",
     "children": []
   },
@@ -32,6 +37,31 @@
   {
     "depth": 2,
     "value": "CSSStyledButton",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Hover Button",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Floating Button",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Icon Button",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Button with Icon",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Neutral Button",
     "children": []
   },
   {

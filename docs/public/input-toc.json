@@ -37,6 +37,11 @@
         "depth": 3,
         "value": "Number Input",
         "children": []
+      },
+      {
+        "depth": 3,
+        "value": "ForwardRefInput",
+        "children": []
       }
     ]
   }
