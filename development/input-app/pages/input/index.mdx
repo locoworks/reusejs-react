@@ -9,6 +9,7 @@ import DisabledInput from "../../components/input/DisabledInput/DisabledInput.ts
 import PasswordInput from "../../components/input/PasswordInput/PasswordInput.tsx";
 import PasswordShowHide from "../../components/input/PasswordShowHide/PasswordShowHide.tsx";
 import NumberInput from "../../components/input/NumberInput/NumberInput.tsx";
+import ForwardRefInput from "../../components/input/ForwardRefInput/ForwardRefInput.jsx"
 
 
 ## Table of contents
@@ -80,6 +81,14 @@ module.exports = {
 
 ```js path=../../components/input/NumberInput name=NumberInput
 ```
+
+### ForwardRefInput
+
+<ForwardRefInput/>
+
+```jsx path=../../components/input/ForwardRefInput name=ForwardRefInput
+```
+
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
