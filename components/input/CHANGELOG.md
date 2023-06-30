@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-input
 
+## 0.1.2
+
+### Patch Changes
+
+- 155e798: added forwardref
+
 ## 0.1.1
 
 ### Patch Changes
