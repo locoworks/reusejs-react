@@ -27,7 +27,6 @@ const Suffix = () => {
 
 const Forwardrefinput = () => {
     const inputRef = useRef<HTMLInputElement>(null);    
-    console.log(inputRef,"this is the forwardrefinputgruop.jsx")
 
     const handleClick = ()=>{
         if(inputRef.current)
