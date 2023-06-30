@@ -9,6 +9,7 @@ import DisabledInput from "../../components/input/DisabledInput/DisabledInput.ts
 import PasswordInput from "../../components/input/PasswordInput/PasswordInput.tsx";
 import PasswordShowHide from "../../components/input/PasswordShowHide/PasswordShowHide.tsx";
 import NumberInput from "../../components/input/NumberInput/NumberInput.tsx";
+import ForwardRefInput from "../../components/input/ForwardRefInput/ForwardRefInput.jsx"
 
 
 Input component is the precursor of `input-group` component which provides functionality specific to input component like placeholder, disable input, autocomplet etc. Along with some additional features like **show/hide passwords** using props showPassword.
@@ -78,6 +79,14 @@ module.exports = {
 
 ```js path=../../components/input/NumberInput name=NumberInput
 ```
+
+### ForwardRefInput
+
+<ForwardRefInput/>
+
+```jsx path=../../components/input/ForwardRefInput name=ForwardRefInput
+```
+
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
