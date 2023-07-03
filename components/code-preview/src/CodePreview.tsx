@@ -10,8 +10,8 @@ export interface CodePreviewProps {
 }
 
 const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
-  const [showCode, setShowCode] = useState(false);
-  const [shownCode, setShownCode] = useState("JS");
+  const [showCode, setShowCode] = useState(true);
+  const [shownCode, setShownCode] = useState("TS");
 
   const [showCopied, setShowCopied] = useState(false);
 
