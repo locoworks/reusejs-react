@@ -6,10 +6,9 @@ import CodeIcon from "./icons/CodeIcon";
 export interface CodePreviewProps {
   js: string;
   ts: string;
-  preview?: string;
 }
 
-const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
+const CodePreview: React.FC<CodePreviewProps> = ({ js, ts }) => {
   const [showCode, setShowCode] = useState(true);
   const [shownCode, setShownCode] = useState("TS");
 
@@ -20,9 +19,7 @@ const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
       ? shownCode === "JS"
         ? js
         : ts
-      : preview
-      ? preview
-      : "NO preview Available";
+      : "No Code To Show";
     navigator.clipboard.writeText(code_to_be_copied);
     setShowCopied(true);
     setTimeout(() => {
@@ -62,7 +59,7 @@ const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
           <div />
         )}
         <div className="flex justify-center items-center">
-          {preview || showCode ? (
+          {showCode ? (
             <button
               className="relative h-10 w-10 px-2 py-1 mx-2 border border-gray-100 hover:bg-gray-200 rounded font-extrabold bg-gray-50"
               onClick={handlingShowCopied}
@@ -95,9 +92,7 @@ const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, preview }) => {
           language={shownCode === "JS" ? "language-js" : "language-ts"}
           code={shownCode === "JS" ? js : ts}
         />
-      ) : (
-        preview && <CodeWrapper language="language-js" code={preview} />
-      )}
+      ) : null}
     </div>
   );
 };
