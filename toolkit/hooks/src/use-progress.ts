@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 interface UseProgresInterface {
     progressInterval?: number,
-    running?: boolean
+    running: boolean
     defaultProgress?: number
     totalFileSize?: number,
     processedFileSize?: number
