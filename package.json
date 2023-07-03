@@ -10,7 +10,7 @@
     "release": "turbo run bundle && changeset publish",
     "button:dev": "turbo run dev --filter=button-app...",
     "button:build": "turbo run build --filter=@locoworks/reusejs-react-button...",
-    "docs:dev": "turbo run dev --filter=reuse-docs...",
+    "docs:dev": "yarn list:comp && turbo run dev --filter=reuse-docs... --concurrency 12",
     "autogen:comp": "node ./scripts/scaffoldComponent.mjs",
     "gen:example": "node ./scripts/createExample.mjs",
     "input-group:dev": "turbo run dev --filter=input-group-app...",
@@ -22,7 +22,10 @@
     "otp-input:build": "turbo run build --filter=@locoworks/reusejs-react-otp-input...",
     "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "list:comp": "node ./scripts/getAllComponentsList.cjs"
+    "list:comp": "node ./scripts/getAllComponentsList.cjs",
+    "build:docs": "node ./scripts/buildDocs.mjs && yarn list:comp && turbo run build --filter=reuse-docs...",
+    "toolkit:dev": "turbo run dev --filter=toolkit-app...",
+    "clean": "node ./scripts/cleanBuilds.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
@@ -56,18 +59,24 @@
     "@rollup/plugin-commonjs": "^24.1.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/istanbul-lib-coverage": "^2.0.4",
     "@types/mdx": "^2.0.5",
     "@types/node": "^20.2.0",
     "babel-loader": "^9.1.2",
+    "framer-motion": "^10.12.17",
     "gray-matter": "^4.0.3",
+    "lodash": "^4.17.21",
     "ncp": "^2.0.0",
     "next-mdx-remote": "^4.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "remark-extract-toc": "^1.1.0",
+    "remark-parse": "^10.0.2",
     "rollup": "^3.21.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "tailwind-merge": "^1.12.0",
     "turbo": "^1.9.8",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "unified": "^10.1.2"
   }
 }

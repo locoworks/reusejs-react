@@ -17,6 +17,7 @@ git status
 # next.js
 /.next/
 /out/
+./devlopment/toolkits-app/.next
 
 # production
 /build
@@ -42,3 +43,4 @@ next-env.d.ts
 
 **/node_modules/**
 turbo-bundle.log
+turbo-build.log
