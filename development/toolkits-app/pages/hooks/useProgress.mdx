@@ -1,7 +1,7 @@
 ---
 HEAD OBJECT
 title: "ReuseJS Progress"
-author: "shrey Dhyani"
+author: "Md Amir Sohail"
 ---
 
 ## Table of contents
@@ -32,10 +32,23 @@ The `useProgress` hook returns an object with the following properties:
 ### Usage
 To use the `useProgress` hook, follow these steps:
 
+### Installation:
+- First, install the hook using npm or yarn:
+
+```jsx
+npm install @locoworks/reusejs-toolkit-react-hook
+```
+
+or
+
+```jsx 
+yarn add @locoworks/reusejs-toolkit-react-hook
+```
+
 1. Import the `useProgress` hook in your React component:
 
 ```jsx
-import useProgress from "./useProgress";
+import useProgress from '@locoworks/reusejs-toolkit-react-hook';
 
 ```
 2. Invoke the `useProgress` hook within your functional component and destructure the `progress` value from the returned object:
@@ -102,7 +115,7 @@ const FileUpload = () => {
 };
 ```
 
-In this example, the `FileUpload` component uses the useProgress hook to track the `progress` of a file `upload/download`. The `progress` is updated every 10 ms if there is any change in `processedFileSize`, and the initial `progress` is set to 0 (`defaultProgress: 0` is a default value). The total file size is 1024 bytes (`totalFileSize: 1024`), and the processed file size is 512 bytes (`processedFileSize: 512`). The `progress` value is then rendered in the component.
+>In this example, the `FileUpload` component uses the useProgress hook to track the `progress` of a file `upload/download`. The `progress` is updated every 10 ms if there is any change in `processedFileSize`, and the initial `progress` is set to 0 (`defaultProgress: 0` is a default value). The total file size is 1024 bytes (`totalFileSize: 1024`), and the processed file size is 512 bytes (`processedFileSize: 512`). The `progress` value is then rendered in the component.
 
 ### Note:
 - If You need to use progress with time just pass props `progressInterval` with `defaultProgress` and `running` (true when need to start progress.).
