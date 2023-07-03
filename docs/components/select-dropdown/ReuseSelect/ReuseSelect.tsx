@@ -118,7 +118,7 @@ const ReuseSample = () => {
         options={optionsChanged}
         valueKey={"id"}
         displayKey={"fname"}
-        // multiple
+        multiple
         enableSearch
         refresh={refresher}
       />
