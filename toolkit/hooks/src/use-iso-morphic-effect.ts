@@ -1,9 +1,12 @@
-import React, {
-  useLayoutEffect,
-  useEffect,
-  EffectCallback,
-  DependencyList,
-} from "react";
+/**
+ * useIsoMorphicEffect
+ *
+ * A custom hook that provides an isomorphic (server-client) effect based on the environment.
+ *
+ * @param {Function} effect - The effect function to be executed.
+ * @param {Array} deps - An optional array of dependencies for the effect.
+ */
+import React, { EffectCallback, DependencyList } from "react";
 import { env } from "@locoworks/reusejs-toolkit-utils";
 
 export let useIsoMorphicEffect = (
@@ -11,8 +14,8 @@ export let useIsoMorphicEffect = (
   deps?: DependencyList | undefined
 ) => {
   if (env.isServer) {
-    useEffect(effect, deps);
+    React.useEffect(effect, deps);
   } else {
-    useLayoutEffect(effect, deps);
+    React.useLayoutEffect(effect, deps);
   }
 };

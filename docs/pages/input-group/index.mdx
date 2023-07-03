@@ -1,0 +1,88 @@
+---
+HEAD OBJECT
+title: "ReuseJS input-group"
+author: "Shrey Dhyani"
+---
+
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../public/input-group-toc.json" 
+import Sample from "../../components/input-group/Sample/Sample.tsx";
+import ReuseExample from "../../components/input-group/ReuseExample/ReuseExample.tsx";
+
+
+## Headless Input Group
+
+The Headless Input Group is an extension of the Input component that allows users to add supporting components such as headers, helper text, prefixes/suffixes, etc. These supporting components are design elements commonly used alongside input elements. By incorporating them into a single component, users have the flexibility to customize their inputs as desired. It extends HeadlessInput Group and thus accepts all from from HeadlessInput and HTMLInput.
+
+In line with our commitment to keeping components flexible and adaptable, we offer different layers of props for the HeadlessInputGroup component. These props enable users to incorporate their own components and position them according to their preferences.
+
+The available layers of props for the HeadlessInputGroup component include:
+
+1. `headerLevel1`: Represents the first-level header component.
+2. `headerLevel2`: Represents the second-level header component.
+3. `footerLevel1`: Represents the first-level footer component.
+4. `footerLevel2`: Represents the second-level footer component.
+
+When rendering the components, they follow the rendering order outlined below:
+
+```
+<div className={wrapperClasses}>
+  { HeaderLevel1 }
+  { HeaderLevel2 }
+  { Input Component }
+  { FooterLevel1 }
+  { FooterLevel2 }
+</div>
+```
+
+The prop `wrapperClasses` is used to style the componnets relative to each other and is helpful to allow designs like relative positionings, layout using flex or grid etc.
+
+By following this rendering order, users can seamlessly integrate the desired components into the Headless Input Group, creating a cohesive and customized input experience.
+ 
+ 
+### Sample Code Demo
+
+<Sample/>
+
+```js path=../../components/input-group/Sample name=Sample
+```
+
+## ReuseJS Input Group
+The **`ReuseInputGroup`** component extends the functionality of **`HeadlessInputGroup`** by providing additional features out of the box. These features include input headers, error messages, helper text, prefixes/suffixes, and more. **`ReuseInputGroup`** utilizes the header and footer layout of **`HeadlessInputGroup`** to render labels with default styling options, which can be overridden to customize components according to your specific use case.
+
+**`ReuseInputGroup`** offers several props to enhance its functionality, such as **errorText**, **headerText**, and **helperText**. These props utilize default components to render the corresponding messages. While using the default styles should be sufficient, users have the flexibility to override styles using props like **errorStyle**, **helperStyle**, **headerStyle**, **inputErrorStyle**, and **className**.
+
+If changing styles is not enough and you want to render your own custom elements, you can utilize the **header**, **helper**, and **error** props. These props allow you to pass custom components to replace the default components for headers, helper text, and error messages.
+
+Another notable feature of **`ReuseInputGroup`** is the ability to pass custom components as prefixes and suffixes. These components can overlap the input field and provide useful functionality. An example demonstrating the usage of these props is provided below.
+
+Here is the list of all available props for the **`ReuseInputGroup`** component:
+
+- **`className`**: Additional class name for the component.
+- **`header`**: Custom component to replace the default header.
+- **`headerStyles`**: Styles for the header component.
+- **`headerText`**: Text content for the header.
+- **`helper`**: Custom component to replace the default helper text.
+- **`helperStyles`**: Styles for the helper text component.
+- **`helperText`**: Text content for the helper text.
+- **`error`**: Custom component to replace the default error message.
+- **`errorStyles`**: Styles for the error message component.
+- **`errorText`**: Text content for the error message.
+- **`prefix`**: Custom component to be placed as a prefix.
+- **`suffix`**: Custom component to be placed as a suffix.
+- **`errorInputStyles`**: Styles specific to the input field when an error occurs.
+- **`wrapperClasses`**: Styles for the wrapper element.
+
+By leveraging these props, users can fully customize the **ReuseInputGroup** component to suit their specific requirements and design preferences.
+
+### ReuseInputGroup Example
+
+<ReuseExample/>
+
+```js path=../../components/input-group/ReuseExample name=ReuseExample
+```
+
+
+export default ({ children }) => {
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
+};

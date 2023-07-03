@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ol,
+ul,
+menu,
+.home-list {
+  list-style: disc;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+}

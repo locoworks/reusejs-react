@@ -1,0 +1,33 @@
+[
+  {
+    "depth": 2,
+    "value": "HEAD OBJECT\ntitle: \"ReuseJS IsoMorphic\"\nauthor: \"Shrey Dhyani\"",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Table of contents",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Reusejs IsoMorphic Effect",
+    "children": [
+      {
+        "depth": 3,
+        "value": "",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "",
+        "children": []
+      }
+    ]
+  }
+]

@@ -1,3 +1,18 @@
+/**
+ * Custom hook for creating a headless select component.
+ *
+ * @param {Object} options - An array of options to be displayed in the select component.
+ * @param {string} valueKey - The key in the options objects that represents the value.
+ * @param {Function} onChange - Callback function called when the selected values change.
+ * @param {Function} filterFunction - Custom filter function to filter the options based on the query.
+ * @param {boolean} clearQuery - Flag indicating whether to clear the query when the select component closes.
+ * @param {Array} defaultSelected - The default selected values for the select component.
+ * @param {boolean} defaultOpen - The default open state of the select component.
+ * @param {string} defaultQuery - The default query for filtering the options.
+ * @param {any} refresh - Dependency to refresh the select component.
+ *
+ * @returns {Object} - An object containing the state and functions of the headless select component.
+ */
 import React, { useEffect, useState, useCallback } from "react";
 import { useOutsideClicker } from "./use-outside-clicker";
 import { useDebounceEffect } from "./use-debounce-effect";
