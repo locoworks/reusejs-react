@@ -2,7 +2,6 @@
   "name": "@locoworks/remark-folder-import",
   "description": "📝 Populate code blocks from folder",
   "version": "0.0.1",
-  "sideEffects": false,
   "engines": {
     "node": ">= 12"
   },
@@ -37,7 +36,8 @@
   "scripts": {
     "build": "tsc",
     "test": "vitest",
-    "bundle": "tsc"
+    "bundle": "tsc",
+    "dev": "yarn build --watch"
   },
   "dependencies": {
     "strip-indent": "^4.0.0",
