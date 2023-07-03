@@ -12,57 +12,53 @@
   {
     "depth": 2,
     "value": "Headless Button",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Sample Code Demo",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Outline Button Demo",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Success Sample Button Demo",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Text Button Demo",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "CSSStyledButton",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Hover Button",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Floating Button",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Icon Button",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Button with Icon",
-    "children": []
-  },
-  {
-    "depth": 2,
-    "value": "Neutral Button",
-    "children": []
+    "children": [
+      {
+        "depth": 3,
+        "value": "Sample Code Demo",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Outline Button Demo",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Success Sample Button Demo",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Text Button Demo",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "CSSStyledButton",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Hover Button",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Floating Button",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Button with Icon",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Neutral Button",
+        "children": []
+      }
+    ]
   },
   {
     "depth": 2,

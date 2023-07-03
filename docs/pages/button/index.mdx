@@ -38,69 +38,62 @@ It uses following tailwind classes for providing styles: ** ``` w-1/2 bg-red-400
 ```js path=../../components/button/HeadlessSample name=HeadlessSample
 ```
 
-## Sample Code Demo
+### Sample Code Demo
 This is the sample styles included when you return **ReuseButton** as shown in the demo code. It has the features of setting the **busy state** and the **busy text** which will be visible when in **busy state**.
 <Sample/>
 
 ```js path=../../components/button/Sample name=Sample
 ```
 
-## Outline Button Demo
+### Outline Button Demo
 This is a simple ReuseButton with the styling of **border-2 border-blue-600 bg-transparent font-bold text-blue-600 py-1 px-2** to give it a **transparent button** look with outlines. It can be suitable for situations where a more subdued visual appearance is desired while still maintaining the interactive nature of a button.
 <OutlineButton/>
 
 ```js path=../../components/button/OutlineButton name=OutlineButton
 ```
 
-## Success Sample Button Demo
+### Success Sample Button Demo
 The Success Sample Button is a customizable button that provides feedback to the user by showing a **loading** state for a specified duration and then disabling the button and displaying a **success** state.
 <SuccessSample/>
 
 ```js path=../../components/button/SuccessSample name=SuccessSample
 ```
 
-## Text Button Demo
+### Text Button Demo
 This is a simple button with no visible outlines to make it look minimalistic. It can be used to embed **hyperlinks** within your text to make it standout.
 <TextButton/>
 
 ```js path=../../components/button/TextButton name=TextButton
 ```
 
-## CSSStyledButton
+### CSSStyledButton
 This code snippet of the button will give you a customizable button with CSS Styling. We have declared a styles object having CSS properties to give it the style we need. You can customize the styles object according to your requirements.
 <CSSStyledButton/>
 
 ```js path=../../components/button/CSSStyledButton name=CSSStyledButton
 ```
 
-## Hover Button
+### Hover Button
 This Button provides a beautiful and subtle **animation effect** which will be in effect whenever a user hovers over the button. 
 <HoverButton/>
 
 ```js path=../../components/button/HoverButton name=HoverButton
 ```
 
-## Floating Button
+### Floating Button
 This is a **bouncing icon button**. This button will give a small bouncing effect to the icons as long as the cursor is hovering over the button.
 <FloatingButton/>
 
 ```js path=../../components/button/FloatingButton name=FloatingButton
 ```
 
-## Icon Button
-This is a simple icon button. In the code snippet we have given it a sample right arrow image. You can give it any image you want as per your requirements.
-<IconButton/>
-
-```js path=../../components/button/IconButton name=IconButton
-```
-
-## Button with Icon
+### Button with Icon
 
 This is an icon button which can have any text along with the icon. It gives a subtle darkening effect whenever a user hovers over the button.
 <ButtonWithIcon/>
 ```js path=../../components/button/ButtonWithIcon name=ButtonWithIcon
 ```
-## Neutral Button
+### Neutral Button
 These buttons can be associated with a functionality of theme or they can be used as buttons in an application where you want a B&W kind of theme.
 <NeutralButton/>
 
@@ -116,3 +109,11 @@ This is a live playground sample that you can use to create a working sample of 
 export default ({ children }) => {
   return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
 };
+
+
+{/* ## Icon Button
+This is a simple icon button. In the code snippet we have given it a sample right arrow image. You can give it any image you want as per your requirements.
+<IconButton/>
+
+```js path=../../components/button/IconButton name=IconButton
+``` */}
