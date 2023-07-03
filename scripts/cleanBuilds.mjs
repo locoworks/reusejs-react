@@ -36,6 +36,6 @@ function searchAndDeleteFolders(startPath, folderNames) {
 }
 
 const repoPath = ".";
-const foldersToDelete = [".turbo", "node_modules", "dist"];
+const foldersToDelete = [".turbo", "node_modules", "dist", ".next", "out"];
 
 searchAndDeleteFolders(repoPath, foldersToDelete);
