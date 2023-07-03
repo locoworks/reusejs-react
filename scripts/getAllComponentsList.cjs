@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
-function scanDirectory(directory) {
+function getComponents(directory) {
+  const ComponentIgnoreArray = ["code-preview"];
   try {
     const files = fs.readdirSync(directory);
     let componentsArray = [];
@@ -10,15 +11,71 @@ function scanDirectory(directory) {
       const filePath = path.join(directory, file);
       const stats = fs.statSync(filePath);
 
-      if (stats.isDirectory()) {
-        componentsArray.push(file);
+      if (stats.isDirectory() && !ComponentIgnoreArray.includes(file)) {
+        const temp = file
+          .split("-")
+          .map((ele) => ele.charAt(0).toUpperCase() + ele.slice(1))
+          .join(" ");
+
+        componentsArray.push(temp);
       }
     });
-    console.log(componentsArray);
+    return componentsArray;
   } catch (error) {
     console.log("Component list fetch error is:", error);
   }
 }
 
-const rootDirectory = "./components";
-scanDirectory(rootDirectory);
+function getHooksList(directory) {
+  try {
+    const files = fs.readdirSync(directory);
+    let hooksList = [];
+
+    files.forEach((file) => {
+      const temp = file
+        .replace(".ts", "")
+        .split("-")
+        .map((ele) => ele.charAt(0).toUpperCase() + ele.slice(1))
+        .join("");
+      hooksList.push(temp);
+    });
+    return hooksList;
+  } catch (error) {
+    console.log("Component list fetch error is:", error);
+  }
+}
+
+function getUtilsList(directory) {
+  try {
+    const files = fs.readdirSync(directory);
+    let utilsList = [];
+
+    files.forEach((file) => {
+      const temp = file.replace(".ts", "").split("-").join("");
+      utilsList.push(temp);
+    });
+    return utilsList;
+  } catch (error) {
+    console.log("Component list fetch error is:", error);
+  }
+}
+
+const createJSONList = () => {
+  const data = { Components: [], Hooks: [], Utils: [] };
+
+  data["Components"] = getComponents("./components");
+  data["Hooks"] = getHooksList("./toolkit/hooks/src");
+
+  data["Utils"] = getUtilsList("./toolkit/utils/src");
+
+  const jsonData = JSON.stringify(data, null, 2);
+  fs.writeFile("./data/sidemenu_data.json", jsonData, (err) => {
+    if (err) {
+      console.error("Error writing JSON file:", err);
+    } else {
+      console.log("JSON file created successfully!");
+    }
+  });
+};
+
+createJSONList();

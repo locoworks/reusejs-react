@@ -1,0 +1,16 @@
+import React from "react";
+import { HeadlessButton } from "@locoworks/reusejs-react-button";
+
+const HeadlessSample = () => {
+  return (
+    <HeadlessButton
+      onClick={() => {
+        console.log("Headless button Clicked!!");
+      }}
+    >
+      Click here
+    </HeadlessButton>
+  );
+};
+
+export default HeadlessSample;

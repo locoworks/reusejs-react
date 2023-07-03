@@ -15,10 +15,11 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "react": [ "./node_modules/@types/react"],
     },
     "allowImportingTsExtensions": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/select-dropdown/HeadlessSelectSample/HeadlessSelectSample..tsx.preview"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
