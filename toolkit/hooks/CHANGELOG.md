@@ -1,5 +1,11 @@
 # @locoworks/reusejs-toolkit-react-hooks
 
+## 0.3.0
+
+### Minor Changes
+
+- 15f8716: Added usePRogess and useSlider hooks to toolkit-react-hooks
+
 ## 0.2.0
 
 ### Minor Changes
