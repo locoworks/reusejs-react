@@ -21,16 +21,15 @@ function extractLines(
 ) {
   const lines = content.split(EOL);
   const start = fromLine || 1;
-  let end;
-  if (!hasDash) {
-    end = start;
-  } else if (toLine) {
-    end = toLine;
-  } else if (lines[lines.length - 1] === '' && !preserveTrailingNewline) {
-    end = lines.length - 1;
-  } else {
-    end = lines.length;
+  let end = toLine;
+
+  if (hasDash && !end) {
+    end =
+      lines[lines.length - 1] === '' && !preserveTrailingNewline
+        ? lines.length - 1
+        : lines.length;
   }
+
   return lines.slice(start - 1, end).join('\n');
 }
 
@@ -53,7 +52,7 @@ function codeImport(options: CodeImportOptions = {}) {
         .split(/(?<!\\) /g)
         .find((meta) => meta.startsWith('path='));
       const nameMeta = (node.meta || '')
-        .split(/(?<!\\) /g) //
+        .split(/(?<!\\) /g)
         .find((meta) => meta.startsWith('name='));
 
       if (!pathMeta || !nameMeta) {
@@ -92,7 +91,7 @@ function codeImport(options: CodeImportOptions = {}) {
       const folderAbsPath = path.resolve(file.dirname, normalizedFolderPath);
 
       let AllContent = '[TO-SPLIT]';
-      const folderFiles = fs.readdirSync(folderAbsPath); //
+      const folderFiles = fs.readdirSync(folderAbsPath);
 
       const addToContent = (filePath: string, type: string) => {
         const fileContent = fs.readFileSync(filePath, 'utf8');
@@ -113,18 +112,14 @@ function codeImport(options: CodeImportOptions = {}) {
       if (pathMeta && folderFiles.length !== 0) {
         folderFiles.forEach((file) => {
           const filePath = path.resolve(folderAbsPath, file);
-          if (file.includes('.preview')) {
-            addToContent(filePath, 'preview');
-          } else if (
-            file.includes(componentName + '.jsx') ||
-            file.includes(componentName + '.js')
-          ) {
-            addToContent(filePath, 'JSX');
-          } else if (
-            file.includes(componentName + '.tsx') ||
-            file.includes(componentName + '.ts')
-          ) {
-            addToContent(filePath, 'TSX');
+          if (fs.lstatSync(filePath).isFile()) {
+            addToContent(
+              filePath,
+              file.includes(componentName + '.js') ||
+                file.includes(componentName + '.jsx')
+                ? 'JSX'
+                : 'TSX'
+            );
           }
         });
       }

@@ -32,10 +32,6 @@ const renameFolders = () => {
       new: commonPath + `/Example/${exampleName}.jsx`,
     },
     {
-      old: commonPath + "/Example/Example.tsx.preview",
-      new: commonPath + `/Example/${exampleName}.tsx.preview`,
-    },
-    {
       old: commonPath + "/Example",
       new: commonPath + `/${exampleName}`,
     },

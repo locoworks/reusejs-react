@@ -1,7 +1,7 @@
 [
   {
     "depth": 2,
-    "value": "HEAD OBJECT\ntitle: \"ReuseJS Headless Select\"\nauthor: \"Shrey Dhyani\"",
+    "value": "HEAD OBJECT\ntitle: \"ReuseJS Progress\"\nauthor: \"Md Amir Sohail\"",
     "children": []
   },
   {
@@ -11,7 +11,7 @@
   },
   {
     "depth": 2,
-    "value": "Reusejs Use Headless Select Hook",
+    "value": "useProgress Hook Documentation",
     "children": [
       {
         "depth": 3,
@@ -20,17 +20,27 @@
       },
       {
         "depth": 3,
-        "value": "Parameters",
+        "value": "Props",
         "children": []
       },
       {
         "depth": 3,
-        "value": "Returns",
+        "value": "Return Value",
         "children": []
       },
       {
         "depth": 3,
-        "value": "Headless Select Example",
+        "value": "Usage",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Example",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Note",
         "children": []
       }
     ]
