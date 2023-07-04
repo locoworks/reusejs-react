@@ -1,17 +1,23 @@
-name: Trigger Deploy Workflow
-
+name: Dispatcher
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  trigger:
+  dispatch:
+    name: Dispatch
+    env:
+      PACKAGES_TO_UPGRADE: ${{ needs.run_publish.outputs.packages }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: ["locoworks/home"]
+    timeout-minutes: 5
     steps:
-      - name: Trigger Deploy Workflow in Repo-A
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.PAT }}
-          repository: locoworks/home
-          event-type: deploy
+      - name: Dispatch to workflows
+        run: |
+          curl -X POST \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${{ secrets.PAT_TRIGGER }}" \
+          https://api.github.com/repos/${{ matrix.repo }}/dispatches \
+          -d '{"event_type":"deploy"}'

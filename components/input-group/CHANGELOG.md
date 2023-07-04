@@ -1,5 +1,16 @@
 # @locoworks/reusejs-react-input-group
 
+## 0.2.0
+
+### Minor Changes
+
+- 01b78e3: Added forward Ref to input-group
+
+### Patch Changes
+
+- Updated dependencies [f48857a]
+  - @locoworks/reusejs-react-input@0.1.3
+
 ## 0.1.4
 
 ### Patch Changes

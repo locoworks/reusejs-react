@@ -7,7 +7,7 @@ const EmailVerification = () => {
 
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10  bg-gray-50">
-        <div className="flex flex-col items-center justify-center text-center space-y-2">
+      <div className="flex flex-col items-center justify-center text-center space-y-2">
         <div className="font-semibold text-3xl">
           <p>Email Verification</p>
         </div>
@@ -25,16 +25,24 @@ const EmailVerification = () => {
         containerStyle="gap-2"
       />
       <div className="flex flex-col space-y-5">
-              <div>
-                <button className="flex flex-row items-center mt-5 justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
-                  Verify Account
-                </button>
-              </div>
+        <div>
+          <button className="flex flex-row items-center mt-5 justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+            Verify Account
+          </button>
+        </div>
 
-              <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                <p>Didn't recieve code?</p> <a className="flex flex-row items-center text-blue-600" href="http://" target="_blank" rel="noopener noreferrer">Resend</a>
-              </div>
-            </div>
+        <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+          <p>{`Didn't recieve code?`}</p>{" "}
+          <a
+            className="flex flex-row items-center text-blue-600"
+            href="http://"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resend
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

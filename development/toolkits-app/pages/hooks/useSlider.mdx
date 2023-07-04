@@ -1,0 +1,114 @@
+---
+HEAD OBJECT
+title: "ReuseJS Slider/Carousel"
+author: "Md Amir Sohail"
+---
+
+## Table of contents
+
+## Documentation 
+
+## useSlider Hook Description:
+The useSlider hook is a custom React hook that provides functionality for creating a slider/carousel component. It manages the state and actions for transitioning between slides.
+
+### Props
+- The `useSlider` hook accepts the following props:
+
+- `slides` (required): An array of React nodes representing the slides to be displayed in the slider.
+
+- `slideInterval` (required): The time interval in milliseconds for automatic slide transition. After this interval, the slider will automatically advance to the next slide.
+
+- `loop` (required): A boolean flag indicating whether the slider should loop back to the first slide after reaching the last slide. If set to `true`, the slider will continuously cycle through the slides. If set to `false`, the slider will stop at the last slide.
+
+
+### Return Value
+- The `useSlider` hook returns an object containing the following values and functions:
+
+- `currentSlideIndex`: The index of the current slide in the slides array.
+
+- `currentSlide`: The React node representing the current slide.
+
+- `moveSlider()`: A function that initiates the automatic slide transition. This function is internally used by the hook and does not need to be called manually(if you need to pause and play then call this function as per requirement)
+
+- `moveToNextSlide()`: A function that manually moves the slider to the next slide. If the loop prop is true, it cycles back to the first slide after reaching the last slide. If the loop prop is false, it stops at the last slide.
+
+- `moveToPreviousSlide()`: A function that manually moves the slider to the previous slide. If the loop prop is true, it cycles back to the last slide after reaching the first slide. If the loop prop is false, it stops at the first slide.
+
+- `pauseSlider()`: A function that pauses the automatic slide transition. It stops the slider from advancing automatically and stores the current slide index for later use.
+
+### Functionality
+
+- The `useSlider` hook provides the following functionality:
+
+- `Automatic Slide Transition`: The hook automatically transitions to the next slide based on the specified slideInterval prop.
+
+- `Manual Slide Control`: You can manually move to the next or previous slide using the moveToNextSlide() and moveToPreviousSlide() functions.
+
+- `Looping`: If the loop prop is set to true, the slider will continuously cycle through the slides. If set to false, the slider will stop at the last slide.
+
+- `Pause Slider`: You can pause the automatic slide transition using the pauseSlider() function. This is useful when you want to temporarily halt the automatic advancement of slides.
+
+### Usage
+To use the `useSlider` hook in your React application, follow these steps:
+
+### Installation
+- First, install the hook using npm or yarn:
+
+```jsx
+npm install @locoworks/reusejs-toolkit-react-hook
+```
+
+or
+
+```jsx 
+yarn add @locoworks/reusejs-toolkit-react-hook
+```
+
+### Importing
+Import the useSlider hook into your component file:
+
+```jsx
+import useSlider from '@locoworks/reusejs-toolkit-react-hook';
+
+```
+
+### Example
+Here's an example of how to use the `useSlider` hook:
+
+```jsx
+import React from 'react';
+import useSlider from '@locoworks/reusejs-toolkit-react-hook';
+
+const Slider = () => {
+  const slides = [
+    <div>Slide 1</div>,
+    <div>Slide 2</div>,
+    <div>Slide 3</div>,
+  ];
+
+  const { currentSlideIndex, currentSlide, moveToNextSlide, moveToPreviousSlide, pauseSlider,moveSlider } = useSlider({
+    slides,
+    slideInterval: 3000,
+    loop: true,
+  });
+
+  return (
+    <div>
+      {currentSlide}
+      <button onClick={moveToPreviousSlide}>Previous</button>
+      <button onClick={moveToNextSlide}>Next</button>
+      <button onClick={pauseSlider}>Pause</button>
+      <button onClick={moveSlider}>Play</button>
+    </div>
+  );
+};
+
+export default Slider;
+```
+
+>In this example, the Slider component uses the useSlider hook to create a basic slider. It displays the current slide, and provides buttons to manually navigate to the previous and next slides, as well as a button to pause and play the automatic slide transition.
+
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
