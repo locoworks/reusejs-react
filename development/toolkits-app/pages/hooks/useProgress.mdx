@@ -7,10 +7,10 @@ author: "Md Amir Sohail"
 ## Table of contents
 
 ## useProgress Hook Documentation
-## Description
+### Description
 The `useProgress` hook is a custom React hook that provides functionality to track and update progress. It calculates and updates the progress based on the provided parameters.
 
-## Props
+### Props
 The `useProgress` hook accepts the following props as an object:
 
 - `progressInterval` (optional): The interval (in milliseconds) at which the progress updated from 0 to 100%. The default value is 4000 milliseconds (4 seconds).
@@ -105,7 +105,7 @@ const FileUpload = () => {
 
 In this example, the `FileUpload` component uses the useProgress hook to track the `progress` of a file `upload/download`. The `progress` is updated every 10 ms if there is any change in `processedFileSize`, and the initial `progress` is set to 0 (`defaultProgress: 0` is a default value). The total file size is 1024 bytes (`totalFileSize: 1024`), and the processed file size is 512 bytes (`processedFileSize: 512`). The `progress` value is then rendered in the component.
 
-### Note:
+### Note
 - If You need to use progress with time just pass props `progressInterval` with `defaultProgress` and `running` (true when need to start progress.).
 - If you want to use `useProgress` hook to show the file upload/download status then pass the props `totalFileSize` ,`processedFileSize` (update it as file processed updates), `defaultProgress` and `running` (true when upload/download starts)
 
