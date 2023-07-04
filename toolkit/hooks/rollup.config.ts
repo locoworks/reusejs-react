@@ -15,7 +15,12 @@ export default [
         format: "es",
       },
     ],
-    external: ["react", "react-dom", "tailwind-merge"],
+    external: [
+      "react",
+      "react-dom",
+      "tailwind-merge",
+      "@locoworks/reusejs-toolkit-utils",
+    ],
     plugins: [
       resolve(),
       commonjs(),
