@@ -1,0 +1,126 @@
+---
+HEAD OBJECT
+title: "ReuseJS Progress"
+author: "Md Amir Sohail"
+---
+
+## Table of contents
+
+## useProgress Hook Documentation
+## Description
+The `useProgress` hook is a custom React hook that provides functionality to track and update progress. It calculates and updates the progress based on the provided parameters.
+
+## Props
+The `useProgress` hook accepts the following props as an object:
+
+- `progressInterval` (optional): The interval (in milliseconds) at which the progress updated from 0 to 100%. The default value is 4000 milliseconds (4 seconds).
+
+- `running` (required): A boolean value indicating whether the progress should be actively running or paused. This is the Required field.
+
+- `defaultProgress` (optional): The initial progress value when the hook is first initialized. The default value is 0.
+
+- `totalFileSize` (optional): The total size of the file being processed. It is used to calculate the progress as a percentage. The default value is 0.
+
+- `processedFileSize` (optional): The size of the file that has been processed. It is used to calculate the progress as a percentage. The default value is 0.
+
+### Return Value
+The `useProgress` hook returns an object with the following properties:
+
+- `progress`: A number representing the current progress value. It is a percentage value between 0 and 100, indicating the progress of the task being tracked.
+
+
+### Usage
+To use the `useProgress` hook, follow these steps:
+
+### Installation:
+- First, install the hook using npm or yarn:
+
+```jsx
+npm install @locoworks/reusejs-toolkit-react-hook
+```
+
+or
+
+```jsx 
+yarn add @locoworks/reusejs-toolkit-react-hook
+```
+
+1. Import the `useProgress` hook in your React component:
+
+```jsx
+import useProgress from '@locoworks/reusejs-toolkit-react-hook';
+
+```
+2. Invoke the `useProgress` hook within your functional component and destructure the `progress` value from the returned object:
+
+```jsx
+const MyComponent = () => {
+  const { progress } = useProgress({
+    running: false,
+    totalFileSize: 0,
+    processedFileSize: 0,
+  });
+
+  // Rest of your component logic
+};
+```
+3. Access and use the `progress` value within your component:
+
+```jsx
+const MyComponent = () => {
+  const { progress } = useProgress({
+    progressInterval: 4000,
+    running: false,
+    defaultProgress: 0,
+    totalFileSize: 0,
+    processedFileSize: 0,
+  });
+
+  // Use the progress value
+  return (
+    <div
+      className={`flex h-full rounded-full bg-black text-white text-xl`}
+      style={{
+        width: `${progress}%`,
+      }}
+    >
+      {progress}%
+    </div>
+  );
+};
+```
+4. Customize the `useProgress` hook by providing different props according to your requirements.
+
+### Example
+- Here's an example of how you can use the useProgress hook:
+
+```jsx
+import React from "react";
+import useProgress from "./useProgress";
+
+const FileUpload = () => {
+  const { progress } = useProgress({
+    progressInterval: 2000,
+    running: true,
+    defaultProgress: 0,
+    totalFileSize: 1024,
+    processedFileSize: 512,
+  });
+
+  return (
+    <div>
+      Progress: {progress}%
+    </div>
+  );
+};
+```
+
+>In this example, the `FileUpload` component uses the useProgress hook to track the `progress` of a file `upload/download`. The `progress` is updated every 10 ms if there is any change in `processedFileSize`, and the initial `progress` is set to 0 (`defaultProgress: 0` is a default value). The total file size is 1024 bytes (`totalFileSize: 1024`), and the processed file size is 512 bytes (`processedFileSize: 512`). The `progress` value is then rendered in the component.
+
+### Note:
+- If You need to use progress with time just pass props `progressInterval` with `defaultProgress` and `running` (true when need to start progress.).
+- If you want to use `useProgress` hook to show the file upload/download status then pass the props `totalFileSize` ,`processedFileSize` (update it as file processed updates), `defaultProgress` and `running` (true when upload/download starts)
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
