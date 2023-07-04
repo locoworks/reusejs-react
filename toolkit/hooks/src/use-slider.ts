@@ -30,7 +30,6 @@ const useSlider = ({ slides, slideInterval, loop }: SliderInterfacer) => {
     }
 
     if (loop === false) {
-      console.log("currentSlideIndex", currentSlideIndex, slides.length);
       if (currentSlideIndex < slides.length - 1) {
         setCurrentSlideIndex((preindex) => {
           const nextIndex = preindex + 1;
