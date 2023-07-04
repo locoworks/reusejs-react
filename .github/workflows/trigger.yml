@@ -1,22 +1,17 @@
-name: Dispatcher
+name: Trigger Deploy Workflow
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  dispatch:
-    name: Dispatch
-    env:
-      PACKAGES_TO_UPGRADE: ${{ needs.run_publish.outputs.packages }}
+  trigger:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        repo: ["locoworks/home"]
-    timeout-minutes: 5
     steps:
-      - name: Dispatch to workflows
-        run: |
-          curl -H "Accept: application/vnd.github.everest-preview+json" \
-          -H "Authorization: token ${{ secrets.PAT }}" \
-          --request POST \
-          --data '{"event_type": "deploy"}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
+      - name: Trigger Deploy Workflow in Repo-A
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: locoworks/home
+          event-type: deploy
