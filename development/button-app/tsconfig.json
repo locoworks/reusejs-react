@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext","ES2016"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,7 +15,8 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "react": [ "./node_modules/@types/react"],
     },
     "allowImportingTsExtensions": true
   },
