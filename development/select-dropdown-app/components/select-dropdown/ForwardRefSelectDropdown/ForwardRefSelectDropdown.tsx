@@ -139,39 +139,3 @@ const ForwardRefInputGroup = () => {
 };
 
 export default ForwardRefInputGroup;
-
-// optionsRenderer={(
-//     selectedValues,
-//     filteredOptions,
-//     addOrRemove,
-//     setQuery
-//   ) => {
-//     return (
-//       <div>
-//         <input
-//           className="w-full"
-//           autoFocus
-//           onChange={(e) => setQuery(e.target?.value)}
-//         />
-//         {filteredOptions.map((option: any, index: any) => {
-//           return (
-//             <div
-//               className={
-//                 "w-full " +
-//                 (selectedValues
-//                   .map((val: any) => val["value"])
-//                   .includes(option["value"])
-//                   ? " bg-green-100 hover:bg-green-300"
-//                   : +" bg-yellow-100 hover:bg-yellow-300")
-//               }
-//               onClick={() => {
-//                 addOrRemove(true, option);
-//               }}
-//             >
-//               {option.label}
-//             </div>
-//           );
-//         })}
-//       </div>
-//     );
-//   }}
