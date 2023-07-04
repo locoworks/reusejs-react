@@ -13,6 +13,7 @@
     "input-group-app",
     "reuse-docs",
     "select-dropdown-app",
-    "otp-input-app"
+    "otp-input-app",
+    "toolkits-app"
   ]
 }

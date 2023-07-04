@@ -11,7 +11,9 @@
     "UseDidMountEffect",
     "UseHeadlessSelectHook",
     "UseIsoMorphicEffect",
-    "UseOutsideClicker"
+    "UseOutsideClicker",
+    "UseProgress",
+    "UseSlider"
   ],
   "Utils": [
     "env"

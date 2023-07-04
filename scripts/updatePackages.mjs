@@ -1,4 +1,3 @@
-// const fs = require("node:fs");
 import fs from "node:fs";
 
 const componentsPath = "./components";
@@ -24,7 +23,6 @@ const updatePackageJsonWith = (updatedDependencies) => {
           console.error("Error writing package.json:", err);
           return;
         }
-        // console.log("package.json file updated successfully.");
       });
     } catch (error) {
       console.error("Error parsing package.json:", error);

@@ -13,16 +13,16 @@ import toc from "../../public/useIsoMorphicEffect-toc.json"
 
 The `useIsoMorphicEffect` hook is a custom hook that offers an isomorphic (server-client) effect based on the execution environment. It allows you to specify an effect function to be executed and an optional array of dependencies.
 
-### **Parameters**
+### Parameters
 
 - `effect` (Function): The effect function to be executed.
 - `deps` (Array): An optional array of dependencies for the effect.
 
-### **Description**
+### Description
 
 The `useIsoMorphicEffect` hook determines the execution environment and selects the appropriate effect hook accordingly. In server-side rendering (SSR) environments, it uses the `useEffect` hook, while in client-side rendering (CSR) environments, it employs the `useLayoutEffect` hook. This ensures consistent behavior and proper synchronization between the server-rendered content and the client-side updates.
 
-### **Usage**
+### Usage
 
 1. Import `useIsoMorphicEffect` hook to your React project:
 
