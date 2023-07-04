@@ -23,6 +23,26 @@
         "depth": 3,
         "value": "ReuseInputGroup Example",
         "children": []
+      },
+      {
+        "depth": 3,
+        "value": "ForwardRefInputGroup Example",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "MultipleInput Example",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "DropdownInputGroup Example",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "SizeInputGroup Example",
+        "children": []
       }
     ]
   }

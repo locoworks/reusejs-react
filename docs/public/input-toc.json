@@ -40,6 +40,26 @@
       },
       {
         "depth": 3,
+        "value": "AcceptedInput",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "RejectedInput",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "SizeInput",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "ColorInput",
+        "children": []
+      },
+      {
+        "depth": 3,
         "value": "ForwardRefInput",
         "children": []
       }
