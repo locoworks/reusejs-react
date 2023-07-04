@@ -84,7 +84,6 @@ const useProgress = ({
     const processedFileInPercent:number =
       (processedFileSize / totalFileSize) * 100;
     setCurrentFileProcessed(Number(processedFileInPercent.toFixed(0)));
-    console.log("processedFile", processedFileInPercent);
   }, [processedFileSize]);
 
   return {
