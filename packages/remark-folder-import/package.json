@@ -1,7 +1,7 @@
 {
   "name": "@locoworks/remark-folder-import",
   "description": "📝 Populate code blocks from folder",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "node": ">= 12"
   },
