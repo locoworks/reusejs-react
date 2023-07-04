@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface SliderInterfacer {
-    slides: React.ReactNode[]
-    slideInterval: number,
-    loop: boolean
+  slides: React.ReactNode[];
+  slideInterval: number;
+  loop: boolean;
 }
 
-const useSlider = ({ slides, slideInterval, loop }: SliderInterfacer) => {
+export let useSlider = ({ slides, slideInterval, loop }: SliderInterfacer) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
   const currentSlide = slides[currentSlideIndex];
   const intervalRef = useRef<any>(null);
@@ -114,5 +114,3 @@ const useSlider = ({ slides, slideInterval, loop }: SliderInterfacer) => {
     pauseSlider,
   };
 };
-
-export default useSlider;

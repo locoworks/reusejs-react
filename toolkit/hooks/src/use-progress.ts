@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface UseProgresInterface {
-    progressInterval?: number,
-    running: boolean
-    defaultProgress?: number
-    totalFileSize?: number,
-    processedFileSize?: number
-
+  progressInterval?: number;
+  running: boolean;
+  defaultProgress?: number;
+  totalFileSize?: number;
+  processedFileSize?: number;
 }
 
-const useProgress = ({
+export let useProgress = ({
   progressInterval = 4000,
   running = false,
   defaultProgress = 0,
@@ -44,7 +43,9 @@ const useProgress = ({
 
   const pause = () => {
     if (progress > 0 && progress < 100) {
-      const currentProgress:number = Number(currentProgressRef.current.toFixed(0));
+      const currentProgress: number = Number(
+        currentProgressRef.current.toFixed(0)
+      );
       setProgress(currentProgress);
       clearInterval(intervalRef.current as NodeJS.Timeout);
     }
@@ -81,7 +82,7 @@ const useProgress = ({
       clearInterval(intervalRef.current as NodeJS.Timeout);
       start();
     }
-    const processedFileInPercent:number =
+    const processedFileInPercent: number =
       (processedFileSize / totalFileSize) * 100;
     setCurrentFileProcessed(Number(processedFileInPercent.toFixed(0)));
   }, [processedFileSize]);
@@ -90,5 +91,3 @@ const useProgress = ({
     progress,
   };
 };
-
-export default useProgress;
