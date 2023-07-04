@@ -217,7 +217,6 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, Reus
       onChange={(e) => setQuery(e.target.value)}
     />
   );
-console.log("this is form the select base file.",{ref})
   return (
     <div
     ref={ref}
