@@ -1,6 +1,5 @@
 import React from "react";
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
-// import Sample from "./button/Sample/Sample.tsx";
 import { HeadlessButton } from "@locoworks/reusejs-react-button";
 
 const LiveSampleButton = () => {

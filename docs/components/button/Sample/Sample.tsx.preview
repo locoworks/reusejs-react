@@ -1,3 +1,0 @@
-<ReuseButton onClick={() => console.log("Hello")}>
-    Reuse!
-</ReuseButton>
