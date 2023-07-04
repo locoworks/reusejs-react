@@ -8,7 +8,6 @@ type StringKeyStringObject = { [key: string]: string };
 
 function convertArrayToObject(array: string[]) {
   const obj: StringKeyStringObject = {};
-  // console.log("Array>>>", array);
   array.forEach((item) => {
     const [key, value] = item.split(":");
     const trimmedKey = key.trim();

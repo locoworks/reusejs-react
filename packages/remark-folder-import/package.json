@@ -35,7 +35,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "vitest"
+    "test": "vitest",
+    "bundle": "tsc",
+    "dev": "yarn build --watch"
   },
   "dependencies": {
     "strip-indent": "^4.0.0",

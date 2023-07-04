@@ -13,9 +13,7 @@ import AcceptedInput from "../../components/input/AcceptedInput/AcceptedInput.ts
 import RejectedInput from "../../components/input/RejectedInput/RejectedInput.tsx"
 import SizeInput from "../../components/input/SizeInput/SizeInput.tsx"
 import ColorInput from "../../components/input/ColorInput/ColorInput.tsx"
-
-
-## Table of contents
+import ForwardRefInput from "../../components/input/ForwardRefInput/ForwardRefInput.jsx"
 
 Input component is the precursor of `input-group` component which provides functionality specific to input component like placeholder, disable input, autocomplet etc. Along with some additional features like **show/hide passwords** using props showPassword.
 Additionally since **reusejs-input** extends **html-input** it supports all the functionality of a default browser input like types, autocomplete, form, alt, for etc.
@@ -108,6 +106,14 @@ module.exports = {
 
 ```js path=../../components/input/ColorInput name=ColorInput
 ```
+
+### ForwardRefInput
+
+<ForwardRefInput/>
+
+```jsx path=../../components/input/ForwardRefInput name=ForwardRefInput
+```
+
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
