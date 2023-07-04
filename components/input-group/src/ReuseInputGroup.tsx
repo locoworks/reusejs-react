@@ -21,6 +21,7 @@ export interface ReuseInputGroupProps extends HeadlessInputGroupProps {
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   errorInputStyles?: string;
+  reuseinputref?: React.Ref<HTMLInputElement> | undefined;
 }
 
 const ReuseInputGroup: React.FC<ReuseInputGroupProps> = ({
@@ -38,8 +39,10 @@ const ReuseInputGroup: React.FC<ReuseInputGroupProps> = ({
   errorInputStyles,
   prefix,
   suffix,
+  reuseinputref,
   ...rest
 }) => {
+  console.log(reuseinputref, "this is the reuseinputref");
   const defaultWrapperClasses = "relative w-1/2 flex flex-col";
   const defaultCommonClassName =
     "form-input w-full py-2 border-1 rounded focus:ring-0 border-black focus:border-blue-700 ";
@@ -66,6 +69,7 @@ const ReuseInputGroup: React.FC<ReuseInputGroupProps> = ({
     <HeadlessInputGroup
       wrapperClasses={finalWrapperClasses}
       className={finalClassName}
+      inputRef={reuseinputref}
       headerLevel1={
         header
           ? header
