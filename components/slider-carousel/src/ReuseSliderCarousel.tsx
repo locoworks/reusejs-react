@@ -22,7 +22,7 @@ const ReuseSliderCarousel = ({
   wrapperClasses,
   sliderContainerClasses,
   enableButtons,
-  prefixButton = false,
+  prefixButton,
   suffixButton,
   buttonClasses,
   animationStyle,
