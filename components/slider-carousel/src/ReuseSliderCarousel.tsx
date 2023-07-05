@@ -12,6 +12,7 @@ interface ReuseSliderCarouselInterface {
   prefixButton?: React.ReactNode;
   suffixButton?: React.ReactNode;
   buttonClasses?: string;
+  animationStyle?: string;
 }
 
 const ReuseSliderCarousel = ({
@@ -24,6 +25,7 @@ const ReuseSliderCarousel = ({
   prefixButton = false,
   suffixButton,
   buttonClasses,
+  animationStyle,
 }: ReuseSliderCarouselInterface) => {
   const {
     currentSlide,
@@ -37,6 +39,11 @@ const ReuseSliderCarousel = ({
     slides,
     loop,
   });
+
+  const parentRef = useRef<HTMLDivElement>(null);
+  let parent: any = parentRef.current;
+  const [scrollLeft, setScrollLeft] = useState<number>(0);
+  const [childWidth, setChildWidth] = useState<number>(0);
 
   const HandleClickEvent = (e: any) => {
     if (!enableButtons) {
@@ -81,21 +88,78 @@ const ReuseSliderCarousel = ({
     </div>
   );
 
+  const resumeSlides = () => {
+    if (parent) {
+      let autoScroll = async () => {
+        setScrollLeft((prev) => {
+          return prev + childWidth;
+        });
+        if (scrollLeft >= parent.scrollWidth - parent.clientWidth) {
+          setScrollLeft(0);
+        }
+        parent.scrollTo({
+          left: scrollLeft,
+          behavior: "smooth",
+        });
+      };
+      autoScroll();
+    }
+  };
+
+  useEffect(() => {
+    parent = parentRef.current;
+    if (parent) {
+      setChildWidth(parent.clientWidth);
+      setScrollLeft(parent.clientWidth);
+    }
+  }, []);
+
+  useEffect(() => {
+    resumeSlides();
+  }, [currentSlideIndex]);
+
   return (
-    <div
-      className={finalWrapperClasses}
-      onClick={HandleClickEvent}
-      onMouseEnter={pauseSlider}
-      onMouseLeave={moveSlider}
-    >
-      {enableButtons && (
-        <div className="absolute flex w-full justify-between px-6 h-fit items-center z-50">
-          {previousButton}
-          {nextButton}
+    <>
+      {animationStyle === "continue" ? (
+        <div
+          className={finalWrapperClasses}
+          onClick={HandleClickEvent}
+          onMouseEnter={pauseSlider}
+          onMouseLeave={moveSlider}
+        >
+          <div
+            className="flex h-full w-full items-center align-center  overflow-hidden text-center"
+            ref={parentRef}
+          >
+            {slides.map((slide: any, index: number) => {
+              return (
+                <div
+                  className="w-full h-full flex bg-green-300 shrink-0"
+                  key={index}
+                >
+                  {slide}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <div
+          className={finalWrapperClasses}
+          onClick={HandleClickEvent}
+          onMouseEnter={pauseSlider}
+          onMouseLeave={moveSlider}
+        >
+          {enableButtons && (
+            <div className="absolute flex w-full justify-between px-6 h-fit items-center z-50">
+              {previousButton}
+              {nextButton}
+            </div>
+          )}
+          <div className={finalSliderContainerClasses}>{currentSlide}</div>
         </div>
       )}
-      <div className={finalSliderContainerClasses}>{currentSlide}</div>
-    </div>
+    </>
   );
 };
 

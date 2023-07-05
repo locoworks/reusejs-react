@@ -5,6 +5,7 @@ author: "Md Amir Sohail"
 ---
 import SliderWithButton from "../../components/slider-carousel/Example/SliderWithButton/SliderWithButton.tsx"
 import SimpleSlider from "../../components/slider-carousel/Example/SimpleSlider/SimpleSlider.tsx"
+import SliderWithLinearSlide from "../../components/slider-carousel/Example/SliderWithLinearSlide/SliderWithLinearSlide.tsx"
 
 ## Table of contents
 
@@ -25,6 +26,7 @@ The `ReuseSliderCarousel` component is a reusable carousel component that displa
 - `prefixButton` (React.ReactNode): Custom ReactNode element to be used as the prefix button. Defaults to a left arrow icon.
 - `suffixButton` (React.ReactNode): Custom ReactNode element to be used as the suffix button. Defaults to a right arrow icon.
 - `buttonClasses` (string): Additional CSS classes to be applied to the navigation buttons.
+- `animationStyle` (string): Determines the animation style of the slider. Set this prop to 'continue' to enable continuous looping with slide chaining. When set to 'continue', the slider will seamlessly transition from the last slide to the first slide, creating a continuous loop effect.
 
 ## Examples:
 1. **without button**:
@@ -40,6 +42,14 @@ The `ReuseSliderCarousel` component is a reusable carousel component that displa
 
 ```js path=../../components/slider-carousel/Example/SliderWithButton name=SliderWithButton
 ```
+
+3. **With LinearSlideChain**
+
+<SliderWithLinearSlide />
+
+```js path=../../components/slider-carousel/Example/SliderWithLinearSlide name=SliderWithLinearSlide
+```
+
 
 
 >Take your website to the next level with ReuseSliderCarousel. Effortlessly create stunning image carousels and captivating slideshows. Customize slide intervals, enable looping, and add intuitive button controls. Engage your visitors with seamless transitions and eye-catching animations. Showcase your content in style and leave a lasting impression.
