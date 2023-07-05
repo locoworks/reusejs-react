@@ -15,6 +15,8 @@
     "gen:example": "node ./scripts/createExample.mjs",
     "input-group:dev": "turbo run dev --filter=input-group-app...",
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
+		"slider-carousel:dev": "turbo run dev --filter=slider-carousel-app...",
+		"slider-carousel:build": "turbo run build --filter=@locoworks/reusejs-react-slider-carousel...",
     "input:dev": "turbo run dev --filter=input-app...",
     "select-dropdown:dev": "turbo run dev --filter=select-dropdown-app...",
     "select-dropdown:build": "turbo run build --filter=@locoworks/reusejs-react-select-dropdown...",

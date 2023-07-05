@@ -1,0 +1,49 @@
+---
+HEAD OBJECT
+title: "ReuseJS slider-carousel"
+author: "Md Amir Sohail"
+---
+import SliderWithButton from "../../components/slider-carousel/Example/SliderWithButton/SliderWithButton.tsx"
+import SimpleSlider from "../../components/slider-carousel/Example/SimpleSlider/SimpleSlider.tsx"
+
+## Table of contents
+
+## ReuseSliderCarousel Component
+The `ReuseSliderCarousel` component is a reusable carousel component that displays a collection of slides. It provides functionality for `automatic slide transitions`, `navigation buttons`, and `customizable styles`.
+
+- a. React component that renders a slider carousel using the `ReuseSliderCarousel` component from the `@locoworks/reusejs-react-slider-carousel` library. The slider displays a list of slides, and it automatically transitions between slides at a specified interval.
+
+- b. The slider component from `ReuseSliderCarousel` has the feature to go to the next or previous slide when clicked, based on the click position. It detects the click position relative to the `slider container` and determines whether the user clicked on the left or right side of the container.
+
+## Props
+- `slideInterval` (number): The interval (in milliseconds) between slide transitions.
+- `slides` (React.ReactNode[]): An array of ReactNode elements representing the slides to be displayed.
+- `loop` (boolean): A boolean value indicating whether the carousel should loop back to the first slide after reaching the last slide.
+- `wrapperClasses` (string): Additional CSS classes to be applied to the wrapper container element.
+- `sliderContainerClasses` (string): Additional CSS classes to be applied to the slider container element.
+- `enableButtons` (boolean): A boolean value indicating whether navigation buttons should be displayed.
+- `prefixButton` (React.ReactNode): Custom ReactNode element to be used as the prefix button. Defaults to a left arrow icon.
+- `suffixButton` (React.ReactNode): Custom ReactNode element to be used as the suffix button. Defaults to a right arrow icon.
+- `buttonClasses` (string): Additional CSS classes to be applied to the navigation buttons.
+
+## Examples:
+1. **without button**:
+<SimpleSlider />
+
+```js path=../../components/slider-carousel/Example/SimpleSlider name=SimpleSlider
+```
+
+2. **With Buttons**:
+
+- a. If the `enableButtons` prop is set to `true`, the ReuseSliderCarousel component will display next and previous buttons instead of relying on the container click event. The container click event handling code can be removed in this case.
+<SliderWithButton />
+
+```js path=../../components/slider-carousel/Example/SliderWithButton name=SliderWithButton
+```
+
+
+>Take your website to the next level with ReuseSliderCarousel. Effortlessly create stunning image carousels and captivating slideshows. Customize slide intervals, enable looping, and add intuitive button controls. Engage your visitors with seamless transitions and eye-catching animations. Showcase your content in style and leave a lasting impression.
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
