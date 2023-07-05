@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { useHeadlessSelectHook } from "@locoworks/reusejs-toolkit-react-hooks";
 
@@ -115,7 +115,7 @@ const DefaultOptionsComponent: React.FC<DefaultOptionsComponentProps> = ({
 
 const MemoizedDefaultOptionsComponent = React.memo(DefaultOptionsComponent);
 
-const ReuseSelectDropDown: React.FC<ReuseSelectProps> = ({
+const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, ReuseSelectProps> = ({ 
   options,
   optionsRenderer,
   noOptionsRenderer,
@@ -138,7 +138,7 @@ const ReuseSelectDropDown: React.FC<ReuseSelectProps> = ({
   selectButtonOverflowWrappper = "",
   inputStyles = "",
   refresh,
-}) => {
+},ref) => {
   const {
     open,
     setOpen,
@@ -217,9 +217,9 @@ const ReuseSelectDropDown: React.FC<ReuseSelectProps> = ({
       onChange={(e) => setQuery(e.target.value)}
     />
   );
-
   return (
     <div
+    ref={ref}
       className={
         typeof selectWrapper === "string"
           ? twMerge(defaultSelectWrapper, selectWrapper)
@@ -276,4 +276,4 @@ const ReuseSelectDropDown: React.FC<ReuseSelectProps> = ({
   );
 };
 
-export default ReuseSelectDropDown;
+export default forwardRef<HTMLInputElement, ReuseSelectProps>(ReuseSelectDropDown);
