@@ -4,9 +4,9 @@ title: "ReuseJS progress-bar"
 author: "Md Amir Sohail"
 ---
 
-import SimpleProgress  from "../../components/progress-bar/SimpleProgress/SimpleProgressBar.tsx"
+import RoundedProgress  from "../../components/progress-bar/RoundedProgress/RoundedProgress.tsx"
 import UploadDownloadProgress  from "../../components/progress-bar/UploadDownloadProgress/UploadDownloadProgress.tsx"
-import SquireProgress  from "../../components/progress-bar/Example/SquireProgress.tsx"
+import Progress  from "../../components/progress-bar/Progress/Progress.tsx"
 
 ## Table of contents
 
@@ -36,14 +36,34 @@ The ProgressBar component accepts the following props:
 - **progressClasses** (optional): A string of additional CSS classes to be applied to the progress bar. These classes will be merged with the default progress bar classes. (Accepts: Tailwind Classes Only)
 - **progressContainerClasses** (optional): A string of additional CSS classes to be applied to the progress bar container. These classes will be merged with the default progress bar container classes. (Accepts: Tailwind Classes Only)
 - **progressInterval** (required): The interval (in milliseconds) at which the progress should be updated.
-- **running** (optional): A boolean value indicating whether the progress bar is currently running or paused. To start the progress this value must be past as true. (Default: false)
+- **running** (optional): A boolean value indicating whether the progress bar is currently running or paused. To start the progress, this value must be set to true. (Default: false)
 - **defaultProgress** (required): The default progress value (between 0 and 100) to be displayed when the progress bar is initially rendered. (Default: undefined)
 - **totalFileSize** (optional): The total file size in bytes. It is used to calculate the progress percentage based on the processed file size. (Default: 0)
 - **processedFileSize** (optional): The processed file size in bytes. It is used to calculate the progress
 
-<SquireProgress />
-<SimpleProgress />
+## Examples:
+
+**1. A sleek `Progress` bar with a graphical edge.**
+<Progress />
+
+```js path=../../components/progress-bar/Progress name=Progress
+```
+
+**2. A sleek `progress` bar without a graphical edge.**
+
+<RoundedProgress />
+```js path=../../components/progress-bar/RoundedProgress name=RoundedProgress
+```
+
+**3. A `Progress` bar withous a graphical edge with Upload/Download functionality.**
 <UploadDownloadProgress />
+```js path=../../components/progress-bar/UploadDownloadProgress name=UploadDownloadProgress
+```
+
+
+
+>`Progress bars` enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
+By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.
 
 
 export default ({ children }) => {

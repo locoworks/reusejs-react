@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-// Import New Component created here
 import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
 
-const SquireProgress = () => {
-  const [running, setRunning] = useState<boolean>(false);
+const Progress = () => {
+  const [running, setRunning] = useState(false);
   return (
     <div className="flex items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
       <div className="w-full h-72 flex flex-col justify-center items-center mx-80">
@@ -26,4 +25,4 @@ const SquireProgress = () => {
   );
 };
 
-export default SquireProgress;
+export default Progress;

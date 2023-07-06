@@ -10,6 +10,8 @@ interface ProgressBarInterface {
   defaultProgress: number;
   totalFileSize?: number;
   processedFileSize?: number;
+  progressText?: string;
+  progressTextClasses?: string;
 }
 
 const ProgressBar = ({
@@ -20,6 +22,8 @@ const ProgressBar = ({
   defaultProgress,
   totalFileSize = 0,
   processedFileSize = 0,
+  progressText,
+  progressTextClasses,
 }: ProgressBarInterface) => {
   const defaultProgressClasses = "flex h-full rounded-full bg-green-600";
   const defaultProgressContainerClasses =
@@ -47,6 +51,11 @@ const ProgressBar = ({
           style={{ width: `${progress}%` }}
         ></div>
       </div>
+      {progressText && progress > 0 && (
+        <div className={progressTextClasses}>
+          {progressText} {progress}%
+        </div>
+      )}
     </>
   );
 };

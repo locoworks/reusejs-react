@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
-import { start } from "repl";
 
 const UploadDownloadProgress = () => {
   const [running, setRunning] = useState<boolean>(false);
@@ -33,6 +32,8 @@ const UploadDownloadProgress = () => {
           progressClasses="bg-green-600 h-full"
           processedFileSize={processedFile}
           totalFileSize={5000}
+          progressText="Uploaded"
+          progressTextClasses="text-xl font-normal justify-self-center"
         />
         <ProgressBar
           progressInterval={2000}
@@ -42,6 +43,8 @@ const UploadDownloadProgress = () => {
           progressClasses="bg-blue-600 h-full"
           processedFileSize={processedFile}
           totalFileSize={5000}
+          progressText="Downloaded"
+          progressTextClasses="text-xl font-normal justify-self-center"
         />
         <ReuseButton
           className="bg-blue-500 text-white font-bold text-2xl text-center mt-20 px-6 flex"
