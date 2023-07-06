@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
-import { run } from "node:test";
 
 const CircularProgress = () => {
   const [running, setRunning] = useState(false);

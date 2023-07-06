@@ -11,13 +11,18 @@ import CircularProgress  from "../../components/progress-bar/CircularProgress/Ci
 
 ## Table of contents
 
+## Introduction
+
+>`ProgressBar` component enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
+By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.
+
 ## ProgressBar Component Documentation
 The `ProgressBar` component is used to display a progress bar with customizable styles.
 
 ## Usage
 To use the `ProgressBar` component, follow these steps:
 
-- 1. Install the required dependencies:
+1. Install the required dependencies:
 ```js
 npm install @locoworks/reusejs-react-progress-bar
 ```
@@ -26,7 +31,7 @@ or
 yarn add @locoworks/reusejs-react-progress-bar
 ```
 
-- 2. Import `ProgressBar`:
+2. Import `ProgressBar`:
 ```js
 import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
 ```
@@ -47,32 +52,27 @@ The ProgressBar component accepts the following props:
 
 ## Examples:
 
-**1. A sleek `Progress` bar with a graphical edge.**
+### **ProgressBar with a graphical edge.**
 <Progress />
 
 ```js path=../../components/progress-bar/Progress name=Progress
 ```
 
-**2. A sleek `progress` bar without a graphical edge.**
+### **ProgressBar without a graphical edge.**
 
 <RoundedProgress />
 ```js path=../../components/progress-bar/RoundedProgress name=RoundedProgress
 ```
 
-**3. A `Progress` bar withous a graphical edge with Upload/Download functionality.**
+### **ProgressBar without a graphical edge with Upload/Download functionality.**
 <UploadDownloadProgress />
 ```js path=../../components/progress-bar/UploadDownloadProgress name=UploadDownloadProgress
 ```
-**4. Circular `Progress` .**
+### **Circular ProgressBar.**
 <CircularProgress />
 
 ```js path=../../components/progress-bar/CircularProgress name=CircularProgress
 ```
-
-
-
->`Progress bars` enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
-By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.
 
 
 export default ({ children }) => {
