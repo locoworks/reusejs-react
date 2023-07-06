@@ -14,6 +14,7 @@ const Progress = () => {
           progressContainerClasses="bg-gray-300 h-6 flex rounded-none"
           progressClasses="h-full rounded-none"
         />
+
         <ReuseButton
           className="bg-blue-500 text-white font-bold text-2xl text-center mt-20 px-6 flex"
           onClick={() => setRunning(!running)}

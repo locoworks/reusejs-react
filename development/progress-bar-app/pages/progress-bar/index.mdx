@@ -7,6 +7,7 @@ author: "Md Amir Sohail"
 import RoundedProgress  from "../../components/progress-bar/RoundedProgress/RoundedProgress.tsx"
 import UploadDownloadProgress  from "../../components/progress-bar/UploadDownloadProgress/UploadDownloadProgress.tsx"
 import Progress  from "../../components/progress-bar/Progress/Progress.tsx"
+import CircularProgress  from "../../components/progress-bar/CircularProgress/CircularProgress.tsx"
 
 ## Table of contents
 
@@ -39,7 +40,10 @@ The ProgressBar component accepts the following props:
 - **running** (optional): A boolean value indicating whether the progress bar is currently running or paused. To start the progress, this value must be set to true. (Default: false)
 - **defaultProgress** (required): The default progress value (between 0 and 100) to be displayed when the progress bar is initially rendered. (Default: undefined)
 - **totalFileSize** (optional): The total file size in bytes. It is used to calculate the progress percentage based on the processed file size. (Default: 0)
-- **processedFileSize** (optional): The processed file size in bytes. It is used to calculate the progress
+- **processedFileSize** (optional): The processed file size in bytes. It is used to calculate the progress.
+- `radius` (optional): The radius of the circular progress bar (default: 95).
+- `circleRadiousInPercentage` (optional as string): The radius of the circular progress bar in percentage (both radius and circleRadiousInPercentage need to be passed together ex: radius={55} , circleRadiousInPercentage="25%").
+- `enableCircularProgress` (optional as boolean): Boolean value indicating whether to enable the circular progress bar. If true it will render CircularProgress else normal ProgressBar (default: false).
 
 ## Examples:
 
@@ -58,6 +62,11 @@ The ProgressBar component accepts the following props:
 **3. A `Progress` bar withous a graphical edge with Upload/Download functionality.**
 <UploadDownloadProgress />
 ```js path=../../components/progress-bar/UploadDownloadProgress name=UploadDownloadProgress
+```
+**4. Circular `Progress` .**
+<CircularProgress />
+
+```js path=../../components/progress-bar/CircularProgress name=CircularProgress
 ```
 
 
