@@ -1,0 +1,51 @@
+---
+HEAD OBJECT
+title: "ReuseJS progress-bar"
+author: "Md Amir Sohail"
+---
+
+import SimpleProgress  from "../../components/progress-bar/SimpleProgress/SimpleProgressBar.tsx"
+import UploadDownloadProgress  from "../../components/progress-bar/UploadDownloadProgress/UploadDownloadProgress.tsx"
+import SquireProgress  from "../../components/progress-bar/Example/SquireProgress.tsx"
+
+## Table of contents
+
+## ProgressBar Component Documentation
+The `ProgressBar` component is used to display a progress bar with customizable styles.
+
+## Usage
+To use the `ProgressBar` component, follow these steps:
+
+- 1. Install the required dependencies:
+```js
+npm install @locoworks/reusejs-react-progress-bar
+```
+or 
+```js
+yarn add @locoworks/reusejs-react-progress-bar
+```
+
+- 2. Import `ProgressBar`:
+```js
+import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
+```
+
+## Props
+The ProgressBar component accepts the following props:
+
+- **progressClasses** (optional): A string of additional CSS classes to be applied to the progress bar. These classes will be merged with the default progress bar classes. (Accepts: Tailwind Classes Only)
+- **progressContainerClasses** (optional): A string of additional CSS classes to be applied to the progress bar container. These classes will be merged with the default progress bar container classes. (Accepts: Tailwind Classes Only)
+- **progressInterval** (required): The interval (in milliseconds) at which the progress should be updated.
+- **running** (optional): A boolean value indicating whether the progress bar is currently running or paused. To start the progress this value must be past as true. (Default: false)
+- **defaultProgress** (required): The default progress value (between 0 and 100) to be displayed when the progress bar is initially rendered. (Default: undefined)
+- **totalFileSize** (optional): The total file size in bytes. It is used to calculate the progress percentage based on the processed file size. (Default: 0)
+- **processedFileSize** (optional): The processed file size in bytes. It is used to calculate the progress
+
+<SquireProgress />
+<SimpleProgress />
+<UploadDownloadProgress />
+
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
