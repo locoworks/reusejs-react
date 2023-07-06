@@ -28,28 +28,30 @@ const List = [
 
 const Slide = ({ heading, phrase }) => {
   return (
-    <>
-      <div className="flex flex-col bg-red-300 cursor-pointer justify-center items-center h-full w-screen overflow-hidden slide-right-to-left mx-6">
-        <div className="flex justify-center items-center flex-col h-96 w-full">
-          <div className="flex flex-col justify-center items-center text-center">
-            <h1 className={`text-4xl font-bold mt-3 ease-linear origin-left`}>
-              {heading}
-            </h1>
-            <p
-              className={`mt-2 text-lg font-normal text-fray-400 ease-linear origin-left`}
-            >
-              {phrase}
-            </p>
-          </div>
+    <div className="flex flex-col bg-red-300 cursor-pointer justify-center items-center h-full w-screen overflow-hidden slide-right-to-left mx-6">
+      <div className="flex justify-center items-center flex-col h-96 w-full">
+        <div className="flex flex-col justify-center items-center text-center">
+          <h1 className={`text-4xl font-bold mt-3 ease-linear origin-left`}>
+            {heading}
+          </h1>
+          <p
+            className={`mt-2 text-lg font-normal text-fray-400 ease-linear origin-left`}
+          >
+            {phrase}
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 const slidesArray = [];
 List.forEach((element, index) => [
   slidesArray.push(
-    <Slide heading={element.heading} phrase={element.phrase} key={index} />
+    <Slide
+      heading={element.heading}
+      phrase={element.phrase}
+      key={"slide" + index}
+    />
   ),
 ]);
 
@@ -62,7 +64,6 @@ const SliderWithButton = () => {
         loop={true}
         enableButtons={true}
         animationStyle="continue"
-        //sliderContainerClasses="slide-right-to-left" // custom class created for animation use any class you want and apply animations as per your requirement
       />
     </div>
   );

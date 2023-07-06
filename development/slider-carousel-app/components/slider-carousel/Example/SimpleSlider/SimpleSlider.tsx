@@ -34,29 +34,31 @@ const List: ListInterface[] = [
 
 const Slide = ({ heading, phrase }: ListInterface) => {
   return (
-    <>
-      <div className="flex flex-col bg-red-300 cursor-pointer justify-center items-center h-full w-screen overflow-hidden slide-right-to-left mx-6">
-        <div className="flex justify-center items-center flex-col h-96 w-full">
-          <div className="flex flex-col justify-center items-center text-center">
-            <h1 className={`text-4xl font-bold mt-3 ease-linear origin-left`}>
-              {heading}
-            </h1>
-            <p
-              className={`mt-2 text-lg font-normal text-fray-400 ease-linear origin-left`}
-            >
-              {phrase}
-            </p>
-          </div>
+    <div className="flex flex-col bg-red-300 cursor-pointer justify-center items-center h-full w-screen overflow-hidden slide-right-to-left mx-6">
+      <div className="flex justify-center items-center flex-col h-96 w-full">
+        <div className="flex flex-col justify-center items-center text-center">
+          <h1 className={`text-4xl font-bold mt-3 ease-linear origin-left`}>
+            {heading}
+          </h1>
+          <p
+            className={`mt-2 text-lg font-normal text-fray-400 ease-linear origin-left`}
+          >
+            {phrase}
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 const slidesArray: React.ReactNode[] = [];
 List.forEach((element: any, index: number) => [
   slidesArray.push(
-    <Slide heading={element.heading} phrase={element.phrase} key={index} />
+    <Slide
+      heading={element.heading}
+      phrase={element.phrase}
+      key={"Slide" + index}
+    />
   ),
 ]);
 
@@ -67,7 +69,7 @@ const SliderWithButton = () => {
         slideInterval={2000}
         slides={slidesArray}
         loop={true}
-        sliderContainerClasses="slide-right-to-left slide-to-left" // custom class created for animation use any class you want and apply animationas poer your need
+        sliderContainerClasses="slide-right-to-left" // This custom class, "slide-right-to-left", is specifically created for animation purposes. You can create your own custom class for animation and replace the class name "slide-right-to-left" with your desired class name.
       />
     </div>
   );

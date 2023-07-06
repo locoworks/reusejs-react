@@ -8,7 +8,7 @@ interface ReuseSliderCarouselInterface {
   loop: boolean;
   wrapperClasses?: string;
   sliderContainerClasses?: string;
-  enableButtons?: boolean | false;
+  enableButtons?: boolean;
   prefixButton?: React.ReactNode;
   suffixButton?: React.ReactNode;
   buttonClasses?: string;
@@ -21,7 +21,7 @@ const ReuseSliderCarousel = ({
   loop,
   wrapperClasses,
   sliderContainerClasses,
-  enableButtons,
+  enableButtons = false,
   prefixButton,
   suffixButton,
   buttonClasses,
