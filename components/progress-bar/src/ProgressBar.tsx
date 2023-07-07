@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { useProgress } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
+import { type } from "os";
 
 interface ProgressBarInterface {
-  progressClasses?: string;
-  progressContainerClasses?: string;
+  progressClasses?: string | CSSProperties;
+  progressContainerClasses?: string | CSSProperties;
   progressInterval: number;
   running: boolean;
   defaultProgress: number;
   totalFileSize?: number;
   processedFileSize?: number;
   progressText?: string;
-  progressTextClasses?: string;
+  progressTextClasses?: string | CSSProperties;
   radius?: number;
   circleRadiousInPercentage?: string;
   enableCircularProgress?: boolean;
@@ -38,13 +39,6 @@ const ProgressBar = ({
   const defaultProgressClasses = "flex h-full rounded-full bg-green-600";
   const defaultProgressContainerClasses =
     "flex h-2 rounded-md mx-1 w-full rounded-full overflow-hidden";
-
-  const finalProgressClasses = twMerge(defaultProgressClasses, progressClasses);
-
-  const finalProgressContainerClasses = twMerge(
-    defaultProgressContainerClasses,
-    progressContainerClasses
-  );
 
   const [progressStyle, setProgressStyle] = useState({});
   const [statusStyle, setStatusStyle] = useState({});
@@ -76,9 +70,25 @@ const ProgressBar = ({
     <>
       {enableCircularProgress ? (
         <div
-          className={`h-full w-full flex justify-center items-center ${progressContainerClasses}`}
+          className={`h-full w-full flex justify-center items-center ${
+            typeof progressContainerClasses === "string"
+              ? twMerge(
+                  defaultProgressContainerClasses,
+                  progressContainerClasses
+                )
+              : defaultProgressContainerClasses
+          }`}
+          style={
+            typeof progressContainerClasses === "object"
+              ? progressContainerClasses
+              : {}
+          }
         >
-          <svg className={`w-52 h-52 ${progressClasses}`}>
+          <svg
+            className={`w-52 h-52 rounded-full ${
+              typeof progressClasses === "string" ? progressClasses : ""
+            }`}
+          >
             <circle
               className={`fill-transparent stroke-[10] -rotate-90 origin-center stroke-gray-300 ${StrokeColour}`}
               cx="50%"
@@ -101,14 +111,42 @@ const ProgressBar = ({
         </div>
       ) : (
         <>
-          <div className={finalProgressContainerClasses}>
+          <div
+            className={
+              typeof progressContainerClasses === "string"
+                ? twMerge(
+                    defaultProgressContainerClasses,
+                    progressContainerClasses
+                  )
+                : defaultProgressContainerClasses
+            }
+            style={
+              typeof progressContainerClasses === "object"
+                ? progressContainerClasses
+                : {}
+            }
+          >
             <div
-              className={finalProgressClasses}
-              style={{ width: `${progress}%` }}
+              className={
+                typeof progressClasses === "string"
+                  ? twMerge(defaultProgressClasses, progressClasses)
+                  : ""
+              }
+              style={
+                typeof progressClasses === "object"
+                  ? { ...progressClasses, width: `${progress}%` }
+                  : { width: `${progress}%` }
+              }
             ></div>
           </div>
           {progressText && progress > 0 && (
-            <div className={progressTextClasses}>
+            <div
+              className={
+                typeof progressTextClasses === "string"
+                  ? progressTextClasses
+                  : ""
+              }
+            >
               {progressText} {progress}%
             </div>
           )}

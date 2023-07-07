@@ -13,8 +13,8 @@ import CircularProgress  from "../../components/progress-bar/CircularProgress/Ci
 
 ## Introduction
 
->`ProgressBar` component enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
-By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.
+*`ProgressBar` component enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
+By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.*
 
 ## ProgressBar Component Documentation
 The `ProgressBar` component is used to display a progress bar with customizable styles.
@@ -46,29 +46,29 @@ The ProgressBar component accepts the following props:
 - **defaultProgress** (required): The default progress value (between 0 and 100) to be displayed when the progress bar is initially rendered. (Default: undefined)
 - **totalFileSize** (optional): The total file size in bytes. It is used to calculate the progress percentage based on the processed file size. (Default: 0)
 - **processedFileSize** (optional): The processed file size in bytes. It is used to calculate the progress.
-- `radius` (optional): The radius of the circular progress bar (default: 95).
-- `circleRadiousInPercentage` (optional as string): The radius of the circular progress bar in percentage (both radius and circleRadiousInPercentage need to be passed together ex: radius={55} , circleRadiousInPercentage="25%").
-- `enableCircularProgress` (optional as boolean): Boolean value indicating whether to enable the circular progress bar. If true it will render CircularProgress else normal ProgressBar (default: false).
+- **radius** (optional): The radius of the circular progress bar (default: 95).
+- **circleRadiousInPercentage** (optional as string): The radius of the circular progress bar in percentage (both radius and circleRadiousInPercentage need to be passed together ex: radius={55} , circleRadiousInPercentage="25%").
+- **enableCircularProgress** (optional as boolean): Boolean value indicating whether to enable the circular progress bar. If true it will render CircularProgress else normal ProgressBar (default: false).
 
 ## Examples:
 
-### **ProgressBar with a graphical edge.**
+### ProgressBar with a graphical edge
 <Progress />
 
 ```js path=../../components/progress-bar/Progress name=Progress
 ```
 
-### **ProgressBar without a graphical edge.**
+### ProgressBar without a graphical edge
 
 <RoundedProgress />
 ```js path=../../components/progress-bar/RoundedProgress name=RoundedProgress
 ```
 
-### **ProgressBar without a graphical edge with Upload/Download functionality.**
+### ProgressBar without a graphical edge with Upload/Download functionality
 <UploadDownloadProgress />
 ```js path=../../components/progress-bar/UploadDownloadProgress name=UploadDownloadProgress
 ```
-### **Circular ProgressBar.**
+### Circular ProgressBar
 <CircularProgress />
 
 ```js path=../../components/progress-bar/CircularProgress name=CircularProgress
