@@ -6,7 +6,12 @@
   },
   {
     "depth": 2,
-    "value": "Form Styles: @tailwindcss/forms",
+    "value": "ReuseJS React Input",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Form Styles",
     "children": []
   },
   {
