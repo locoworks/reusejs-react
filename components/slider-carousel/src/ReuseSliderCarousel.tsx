@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, CSSProperties } from "react";
 import { useSlider } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
+import HeadlessSliderCarousel from "./HeadlessSliderCarousel";
 
 interface ReuseSliderCarouselInterface {
   slideInterval: number;
@@ -11,7 +12,6 @@ interface ReuseSliderCarouselInterface {
   enableButtons?: boolean;
   previousButton?: React.ReactNode;
   nextButton?: React.ReactNode;
-  animationStyle?: string;
 }
 
 const ReuseSliderCarousel = ({
@@ -23,7 +23,6 @@ const ReuseSliderCarousel = ({
   enableButtons = false,
   previousButton,
   nextButton,
-  animationStyle,
 }: ReuseSliderCarouselInterface) => {
   const {
     currentSlide,
@@ -37,11 +36,6 @@ const ReuseSliderCarousel = ({
     slides,
     loop,
   });
-
-  const parentRef = useRef<HTMLDivElement>(null);
-  let parent: any = parentRef.current;
-  const [scrollLeft, setScrollLeft] = useState<number>(0);
-  const [childWidth, setChildWidth] = useState<number>(0);
 
   const HandleClickEvent = (e: any) => {
     if (!enableButtons) {
@@ -90,101 +84,65 @@ const ReuseSliderCarousel = ({
     </>
   );
 
-  const resumeSlides = () => {
-    if (parent) {
-      let autoScroll = async () => {
-        setScrollLeft((prev) => {
-          return prev + childWidth;
-        });
-        if (scrollLeft >= parent.scrollWidth - parent.clientWidth) {
-          setScrollLeft(0);
-        }
-        parent.scrollTo({
-          left: scrollLeft,
-          behavior: "smooth",
-        });
-      };
-      autoScroll();
-    }
-  };
+  const newSlides = slides.map((slide: any, index: number) => {
+    return (
+      <div className="w-full h-full flex bg-green-300 shrink-0" key={index}>
+        {slide}
+      </div>
+    );
+  });
 
-  useEffect(() => {
-    parent = parentRef.current;
-    if (parent) {
-      setChildWidth(parent.clientWidth);
-      setScrollLeft(parent.clientWidth);
-    }
-  }, []);
-
-  useEffect(() => {
-    resumeSlides();
-  }, [currentSlideIndex]);
+  // <div
+  //         className={
+  //           typeof wrapperClasses === "string"
+  //             ? twMerge(defaultWrapperClasses, wrapperClasses)
+  //             : defaultWrapperClasses
+  //         }
+  //         style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
+  //         onClick={HandleClickEvent}
+  //         onMouseEnter={pauseSlider}
+  //         onMouseLeave={moveSlider}
+  //       >
+  //         <HeadlessSliderCarousel
+  //           slides={newSlides}
+  //           dependency={currentSlideIndex}
+  //           className="flex h-full w-full items-center align-center  overflow-hidden text-center"
+  //         />
+  //       </div>
 
   return (
-    <>
-      {animationStyle === "continue" ? (
-        <div
-          className={
-            typeof wrapperClasses === "string"
-              ? twMerge(defaultWrapperClasses, wrapperClasses)
-              : defaultWrapperClasses
-          }
-          style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
-          onClick={HandleClickEvent}
-          onMouseEnter={pauseSlider}
-          onMouseLeave={moveSlider}
-        >
-          <div
-            className="flex h-full w-full items-center align-center  overflow-hidden text-center"
-            ref={parentRef}
-          >
-            {slides.map((slide: any, index: number) => {
-              return (
-                <div
-                  className="w-full h-full flex bg-green-300 shrink-0"
-                  key={index}
-                >
-                  {slide}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        <div
-          className={
-            typeof wrapperClasses === "string"
-              ? twMerge(defaultWrapperClasses, wrapperClasses)
-              : defaultWrapperClasses
-          }
-          style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
-          onClick={HandleClickEvent}
-          onMouseEnter={pauseSlider}
-          onMouseLeave={moveSlider}
-        >
-          {enableButtons && (
-            <div className="absolute flex w-full justify-between px-6 h-fit items-center z-50">
-              {defaultPreviousButton}
-              {defaultNextButton}
-            </div>
-          )}
-          <div
-            className={
-              typeof sliderContainerClasses === "string"
-                ? twMerge(defaultSliderContainerClasses, sliderContainerClasses)
-                : defaultSliderContainerClasses
-            }
-            style={
-              typeof sliderContainerClasses === "object"
-                ? sliderContainerClasses
-                : {}
-            }
-          >
-            {currentSlide}
-          </div>
+    <div
+      className={
+        typeof wrapperClasses === "string"
+          ? twMerge(defaultWrapperClasses, wrapperClasses)
+          : defaultWrapperClasses
+      }
+      style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
+      onClick={HandleClickEvent}
+      onMouseEnter={pauseSlider}
+      onMouseLeave={moveSlider}
+    >
+      {enableButtons && (
+        <div className="absolute flex w-full justify-between px-6 h-fit items-center z-50">
+          {defaultPreviousButton}
+          {defaultNextButton}
         </div>
       )}
-    </>
+      <div
+        className={
+          typeof sliderContainerClasses === "string"
+            ? twMerge(defaultSliderContainerClasses, sliderContainerClasses)
+            : defaultSliderContainerClasses
+        }
+        style={
+          typeof sliderContainerClasses === "object"
+            ? sliderContainerClasses
+            : {}
+        }
+      >
+        {currentSlide}
+      </div>
+    </div>
   );
 };
 

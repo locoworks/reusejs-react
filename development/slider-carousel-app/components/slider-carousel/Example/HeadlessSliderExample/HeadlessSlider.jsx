@@ -1,5 +1,6 @@
 import React from "react";
-import { ReuseSliderCarousel } from "@locoworks/reusejs-react-slider-carousel";
+import { useSlider } from "@locoworks/reusejs-toolkit-react-hooks";
+import { HeadlessSliderCarousel } from "@locoworks/reusejs-react-slider-carousel";
 
 const List = [
   {
@@ -44,29 +45,41 @@ const Slide = ({ heading, phrase }) => {
     </div>
   );
 };
+
 const slidesArray = [];
 List.forEach((element, index) => [
   slidesArray.push(
     <Slide
       heading={element.heading}
       phrase={element.phrase}
-      key={"slide" + index}
+      key={"Slide" + index}
     />
   ),
 ]);
 
-const SliderWithButton = () => {
+const newSlides = slidesArray.map((slide) => {
   return (
-    <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-      <ReuseSliderCarousel
-        slideInterval={2000}
-        slides={slidesArray}
-        loop={true}
-        enableButtons={true}
-        animationStyle="continue"
+    <div className="w-full h-full flex bg-green-300 shrink-0" key={index}>
+      {slide}
+    </div>
+  );
+});
+
+const HeadlessSlider = () => {
+  const { currentSlideIndex } = useSlider({
+    slideInterval: 2000,
+    slides: slidesArray,
+    loop: true,
+  });
+  return (
+    <div>
+      <HeadlessSliderCarousel
+        slides={newSlides}
+        dependency={currentSlideIndex}
+        className="flex h-full w-full items-center align-center  overflow-hidden text-center"
       />
     </div>
   );
 };
 
-export default SliderWithButton;
+export default HeadlessSlider;

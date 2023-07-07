@@ -5,15 +5,37 @@ author: "Md Amir Sohail"
 ---
 import SliderWithButton from "../../components/slider-carousel/Example/SliderWithButton/SliderWithButton.tsx"
 import SimpleSlider from "../../components/slider-carousel/Example/SimpleSlider/SimpleSlider.tsx"
-import SliderWithLinearSlide from "../../components/slider-carousel/Example/SliderWithLinearSlide/SliderWithLinearSlide.tsx"
+import HeadlessSlider from "../../components/slider-carousel/Example/HeadlessSliderExample/HeadlessSlider.tsx"
 
 ## Table of contents
 
 ## Introduction
 ***Take your website to the next level with ReuseSliderCarousel. Effortlessly create stunning image carousels and captivating slideshows. Customize slide intervals, enable looping, and add intuitive button controls. Engage your visitors with seamless transitions and eye-catching animations. Showcase your content in style and leave a lasting impression.***
 
+## HeadlessSliderCarousel Component Documentation
+The HeadlessSliderCarousel component is a customizable carousel/slider component for displaying a set of slides. It provides automatic scrolling functionality and is designed to be headless, meaning it handles the core functionality of the slider while allowing you to control the presentation and styling.
+## HeadlessSliderCarousel props
+- **slides** (required) :  An array of ReactNode elements representing the individual slides to be displayed in the carousel.
+- **dependency** (required) : A dependency value that triggers the carousel to resume scrolling when it changes. This can be useful when you want to update the carousel based on external changes, such as data updates.
+
+**Node :**
+- Apart from above it also accepts all the props a HTMLDivElement Accepts.
+
+## HeadlessSliderCarousel Functionality
+
+- The HeadlessSliderCarousel component provides the following functionality:
+
+- Automatic Scrolling: The carousel automatically scrolls through the slides horizontally. It uses the scrollLeft property and scrollTo method to control the scrolling behavior.
+
+- Slide Resizing: The component adjusts the size of the slides dynamically based on the width of the parent container. This ensures that the slides are responsive and fill the available space.
+
+- Looping: The carousel loops back to the beginning once it reaches the end of the slides. This creates a seamless scrolling experience.
+
+- Customizability: The component is designed to be headless, allowing you to customize the presentation and styling of the slides as per your requirements. You can provide any React components or content as slides.
+
 ## ReuseSliderCarousel Component Docs
 The `ReuseSliderCarousel` component is a reusable carousel component that displays a collection of slides. It provides functionality for `automatic slide transitions`, `navigation buttons`, and `customizable styles`.
+
 
 - React component that renders a slider carousel using the `ReuseSliderCarousel` component from the `@locoworks/reusejs-react-slider-carousel` library. The slider displays a list of slides, and it automatically transitions between slides at a specified interval.
 
@@ -49,9 +71,9 @@ You have the flexibility to create personalized animations by designing your own
 
 ### Slider With LinearSlideChain
 
-<SliderWithLinearSlide />
+<HeadlessSlider />
 
-```js path=../../components/slider-carousel/Example/SliderWithLinearSlide name=SliderWithLinearSlide
+```js path=../../components/slider-carousel/Example/HeadlessSliderExample name=HeadlessSlider
 ```
 
 export default ({ children }) => {
