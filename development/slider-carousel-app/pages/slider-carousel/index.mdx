@@ -9,8 +9,8 @@ import SliderWithLinearSlide from "../../components/slider-carousel/Example/Slid
 
 ## Table of contents
 
-## **Introduction**
->Take your website to the next level with ReuseSliderCarousel. Effortlessly create stunning image carousels and captivating slideshows. Customize slide intervals, enable looping, and add intuitive button controls. Engage your visitors with seamless transitions and eye-catching animations. Showcase your content in style and leave a lasting impression.
+## Introduction
+***Take your website to the next level with ReuseSliderCarousel. Effortlessly create stunning image carousels and captivating slideshows. Customize slide intervals, enable looping, and add intuitive button controls. Engage your visitors with seamless transitions and eye-catching animations. Showcase your content in style and leave a lasting impression.***
 
 ## ReuseSliderCarousel Component Docs
 The `ReuseSliderCarousel` component is a reusable carousel component that displays a collection of slides. It provides functionality for `automatic slide transitions`, `navigation buttons`, and `customizable styles`.
@@ -24,21 +24,21 @@ The `ReuseSliderCarousel` component is a reusable carousel component that displa
 - `slides` (React.ReactNode[]): An array of ReactNode elements representing the slides to be displayed.
 - `loop` (boolean): A boolean value indicating whether the carousel should loop back to the first slide after reaching the last slide.
 - `wrapperClasses` (string): Additional CSS classes to be applied to the wrapper container element.
-- `sliderContainerClasses` (string): Additional CSS classes to be applied to the slider container element.
 - `enableButtons` (boolean): A boolean value indicating whether navigation buttons should be displayed.
-- `prefixButton` (React.ReactNode): Custom ReactNode element to be used as the prefix button. Defaults to a left arrow icon.
-- `suffixButton` (React.ReactNode): Custom ReactNode element to be used as the suffix button. Defaults to a right arrow icon.
-- `buttonClasses` (string): Additional CSS classes to be applied to the navigation buttons.
+- `previousButton` (React.ReactNode): Custom ReactNode element to be used as the previous button to back on the previous slide.
+- `nextButton` (React.ReactNode): Custom ReactNode element to be used as the next button to go to the next slide.
 - `animationStyle` (string): Determines the animation style of the slider. Set this prop to 'continue' to enable continuous looping with slide chaining. When set to 'continue', the slider will seamlessly transition from the last slide to the first slide, creating a continuous loop effect.
+- `sliderContainerClasses` (string): This custom **class**, "slide-right-to-left", is specifically created for animation purposes.
+You have the flexibility to create personalized animations by designing your own custom animations. Simply replace the default class name 'slide-right-to-left' with your own animation class name, allowing you to achieve your desired animation effects.
 
 ## Examples
-### **Slider without button**
+### Slider without button
 <SimpleSlider />
 
 ```js path=../../components/slider-carousel/Example/SimpleSlider name=SimpleSlider
 ```
 
-### **Slider With Buttons**
+### Slider With Buttons
 
 - If the `enableButtons` prop is set to `true`, the ReuseSliderCarousel component will display next and previous buttons instead of relying on the container click event. The container click event handling code can be removed in this case.
 
@@ -47,7 +47,7 @@ The `ReuseSliderCarousel` component is a reusable carousel component that displa
 ```js path=../../components/slider-carousel/Example/SliderWithButton name=SliderWithButton
 ```
 
-### **Slider With LinearSlideChain**
+### Slider With LinearSlideChain
 
 <SliderWithLinearSlide />
 

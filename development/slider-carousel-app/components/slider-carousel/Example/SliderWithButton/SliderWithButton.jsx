@@ -63,7 +63,7 @@ const SliderWithButton = () => {
         slides={slidesArray}
         loop={true}
         enableButtons={true}
-        sliderContainerClasses="slide-right-to-left" // This custom class, "slide-right-to-left", is specifically created for animation purposes. You can create your own custom class for animation and replace the class name "slide-right-to-left" with your desired class name.
+        sliderContainerClasses="slide-right-to-left"
       />
     </div>
   );

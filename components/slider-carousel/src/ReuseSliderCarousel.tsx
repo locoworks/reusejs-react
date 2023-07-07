@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, CSSProperties } from "react";
 import { useSlider } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
 
@@ -6,12 +6,11 @@ interface ReuseSliderCarouselInterface {
   slideInterval: number;
   slides: React.ReactNode[];
   loop: boolean;
-  wrapperClasses?: string;
-  sliderContainerClasses?: string;
+  wrapperClasses?: string | CSSProperties;
+  sliderContainerClasses?: string | CSSProperties;
   enableButtons?: boolean;
-  prefixButton?: React.ReactNode;
-  suffixButton?: React.ReactNode;
-  buttonClasses?: string;
+  previousButton?: React.ReactNode;
+  nextButton?: React.ReactNode;
   animationStyle?: string;
 }
 
@@ -22,9 +21,8 @@ const ReuseSliderCarousel = ({
   wrapperClasses,
   sliderContainerClasses,
   enableButtons = false,
-  prefixButton,
-  suffixButton,
-  buttonClasses,
+  previousButton,
+  nextButton,
   animationStyle,
 }: ReuseSliderCarouselInterface) => {
   const {
@@ -68,24 +66,28 @@ const ReuseSliderCarousel = ({
   const defaultButtonClasses =
     "flex h-10 w-10 rounded-full text-center mx-6 bg-white items-center justify-center cursor-pointer";
 
-  const finalWrapperClasses = twMerge(defaultWrapperClasses, wrapperClasses);
-  const finalSliderContainerClasses = twMerge(
-    defaultSliderContainerClasses,
-    sliderContainerClasses
+  const defaultPreviousButton = (
+    <>
+      {previousButton ? (
+        previousButton
+      ) : (
+        <div className={defaultButtonClasses} onClick={moveToPreviousSlide}>
+          <span>&#8810;</span>
+        </div>
+      )}
+    </>
   );
 
-  const finalButtonClasses = twMerge(defaultButtonClasses, buttonClasses);
-
-  const previousButton = (
-    <div className={finalButtonClasses} onClick={moveToPreviousSlide}>
-      {prefixButton ? prefixButton : <span>&#8810;</span>}
-    </div>
-  );
-
-  const nextButton = (
-    <div className={finalButtonClasses} onClick={moveToNextSlide}>
-      {suffixButton ? suffixButton : <span>&#8811;</span>}
-    </div>
+  const defaultNextButton = (
+    <>
+      {nextButton ? (
+        nextButton
+      ) : (
+        <div className={defaultButtonClasses} onClick={moveToPreviousSlide}>
+          <span>&#8811;</span>
+        </div>
+      )}
+    </>
   );
 
   const resumeSlides = () => {
@@ -122,7 +124,12 @@ const ReuseSliderCarousel = ({
     <>
       {animationStyle === "continue" ? (
         <div
-          className={finalWrapperClasses}
+          className={
+            typeof wrapperClasses === "string"
+              ? twMerge(defaultWrapperClasses, wrapperClasses)
+              : ""
+          }
+          style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
           onClick={HandleClickEvent}
           onMouseEnter={pauseSlider}
           onMouseLeave={moveSlider}
@@ -145,18 +152,36 @@ const ReuseSliderCarousel = ({
         </div>
       ) : (
         <div
-          className={finalWrapperClasses}
+          className={
+            typeof wrapperClasses === "string"
+              ? twMerge(defaultWrapperClasses, wrapperClasses)
+              : ""
+          }
+          style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
           onClick={HandleClickEvent}
           onMouseEnter={pauseSlider}
           onMouseLeave={moveSlider}
         >
           {enableButtons && (
             <div className="absolute flex w-full justify-between px-6 h-fit items-center z-50">
-              {previousButton}
-              {nextButton}
+              {defaultPreviousButton}
+              {defaultNextButton}
             </div>
           )}
-          <div className={finalSliderContainerClasses}>{currentSlide}</div>
+          <div
+            className={
+              typeof sliderContainerClasses === "string"
+                ? twMerge(defaultSliderContainerClasses, sliderContainerClasses)
+                : ""
+            }
+            style={
+              typeof sliderContainerClasses === "object"
+                ? sliderContainerClasses
+                : {}
+            }
+          >
+            {currentSlide}
+          </div>
         </div>
       )}
     </>
