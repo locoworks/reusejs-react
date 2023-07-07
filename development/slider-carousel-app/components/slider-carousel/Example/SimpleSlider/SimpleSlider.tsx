@@ -1,7 +1,5 @@
 import React from "react";
-// Import New Component created here
 import { ReuseSliderCarousel } from "@locoworks/reusejs-react-slider-carousel";
-
 interface ListInterface {
   heading: string;
   phrase: string;

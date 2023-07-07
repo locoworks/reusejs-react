@@ -127,7 +127,7 @@ const ReuseSliderCarousel = ({
           className={
             typeof wrapperClasses === "string"
               ? twMerge(defaultWrapperClasses, wrapperClasses)
-              : ""
+              : defaultWrapperClasses
           }
           style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
           onClick={HandleClickEvent}
@@ -155,7 +155,7 @@ const ReuseSliderCarousel = ({
           className={
             typeof wrapperClasses === "string"
               ? twMerge(defaultWrapperClasses, wrapperClasses)
-              : ""
+              : defaultWrapperClasses
           }
           style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
           onClick={HandleClickEvent}
@@ -172,7 +172,7 @@ const ReuseSliderCarousel = ({
             className={
               typeof sliderContainerClasses === "string"
                 ? twMerge(defaultSliderContainerClasses, sliderContainerClasses)
-                : ""
+                : defaultSliderContainerClasses
             }
             style={
               typeof sliderContainerClasses === "object"
