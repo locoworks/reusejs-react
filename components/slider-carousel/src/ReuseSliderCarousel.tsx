@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect, CSSProperties } from "react";
 import { useSlider } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
-import HeadlessSliderCarousel from "./HeadlessSliderCarousel";
-
 interface ReuseSliderCarouselInterface {
   slideInterval: number;
   slides: React.ReactNode[];
@@ -92,24 +90,6 @@ const ReuseSliderCarousel = ({
     );
   });
 
-  // <div
-  //         className={
-  //           typeof wrapperClasses === "string"
-  //             ? twMerge(defaultWrapperClasses, wrapperClasses)
-  //             : defaultWrapperClasses
-  //         }
-  //         style={typeof wrapperClasses === "object" ? wrapperClasses : {}}
-  //         onClick={HandleClickEvent}
-  //         onMouseEnter={pauseSlider}
-  //         onMouseLeave={moveSlider}
-  //       >
-  //         <HeadlessSliderCarousel
-  //           slides={newSlides}
-  //           dependency={currentSlideIndex}
-  //           className="flex h-full w-full items-center align-center  overflow-hidden text-center"
-  //         />
-  //       </div>
-
   return (
     <div
       className={
@@ -121,7 +101,13 @@ const ReuseSliderCarousel = ({
       onClick={HandleClickEvent}
       onMouseEnter={pauseSlider}
       onMouseLeave={moveSlider}
+      onTouchStart={pauseSlider}
+      onTouchEnd={moveSlider}
+      onTouchCancel={moveSlider}
     >
+      {newSlides.map((element: React.ReactNode, index: number) => {
+        return "";
+      })}
       {enableButtons && (
         <div className="absolute flex w-full justify-between px-6 h-fit items-center z-50">
           {defaultPreviousButton}

@@ -6,6 +6,7 @@ author: "Md Amir Sohail"
 import SliderWithButton from "../../components/slider-carousel/Example/SliderWithButton/SliderWithButton.tsx"
 import SimpleSlider from "../../components/slider-carousel/Example/SimpleSlider/SimpleSlider.tsx"
 import HeadlessSlider from "../../components/slider-carousel/Example/HeadlessSliderExample/HeadlessSlider.tsx"
+import SliderWithProgress from "../../components/slider-carousel/Example/SliderWithProgress/SliderWithProgress.tsx"
 
 ## Table of contents
 
@@ -74,6 +75,44 @@ You have the flexibility to create personalized animations by designing your own
 <HeadlessSlider />
 
 ```js path=../../components/slider-carousel/Example/HeadlessSliderExample name=HeadlessSlider
+```
+
+## Slider Component with Progress
+The `Slider` component is a customizable slider component that displays a list of statuses or slides. It supports automatic scrolling, navigation buttons, progress indicators, and various customization options.
+
+**Props :**
+
+The `Slider` component accepts the following props:
+
+- `slideInterval` (optional, default: 2000): Specifies the interval (in milliseconds) between automatic slide changes.
+
+- `statusArray`: An array of React nodes representing the statuses or slides to be displayed in the slider.
+
+- `progressStyle` (optional): The style of the progress indicator. It can be a string representing a CSS class or an object defining inline CSS properties.
+
+- `progressContainerStyles` (optional): The styles for the container that holds the progress indicators. It can be a string representing a CSS class or an object defining inline CSS properties.
+
+- `SliderContainerStyles` (optional): The styles for the main container of the slider. It can be a string representing a CSS class or an object defining inline CSS properties.
+
+- `sliderWrapperClasses` (optional): Additional CSS classes to be applied to the outer wrapper div of the slider.
+
+- `progressPosition` (optional): The position of the progress indicators. It can be a string representing a CSS class or an object defining inline CSS properties.
+
+- `footer` (optional): React node representing the content to be displayed below each slide.
+
+- `loop` (optional, default: false): Determines whether the slider should loop back to the beginning when reaching the last slide.
+
+- `enableButton` (optional, default: false): Determines whether navigation buttons should be enabled.
+
+- `nextButton` (optional): React node representing the content of the next button. It will be displayed on the right side of the slider.
+
+- `prevButton` (optional): React node representing the content of the previous button. It will be displayed on the left side of the slider.
+
+## Example Usage Slider with Progress
+
+<SliderWithProgress />
+
+```js path=../../components/slider-carousel/Example/SliderWithProgress name=SliderWithProgress
 ```
 
 export default ({ children }) => {
