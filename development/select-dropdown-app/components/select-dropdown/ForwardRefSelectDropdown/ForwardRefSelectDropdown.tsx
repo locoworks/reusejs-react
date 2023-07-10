@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, Ref, RefObject } from "react";
 import { ReuseSelectDropdown } from "@locoworks/reusejs-react-select-dropdown";
 import { HeadlessButton } from "@locoworks/reusejs-react-button";
 const ForwardRefInputGroup = () => {
-    const selectRef = useRef<HTMLDivElement>(null); 
+  const selectRef: any = useRef<Ref<HTMLInputElement> | undefined>(null);
+  useEffect(() => {
+    if (selectRef.current) {
+      const current = selectRef.current;
+      const inputElement = current.childNodes[0]
+        .childNodes[0] as HTMLInputElement;
+      inputElement.style.border = "solid blue 3px";
+    }
+  }, []);
 
-    useEffect(()=>{
-
-        if (selectRef.current) {
-                const inputElement: HTMLInputElement | null =
-          selectRef.current.childNodes[0]?.childNodes[0] as HTMLInputElement;
-          inputElement.style.border = "solid blue 3px";
-      }
-    },[])
-    
   const options = [
     { label: "One", value: "1" },
     { label: "Two", value: "2" },
@@ -126,7 +125,7 @@ const ForwardRefInputGroup = () => {
         Switch
       </button>
       <ReuseSelectDropdown
-      ref={selectRef}
+        ref={selectRef}
         options={optionsChanged}
         valueKey={"id"}
         displayKey={"fname"}

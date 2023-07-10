@@ -8,7 +8,7 @@ import SiteWrapper from "../../components/support/SiteWrapper.tsx"
 import toc from "../../public/select-dropdown-toc.json" 
 import HeadlessSelectSample from "../../components/select-dropdown/HeadlessSelectSample/HeadlessSelectSample.tsx"
 import ReuseSelect from "../../components/select-dropdown/ReuseSelect/ReuseSelect.tsx"
-
+import ForwardRefSelectDropdown from "../../components/select-dropdown/ForwardRefSelectDropdown/ForwardRefSelectDropdown.tsx"
 
 
 ## Table of contents
@@ -202,6 +202,12 @@ This is a basic usage example of the `ReuseSelectDropDown` component. You can cu
 ```
 
 
+### ForwardRefSelectDropdown
+
+<ForwardRefSelectDropdown/>
+
+```js path=../../components/select-dropdown/ForwardRefSelectDropdown name=ForwardRefSelectDropdown
+```
 
 export default ({ children }) => {
   return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
