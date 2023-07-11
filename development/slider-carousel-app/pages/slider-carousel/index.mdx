@@ -16,7 +16,7 @@ import SliderWithProgress from "../../components/slider-carousel/Example/SliderW
 ## HeadlessSliderCarousel Component Documentation
 The HeadlessSliderCarousel component is a customizable carousel/slider component for displaying a set of slides. It provides automatic scrolling functionality and is designed to be headless, meaning it handles the core functionality of the slider while allowing you to control the presentation and styling.
 ## HeadlessSliderCarousel props
-- **slides** (required) :  An array of ReactNode elements representing the individual slides to be displayed in the carousel.
+- **slides** (required) :  An array of React elements representing the individual slides to be displayed in the carousel.
 - **dependency** (required) : A dependency value that triggers the carousel to resume scrolling when it changes. This can be useful when you want to update the carousel based on external changes, such as data updates.
 
 **Node :**
@@ -44,12 +44,12 @@ The `ReuseSliderCarousel` component is a reusable carousel component that displa
 
 ## Props
 - `slideInterval` (number): The interval (in milliseconds) between slide transitions.
-- `slides` (React.ReactNode[]): An array of ReactNode elements representing the slides to be displayed.
+- `slides` (React.ReactNode[]): An array of Reactelements representing the slides to be displayed.
 - `loop` (boolean): A boolean value indicating whether the carousel should loop back to the first slide after reaching the last slide.
 - `wrapperClasses` (string): Additional CSS classes to be applied to the wrapper container element.
 - `enableButtons` (boolean): A boolean value indicating whether navigation buttons should be displayed.
-- `previousButton` (React.ReactNode): Custom ReactNode element to be used as the previous button to back on the previous slide.
-- `nextButton` (React.ReactNode): Custom ReactNode element to be used as the next button to go to the next slide.
+- `previousButton` (React.ReactNode): Custom Reactelement to be used as the previous button to back on the previous slide.
+- `nextButton` (React.ReactNode): Custom Reactelement to be used as the next button to go to the next slide.
 - `animationStyle` (string): Determines the animation style of the slider. Set this prop to 'continue' to enable continuous looping with slide chaining. When set to 'continue', the slider will seamlessly transition from the last slide to the first slide, creating a continuous loop effect.
 - `sliderContainerClasses` (string): This custom **class**, "slide-right-to-left", is specifically created for animation purposes.
 You have the flexibility to create personalized animations by designing your own custom animations. Simply replace the default class name 'slide-right-to-left' with your own animation class name, allowing you to achieve your desired animation effects.
@@ -86,7 +86,7 @@ The `Slider` component accepts the following props:
 
 - `slideInterval` (optional, default: 2000): Specifies the interval (in milliseconds) between automatic slide changes.
 
-- `statusArray`: An array of React nodes representing the statuses or slides to be displayed in the slider.
+- `statusArray`: An array of React elements representing the statuses or slides to be displayed in the slider.
 
 - `progressStyle` (optional): The style of the progress indicator. It can be a string representing a CSS class or an object defining inline CSS properties.
 
@@ -98,15 +98,15 @@ The `Slider` component accepts the following props:
 
 - `progressPosition` (optional): The position of the progress indicators. It can be a string representing a CSS class or an object defining inline CSS properties.
 
-- `footer` (optional): React node representing the content to be displayed below each slide.
+- `footer` (optional): React element representing the content to be displayed below each slide.
 
 - `loop` (optional, default: false): Determines whether the slider should loop back to the beginning when reaching the last slide.
 
 - `enableButton` (optional, default: false): Determines whether navigation buttons should be enabled.
 
-- `nextButton` (optional): React node representing the content of the next button. It will be displayed on the right side of the slider.
+- `nextButton` (optional): React element representing the content of the next button. It will be displayed on the right side of the slider.
 
-- `prevButton` (optional): React node representing the content of the previous button. It will be displayed on the left side of the slider.
+- `prevButton` (optional): React element representing the content of the previous button. It will be displayed on the left side of the slider.
 
 ## Example Usage Slider with Progress
 
