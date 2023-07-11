@@ -143,7 +143,6 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
           />
           <Link
             href={"https://github.com/locoworks/reusejs-react"}
-            as="a"
             target="_blank"
           >
             <GitHubIcon />
