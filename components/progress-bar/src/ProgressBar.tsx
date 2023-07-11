@@ -4,13 +4,13 @@ import { twMerge } from "tailwind-merge";
 import { type } from "os";
 
 interface ProgressBarInterface {
-  progressClasses?: string | CSSProperties;
-  progressContainerClasses?: string | CSSProperties;
   progressInterval: number;
-  running: boolean;
   defaultProgress: number;
+  running: boolean;
   totalFileSize?: number;
   processedFileSize?: number;
+  progressClasses?: string | CSSProperties;
+  progressContainerClasses?: string | CSSProperties;
   progressText?: string;
   progressTextClasses?: string | CSSProperties;
   radius?: number;
@@ -52,8 +52,8 @@ const ProgressBar = ({
   });
 
   useEffect(() => {
-    const circumference = 2 * Math.PI * radius; // Calculate the circumference of the circle
-    const offset = circumference - (progress / 100) * circumference; // Calculate the offset for the border
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (progress / 100) * circumference;
 
     setProgressStyle({
       strokeDasharray: `${circumference} ${circumference}`,

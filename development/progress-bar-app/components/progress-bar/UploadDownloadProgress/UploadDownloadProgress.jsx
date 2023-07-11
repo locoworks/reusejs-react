@@ -23,7 +23,7 @@ const UploadDownloadProgress = () => {
   return (
     <div className="flex items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
       <div className="w-full h-72 flex flex-col justify-center items-center mx-80">
-      <ProgressBar
+        <ProgressBar
           progressInterval={2000}
           running={running}
           defaultProgress={0}

@@ -35,7 +35,7 @@ const CircularProgress = () => {
         className="bg-blue-500 text-white font-bold text-xl text-center mt-20 px-6 flex"
         onClick={() => setRunning(!running)}
       >
-        Play & Pause
+        {running ? "Pause" : "Play"}
       </ReuseButton>
     </div>
   );
