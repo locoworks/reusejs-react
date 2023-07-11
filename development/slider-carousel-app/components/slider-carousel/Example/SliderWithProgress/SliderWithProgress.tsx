@@ -1,6 +1,5 @@
+import { ReuseSlider } from "@locoworks/reusejs-react-slider-carousel";
 import React from "react";
-import { Slider } from "@locoworks/reusejs-react-slider-carousel";
-
 interface ListInterface {
   heading: string;
   phrase: string;
@@ -63,7 +62,7 @@ const slidesArray: React.ReactNode[] = List.map(
 const SliderWithProgress = () => {
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50 px-6">
-      <Slider
+      <ReuseSlider
         slideInterval={2000}
         statusArray={slidesArray}
         loop={true}

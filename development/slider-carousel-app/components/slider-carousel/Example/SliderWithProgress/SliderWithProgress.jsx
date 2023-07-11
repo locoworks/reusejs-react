@@ -1,5 +1,5 @@
 import React from "react";
-import { Slider } from "@locoworks/reusejs-react-slider-carousel";
+import { ReuseSlider } from "@locoworks/reusejs-react-slider-carousel";
 
 const List = [
   {
@@ -56,9 +56,9 @@ const slidesArray = List.map((element, index) => {
 const SliderWithProgress = () => {
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50 px-6">
-      <Slider
+      <ReuseSlider
         slideInterval={2000}
-        statusArray={slides}
+        statusArray={slidesArray}
         loop={true}
         enableButton={true}
         progressStyle="flex h-full rounded-full bg-green-500"
