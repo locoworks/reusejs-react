@@ -31,7 +31,7 @@ const prevBtn = () => {
   );
 };
 
-const Slider = ({
+const ReuseSlider = ({
   slideInterval = 2000,
   statusArray,
   progressStyle,
@@ -242,4 +242,4 @@ const Slider = ({
   );
 };
 
-export default Slider;
+export default ReuseSlider;
