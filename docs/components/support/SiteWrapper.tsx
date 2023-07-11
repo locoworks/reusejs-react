@@ -2,6 +2,8 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import GitHubIcon from "./GitHubIcon";
 import Link from "next/link";
+import { DocSearch } from "@docsearch/react";
+import "@docsearch/css";
 
 interface TocNode {
   depth: number;
@@ -44,6 +46,7 @@ const renderToC = (toc: TocNode[]): any => {
         case 1:
           listElement = (
             <ListElement
+              key={node.depth + node.value}
               key_value={node.depth + node.value}
               margin=""
               value={node.value}
@@ -53,6 +56,7 @@ const renderToC = (toc: TocNode[]): any => {
         case 2:
           listElement = (
             <ListElement
+              key={node.depth + node.value}
               key_value={node.depth + node.value}
               margin={"ml-2"}
               value={node.value}
@@ -62,6 +66,7 @@ const renderToC = (toc: TocNode[]): any => {
         case 3:
           listElement = (
             <ListElement
+              key={node.depth + node.value}
               key_value={node.depth + node.value}
               margin={"ml-4"}
               value={node.value}
@@ -71,6 +76,7 @@ const renderToC = (toc: TocNode[]): any => {
         case 4:
           listElement = (
             <ListElement
+              key={node.depth + node.value}
               key_value={node.depth + node.value}
               margin="ml-6"
               value={node.value}
@@ -80,6 +86,7 @@ const renderToC = (toc: TocNode[]): any => {
         case 5:
           listElement = (
             <ListElement
+              key={node.depth + node.value}
               key_value={node.depth + node.value}
               margin="ml-8"
               value={node.value}
@@ -89,6 +96,7 @@ const renderToC = (toc: TocNode[]): any => {
         case 6:
           listElement = (
             <ListElement
+              key={node.depth + node.value}
               key_value={node.depth + node.value}
               margin="ml-10"
               value={node.value}
@@ -98,6 +106,7 @@ const renderToC = (toc: TocNode[]): any => {
         default:
           listElement = (
             <ListElement
+              key={node.depth + node.value}
               key_value={node.depth + node.value}
               margin=""
               value={node.value}
@@ -127,6 +136,11 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
           </Link>
         </label>
         <div className="flex gap-x-10">
+          <DocSearch
+            appId="TNDA5WN0U4"
+            indexName="locoworks"
+            apiKey="67c042b54d4806a1428f1ab491af1cd7"
+          />
           <Link
             href={"https://github.com/locoworks/reusejs-react"}
             as="a"

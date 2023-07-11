@@ -62,7 +62,7 @@ const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
                 className=" hover:bg-[#5501BF36] mb-2"
               >
                 <h2 className="ml-6 w-fit cursor-pointer">
-                  <Link href={"/reusejs-react/" + route}>{val}</Link>
+                  <Link href={"/reusejs-react" + route}>{val}</Link>
                 </h2>
               </motion.div>
             );
