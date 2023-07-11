@@ -1,6 +1,5 @@
 import React from "react";
 import Sidebar from "./Sidebar";
-import { useRouter } from "next/router";
 import GitHubIcon from "./GitHubIcon";
 import Link from "next/link";
 
@@ -119,18 +118,20 @@ const renderToC = (toc: TocNode[]): any => {
 };
 
 export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
-  const router = useRouter();
   return (
     <main className="h-screen">
       <div className="z-10 h-[6%] flex items-center py-4 pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
-        <label
-          className="text-lg text-[#5501BF] cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <span className="font-bold">LOCO</span>WORKS
+        <label className="text-lg text-[#5501BF] cursor-pointer">
+          <Link href={"/"}>
+            <span className="font-bold">LOCO</span>WORKS
+          </Link>
         </label>
         <div className="flex gap-x-10">
-          <Link href={"https://github.com/locoworks/reusejs-react"} as="a">
+          <Link
+            href={"https://github.com/locoworks/reusejs-react"}
+            as="a"
+            target="_blank"
+          >
             <GitHubIcon />
           </Link>
         </div>
