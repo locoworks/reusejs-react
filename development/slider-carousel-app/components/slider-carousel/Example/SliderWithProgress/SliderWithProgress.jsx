@@ -58,7 +58,7 @@ const SliderWithProgress = () => {
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50 px-6">
       <Slider
         slideInterval={2000}
-        statusArray={slidesArray}
+        statusArray={slides}
         loop={true}
         enableButton={true}
         progressStyle="flex h-full rounded-full bg-green-500"
