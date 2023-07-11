@@ -82,14 +82,6 @@ const ReuseSliderCarousel = ({
     </>
   );
 
-  const newSlides = slides.map((slide: any, index: number) => {
-    return (
-      <div className="w-full h-full flex bg-green-300 shrink-0" key={index}>
-        {slide}
-      </div>
-    );
-  });
-
   return (
     <div
       className={
@@ -105,9 +97,6 @@ const ReuseSliderCarousel = ({
       onTouchEnd={moveSlider}
       onTouchCancel={moveSlider}
     >
-      {newSlides.map((element: React.ReactNode, index: number) => {
-        return "";
-      })}
       {enableButtons && (
         <div className="absolute flex w-full justify-between px-6 h-fit items-center z-50">
           {defaultPreviousButton}

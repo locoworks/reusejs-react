@@ -48,16 +48,17 @@ const Slide = ({ heading, phrase }: ListInterface) => {
     </div>
   );
 };
-const slidesArray: React.ReactNode[] = [];
-List.forEach((element: any, index: number) => [
-  slidesArray.push(
-    <Slide
-      heading={element.heading}
-      phrase={element.phrase}
-      key={"slide" + index}
-    />
-  ),
-]);
+const slidesArray: React.ReactNode[] = List.map(
+  (element: ListInterface, index: number) => {
+    return (
+      <Slide
+        heading={element.heading}
+        phrase={element.phrase}
+        key={"Slide" + index}
+      />
+    );
+  }
+);
 
 const SliderWithButton = () => {
   return (
