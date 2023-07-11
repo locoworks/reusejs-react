@@ -6,9 +6,10 @@ import CodeIcon from "./icons/CodeIcon";
 export interface CodePreviewProps {
   js: string;
   ts: string;
+  customWrapper?: any;
 }
 
-const CodePreview: React.FC<CodePreviewProps> = ({ js, ts }) => {
+const CodePreview: React.FC<CodePreviewProps> = ({ js, ts, customWrapper }) => {
   const [shownCode, setShownCode] = useState("TS");
   const [showCopied, setShowCopied] = useState(false);
 
@@ -67,10 +68,17 @@ const CodePreview: React.FC<CodePreviewProps> = ({ js, ts }) => {
         </div>
       </div>
 
-      <CodeWrapper
-        language={shownCode === "JS" ? "language-js" : "language-ts"}
-        code={shownCode === "JS" ? js : ts}
-      />
+      {customWrapper ? (
+        customWrapper(
+          shownCode === "JS" ? "javascript" : "typescript",
+          shownCode === "JS" ? js : ts
+        )
+      ) : (
+        <CodeWrapper
+          language={shownCode === "JS" ? "language-js" : "language-ts"}
+          code={shownCode === "JS" ? js : ts}
+        />
+      )}
     </div>
   );
 };

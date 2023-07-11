@@ -37,7 +37,7 @@ const nextConfig = {
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
   output: "export",
-  // transpilePackages: ["react-syntax-highlighter"],
+  transpilePackages: ["react-syntax-highlighter"],
   // assetPrefix: "https://cdn.tailwindcss.com",
   webpack: (config) => {
     config.module.rules.push({
