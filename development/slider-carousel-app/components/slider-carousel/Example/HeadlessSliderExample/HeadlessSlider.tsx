@@ -52,24 +52,19 @@ const Slide = ({ heading, phrase }: ListInterface) => {
   );
 };
 
-const slidesArray: React.ReactNode[] = [];
-List.forEach((element: any, index: number) => [
-  slidesArray.push(
-    <Slide
-      heading={element.heading}
-      phrase={element.phrase}
-      key={"Slide" + index}
-    />
-  ),
-]);
-
-const newSlides = slidesArray.map((slide: any, index: number) => {
-  return (
-    <div className="w-full h-full flex bg-green-300 shrink-0" key={index}>
-      {slide}
-    </div>
-  );
-});
+const slidesArray: React.ReactNode[] = List.map(
+  (element: ListInterface, index: number) => {
+    return (
+      <div className="w-full h-full flex bg-green-300 shrink-0" key={index}>
+        <Slide
+          heading={element.heading}
+          phrase={element.phrase}
+          key={"Slide" + index}
+        />
+      </div>
+    );
+  }
+);
 
 const HeadlessSlider = () => {
   const { currentSlideIndex } = useSlider({
@@ -78,13 +73,13 @@ const HeadlessSlider = () => {
     loop: true,
   });
   return (
-    <div>
+    <>
       <HeadlessSliderCarousel
-        slides={newSlides}
+        slides={slidesArray}
         dependency={currentSlideIndex}
         className="flex h-full w-full items-center align-center  overflow-hidden text-center"
       />
-    </div>
+    </>
   );
 };
 

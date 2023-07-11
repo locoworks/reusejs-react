@@ -43,16 +43,15 @@ const Slide = ({ heading, phrase }) => {
     </div>
   );
 };
-const slidesArray = [];
-List.forEach((element, index) => [
-  slidesArray.push(
+const slidesArray = List.map((element, index) => {
+  return (
     <Slide
       heading={element.heading}
       phrase={element.phrase}
       key={"slide" + index}
     />
-  ),
-]);
+  );
+});
 
 const SliderWithButton = () => {
   return (
