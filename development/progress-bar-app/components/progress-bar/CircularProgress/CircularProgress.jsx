@@ -7,29 +7,33 @@ const CircularProgress = () => {
 
   return (
     <div className="flex items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-      <ProgressBar
+      <CircularProgressBar
         progressInterval={2000}
         running={running}
         defaultProgress={0}
-        enableCircularProgress={true}
+        progressText={(progress) => `Progress One ${progress} %`}
+        progressTextClasses={"text-center font-extrabold"}
       />
-      <ProgressBar
+      <CircularProgressBar
         progressInterval={2000}
         running={running}
         defaultProgress={0}
-        enableCircularProgress={true}
         radius={55}
-        circleRadiousInPercentage="25%"
+        circleRadiusInPercentage="25%"
         totalFileSize={5000}
         processedFileSize={processedFile}
+        progressColour="stroke-yellow-500"
+        progressTextClasses={"text-center font-bold absolute"}
       />
-      <ProgressBar
+      <CircularProgressBar
         progressInterval={4000}
         running={running}
         defaultProgress={0}
-        enableCircularProgress={true}
         radius={75}
-        circleRadiousInPercentage="35%"
+        progressColour="stroke-blue-500"
+        circleRadiusInPercentage="35%"
+        progressText={(progress) => `Progress Three ${progress} %`}
+        progressTextClasses={"text-center text-2xl"}
       />
       <ReuseButton
         className="bg-blue-500 text-white font-bold text-xl text-center mt-20 px-6 flex"

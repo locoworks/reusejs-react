@@ -31,7 +31,7 @@ const UploadDownloadProgress = () => {
           progressClasses="bg-green-600 h-full"
           processedFileSize={processedFile}
           totalFileSize={5000}
-          progressText="Uploaded"
+          progressText={(progress) => `Uploaded ${progress}%`}
           progressTextClasses="text-xl font-normal justify-self-center"
         />
         <ProgressBar
@@ -42,7 +42,7 @@ const UploadDownloadProgress = () => {
           progressClasses="bg-blue-600 h-full"
           processedFileSize={processedFile}
           totalFileSize={5000}
-          progressText="Downloaded"
+          progressText={(progress) => `Uploaded ${progress}%`}
           progressTextClasses="text-xl font-normal justify-self-center"
         />
         <ReuseButton

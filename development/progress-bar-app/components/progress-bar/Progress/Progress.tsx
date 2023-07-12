@@ -13,6 +13,7 @@ const Progress = () => {
           defaultProgress={0}
           progressContainerClasses="bg-gray-300 h-6 flex rounded-none"
           progressClasses="h-full rounded-none"
+          progressText={(progress: number) => `progress Value ${progress} %`}
         />
 
         <ReuseButton
