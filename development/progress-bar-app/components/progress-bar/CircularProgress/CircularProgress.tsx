@@ -49,7 +49,13 @@ const CircularProgress = () => {
           radius={75}
           progressColour="stroke-blue-500"
           circleRadiusInPercentage="35%"
-          progressText={(progress: number) => `Progress Three ${progress} %`}
+          progressText={(progress: number) => {
+            return progress > 0 && progress <= 33
+              ? "Low Risk"
+              : progress > 33 && progress <= 66
+              ? "Medium Risk"
+              : "High Risk";
+          }}
           progressTextClasses={"text-center text-2xl"}
         />
       </div>
