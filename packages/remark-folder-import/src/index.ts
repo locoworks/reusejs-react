@@ -33,6 +33,15 @@ function extractLines(
   return lines.slice(start - 1, end).join('\n');
 }
 
+const getMeta = (
+  metaValue: string | null | undefined,
+  matchString: string
+): any => {
+  return (metaValue || '')
+    .split(/(?<!\\) /g)
+    .find((meta) => meta.startsWith(matchString));
+};
+
 function codeImport(options: CodeImportOptions = {}) {
   const rootDir = options.rootDir || process.cwd();
 
@@ -43,18 +52,26 @@ function codeImport(options: CodeImportOptions = {}) {
   return function transformer(tree: Root, file: VFile) {
     const codes: [Code, number | null, Parent][] = [];
 
+    //This segment pushes all noes of tree into code array.
     visit(tree, 'code', (node, index, parent) => {
       codes.push([node as Code, index, parent as Parent]);
     });
 
+    // Iterates Over all the code nodes from the tree
     for (const [node] of codes) {
-      const pathMeta = (node.meta || '')
-        .split(/(?<!\\) /g)
-        .find((meta) => meta.startsWith('path='));
-      const nameMeta = (node.meta || '')
-        .split(/(?<!\\) /g)
-        .find((meta) => meta.startsWith('name='));
+      // Both of the below can be extarcted in a seperate function
+      // Get meta values from node decleration in mdx for path pattern
+      // const pathMeta = (node.meta || '')
+      //   .split(/(?<!\\) /g)
+      //   .find((meta) => meta.startsWith('path='));
+      const pathMeta = getMeta(node.meta, 'path=');
+      // Get meta values from node decleration in mdx for path pattern
+      // const nameMeta = (node.meta || '')
+      //   .split(/(?<!\\) /g)
+      //   .find((meta) => meta.startsWith('name='));
+      const nameMeta = getMeta(node.meta, 'name=');
 
+      //Check for presense of values if failed then no need to perform any action on this code node
       if (!pathMeta || !nameMeta) {
         continue;
       }
@@ -67,7 +84,6 @@ function codeImport(options: CodeImportOptions = {}) {
       if (!nameRes || !nameRes.groups || !nameRes.groups.name) {
         throw new Error(`Unable to parse component name ${nameRes}`);
       }
-
       const componentName = nameRes.groups.name;
 
       const res =
@@ -90,7 +106,7 @@ function codeImport(options: CodeImportOptions = {}) {
         .replace(/\\ /g, ' ');
       const folderAbsPath = path.resolve(file.dirname, normalizedFolderPath);
 
-      let AllContent = '[TO-SPLIT]';
+      let newNodeContent = '[TO-SPLIT]';
       const folderFiles = fs.readdirSync(folderAbsPath);
 
       const addToContent = (filePath: string, type: string) => {
@@ -102,9 +118,9 @@ function codeImport(options: CodeImportOptions = {}) {
           toLine,
           options.preserveTrailingNewline
         );
-        AllContent =
-          AllContent +
-          (AllContent === '[TO-SPLIT]'
+        newNodeContent =
+          newNodeContent +
+          (newNodeContent === '[TO-SPLIT]'
             ? `[${type}]\n` + content
             : `\n||||\n[${type}]\n` + content);
       };
@@ -125,7 +141,7 @@ function codeImport(options: CodeImportOptions = {}) {
       }
 
       node.value = extractLines(
-        AllContent,
+        newNodeContent,
         fromLine,
         hasDash,
         toLine,
