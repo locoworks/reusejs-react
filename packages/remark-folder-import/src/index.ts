@@ -36,7 +36,7 @@ function extractLines(
 const getMeta = (
   metaValue: string | null | undefined,
   matchString: string
-): any => {
+): string | undefined => {
   return (metaValue || '')
     .split(/(?<!\\) /g)
     .find((meta) => meta.startsWith(matchString));
@@ -52,26 +52,14 @@ function codeImport(options: CodeImportOptions = {}) {
   return function transformer(tree: Root, file: VFile) {
     const codes: [Code, number | null, Parent][] = [];
 
-    //This segment pushes all noes of tree into code array.
     visit(tree, 'code', (node, index, parent) => {
       codes.push([node as Code, index, parent as Parent]);
     });
 
-    // Iterates Over all the code nodes from the tree
     for (const [node] of codes) {
-      // Both of the below can be extarcted in a seperate function
-      // Get meta values from node decleration in mdx for path pattern
-      // const pathMeta = (node.meta || '')
-      //   .split(/(?<!\\) /g)
-      //   .find((meta) => meta.startsWith('path='));
       const pathMeta = getMeta(node.meta, 'path=');
-      // Get meta values from node decleration in mdx for path pattern
-      // const nameMeta = (node.meta || '')
-      //   .split(/(?<!\\) /g)
-      //   .find((meta) => meta.startsWith('name='));
       const nameMeta = getMeta(node.meta, 'name=');
 
-      //Check for presense of values if failed then no need to perform any action on this code node
       if (!pathMeta || !nameMeta) {
         continue;
       }
