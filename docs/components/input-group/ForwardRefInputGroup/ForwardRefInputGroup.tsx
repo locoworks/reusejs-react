@@ -1,7 +1,6 @@
 import React, { createRef, useRef, useState } from "react";
 import { ReuseInputGroup } from "@locoworks/reusejs-react-input-group";
 import { HeadlessButton } from "@locoworks/reusejs-react-button";
-import { HeadlessInputGroup } from "@locoworks/reusejs-react-input-group";
 
 const Prefix = () => {
   return (
@@ -25,11 +24,9 @@ const Suffix = () => {
 };
 
 const Forwardrefinput = () => {
-  const forwardinputref = useRef(null);
+  const forwardinputRef = useRef<HTMLInputElement | null>(null);
   const handleClick = () => {
-    console.log("i have been clicked");
-    console.log(forwardinputref);
-    // alert(forwardinputRef.current.value);
+    if (forwardinputRef.current) alert(forwardinputRef.current.value);
   };
 
   return (
@@ -41,7 +38,7 @@ const Forwardrefinput = () => {
         helperText="This text is for Helping!!"
         prefix={<Prefix />}
         suffix={<Suffix />}
-        reuseinputref={forwardinputref}
+        reuseinputref={forwardinputRef}
       />
       <div className="flex mt-6 gap-x-10">
         <HeadlessButton

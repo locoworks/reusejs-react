@@ -26,8 +26,6 @@ const Suffix = () => {
 const Forwardrefinput = () => {
   const forwardinputRef = useRef(null);
 
-  console.log(inputRef, "this is the forwardrefinputgruop.jsx");
-
   const handleClick = () => {
     alert(forwardinputRef.current.value);
   };
