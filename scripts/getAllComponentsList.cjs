@@ -1,6 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 
+/**
+ * getComponents
+ *
+ * Fetches the list of components in the specified directory, excluding ignored components.
+ *
+ * @param {string} directory - The directory path where the components are located.
+ * @returns {string[]} - An array containing the names of the components.
+ */
 function getComponents(directory) {
   const COMPONENTIGNOREARRAY = ["code-preview"];
   try {
@@ -25,6 +33,14 @@ function getComponents(directory) {
   }
 }
 
+/**
+ * getHooksList
+ *
+ * Fetches the list of hooks in the specified directory, excluding ignored components.
+ *
+ * @param {string} directory - The directory path where the hooks are located.
+ * @returns {string[]} - An array containing the names of the hooks.
+ */
 function getHooksList(directory) {
   try {
     const files = fs.readdirSync(directory);
@@ -47,13 +63,27 @@ function getHooksList(directory) {
   }
 }
 
+/**
+ * getUtilsList
+ *
+ * Fetches the list of utils in the specified directory, excluding ignored components.
+ *
+ * @param {string} directory - The directory path where the utils are located.
+ * @returns {string[]} - An array containing the names of the utils.
+ */
 function getUtilsList(directory) {
   try {
     const files = fs.readdirSync(directory);
     let utilsList = [];
 
     files.forEach((file) => {
-      const temp = file.replace(".ts", "").split("-").join("");
+      const temp = file
+        .replace(".ts", "")
+        .replace("js", "")
+        .replace(".tsx", "")
+        .replace("jsx", "")
+        .split("-")
+        .join("");
       utilsList.push(temp);
     });
     return utilsList;
@@ -62,6 +92,14 @@ function getUtilsList(directory) {
   }
 }
 
+/**
+ * createJSONList
+ *
+ * Creates a JSON file containing a list of components, hooks, and utils.
+ * The JSON file is structured with "Components", "Hooks", and "Utils" keys,
+ * each containing an array of names corresponding to the components, hooks, and utils.
+ * The JSON file is written to the specified file path "./data/sidemenu_data.json".
+ */
 const createJSONList = () => {
   const data = { Components: [], Hooks: [], Utils: [] };
 
