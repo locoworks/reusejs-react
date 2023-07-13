@@ -41,11 +41,11 @@ const ProgressBar = ({
   return (
     <>
       <div
-        className={` ${
+        className={
           typeof progressContainerClasses === "string"
             ? twMerge(defaultProgressContainerClasses, progressContainerClasses)
             : defaultProgressContainerClasses
-        }`}
+        }
         style={
           typeof progressContainerClasses === "object"
             ? progressContainerClasses
@@ -56,7 +56,7 @@ const ProgressBar = ({
           className={
             typeof progressClasses === "string"
               ? twMerge(defaultProgressClasses, progressClasses)
-              : ""
+              : defaultProgressClasses
           }
           style={
             typeof progressClasses === "object"
@@ -65,7 +65,7 @@ const ProgressBar = ({
           }
         ></div>
       </div>
-      {progressText && progress > 0 && (
+      {progressText && (
         <div
           className={
             typeof progressTextClasses === "string" ? progressTextClasses : ""

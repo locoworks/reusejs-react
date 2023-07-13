@@ -5,7 +5,8 @@ author: "Md Amir Sohail"
 ---
 
 import RoundedProgress  from "../../components/progress-bar/RoundedProgress/RoundedProgress.tsx"
-import UploadDownloadProgress  from "../../components/progress-bar/UploadDownloadProgress/UploadDownloadProgress.tsx"
+import DownloadFile  from "../../components/progress-bar/DownloadFile/DownloadFile.tsx"
+import UploadFile  from "../../components/progress-bar/UploadFile/UploadFile.tsx"
 import Progress  from "../../components/progress-bar/Progress/Progress.tsx"
 import CircularProgress  from "../../components/progress-bar/CircularProgress/CircularProgress.tsx"
 
@@ -48,11 +49,12 @@ The ProgressBar component accepts the following props:
 - **processedFileSize** (optional): The processed file size in bytes. It is used to calculate the progress.
 
 ## Props for CircularProgressBar
-The CircularProgressBar accepts following 4 additional props apart from above:
+The CircularProgressBar accepts following 5 additional props apart from above:
 - **radius** (optional as number): The radius of the circular progress bar (default: 95).
-- **circleRadiusInPercentage** (optional as string): The radius of the circular progress bar in percentage (both radius and `circleRadiusInPercentage` need to be passed together ex: radius={55} , circleRadiusInPercentage="25%").
-- **strokeColour** (optional): Takes CSS Classes for the strock colour and strock width of `CircularProgressBar`(example "bg-gray-500 strock-[10]").
-- **progressColour** (optional): Takes CSS Classes for the Progress of the `CircularProgressBar`(example "bg-red-500 strock-[10]").
+- **circleRadiusInPercentage** (optional): The radius of the circular progress bar in percentage (both radius and `circleRadiusInPercentage` need to be passed together ex: radius={55} , circleRadiusInPercentage="25%").
+- **circleContainerClasses** (optional): This accepts either a string as CSS classes or an object of CSS properties to apply the styles on `ProgressContainer`.
+- **innerCircleClasses** (optional as string): This accepts either a string as CSS classes or an object of CSS properties to apply the styles on `InnerCircle` which is initially grey colour.
+- **outerCircleClasses** (required must pass stroke-color): This accepts either a string as CSS classes or an object of CSS properties to apply the styles on `OuterCircle` which shows Progress as in different colour.
 
 
 ### Note
@@ -75,9 +77,13 @@ The CircularProgressBar accepts following 4 additional props apart from above:
 ```js path=../../components/progress-bar/RoundedProgress name=RoundedProgress
 ```
 
-### ProgressBar without a graphical edge with Upload/Download functionality
-<UploadDownloadProgress />
-```js path=../../components/progress-bar/UploadDownloadProgress name=UploadDownloadProgress
+### ProgressBar without a graphical edge with Download functionality
+<DownloadFile />
+```js path=../../components/progress-bar/DownloadFile name=DownloadFile
+```
+### ProgressBar without a graphical edge with Upload functionality
+<UploadFile />
+```js path=../../components/progress-bar/UploadFile name=UploadFile
 ```
 ### Circular ProgressBar
 <CircularProgress />

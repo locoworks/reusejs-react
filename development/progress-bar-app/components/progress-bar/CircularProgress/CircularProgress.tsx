@@ -30,6 +30,7 @@ const CircularProgress = () => {
           defaultProgress={0}
           progressText={(progress: number) => `Progress One ${progress} %`}
           progressTextClasses={"text-center font-extrabold"}
+          outerCircleClasses={"stroke-green-500"}
         />
         <CircularProgressBar
           progressInterval={2000}
@@ -39,7 +40,7 @@ const CircularProgress = () => {
           circleRadiusInPercentage="25%"
           totalFileSize={5000}
           processedFileSize={processedFile}
-          progressColour="stroke-yellow-500"
+          outerCircleClasses={"stroke-yellow-500"}
           progressTextClasses={"text-center font-bold absolute"}
         />
         <CircularProgressBar
@@ -47,7 +48,7 @@ const CircularProgress = () => {
           running={running}
           defaultProgress={0}
           radius={75}
-          progressColour="stroke-blue-500"
+          outerCircleClasses={"stroke-blue-500"}
           circleRadiusInPercentage="35%"
           progressText={(progress: number) => {
             return progress > 0 && progress <= 33

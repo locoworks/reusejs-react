@@ -2,23 +2,22 @@ import React, { useState, useRef, useEffect } from "react";
 import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
 
-const UploadDownloadProgress = () => {
-  const [running, setRunning] = useState<boolean>(false);
-  const [processedFile, setProcessedFile] = useState<number>(0);
+const UploadFile = () => {
+  const [running, setRunning] = useState(false);
+  const [processedFile, setProcessedFile] = useState(0);
 
-  const processedFileRef = useRef<NodeJS.Timeout | null>(null);
+  const processedFileRef = useRef(null);
   const StartUploadDownload = () => {
-    clearInterval(processedFileRef.current as NodeJS.Timeout);
     processedFileRef.current = setInterval(() => {
       setProcessedFile((previousValue) => {
         return previousValue + 10;
       });
-    }, 10);
+    }, 100);
   };
 
   useEffect(() => {
     if (processedFile === 5000) {
-      clearInterval(processedFileRef.current as NodeJS.Timeout);
+      clearInterval(processedFileRef.current);
     }
   }, [processedFile]);
   return (
@@ -28,36 +27,25 @@ const UploadDownloadProgress = () => {
           progressInterval={2000}
           running={running}
           defaultProgress={0}
-          progressContainerClasses="bg-gray-200 h-6 flex"
-          progressClasses="bg-green-600 h-full"
+          progressContainerClasses="bg-gray-500 h-6 flex"
+          progressClasses="bg-Yellow-600 h-full"
           processedFileSize={processedFile}
           totalFileSize={5000}
-          progressText={(progress: number) => `Downloaded ${progress}%`}
-          progressTextClasses="text-xl font-normal justify-self-center"
-        />
-        <ProgressBar
-          progressInterval={2000}
-          running={running}
-          defaultProgress={0}
-          progressContainerClasses="bg-yellow-100 h-6 flex mt-10"
-          progressClasses="bg-blue-600 h-full"
-          processedFileSize={processedFile}
-          totalFileSize={5000}
-          progressText={(progress: number) => `Uploaded ${progress}%`}
+          progressText={(progress) => `Uploaded ${progress}%`}
           progressTextClasses="text-xl font-normal justify-self-center"
         />
         <ReuseButton
           className="bg-blue-500 text-white font-bold text-2xl text-center mt-20 px-6 flex"
           onClick={() => {
-            setRunning(!running);
+            setRunning(true);
             StartUploadDownload();
           }}
         >
-          Start Download/Upload
+          Start File Upload
         </ReuseButton>
       </div>
     </div>
   );
 };
 
-export default UploadDownloadProgress;
+export default UploadFile;

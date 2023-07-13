@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
 
-const UploadDownloadProgress = () => {
+const DownloadFile = () => {
   const [running, setRunning] = useState(false);
   const [processedFile, setProcessedFile] = useState(0);
 
@@ -34,17 +34,6 @@ const UploadDownloadProgress = () => {
           progressText={(progress) => `Uploaded ${progress}%`}
           progressTextClasses="text-xl font-normal justify-self-center"
         />
-        <ProgressBar
-          progressInterval={2000}
-          running={running}
-          defaultProgress={0}
-          progressContainerClasses="bg-yellow-100 h-6 flex mt-10"
-          progressClasses="bg-blue-600 h-full"
-          processedFileSize={processedFile}
-          totalFileSize={5000}
-          progressText={(progress) => `Uploaded ${progress}%`}
-          progressTextClasses="text-xl font-normal justify-self-center"
-        />
         <ReuseButton
           className="bg-blue-500 text-white font-bold text-2xl text-center mt-20 px-6 flex"
           onClick={() => {
@@ -52,11 +41,11 @@ const UploadDownloadProgress = () => {
             StartUploadDownload();
           }}
         >
-          Start Download/Upload
+          Start File Download
         </ReuseButton>
       </div>
     </div>
   );
 };
 
-export default UploadDownloadProgress;
+export default DownloadFile;

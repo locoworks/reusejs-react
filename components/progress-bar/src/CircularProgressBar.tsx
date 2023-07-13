@@ -2,7 +2,7 @@ import React, { CSSProperties, useEffect, useState } from "react";
 import { useProgress } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
 
-interface ProgressBarInterface {
+interface CircularProgressInterface {
   progressInterval: number;
   defaultProgress: number;
   running: boolean;
@@ -14,8 +14,10 @@ interface ProgressBarInterface {
   progressTextClasses?: string | CSSProperties;
   radius?: number;
   circleRadiusInPercentage?: string;
-  strokeColour?: string;
-  progressColour?: string;
+  circleClasses?: string | CSSProperties;
+  circleContainerClasses?: string | CSSProperties;
+  innerCircleClasses?: string | CSSProperties;
+  outerCircleClasses?: string | CSSProperties;
 }
 
 const CircularProgressBar = ({
@@ -30,11 +32,19 @@ const CircularProgressBar = ({
   progressTextClasses,
   radius = 95,
   circleRadiusInPercentage = "45%",
-  strokeColour,
-  progressColour,
-}: ProgressBarInterface) => {
+  circleContainerClasses,
+  innerCircleClasses,
+  outerCircleClasses,
+}: CircularProgressInterface) => {
   const defaultProgressContainerClasses =
-    "flex h-2 rounded-md mx-1 w-full rounded-full overflow-hidden";
+    "flex h-full w-full justify-center items-center flex h-2 rounded-md mx-1 overflow-hidden";
+
+  const defaultProgressClasses = "w-52 h-52 rounded-full ";
+  const defaultCircleContainerClasses =
+    "flex flex-col justify-center items-center";
+
+  const defaultCircleClasses =
+    "fill-transparent stroke-[10] -rotate-90 origin-center stroke-gray-300";
 
   const [progressStyle, setProgressStyle] = useState({});
   const [statusStyle, setStatusStyle] = useState({});
@@ -63,40 +73,69 @@ const CircularProgressBar = ({
   }, [progress]);
   return (
     <div
-      className={`h-full w-full flex justify-center items-center ${
+      className={
         typeof progressContainerClasses === "string"
           ? twMerge(defaultProgressContainerClasses, progressContainerClasses)
           : defaultProgressContainerClasses
-      }`}
+      }
       style={
         typeof progressContainerClasses === "object"
           ? progressContainerClasses
           : {}
       }
     >
-      <div className="flex flex-col justify-center -items-center">
+      <div
+        className={
+          typeof circleContainerClasses === "string"
+            ? twMerge(defaultCircleContainerClasses, circleContainerClasses)
+            : defaultCircleContainerClasses
+        }
+        style={
+          typeof circleContainerClasses === "object"
+            ? circleContainerClasses
+            : {}
+        }
+      >
         <svg
-          className={`w-52 h-52 rounded-full ${
-            typeof progressClasses === "string" ? progressClasses : ""
-          }`}
+          className={
+            typeof progressClasses === "string"
+              ? twMerge(defaultProgressClasses, progressClasses)
+              : defaultProgressClasses
+          }
           style={typeof progressClasses === "object" ? progressClasses : {}}
         >
           <circle
-            className={`fill-transparent stroke-[10] -rotate-90 origin-center stroke-gray-300 ${strokeColour}`}
+            className={
+              typeof innerCircleClasses === "string"
+                ? twMerge(defaultCircleClasses, innerCircleClasses)
+                : defaultCircleClasses
+            }
             cx="50%"
             cy="50%"
             r={circleRadiusInPercentage}
-            style={statusStyle}
+            style={
+              typeof innerCircleClasses === "object"
+                ? { ...innerCircleClasses, ...statusStyle }
+                : statusStyle
+            }
           ></circle>
           <circle
-            className={`fill-transparent stroke-[10] -rotate-90 origin-center stroke-green-500 ${progressColour}`}
+            className={
+              typeof outerCircleClasses === "string"
+                ? twMerge(defaultCircleClasses, outerCircleClasses)
+                : defaultCircleClasses
+            }
             cx="50%"
             cy="50%"
             r={circleRadiusInPercentage}
-            style={progressStyle}
+            style={
+              typeof outerCircleClasses === "object"
+                ? { ...outerCircleClasses, ...progressStyle }
+                : progressStyle
+            }
           ></circle>
         </svg>
-        {progressText && progress > 0 && (
+        {progressText && (
           <div
             className={
               typeof progressTextClasses === "string" ? progressTextClasses : ""
@@ -109,7 +148,7 @@ const CircularProgressBar = ({
           </div>
         )}
       </div>
-      {!progressText && progress > 0 && (
+      {!progressText && (
         <div
           className={` ${
             typeof progressTextClasses === "string" ? progressTextClasses : ""
