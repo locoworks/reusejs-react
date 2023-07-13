@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 function getComponents(directory) {
-  const ComponentIgnoreArray = ["code-preview"];
+  const COMPONENTIGNOREARRAY = ["code-preview"];
   try {
     const files = fs.readdirSync(directory);
     let componentsArray = [];
@@ -10,8 +10,7 @@ function getComponents(directory) {
     files.forEach((file) => {
       const filePath = path.join(directory, file);
       const stats = fs.statSync(filePath);
-
-      if (stats.isDirectory() && !ComponentIgnoreArray.includes(file)) {
+      if (stats.isDirectory() && !COMPONENTIGNOREARRAY.includes(file)) {
         const temp = file
           .split("-")
           .map((ele) => ele.charAt(0).toUpperCase() + ele.slice(1))
@@ -34,6 +33,9 @@ function getHooksList(directory) {
     files.forEach((file) => {
       const temp = file
         .replace(".ts", "")
+        .replace("js", "")
+        .replace(".tsx", "")
+        .replace("jsx", "")
         .split("-")
         .map((ele) => ele.charAt(0).toUpperCase() + ele.slice(1))
         .join("");
@@ -65,7 +67,6 @@ const createJSONList = () => {
 
   data["Components"] = getComponents("./components");
   data["Hooks"] = getHooksList("./toolkit/hooks/src");
-
   data["Utils"] = getUtilsList("./toolkit/utils/src");
 
   const jsonData = JSON.stringify(data, null, 2);
