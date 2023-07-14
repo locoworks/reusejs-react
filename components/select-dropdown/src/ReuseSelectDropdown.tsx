@@ -115,30 +115,36 @@ const DefaultOptionsComponent: React.FC<DefaultOptionsComponentProps> = ({
 
 const MemoizedDefaultOptionsComponent = React.memo(DefaultOptionsComponent);
 
-const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, ReuseSelectProps> = ({ 
-  options,
-  optionsRenderer,
-  noOptionsRenderer,
-  multiple = false,
-  defaultSelected = [],
-  header,
-  footer,
-  onChange,
-  valueKey,
-  displayKey,
-  filterFunction,
-  clearQuery = true,
-  defaultQuery = "",
-  defaultOpen = false,
-  enableSearch = false,
-  dropDownText = "Open Dropdown",
-  optionsWrapper = "",
-  selectWrapper = "",
-  selectButtonStyles = "",
-  selectButtonOverflowWrappper = "",
-  inputStyles = "",
-  refresh,
-},ref) => {
+const ReuseSelectDropDown: React.ForwardRefRenderFunction<
+  HTMLInputElement,
+  ReuseSelectProps
+> = (
+  {
+    options,
+    optionsRenderer,
+    noOptionsRenderer,
+    multiple = false,
+    defaultSelected = [],
+    header,
+    footer,
+    onChange,
+    valueKey,
+    displayKey,
+    filterFunction,
+    clearQuery = true,
+    defaultQuery = "",
+    defaultOpen = false,
+    enableSearch = false,
+    dropDownText = "Open Dropdown",
+    optionsWrapper = "",
+    selectWrapper = "",
+    selectButtonStyles = "",
+    selectButtonOverflowWrappper = "",
+    inputStyles = "",
+    refresh,
+  },
+  ref
+) => {
   const {
     open,
     setOpen,
@@ -219,7 +225,7 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, Reus
   );
   return (
     <div
-    ref={ref}
+      ref={ref}
       className={
         typeof selectWrapper === "string"
           ? twMerge(defaultSelectWrapper, selectWrapper)
@@ -276,4 +282,6 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, Reus
   );
 };
 
-export default forwardRef<HTMLInputElement, ReuseSelectProps>(ReuseSelectDropDown);
+export default forwardRef<HTMLInputElement, ReuseSelectProps>(
+  ReuseSelectDropDown
+);
