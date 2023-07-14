@@ -2,7 +2,6 @@ import React, { createRef, useRef, useState } from "react";
 import { ReuseInputGroup } from "@locoworks/reusejs-react-input-group";
 import { HeadlessButton } from "@locoworks/reusejs-react-button";
 
-
 const Prefix = () => {
   return (
     <div className="absolute top-1/2 -translate-y-1/2 left-2 font-bold">
@@ -25,15 +24,13 @@ const Suffix = () => {
 };
 
 const Forwardrefinput = () => {
-    const forwardinputRef = useRef(null);    
+  const forwardinputRef = useRef(null);
 
-    console.log(inputRef,"this is the forwardrefinputgruop.jsx")
+  console.log(inputRef, "this is the forwardrefinputgruop.jsx");
 
-    const handleClick = ()=>{
-      console.log("i have been clicked")
-      console.log(forwardinputRef)
-      alert(forwardinputRef.current.value)
-    }
+  const handleClick = () => {
+    alert(forwardinputRef.current.value);
+  };
 
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
@@ -44,12 +41,15 @@ const Forwardrefinput = () => {
         helperText="This text is for Helping!!"
         prefix={<Prefix />}
         suffix={<Suffix />}
-        reuseinputRef = {forwardinputRef}
+        reuseinputref={forwardinputRef}
       />
       <div className="flex mt-6 gap-x-10">
-            <HeadlessButton className="px-3 py-1 border border-blue-500 bg-blue-200 rounded" onClick={handleClick}>
-                Get input Text
-            </HeadlessButton>
+        <HeadlessButton
+          className="px-3 py-1 border border-blue-500 bg-blue-200 rounded"
+          onClick={handleClick}
+        >
+          Get input Text
+        </HeadlessButton>
       </div>
     </div>
   );

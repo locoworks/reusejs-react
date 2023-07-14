@@ -17,7 +17,7 @@ const addSiteWrapper = () => {
   temp.forEach((file) => {
     if (fs.statSync(path + "/" + file).isDirectory()) {
       fs.readFile(path + "/" + file + "/index.mdx", "utf8", (err, data) => {
-        const tocImport = `import toc from "../../public/${file}-toc.json" `;
+        const tocImport = `import toc from "../../../data/${file}-toc.json" `;
         if (err) {
           console.error(`Error reading file ${file}:`, err);
           return;
@@ -72,7 +72,7 @@ const addSiteWrapper = () => {
       // console.log("Files", files);
       files.forEach((toolkitFile) => {
         // console.log(">>>>", path + "/" + file + "/" + toolkitFile);
-        const tocImport = `import toc from "../../public/${toolkitFile.replace(
+        const tocImport = `import toc from "../../../data/${toolkitFile.replace(
           ".mdx",
           ""
         )}-toc.json"\n\n`;
