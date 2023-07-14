@@ -146,7 +146,7 @@ const pluginsFetcher = async (path, regex) => {
  * @returns {Promise<void>} - A promise that resolves once the new Tailwind configuration file is written.
  */
 const getTailWindFromDevApps = async () => {
-  const devappList = fs.readdirSync(devAppsPath);
+  const devappList = await fs.promises.readdir(devAppsPath);
   const devAppsPaths = [
     ...devappList.map((app) => devAppsPath + "/" + app + "/tailwind.config.js"),
     "./docs/tailwind.config.js",
