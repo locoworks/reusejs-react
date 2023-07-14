@@ -38,7 +38,7 @@ const UploadFile = () => {
         <ReuseButton
           className="bg-blue-500 text-white font-bold text-2xl text-center mt-20 px-6 flex"
           onClick={() => {
-            setRunning(!running);
+            setRunning(true);
             StartUploadDownload();
           }}
         >

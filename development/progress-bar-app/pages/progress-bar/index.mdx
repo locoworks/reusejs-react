@@ -9,10 +9,13 @@ import DownloadFile  from "../../components/progress-bar/DownloadFile/DownloadFi
 import UploadFile  from "../../components/progress-bar/UploadFile/UploadFile.tsx"
 import Progress  from "../../components/progress-bar/Progress/Progress.tsx"
 import CircularProgress  from "../../components/progress-bar/CircularProgress/CircularProgress.tsx"
+import PageScrollProgress  from "../../components/progress-bar/PageScrollProgress/PageScrollProgress.tsx"
 
 ## Table of contents
 
 ## Introduction
+
+<PageScrollProgress />
 
 *`ProgressBar` component enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
 By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.*
@@ -47,6 +50,8 @@ The ProgressBar component accepts the following props:
 - **defaultProgress** (required): The default progress value (between 0 and 100) to be displayed when the progress bar is initially rendered. (Default: undefined)
 - **totalFileSize** (optional): The total file size in bytes. It is used to calculate the progress percentage based on the processed file size. (Default: 0)
 - **processedFileSize** (optional): The processed file size in bytes. It is used to calculate the progress.
+- **progressLoop** (optional): If true it will updated every time the progress even if it reaches to hundred.(Default Value is false after reaching 100 it will do nothing. If true, after reaching 100 it will  wait for change in processedFile and if changes happend it will recalculate the the progress and return it.)
+
 
 ## Props for CircularProgressBar
 The CircularProgressBar accepts following 5 additional props apart from above:
@@ -55,6 +60,8 @@ The CircularProgressBar accepts following 5 additional props apart from above:
 - **circleContainerClasses** (optional): This accepts either a string as CSS classes or an object of CSS properties to apply the styles on `ProgressContainer`.
 - **innerCircleClasses** (optional as string): This accepts either a string as CSS classes or an object of CSS properties to apply the styles on `InnerCircle` which is initially grey colour.
 - **outerCircleClasses** (required must pass stroke-color): This accepts either a string as CSS classes or an object of CSS properties to apply the styles on `OuterCircle` which shows Progress as in different colour.
+- **progressLoop** (optional): If true it will updated every time the progress even if it reaches to hundred.(Default Value is false after reaching 100 it will do nothing. If true, after reaching 100 it will  wait for change in processedFile and if changes happend it will recalculate the the progress and return it.)
+
 
 
 ### Note

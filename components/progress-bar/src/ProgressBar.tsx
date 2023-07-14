@@ -1,7 +1,6 @@
 import React, { CSSProperties, useEffect, useState } from "react";
 import { useProgress } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
-import { type } from "os";
 
 interface ProgressBarInterface {
   progressInterval: number;
@@ -13,6 +12,7 @@ interface ProgressBarInterface {
   progressContainerClasses?: string | CSSProperties;
   progressText?: (progressValue: number) => React.ReactNode | string;
   progressTextClasses?: string | CSSProperties;
+  progressLoop?: boolean;
 }
 
 const ProgressBar = ({

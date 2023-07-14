@@ -18,6 +18,7 @@ interface CircularProgressInterface {
   circleContainerClasses?: string | CSSProperties;
   innerCircleClasses?: string | CSSProperties;
   outerCircleClasses?: string | CSSProperties;
+  progressLoop?: boolean;
 }
 
 const CircularProgressBar = ({

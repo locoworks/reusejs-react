@@ -6,6 +6,7 @@ interface UseProgresInterface {
   defaultProgress?: number;
   totalFileSize?: number;
   processedFileSize?: number;
+  progressLoop?: boolean
 }
 
 export let useProgress = ({
@@ -14,6 +15,7 @@ export let useProgress = ({
   defaultProgress = 0,
   totalFileSize = 0,
   processedFileSize = 0,
+  progressLoop = false,
 }: UseProgresInterface) => {
   const [progress, setProgress] = useState<number>(defaultProgress);
   const [currentFileProcessed, setCurrentFileProcessed] = useState<number>(0);
@@ -78,10 +80,15 @@ export let useProgress = ({
   }, [running]);
 
   useEffect(() => {
-    if (progress < 100 && totalFileSize !== 0) {
+    if (progress < 100 && totalFileSize !== 0 && progressLoop === false ) {
       clearInterval(intervalRef.current as NodeJS.Timeout);
       start();
     }
+    else if (totalFileSize !== 0 && progressLoop === true ) {
+      clearInterval(intervalRef.current as NodeJS.Timeout);
+      start();
+    }
+
     const processedFileInPercent: number =
       (processedFileSize / totalFileSize) * 100;
     setCurrentFileProcessed(Number(processedFileInPercent.toFixed(0)));
