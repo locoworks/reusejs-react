@@ -51,6 +51,7 @@ export interface DefaultOptionsComponentProps {
   activeStyles?: string | CSSProperties;
   inactiveStyles?: string | CSSProperties;
   borderStyles?: string | CSSProperties;
+  active?: boolean;
 }
 
 const DefaultOptionsComponent: React.FC<DefaultOptionsComponentProps> = ({
@@ -64,6 +65,7 @@ const DefaultOptionsComponent: React.FC<DefaultOptionsComponentProps> = ({
   activeStyles = "",
   inactiveStyles = "",
   borderStyles = "",
+  active,
 }) => {
   const defaultActiveStyles =
     "bg-green-100 hover:bg-green-500 hover:text-white hover:font-bold px-2 py-1 flex justify-between w-full";
@@ -115,30 +117,36 @@ const DefaultOptionsComponent: React.FC<DefaultOptionsComponentProps> = ({
 
 const MemoizedDefaultOptionsComponent = React.memo(DefaultOptionsComponent);
 
-const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, ReuseSelectProps> = ({ 
-  options,
-  optionsRenderer,
-  noOptionsRenderer,
-  multiple = false,
-  defaultSelected = [],
-  header,
-  footer,
-  onChange,
-  valueKey,
-  displayKey,
-  filterFunction,
-  clearQuery = true,
-  defaultQuery = "",
-  defaultOpen = false,
-  enableSearch = false,
-  dropDownText = "Open Dropdown",
-  optionsWrapper = "",
-  selectWrapper = "",
-  selectButtonStyles = "",
-  selectButtonOverflowWrappper = "",
-  inputStyles = "",
-  refresh,
-},ref) => {
+const ReuseSelectDropDown: React.ForwardRefRenderFunction<
+  HTMLInputElement,
+  ReuseSelectProps
+> = (
+  {
+    options,
+    optionsRenderer,
+    noOptionsRenderer,
+    multiple = false,
+    defaultSelected = [],
+    header,
+    footer,
+    onChange,
+    valueKey,
+    displayKey,
+    filterFunction,
+    clearQuery = true,
+    defaultQuery = "",
+    defaultOpen = false,
+    enableSearch = false,
+    dropDownText = "Open Dropdown",
+    optionsWrapper = "",
+    selectWrapper = "",
+    selectButtonStyles = "",
+    selectButtonOverflowWrappper = "",
+    inputStyles = "",
+    refresh,
+  },
+  ref
+) => {
   const {
     open,
     setOpen,
@@ -169,6 +177,10 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, Reus
     "overflow-hidden text-ellipsis whitespace-nowrap";
   const defaultInputStyles =
     "bg-white border border-black rounded px-4 flex items-center w-1/2 h-10 cursor-pointer";
+
+  const handleKeyDown = (e: any) => {
+    console.log("Event>>>", e);
+  };
 
   const selectButton = (
     <div
@@ -206,6 +218,7 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, Reus
 
   const selectInput = (
     <input
+      onKeyDown={handleKeyDown}
       autoFocus
       className={
         typeof inputStyles === "string"
@@ -217,9 +230,10 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, Reus
       onChange={(e) => setQuery(e.target.value)}
     />
   );
+
   return (
     <div
-    ref={ref}
+      ref={ref}
       className={
         typeof selectWrapper === "string"
           ? twMerge(defaultSelectWrapper, selectWrapper)
@@ -276,4 +290,6 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<HTMLInputElement, Reus
   );
 };
 
-export default forwardRef<HTMLInputElement, ReuseSelectProps>(ReuseSelectDropDown);
+export default forwardRef<HTMLInputElement, ReuseSelectProps>(
+  ReuseSelectDropDown
+);
