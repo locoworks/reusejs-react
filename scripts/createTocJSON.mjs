@@ -7,22 +7,7 @@ import { unified } from "unified";
 import markdown from "remark-parse";
 import extractToc from "remark-extract-toc";
 import fs from "node:fs";
-
-/**
- * Write data to a file at the specified path.
- * This function writes the provided data to a file at the specified path. If an error occurs during the writing process, it logs the error to the console.
- *
- * @param {string} path - The path of the file to write.
- * @param {string} data - The data to be written to the file.
- * @returns {void}
- */
-const writeToFile = (path, data) => {
-  fs.writeFile(path, data, (err) => {
-    if (err) {
-      console.log("Error while writing to path>>", path, err);
-    }
-  });
-};
+import { writeToFile } from "./writeToFile.mjs";
 
 /**
  * Export the table of contents (TOC) from a Markdown file.
@@ -89,3 +74,4 @@ const createTocJSON = async () => {
 };
 
 export default createTocJSON;
+createTocJSON();
