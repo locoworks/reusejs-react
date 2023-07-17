@@ -42,7 +42,6 @@ const ReuseInputGroup: React.FC<ReuseInputGroupProps> = ({
   reuseinputref,
   ...rest
 }) => {
-  console.log(reuseinputref, "this is the reuseinputref");
   const defaultWrapperClasses = "relative w-1/2 flex flex-col";
   const defaultCommonClassName =
     "form-input w-full py-2 border-1 rounded focus:ring-0 border-black focus:border-blue-700 ";
