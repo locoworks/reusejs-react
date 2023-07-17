@@ -24,7 +24,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "list:comp": "node ./scripts/getAllComponentsList.cjs",
     "build:docs": "node ./scripts/buildDocs.mjs && yarn list:comp && turbo run build --filter=reuse-docs...",
-    "toolkit:dev": "turbo run dev --filter=toolkit-app...",
+    "toolkit:dev": "turbo run dev --filter=toolkits-app...",
     "clean": "node ./scripts/cleanBuilds.mjs"
   },
   "devDependencies": {

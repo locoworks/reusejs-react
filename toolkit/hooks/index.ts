@@ -5,3 +5,4 @@ export { useDidMountEffect } from "./src/use-did-mount-effect";
 export { useHeadlessSelectHook } from "./src/use-headless-select-hook";
 export { useProgress } from "./src/use-progress";
 export { useSlider } from "./src/use-slider";
+export { useBetaForm } from "./src/use-beta-form/index";

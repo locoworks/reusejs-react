@@ -43,6 +43,11 @@
         "depth": 3,
         "value": "SizeInputGroup Example",
         "children": []
+      },
+      {
+        "depth": 3,
+        "value": "BetaForm Sample",
+        "children": []
       }
     ]
   }

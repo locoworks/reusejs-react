@@ -12,6 +12,7 @@ import ForwardRefInputGroup from "../../components/input-group/ForwardRefInputGr
 import MultipleInput from "../../components/input-group/MultipleInput/MultipleInput.tsx"
 import DropdownInputGroup from "../../components/input-group/DropdownInputGroup/DropdownInputGroup.tsx"
 import SizeInputGroup from "../../components/input-group/SizeInputGroup/SizeInputGroup.tsx"
+import BetaFormSample from "../../components/input-group/BetaFormSample/BetaFormSample.tsx"
 
 ## Headless Input Group
 
@@ -115,6 +116,16 @@ By leveraging these props, users can fully customize the **ReuseInputGroup** com
 ```js path=../../components/input-group/SizeInputGroup name=SizeInputGroup
 ```
 
+### BetaForm Sample
+
+This example show a use-case of how to use input group with `BetaForm` to handle error and validation using validate.js.
+This example will take ***Name*** and ***Email*** as form fields and validate the filed on button click, show errors etc.
+This will handle all states and error using **BetaForm** without creating any extra states.
+
+<BetaFormSample/>
+
+```js path=../../components/input-group/BetaFormSample name=BetaFormSample
+```
 
 
 export default ({ children }) => {
