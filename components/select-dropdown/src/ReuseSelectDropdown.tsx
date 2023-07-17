@@ -51,6 +51,7 @@ export interface DefaultOptionsComponentProps {
   activeStyles?: string | CSSProperties;
   inactiveStyles?: string | CSSProperties;
   borderStyles?: string | CSSProperties;
+  active?: boolean;
 }
 
 const DefaultOptionsComponent: React.FC<DefaultOptionsComponentProps> = ({
@@ -64,6 +65,7 @@ const DefaultOptionsComponent: React.FC<DefaultOptionsComponentProps> = ({
   activeStyles = "",
   inactiveStyles = "",
   borderStyles = "",
+  active,
 }) => {
   const defaultActiveStyles =
     "bg-green-100 hover:bg-green-500 hover:text-white hover:font-bold px-2 py-1 flex justify-between w-full";
@@ -176,6 +178,10 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<
   const defaultInputStyles =
     "bg-white border border-black rounded px-4 flex items-center w-1/2 h-10 cursor-pointer";
 
+  const handleKeyDown = (e: any) => {
+    console.log("Event>>>", e);
+  };
+
   const selectButton = (
     <div
       className={
@@ -212,6 +218,7 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<
 
   const selectInput = (
     <input
+      onKeyDown={handleKeyDown}
       autoFocus
       className={
         typeof inputStyles === "string"
@@ -223,6 +230,7 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<
       onChange={(e) => setQuery(e.target.value)}
     />
   );
+
   return (
     <div
       ref={ref}
