@@ -12,7 +12,7 @@ const HeadlessSliderCarousel: FC<HeadlessSliderCarouselInterface> = ({
   ...rest
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
-  let parent: any = parentRef.current;
+  let parent: HTMLDivElement | null = parentRef.current;
   const [scrollLeft, setScrollLeft] = useState<number>(0);
   const [childWidth, setChildWidth] = useState<number>(0);
 
