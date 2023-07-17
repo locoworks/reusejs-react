@@ -15,6 +15,8 @@
     "gen:example": "node ./scripts/createExample.mjs",
     "input-group:dev": "turbo run dev --filter=input-group-app...",
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
+		"progress-bar:dev": "turbo run dev --filter=progress-bar-app...",
+		"progress-bar:build": "turbo run build --filter=@locoworks/reusejs-react-progress-bar...",
     "input:dev": "turbo run dev --filter=input-app...",
     "select-dropdown:dev": "turbo run dev --filter=select-dropdown-app...",
     "select-dropdown:build": "turbo run build --filter=@locoworks/reusejs-react-select-dropdown...",
@@ -22,7 +24,7 @@
     "otp-input:build": "turbo run build --filter=@locoworks/reusejs-react-otp-input...",
     "input:build": "turbo run build --filter=@locoworks/reusejs-react-input...",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "list:comp": "node ./scripts/getAllComponentsList.cjs",
+    "list:comp": "node ./scripts/getAllComponentsList.mjs",
     "build:docs": "node ./scripts/buildDocs.mjs && yarn list:comp && turbo run build --filter=reuse-docs...",
     "toolkit:dev": "turbo run dev --filter=toolkits-app...",
     "clean": "node ./scripts/cleanBuilds.mjs"
