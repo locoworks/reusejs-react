@@ -80,15 +80,10 @@ export let useProgress = ({
   }, [running]);
 
   useEffect(() => {
-    if (progress < 100 && totalFileSize !== 0 && progressLoop === false ) {
+    if (progress < 100 && totalFileSize !== 0 && progressLoop === false || totalFileSize !== 0 && progressLoop === true) {
       clearInterval(intervalRef.current as NodeJS.Timeout);
       start();
     }
-    else if (totalFileSize !== 0 && progressLoop === true ) {
-      clearInterval(intervalRef.current as NodeJS.Timeout);
-      start();
-    }
-
     const processedFileInPercent: number =
       (processedFileSize / totalFileSize) * 100;
     setCurrentFileProcessed(Number(processedFileInPercent.toFixed(0)));

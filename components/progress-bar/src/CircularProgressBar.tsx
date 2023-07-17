@@ -136,7 +136,7 @@ const CircularProgressBar = ({
             }
           ></circle>
         </svg>
-        {progressText && (
+        {progressText ? (
           <div
             className={
               typeof progressTextClasses === "string" ? progressTextClasses : ""
@@ -147,17 +147,16 @@ const CircularProgressBar = ({
           >
             {progressText(progress)}
           </div>
+        ) : (
+          <div
+            className={` ${
+              typeof progressTextClasses === "string" ? progressTextClasses : ""
+            }`}
+          >
+            {progress}%
+          </div>
         )}
       </div>
-      {!progressText && (
-        <div
-          className={` ${
-            typeof progressTextClasses === "string" ? progressTextClasses : ""
-          }`}
-        >
-          {progress}%
-        </div>
-      )}
     </div>
   );
 };

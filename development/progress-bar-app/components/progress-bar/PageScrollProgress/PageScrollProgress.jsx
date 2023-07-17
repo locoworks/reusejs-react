@@ -16,8 +16,6 @@ const PageScrollProgress = () => {
     }
     const divScrollTop = event.target.scrollTop;
     setScrollValue(divScrollTop);
-
-    console.log(divScrollTop);
   };
 
   const { progress } = useProgress({
@@ -32,8 +30,6 @@ const PageScrollProgress = () => {
     const totalHeight = scrollContainer?.scrollHeight;
     const viewAreaHeight = scrollContainer?.offsetHeight;
     console.log(totalHeight - viewAreaHeight);
-
-    setParentScrollHeight(totalHeight - viewAreaHeight);
   }, []);
 
   return (

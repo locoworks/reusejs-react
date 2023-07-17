@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CircularProgressBar } from "@locoworks/reusejs-react-progress-bar";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
+import { url } from "inspector";
 
 const CircularProgress = () => {
-  const [running, setRunning] = useState<boolean>(false);
+  const [runningOne, setRunningOne] = useState<boolean>(false);
+  const [runningTwo, setRunningTwo] = useState<boolean>(false);
+  const [runningThree, setRunningThree] = useState<boolean>(false);
   const [processedFile, setProcessedFile] = useState<number>(0);
 
   const processedFileRef = useRef<NodeJS.Timeout | null>(null);
@@ -16,6 +19,9 @@ const CircularProgress = () => {
     }, 10);
   };
 
+  const gradient =
+    "linear-gradient(to right, green 0%, green 33%, yellow 34%, yellow 66%, red 67%, red 100%)";
+
   useEffect(() => {
     if (processedFile === 5000) {
       clearInterval(processedFileRef.current as NodeJS.Timeout);
@@ -26,7 +32,7 @@ const CircularProgress = () => {
       <div className="flex justify-evenly w-full">
         <CircularProgressBar
           progressInterval={2000}
-          running={running}
+          running={runningOne}
           defaultProgress={0}
           progressText={(progress: number) => `Progress One ${progress} %`}
           progressTextClasses={"text-center font-extrabold"}
@@ -34,7 +40,7 @@ const CircularProgress = () => {
         />
         <CircularProgressBar
           progressInterval={2000}
-          running={running}
+          running={runningTwo}
           defaultProgress={0}
           radius={55}
           circleRadiusInPercentage="25%"
@@ -45,13 +51,15 @@ const CircularProgress = () => {
         />
         <CircularProgressBar
           progressInterval={4000}
-          running={running}
+          running={runningThree}
           defaultProgress={0}
           radius={75}
-          outerCircleClasses={"stroke-blue-500"}
+          outerCircleClasses={{
+            stroke: "red",
+          }}
           circleRadiusInPercentage="35%"
           progressText={(progress: number) => {
-            return progress > 0 && progress <= 33
+            return progress >= 0 && progress <= 33
               ? "Low Risk"
               : progress > 33 && progress <= 66
               ? "Medium Risk"
@@ -61,15 +69,33 @@ const CircularProgress = () => {
         />
       </div>
 
-      <ReuseButton
-        className="bg-blue-500 text-white font-bold text-xl text-center mt-20 px-6 flex"
-        onClick={() => {
-          setRunning(!running);
-          StartUploadDownload();
-        }}
-      >
-        {running ? "Pause" : "Play"}
-      </ReuseButton>
+      <div className="flex w-full justify-around items-center">
+        <ReuseButton
+          className="bg-blue-500 text-white font-bold text-xl text-center mt-20 px-6 flex"
+          onClick={() => {
+            setRunningOne(!runningOne);
+          }}
+        >
+          {runningOne ? "Pause" : "Play"}
+        </ReuseButton>
+        <ReuseButton
+          className="bg-blue-500 text-white font-bold text-xl text-center mt-20 px-6 flex"
+          onClick={() => {
+            setRunningTwo(true);
+            StartUploadDownload();
+          }}
+        >
+          {runningTwo ? "Pause" : "Play"}
+        </ReuseButton>
+        <ReuseButton
+          className="bg-blue-500 text-white font-bold text-xl text-center mt-20 px-6 flex"
+          onClick={() => {
+            setRunningThree(!runningThree);
+          }}
+        >
+          {runningThree ? "Pause" : "Play"}
+        </ReuseButton>
+      </div>
     </div>
   );
 };
