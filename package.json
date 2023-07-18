@@ -27,9 +27,12 @@
     "list:comp": "node ./scripts/getAllComponentsList.mjs",
     "build:docs": "node ./scripts/buildDocs.mjs && yarn list:comp && turbo run build --filter=reuse-docs...",
     "toolkit:dev": "turbo run dev --filter=toolkits-app...",
-    "clean": "node ./scripts/cleanBuilds.mjs"
+    "clean": "node ./scripts/cleanBuilds.mjs",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@betalectic-reusejs/shared-config-eslint-reactts": "^1.0.1",
+    "@betalectic-reusejs/shared-config-prettier-ts": "^1.0.0",
     "@changesets/cli": "^2.26.1",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
@@ -37,17 +40,17 @@
     "concurrently": "^8.0.1",
     "eslint": "^8.45.0",
     "eslint-config-custom": "*",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-standard": "^5.0.0",
     "fs-extra": "^11.1.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "path": "^0.12.7",
     "postcss": "^8.4.23",
     "prettier": "^3.0.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "tailwindcss": "^3.3.2",
-    "@betalectic-reusejs/shared-config-eslint-reactts": "^1.0.1",
-    "@betalectic-reusejs/shared-config-prettier-ts": "^1.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-standard": "^5.0.0"
+    "tailwindcss": "^3.3.2"
   },
   "name": "reusev2-sample",
   "packageManager": "yarn@1.22.19",
@@ -60,7 +63,6 @@
     "toolkit/*"
   ],
   "dependencies": {
-    "eslint-config-react-app": "^7.0.1",
     "@babel/eslint-parser": "^7.22.7",
     "@docsearch/react": "^3.5.1",
     "@mdx-js/loader": "^2.3.0",
@@ -73,6 +75,7 @@
     "@types/mdx": "^2.0.5",
     "@types/node": "^20.2.0",
     "babel-loader": "^9.1.2",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-import": "^2.27.5",
     "framer-motion": "^10.12.17",
     "gray-matter": "^4.0.3",
@@ -89,5 +92,11 @@
     "turbo": "^1.9.8",
     "typescript": "^5.0.4",
     "unified": "^10.1.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
   }
 }
