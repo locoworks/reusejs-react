@@ -3,28 +3,28 @@ import { ProgressBar } from "@locoworks/reusejs-react-progress-bar";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
 
 const Progress = () => {
-  const [running, setRunning] = useState<boolean>(false);
-  return (
-    <div className="flex items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-      <div className="w-full h-72 flex flex-col justify-center items-center mx-80">
-        <ProgressBar
-          progressInterval={2000}
-          running={running}
-          defaultProgress={0}
-          progressContainerClasses="bg-gray-300 h-6 flex rounded-none"
-          progressClasses="h-full rounded-none"
-          progressText={(progress: number) => `progress Value ${progress} %`}
-        />
+	const [running, setRunning] = useState<boolean>(false);
+	return (
+		<div className="flex items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
+			<div className="w-full h-72 flex flex-col justify-center items-center mx-80">
+				<ProgressBar
+					progressInterval={2000}
+					running={running}
+					defaultProgress={0}
+					progressContainerClasses="bg-gray-300 h-6 flex rounded-none"
+					progressClasses="h-full rounded-none"
+					progressText={(progress: number) => `progress Value ${progress} %`}
+				/>
 
-        <ReuseButton
-          className="bg-blue-500 text-white font-bold text-2xl text-center mt-20 px-6 flex"
-          onClick={() => setRunning(!running)}
-        >
-          {running ? "Pause" : "Play"}
-        </ReuseButton>
-      </div>
-    </div>
-  );
+				<ReuseButton
+					className="bg-blue-500 text-white font-bold text-2xl text-center mt-20 px-6 flex"
+					onClick={() => setRunning(!running)}
+				>
+					{running ? "Pause" : "Play"}
+				</ReuseButton>
+			</div>
+		</div>
+	);
 };
 
 export default Progress;

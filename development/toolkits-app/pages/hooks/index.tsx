@@ -2,13 +2,13 @@ import React from "react";
 import { useRouter } from "next/router";
 
 export default function index() {
-  const router = useRouter();
-  router.push("/reusejs-react");
-  return <div>Hooks</div>;
+	const router = useRouter();
+	router.push("/reusejs-react");
+	return <div>Hooks</div>;
 }
 
 {
-  /* ---
+	/* ---
 HEAD OBJECT
 title: "ReuseJS Toolkit"
 author: "John Doe"
