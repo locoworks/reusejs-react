@@ -10,25 +10,25 @@ interface ListInterface {
 
 const List: ListInterface[] = [
   {
-    heading: "Get Real-time Forex Rates with zero delay time",
+    heading: "Slider 1",
     phrase: "Monitor, manage, quote, compare, and conquer market surprises",
   },
   {
-    heading: "Plan your daily FX operations seamlessly",
+    heading: "Slider 2",
     phrase:
       "Quantify risk on your exposures and plan ahead with real-time forex rates 24X5",
   },
   {
-    heading: "Plan your daily forex operations seamlessly",
+    heading: "Slider 3",
     phrase: "Let the system help you with hedge pickups vs cash rates",
   },
   {
-    heading: "Pay-as-you-go model for personalised support",
+    heading: "Slider 4",
     phrase:
       "Compute the viability of deals and prepare quotes to win new business",
   },
   {
-    heading: "Expand cross border business and never miss a deal",
+    heading: "Slider 5",
     phrase: "Pay only when you need us on a per consult basis",
   },
 ];

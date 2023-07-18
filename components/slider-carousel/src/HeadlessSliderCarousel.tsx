@@ -17,18 +17,24 @@ const HeadlessSliderCarousel: FC<HeadlessSliderCarouselInterface> = ({
   const [childWidth, setChildWidth] = useState<number>(0);
 
   const resumeSlides = () => {
-    if (parent) {
+    if (parent !== null) {
       let autoScroll = async () => {
         setScrollLeft((prev) => {
           return prev + childWidth;
         });
-        if (scrollLeft >= parent.scrollWidth - parent.clientWidth) {
+        if (
+          parent != null &&
+          scrollLeft >= parent.scrollWidth - parent.clientWidth
+        ) {
           setScrollLeft(0);
         }
-        parent.scrollTo({
-          left: scrollLeft,
-          behavior: "smooth",
-        });
+
+        parent != null
+          ? parent.scrollTo({
+              left: scrollLeft,
+              behavior: "smooth",
+            })
+          : "";
       };
       autoScroll();
     }

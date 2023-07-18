@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect, CSSProperties } from "react";
 import { useSlider } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
 interface ReuseSliderCarouselInterface {
-  slideInterval: number;
   slides: React.ReactNode[];
   loop: boolean;
+  slideInterval?: number;
   wrapperClasses?: string | CSSProperties;
   sliderContainerClasses?: string | CSSProperties;
   enableButtons?: boolean;
@@ -13,7 +13,7 @@ interface ReuseSliderCarouselInterface {
 }
 
 const ReuseSliderCarousel = ({
-  slideInterval,
+  slideInterval = 2000,
   slides,
   loop,
   wrapperClasses,

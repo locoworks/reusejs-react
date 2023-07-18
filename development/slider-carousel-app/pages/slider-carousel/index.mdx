@@ -7,13 +7,12 @@ import SliderWithButton from "../../components/slider-carousel/Example/SliderWit
 import SimpleSlider from "../../components/slider-carousel/Example/SimpleSlider/SimpleSlider.tsx"
 import HeadlessSlider from "../../components/slider-carousel/Example/HeadlessSliderExample/HeadlessSlider.tsx"
 
-## Table of contents
-
 ## Introduction
 **Take your website to the next level with ReuseSliderCarousel. Effortlessly create stunning image carousels and captivating slideshows. Customize slide intervals, enable looping, and add intuitive button controls. Engage your visitors with seamless transitions and eye-catching animations. Showcase your content in style and leave a lasting impression.**
 
 ## HeadlessSliderCarousel Component Documentation
 The HeadlessSliderCarousel component is a customizable carousel/slider component for displaying a set of slides. It provides automatic scrolling functionality and is designed to be headless, meaning it handles the core functionality of the slider while allowing you to control the presentation and styling.
+
 ## HeadlessSliderCarousel props
 - **slides** (required) :  An array of ReactNode elements representing the individual slides to be displayed in the carousel.
 - **dependency** (required) : A dependency value that triggers the carousel to resume scrolling when it changes. This can be useful when you want to update the carousel based on external changes, such as data updates.
@@ -56,23 +55,17 @@ You have the flexibility to create personalized animations by designing your own
 ## Examples
 ### Slider without button
 <SimpleSlider />
-
 ```js path=../../components/slider-carousel/Example/SimpleSlider name=SimpleSlider
 ```
 
 ### Slider With Buttons
-
 - If the `enableButtons` prop is set to `true`, the ReuseSliderCarousel component will display next and previous buttons instead of relying on the container click event. The container click event handling code can be removed in this case.
-
 <SliderWithButton />
-
 ```js path=../../components/slider-carousel/Example/SliderWithButton name=SliderWithButton
 ```
 
 ### Slider With LinearSlideChain
-
 <HeadlessSlider />
-
 ```js path=../../components/slider-carousel/Example/HeadlessSliderExample name=HeadlessSlider
 ```
 
