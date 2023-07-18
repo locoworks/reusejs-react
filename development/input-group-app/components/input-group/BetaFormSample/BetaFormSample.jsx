@@ -22,7 +22,7 @@ const BetaFormSample = () => {
 
   useEffect(() => {
     form.setValidationRules(constraints);
-  }, []);
+  }, [constraints]);
 
   const handleClick = () => {
     form.validate();
