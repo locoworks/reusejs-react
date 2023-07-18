@@ -47,7 +47,6 @@
   "name": "reusev2-sample",
   "packageManager": "yarn@1.22.19",
   "workspaces": [
-    "apps/*",
     "components/*",
     "development/*",
     "docs",
