@@ -18,9 +18,6 @@ const CircularProgress = () => {
 		}, 10);
 	};
 
-	const gradient =
-		"linear-gradient(to right, green 0%, green 33%, yellow 34%, yellow 66%, red 67%, red 100%)";
-
 	useEffect(() => {
 		if (processedFile === 5000) {
 			clearInterval(processedFileRef.current as NodeJS.Timeout);

@@ -6,11 +6,6 @@
   },
   {
     "depth": 2,
-    "value": "Table of contents",
-    "children": []
-  },
-  {
-    "depth": 2,
     "value": "Introduction",
     "children": []
   },
@@ -56,7 +51,17 @@
       },
       {
         "depth": 3,
-        "value": "ProgressBar without a graphical edge with Download functionality",
+        "value": "Download File ProgressBar",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Upload File ProgressBar",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Circular ProgressBar",
         "children": []
       },
       {
