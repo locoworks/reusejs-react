@@ -26,6 +26,7 @@ The `useProgress` hook accepts the following props as an object:
 
 - `processedFileSize` (optional): The size of the file that has been processed. It is used to calculate the progress as a percentage. The default value is 0.
 
+- `progressLoop` (optional): By default, the progress stops updating once it reaches 100%. However, if progressLoop is enabled (set to true), the progress will continue to update even after reaching 100%. It achieves this by monitoring changes in the processedFile. If any changes occur, the progress will be recalculated and reflect the updated progress value. Additionally, the progress value will always be within the range of 0 to totalFileSize, ensuring that it accurately represents the progress of the processed file. 
 
 ### Return Value
 The `useProgress` hook returns an object with the following properties:

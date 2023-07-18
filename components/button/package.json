@@ -12,7 +12,7 @@
     "dist/**"
   ],
   "scripts": {
-    "lint": "yarn eslint '**/*.ts' '**/*.tsx'",
+    "lint": "yarn eslint '**/*.{ts,tsx}' ",
     "build": "rollup -c --bundleConfigAsCjs",
     "bundle": "rollup -c --bundleConfigAsCjs",
     "dev": "rollup -c -w --bundleConfigAsCjs"
