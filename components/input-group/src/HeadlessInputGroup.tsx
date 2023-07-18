@@ -22,7 +22,6 @@ const HeadlessInputGroup: React.FC<HeadlessInputGroupProps> = ({
   inputRef,
   ...rest
 }) => {
-  console.log(rest);
   return (
     <>
       <div className={wrapperClasses}>

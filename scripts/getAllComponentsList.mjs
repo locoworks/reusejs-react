@@ -1,8 +1,16 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
+/**
+ * getComponents
+ *
+ * Fetches the list of components in the specified directory, excluding ignored components.
+ *
+ * @param {string} directory - The directory path where the components are located.
+ * @returns {string[]} - An array containing the names of the components.
+ */
 function getComponents(directory) {
-  const ComponentIgnoreArray = ["code-preview"];
+  const COMPONENTIGNOREARRAY = ["code-preview"];
   try {
     const files = fs.readdirSync(directory);
     let componentsArray = [];
@@ -10,8 +18,7 @@ function getComponents(directory) {
     files.forEach((file) => {
       const filePath = path.join(directory, file);
       const stats = fs.statSync(filePath);
-
-      if (stats.isDirectory() && !ComponentIgnoreArray.includes(file)) {
+      if (stats.isDirectory() && !COMPONENTIGNOREARRAY.includes(file)) {
         const temp = file
           .split("-")
           .map((ele) => ele.charAt(0).toUpperCase() + ele.slice(1))
@@ -26,6 +33,14 @@ function getComponents(directory) {
   }
 }
 
+/**
+ * getHooksList
+ *
+ * Fetches the list of hooks in the specified directory, excluding ignored components.
+ *
+ * @param {string} directory - The directory path where the hooks are located.
+ * @returns {string[]} - An array containing the names of the hooks.
+ */
 function getHooksList(directory) {
   try {
     const files = fs.readdirSync(directory);
@@ -34,6 +49,9 @@ function getHooksList(directory) {
     files.forEach((file) => {
       const temp = file
         .replace(".ts", "")
+        .replace("js", "")
+        .replace(".tsx", "")
+        .replace("jsx", "")
         .split("-")
         .map((ele) => ele.charAt(0).toUpperCase() + ele.slice(1))
         .join("");
@@ -45,13 +63,27 @@ function getHooksList(directory) {
   }
 }
 
+/**
+ * getUtilsList
+ *
+ * Fetches the list of utils in the specified directory, excluding ignored components.
+ *
+ * @param {string} directory - The directory path where the utils are located.
+ * @returns {string[]} - An array containing the names of the utils.
+ */
 function getUtilsList(directory) {
   try {
     const files = fs.readdirSync(directory);
     let utilsList = [];
 
     files.forEach((file) => {
-      const temp = file.replace(".ts", "").split("-").join("");
+      const temp = file
+        .replace(".ts", "")
+        .replace("js", "")
+        .replace(".tsx", "")
+        .replace("jsx", "")
+        .split("-")
+        .join("");
       utilsList.push(temp);
     });
     return utilsList;
@@ -60,12 +92,19 @@ function getUtilsList(directory) {
   }
 }
 
+/**
+ * createJSONList
+ *
+ * Creates a JSON file containing a list of components, hooks, and utils.
+ * The JSON file is structured with "Components", "Hooks", and "Utils" keys,
+ * each containing an array of names corresponding to the components, hooks, and utils.
+ * The JSON file is written to the specified file path "./data/sidemenu_data.json".
+ */
 const createJSONList = () => {
   const data = { Components: [], Hooks: [], Utils: [] };
 
   data["Components"] = getComponents("./components");
   data["Hooks"] = getHooksList("./toolkit/hooks/src");
-
   data["Utils"] = getUtilsList("./toolkit/utils/src");
 
   const jsonData = JSON.stringify(data, null, 2);
