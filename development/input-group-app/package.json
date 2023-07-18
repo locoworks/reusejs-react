@@ -2,11 +2,12 @@
   "name": "input-group-app",
   "version": "0.0.1",
   "private": true,
+  "prettier": "@betalectic-reusejs/shared-config-prettier-ts",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "yarn eslint '**/*.ts' '**/*.tsx'"
   },
   "dependencies": {
     "@locoworks/reusejs-react-code-preview": "*",
@@ -37,6 +38,13 @@
     "@locoworks/reusejs-toolkit-react-hooks": "*"
   },
   "devDependencies": {
-    "@types/react-syntax-highlighter": "^15.5.7"
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "prettier": "^3.0.0",
+    "@betalectic-reusejs/shared-config-eslint-reactts": "^1.0.1",
+    "@betalectic-reusejs/shared-config-prettier-ts": "^1.0.0",
+    "eslint-config-custom": "*",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-standard": "^5.0.0"
   }
 }
