@@ -11,12 +11,10 @@ import Progress  from "../../components/progress-bar/Progress/Progress.tsx"
 import CircularProgress  from "../../components/progress-bar/CircularProgress/CircularProgress.tsx"
 import PageScrollProgress  from "../../components/progress-bar/PageScrollProgress/PageScrollProgress.tsx"
 
-## Table of contents
-
 ## Introduction
 
-*`ProgressBar` component enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
-By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.*
+`ProgressBar` component enhance websites by providing visual feedback for file uploads, form submissions, content loading, task completion, downloads/updates, and page scrolling. They improve the user experience, engagement, and interface, keeping users informed and motivated in a concise and intuitive manner.
+By incorporating our ProgressBar component, you can elevate your website's user experience to new heights, adding a touch of interactivity and visual appeal. With progress indicators tailored to various scenarios, your website will become more engaging and provide a seamless and delightful user journey.
 
 ## ProgressBar Component Documentation
 The `ProgressBar` component is used to display a progress bar with customizable styles.
@@ -64,7 +62,7 @@ The CircularProgressBar accepts following 5 additional props apart from above:
 
 ### Note
 - To use `Circular ProgressBar` You have to import CircularProgressBar.
-- To Adjust `Circular ProgressBar` Size you need to pass two props (radius,circleRadiousInPercentage).
+- To Adjust `Circular ProgressBar` Size you need to pass two props (radius,circleRadiousInPercentage,progressClasses).
 - To get better understanding for these props refer to [Circular ProgressBar](#circular-progressbar) examples and Check code.
 
 
@@ -86,24 +84,23 @@ The CircularProgressBar accepts following 5 additional props apart from above:
 ```js path=../../components/progress-bar/RoundedProgress name=RoundedProgress
 ```
 
-### ProgressBar without a graphical edge with Download functionality
+### Download File ProgressBar
 <DownloadFile />
 ```js path=../../components/progress-bar/DownloadFile name=DownloadFile
 ```
-### ProgressBar without a graphical edge with Upload functionality
+
+### Upload File ProgressBar
 <UploadFile />
 ```js path=../../components/progress-bar/UploadFile name=UploadFile
 ```
+
 ### Circular ProgressBar
 <CircularProgress />
-
 ```js path=../../components/progress-bar/CircularProgress name=CircularProgress
 ```
 
 ### PageScrollProgress 
-
 <PageScrollProgress />
-
 ```js path=../../components/progress-bar/PageScrollProgress name=PageScrollProgress
 ```
 

@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useRef, RefObject } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useProgress } from "@locoworks/reusejs-toolkit-react-hooks";
 
 const PageScrollProgress = () => {
-	const [scrollValue, setScrollValue] = useState < number > 0;
-	const [running, setRunning] = useState < boolean > false;
-	const [parentscrollHeight, setParentScrollHeight] =
-		(useState < number) | (undefined > 0);
+	const [scrollValue, setScrollValue] = useState(0);
+	const [running, setRunning] = useState(false);
 
 	const scrollRef = useRef(null);
 	let scrollContainer = scrollRef.current;
@@ -19,7 +17,7 @@ const PageScrollProgress = () => {
 	};
 
 	const { progress } = useProgress({
-		totalFileSize: parentscrollHeight,
+		totalFileSize: 0,
 		processedFileSize: scrollValue,
 		running: running,
 		progressLoop: true, // to Implement PageScroll Progress Feature it must be passed as true.
@@ -45,7 +43,7 @@ const PageScrollProgress = () => {
 			>
 				<div className="flex flex-col text-center justify-center items-center w-full">
 					<p className="flex text-center font-semibold text-xl  my-2">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
+						{`Lorem Ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry's standard dummy text
 						ever since the 1500s, when an unknown printer took a galley of type
 						and scrambled it to make a type specimen book. It has survived not
@@ -53,10 +51,10 @@ const PageScrollProgress = () => {
 						remaining essentially unchanged. It was popularised in the 1960s
 						with the release of Letraset sheets containing Lorem Ipsum passages,
 						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
+						PageMaker including versions of Lorem Ipsum.`}
 					</p>
 					<p className="flex text-center font-semibold text-xl  my-2">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
+						{`Lorem Ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry's standard dummy text
 						ever since the 1500s, when an unknown printer took a galley of type
 						and scrambled it to make a type specimen book. It has survived not
@@ -64,10 +62,10 @@ const PageScrollProgress = () => {
 						remaining essentially unchanged. It was popularised in the 1960s
 						with the release of Letraset sheets containing Lorem Ipsum passages,
 						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
+						PageMaker including versions of Lorem Ipsum.`}
 					</p>
 					<p className="flex text-center font-semibold text-xl  my-2">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
+						{`Lorem Ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry's standard dummy text
 						ever since the 1500s, when an unknown printer took a galley of type
 						and scrambled it to make a type specimen book. It has survived not
@@ -75,10 +73,10 @@ const PageScrollProgress = () => {
 						remaining essentially unchanged. It was popularised in the 1960s
 						with the release of Letraset sheets containing Lorem Ipsum passages,
 						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
+						PageMaker including versions of Lorem Ipsum.`}
 					</p>
 					<p className="flex text-center font-semibold text-xl  my-2">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
+						{`Lorem Ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry's standard dummy text
 						ever since the 1500s, when an unknown printer took a galley of type
 						and scrambled it to make a type specimen book. It has survived not
@@ -86,10 +84,10 @@ const PageScrollProgress = () => {
 						remaining essentially unchanged. It was popularised in the 1960s
 						with the release of Letraset sheets containing Lorem Ipsum passages,
 						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
+						PageMaker including versions of Lorem Ipsum.`}
 					</p>
 					<p className="flex text-center font-semibold text-xl  my-2">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
+						{`Lorem Ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry's standard dummy text
 						ever since the 1500s, when an unknown printer took a galley of type
 						and scrambled it to make a type specimen book. It has survived not
@@ -97,10 +95,10 @@ const PageScrollProgress = () => {
 						remaining essentially unchanged. It was popularised in the 1960s
 						with the release of Letraset sheets containing Lorem Ipsum passages,
 						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
+						PageMaker including versions of Lorem Ipsum.`}
 					</p>
 					<p className="flex text-center font-semibold text-xl  my-2">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
+						{`Lorem Ipsum is simply dummy text of the printing and typesetting
 						industry. Lorem Ipsum has been the industry's standard dummy text
 						ever since the 1500s, when an unknown printer took a galley of type
 						and scrambled it to make a type specimen book. It has survived not
@@ -108,7 +106,7 @@ const PageScrollProgress = () => {
 						remaining essentially unchanged. It was popularised in the 1960s
 						with the release of Letraset sheets containing Lorem Ipsum passages,
 						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
+						PageMaker including versions of Lorem Ipsum.`}
 					</p>
 				</div>
 			</div>
