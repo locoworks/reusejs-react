@@ -40,10 +40,10 @@ const CircularProgressBar = ({
   const defaultProgressContainerClasses =
     "flex h-full w-full justify-center items-center flex h-2 rounded-md mx-1 overflow-hidden";
 
-  const defaultProgressClasses = "w-52 h-52 rounded-full ";
   const defaultCircleContainerClasses =
-    "flex flex-col justify-center items-center";
+    "relative flex flex-col justify-center items-center";
 
+  const defaultProgressClasses = "w-52 h-52 rounded-full ";
   const defaultCircleClasses =
     "fill-transparent stroke-[10] -rotate-90 origin-center stroke-gray-300";
 

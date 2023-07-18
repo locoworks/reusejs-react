@@ -18,9 +18,6 @@ const CircularProgress = () => {
     }, 10);
   };
 
-  const gradient =
-    "linear-gradient(to right, green 0%, green 33%, yellow 34%, yellow 66%, red 67%, red 100%)";
-
   useEffect(() => {
     if (processedFile === 5000) {
       clearInterval(processedFileRef.current as NodeJS.Timeout);
@@ -28,25 +25,29 @@ const CircularProgress = () => {
   }, [processedFile]);
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-      <div className="flex justify-evenly w-full">
+      <div className="flex justify-evenly items-center w-full">
         <CircularProgressBar
           progressInterval={2000}
           running={runningOne}
           defaultProgress={0}
+          radius={80}
+          circleRadiusInPercentage="48%"
           progressText={(progress: number) => `Progress One ${progress} %`}
-          progressTextClasses={"text-center font-extrabold"}
-          outerCircleClasses={"stroke-green-500"}
+          progressTextClasses={"text-center font-extrabold mt-4"}
+          outerCircleClasses={"stroke-green-600"}
+          progressClasses={"bg-indigo-950 h-40 w-40"}
         />
         <CircularProgressBar
           progressInterval={2000}
           running={runningTwo}
           defaultProgress={0}
-          radius={55}
-          circleRadiusInPercentage="25%"
+          radius={60}
+          circleRadiusInPercentage="50%"
           totalFileSize={5000}
           processedFileSize={processedFile}
           outerCircleClasses={"stroke-yellow-500"}
-          progressTextClasses={"text-center font-bold absolute"}
+          progressTextClasses={"absolute text-white font-bold"}
+          progressClasses={"h-[120px] w-[120px] bg-cyan-800"}
         />
         <CircularProgressBar
           progressInterval={4000}
