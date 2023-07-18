@@ -26,11 +26,7 @@ const Suffix = () => {
 const Forwardrefinput = () => {
   const forwardinputRef = useRef(null);
 
-  console.log(inputRef, "this is the forwardrefinputgruop.jsx");
-
   const handleClick = () => {
-    console.log("i have been clicked");
-    console.log(forwardinputRef);
     alert(forwardinputRef.current.value);
   };
 
