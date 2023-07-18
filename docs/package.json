@@ -2,11 +2,12 @@
   "name": "reuse-docs",
   "version": "0.0.0",
   "private": true,
+  "prettier": "@betalectic-reusejs/shared-config-prettier-ts",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "yarn eslint '**/*.{ts,tsx,js,jsx}'"
   },
   "dependencies": {
     "@locoworks/remark-folder-import": "*",
@@ -42,6 +43,17 @@
     "@heroicons/react": "^2.0.18",
     "@locoworks/reusejs-react-select-dropdown": "*",
     "@locoworks/reusejs-toolkit-react-hooks": "*",
-    "@locoworks/reusejs-toolkit-utils": "*"
+    "@locoworks/reusejs-toolkit-utils": "*",
+    "@locoworks/reusejs-react-progress-bar": "*"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "@betalectic-reusejs/shared-config-eslint-reactts": "^1.0.1",
+    "@betalectic-reusejs/shared-config-prettier-ts": "^1.0.0",
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "eslint-config-custom": "*",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-standard": "^5.0.0"
   }
 }
