@@ -54,17 +54,16 @@ const slidesArray = List.map((element, index) => {
   );
 });
 
-const SliderWithButton = () => {
+const SimpleSlider = () => {
   return (
     <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
       <ReuseSliderCarousel
         slideInterval={2000}
         slides={slidesArray}
         loop={true}
-        sliderContainerClasses="slide-right-to-left"
       />
     </div>
   );
 };
 
-export default SliderWithButton;
+export default SimpleSlider;

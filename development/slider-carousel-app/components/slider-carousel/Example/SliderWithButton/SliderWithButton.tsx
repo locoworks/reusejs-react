@@ -68,7 +68,6 @@ const SliderWithButton = () => {
         slides={slidesArray}
         loop={true}
         enableButtons={true}
-        sliderContainerClasses="slide-right-to-left"
       />
     </div>
   );
