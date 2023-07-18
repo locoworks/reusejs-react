@@ -20,8 +20,8 @@ const CircularProgress = () => {
           circleRadiusInPercentage="48%"
           progressText={(progress) => `Progress One ${progress} %`}
           progressTextClasses={"text-center font-extrabold mt-4"}
-          outerCircleClasses={"stroke-green-500"}
-          progressClasses={"bg-red-900 h-40 w-40"}
+          outerCircleClasses={"stroke-green-600"}
+          progressClasses={"bg-indigo-950 h-40 w-40"}
         />
         <CircularProgressBar
           progressInterval={2000}
