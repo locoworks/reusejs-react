@@ -33,6 +33,15 @@ function extractLines(
   return lines.slice(start - 1, end).join('\n');
 }
 
+const getMeta = (
+  metaValue: string | null | undefined,
+  matchString: string
+): string | undefined => {
+  return (metaValue || '')
+    .split(/(?<!\\) /g)
+    .find((meta) => meta.startsWith(matchString));
+};
+
 function codeImport(options: CodeImportOptions = {}) {
   const rootDir = options.rootDir || process.cwd();
 
@@ -48,12 +57,8 @@ function codeImport(options: CodeImportOptions = {}) {
     });
 
     for (const [node] of codes) {
-      const pathMeta = (node.meta || '')
-        .split(/(?<!\\) /g)
-        .find((meta) => meta.startsWith('path='));
-      const nameMeta = (node.meta || '')
-        .split(/(?<!\\) /g)
-        .find((meta) => meta.startsWith('name='));
+      const pathMeta = getMeta(node.meta, 'path=');
+      const nameMeta = getMeta(node.meta, 'name=');
 
       if (!pathMeta || !nameMeta) {
         continue;
@@ -67,7 +72,6 @@ function codeImport(options: CodeImportOptions = {}) {
       if (!nameRes || !nameRes.groups || !nameRes.groups.name) {
         throw new Error(`Unable to parse component name ${nameRes}`);
       }
-
       const componentName = nameRes.groups.name;
 
       const res =
@@ -90,7 +94,7 @@ function codeImport(options: CodeImportOptions = {}) {
         .replace(/\\ /g, ' ');
       const folderAbsPath = path.resolve(file.dirname, normalizedFolderPath);
 
-      let AllContent = '[TO-SPLIT]';
+      let newNodeContent = '[TO-SPLIT]';
       const folderFiles = fs.readdirSync(folderAbsPath);
 
       const addToContent = (filePath: string, type: string) => {
@@ -102,9 +106,9 @@ function codeImport(options: CodeImportOptions = {}) {
           toLine,
           options.preserveTrailingNewline
         );
-        AllContent =
-          AllContent +
-          (AllContent === '[TO-SPLIT]'
+        newNodeContent =
+          newNodeContent +
+          (newNodeContent === '[TO-SPLIT]'
             ? `[${type}]\n` + content
             : `\n||||\n[${type}]\n` + content);
       };
@@ -125,7 +129,7 @@ function codeImport(options: CodeImportOptions = {}) {
       }
 
       node.value = extractLines(
-        AllContent,
+        newNodeContent,
         fromLine,
         hasDash,
         toLine,

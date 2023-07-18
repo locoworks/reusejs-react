@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "tailwind-merge": "^1.12.0",
-    "@locoworks/reusejs-toolkit-utils": "*"
+    "@locoworks/reusejs-toolkit-utils": "*",
+    "lodash": "^4.17.21",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

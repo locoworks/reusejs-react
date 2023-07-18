@@ -7,6 +7,7 @@
     "Select Dropdown"
   ],
   "Hooks": [
+    "UseBetaForm",
     "UseDebounceEffect",
     "UseDidMountEffect",
     "UseHeadlessSelectHook",
