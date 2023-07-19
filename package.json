@@ -15,6 +15,8 @@
     "gen:example": "node ./scripts/createExample.mjs",
     "input-group:dev": "turbo run dev --filter=input-group-app...",
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
+		"data-table:dev": "turbo run dev --filter=data-table-app...",
+		"data-table:build": "turbo run build --filter=@locoworks/reusejs-react-data-table...",
 		"progress-bar:dev": "turbo run dev --filter=progress-bar-app...",
 		"progress-bar:build": "turbo run build --filter=@locoworks/reusejs-react-progress-bar...",
     "input:dev": "turbo run dev --filter=input-app...",
