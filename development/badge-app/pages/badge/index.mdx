@@ -1,0 +1,38 @@
+---
+HEAD OBJECT
+title: "ReuseJS badge"
+author: "John Doe"
+---
+
+import Example from "../../components/badge/Example/Example.tsx"
+import HeadlessExample from "../../components/badge/HeadlessExample/HeadlessExample.tsx"
+import MultiBadgeExample from "../../components/badge/MultiBadgeExample/MultiBadgeExample.tsx"
+import NumberedBadges from "../../components/badge/NumberedBadges/NumberedBadges.tsx"
+import IconsBadgeExample from "../../components/badge/IconsBadgeExample/IconsBadgeExample.tsx"
+
+## Table of contents
+
+## Sample Code Demo
+
+<Example/>
+
+### Headless Example
+
+<HeadlessExample/>
+
+### Multi Badge Example
+
+<MultiBadgeExample/>
+
+### Numbered Badges Example
+
+<NumberedBadges/>
+
+### Icons Badge Example
+
+<IconsBadgeExample/>
+
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
