@@ -1,5 +1,11 @@
 # @locoworks/reusejs-toolkit-react-hooks
 
+## 0.4.0
+
+### Minor Changes
+
+- 4835ee6: Added useBetaForm Hook
+
 ## 0.3.0
 
 ### Minor Changes
