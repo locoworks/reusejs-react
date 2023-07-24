@@ -51,6 +51,15 @@ const Example = () => {
 		);
 	};
 
+	const tableHeader = [
+		"Name",
+		"Gender",
+		"Age",
+		"Email",
+		"Contact Details",
+		"Address",
+	];
+
 	useEffect(() => {
 		fetchData(50);
 	}, []);
@@ -60,6 +69,7 @@ const Example = () => {
 			<TableBase
 				tableData={userData}
 				itemsPerPage={5}
+				customTableHeader={tableHeader}
 				buttonClasses={"bg-gray-200 py-2 px-4 rounded-md text-gray-700 mb-10"}
 				buttonContainerClasses={"flex justify-between mt-4"}
 				showDetails={ShowRecordInfo}

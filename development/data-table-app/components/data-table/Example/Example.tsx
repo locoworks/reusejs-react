@@ -37,6 +37,15 @@ const Example = () => {
 		userData.push(userObject);
 	});
 
+	const tableHeader = [
+		"Name",
+		"Gender",
+		"Age",
+		"Email",
+		"Contact Details",
+		"Address",
+	];
+
 	const ShowRecordInfo = (
 		totalPages: number,
 		totalRecords: number,
@@ -45,7 +54,7 @@ const Example = () => {
 	) => {
 		return (
 			<>
-				<div className="flex items-center text-white">
+				<div className="flex items-center">
 					Showing:{" "}
 					{currentPage < totalPages
 						? `${currentPage * itemsPerPage}/${totalRecords}`
@@ -53,7 +62,7 @@ const Example = () => {
 					Records.
 				</div>
 
-				<div className="flex items-center text-white">Page : {currentPage}</div>
+				<div className="flex items-center">Page : {currentPage}</div>
 			</>
 		);
 	};
@@ -67,13 +76,14 @@ const Example = () => {
 			<TableBase
 				tableData={userData}
 				itemsPerPage={5}
+				customTableHeader={tableHeader}
 				buttonClasses={"bg-gray-200 py-2 px-4 rounded-md text-gray-700 mb-10"}
 				buttonContainerClasses={"flex justify-between mt-4"}
 				showDetails={ShowRecordInfo}
-				tableColumnClasses={"px-4 border border-white"}
-				tableContainerClasses={"flex flex-col px-10 w-full bg-cyan-700"}
+				tableColumnClasses={"px-4 border border-gray-500"}
+				tableContainerClasses={"flex flex-col px-10 w-full bg-white"}
 				tableClasses={"w-full"}
-				headingColumnClasses={"px-4 text-left border border-white"}
+				headingColumnClasses={"px-4 text-left border border-gray-500"}
 				headingRowClasses={"bg-gray-300 "}
 			/>
 		</div>

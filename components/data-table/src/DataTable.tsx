@@ -3,6 +3,7 @@ import { useDataTable } from "@locoworks/reusejs-toolkit-react-hooks";
 
 interface DataEntry {
 	tableData: any;
+	customTableHeader?: any;
 	itemsPerPage?: number;
 	tableContainerClasses?: string | CSSProperties;
 	tableClasses?: string | CSSProperties;
@@ -22,6 +23,7 @@ interface DataEntry {
 
 const DataTable = ({
 	tableData,
+	customTableHeader = [],
 	itemsPerPage = 0,
 	tableContainerClasses,
 	tableClasses,
@@ -70,23 +72,41 @@ const DataTable = ({
 							typeof headingRowClasses === "object" ? headingRowClasses : {}
 						}
 					>
-						{tableHeaders.map((header: any) => (
-							<th
-								key={header}
-								className={
-									typeof headingColumnClasses === "string"
-										? headingColumnClasses
-										: ""
-								}
-								style={
-									typeof headingColumnClasses === "object"
-										? headingColumnClasses
-										: {}
-								}
-							>
-								{header}
-							</th>
-						))}
+						{customTableHeader.length > 0
+							? customTableHeader.map((header: string) => (
+									<th
+										key={header}
+										className={
+											typeof headingColumnClasses === "string"
+												? headingColumnClasses
+												: ""
+										}
+										style={
+											typeof headingColumnClasses === "object"
+												? headingColumnClasses
+												: {}
+										}
+									>
+										{header}
+									</th>
+							  ))
+							: tableHeaders.map((header: string) => (
+									<th
+										key={header}
+										className={
+											typeof headingColumnClasses === "string"
+												? headingColumnClasses
+												: ""
+										}
+										style={
+											typeof headingColumnClasses === "object"
+												? headingColumnClasses
+												: {}
+										}
+									>
+										{header}
+									</th>
+							  ))}
 					</tr>
 				</thead>
 				<tbody>

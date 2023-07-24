@@ -34,6 +34,8 @@ The `DataTable` component accepts the following props:
 
 11. `showDetails` (optional): A function that receives totalPages, totalItems, currentPage, and itemsPerPage as arguments. This function can be used to display additional information about the pagination or any custom details based on the current state of the data table.
 
+12. `customTableHeader` (optional): An array of string representing the table header. if not provided Table header will be create dfrom the `tableData`.
+
 
 ## How It Works
 The `DataTable` component uses the `useDataTable` hook from the @locoworks/reusejs-toolkit-react-hooks library to manage pagination and other functionalities. The hook returns various properties that are used to render the table and handle pagination. Please refer to the hook section to get more visiblity
