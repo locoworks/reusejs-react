@@ -37,7 +37,7 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
-  // transpilePackages: ["react-syntax-highlighter"],
+  transpilePackages: ["react-syntax-highlighter"],
   // assetPrefix: "https://cdn.tailwindcss.com",
   webpack: (config) => {
     config.module.rules.push({

@@ -6,3 +6,5 @@ export { useHeadlessSelectHook } from "./src/use-headless-select-hook";
 export { useProgress } from "./src/use-progress";
 export { useSlider } from "./src/use-slider";
 export { useBetaForm } from "./src/use-beta-form/index";
+export { default as useClosableComponent } from "./src/use-closable-component";
+export { default as useMountComponent } from "./src/use-mount-component";
