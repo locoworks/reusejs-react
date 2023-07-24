@@ -9,13 +9,13 @@
 import React, { EffectCallback, DependencyList } from "react";
 import { env } from "@locoworks/reusejs-toolkit-utils";
 
-export let useIsoMorphicEffect = (
-  effect: EffectCallback,
-  deps?: DependencyList | undefined
+export const useIsoMorphicEffect = (
+	effect: EffectCallback,
+	deps?: DependencyList | undefined,
 ) => {
-  if (env.isServer) {
-    React.useEffect(effect, deps);
-  } else {
-    React.useLayoutEffect(effect, deps);
-  }
+	if (env.isServer) {
+		React.useEffect(effect, deps);
+	} else {
+		React.useLayoutEffect(effect, deps);
+	}
 };

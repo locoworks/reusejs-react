@@ -44,3 +44,5 @@ next-env.d.ts
 **/node_modules/**
 turbo-bundle.log
 turbo-build.log
+
+.eslintcache
