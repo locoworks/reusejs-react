@@ -1,1 +1,1 @@
-export { default as TableBase } from "./src/DataTable";
+export { default as HeadlessDataTable } from "./src/HeadlessDataTable";

@@ -21,7 +21,7 @@ interface DataEntry {
 	) => any;
 }
 
-const DataTable = ({
+const HeadlessDataTable = ({
 	tableData,
 	customTableHeader = [],
 	itemsPerPage = 0,
@@ -142,9 +142,7 @@ const DataTable = ({
 						))
 					) : (
 						<tr>
-							<td colSpan={tableHeaders.length} className="text-center py-4">
-								No results found.
-							</td>
+							<td colSpan={tableHeaders.length}>No results found.</td>
 						</tr>
 					)}
 				</tbody>
@@ -184,4 +182,4 @@ const DataTable = ({
 	);
 };
 
-export default DataTable;
+export default HeadlessDataTable;

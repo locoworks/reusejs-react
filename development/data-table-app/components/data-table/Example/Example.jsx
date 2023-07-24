@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TableBase } from "@locoworks/reusejs-react-data-table";
+import { HeadlessDataTable } from "@locoworks/reusejs-react-data-table";
 
 const Example = () => {
 	const [userList, setUserLists] = useState([]);
@@ -42,7 +42,7 @@ const Example = () => {
 					Showing:{" "}
 					{currentPage < totalPages
 						? `${currentPage * itemsPerPage}/${totalRecords}`
-						: `${totalRecords}/${totalRecords}`}
+						: `${totalRecords}/${totalRecords}`}{" "}
 					Records.
 				</div>
 
@@ -66,7 +66,7 @@ const Example = () => {
 
 	return (
 		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-			<TableBase
+			<HeadlessDataTable
 				tableData={userData}
 				itemsPerPage={5}
 				customTableHeader={tableHeader}
