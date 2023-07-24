@@ -6,3 +6,4 @@ export { useHeadlessSelectHook } from "./src/use-headless-select-hook";
 export { useProgress } from "./src/use-progress";
 export { useSlider } from "./src/use-slider";
 export { useBetaForm } from "./src/use-beta-form/index";
+export { useDataTable } from "./src/use-data-table";

@@ -1,0 +1,53 @@
+---
+HEAD OBJECT
+title: "ReuseJS data-table"
+author: "Md Amir Sohail"
+---
+
+import Example  from "../../components/data-table/Example/Example.tsx"
+
+## DataTable Component Docs
+The `DataTable` component is a reusable React component that provides a simple and customizable way to display tabular data. It supports pagination, column headers, and other useful features for working with large datasets.
+
+## Props
+The `DataTable` component accepts the following props:
+
+1. `tableData` (required): An array of objects representing the data to be displayed in the table.
+
+2. `itemsPerPage` (optional): The number of items to display per page. If not specified or set to 0, all items will be displayed on a single page.
+
+3. `tableContainerClasses` (optional): Custom CSS classes or styles to be applied to the container element that wraps the table. Accepts either a string of space-separated class names or an object of inline styles.
+
+4. `tableClasses` (optional): Custom CSS classes or styles to be applied to the table element. Accepts either a string of space-separated class names or an object of inline styles.
+
+5. `tableRowClasses` (optional): Custom CSS classes or styles to be applied to the table rows (tr elements). Accepts either a string of space-separated class names or an object of inline styles.
+
+6. `tableColumnClasses` (optional): Custom CSS classes or styles to be applied to the table columns (td elements). Accepts either a string of space-separated class names or an object of inline styles.
+
+7. `headingRowClasses` (optional): Custom CSS classes or styles to be applied to the heading row (tr element) of the table. Accepts either a string of space-separated class names or an object of inline styles.
+
+18. `headingColumnClasses` (optional): Custom CSS classes or styles to be applied to the heading columns (th elements) of the table. Accepts either a string of space-separated class names or an object of inline styles.
+
+9. `buttonClasses` (optional): Custom CSS classes or styles to be applied to the navigation buttons. Accepts either a string of space-separated class names or an object of inline styles.
+
+10. `buttonContainerClasses` (optional): Custom CSS classes or styles to be applied to the container element that wraps the navigation buttons. Accepts either a string of space-separated class names or an object of inline styles.
+
+11. `showDetails` (optional): A function that receives totalPages, totalItems, currentPage, and itemsPerPage as arguments. This function can be used to display additional information about the pagination or any custom details based on the current state of the data table.
+
+
+## How It Works
+The `DataTable` component uses the `useDataTable` hook from the @locoworks/reusejs-toolkit-react-hooks library to manage pagination and other functionalities. The hook returns various properties that are used to render the table and handle pagination. Please refer to the hook section to get more visiblity
+
+When you use the DataTable component, it automatically paginates the tableData based on the itemsPerPage prop. It also sets up navigation buttons to move between pages of data.
+## Example
+<Example />
+
+## Sample code demo
+
+```js path=../../components/data-table/Example name=Example
+```
+
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
