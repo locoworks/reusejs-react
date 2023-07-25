@@ -3,7 +3,6 @@ import remarkToc from "remark-toc";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import codeImport from "@locoworks/remark-folder-import";
-import remarkGfm from "remark-gfm";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
@@ -11,7 +10,7 @@ const withMDX = createMDX({
     // If you use remark-gfm, you'll need to use next.config.mjs
     // as the package is ESM only
     // https://github.com/remarkjs/remark-gfm#install
-    remarkPlugins: [remarkToc, codeImport,remarkGfm],
+    remarkPlugins: [remarkToc, codeImport],
     rehypePlugins: [
       rehypeSlug,
       [
@@ -37,7 +36,7 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
-  // transpilePackages: ["react-syntax-highlighter"],
+  transpilePackages: ["react-syntax-highlighter"],
   // assetPrefix: "https://cdn.tailwindcss.com",
   webpack: (config) => {
     config.module.rules.push({
