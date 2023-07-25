@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 import { useSlider } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
 interface ReuseSliderCarouselInterface {
@@ -24,7 +24,6 @@ const ReuseSliderCarousel = ({
 }: ReuseSliderCarouselInterface) => {
   const {
     currentSlide,
-    currentSlideIndex,
     moveToNextSlide,
     moveToPreviousSlide,
     pauseSlider,
