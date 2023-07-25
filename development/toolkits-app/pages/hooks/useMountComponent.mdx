@@ -1,0 +1,72 @@
+---
+HEAD OBJECT
+title: "ReuseJS Toolkit"
+author: "Shrey Dhyani"
+---
+
+# Reusejs Mount Component Function
+
+## Overview
+
+The `mountComponent` function is a utility that allows mounting a React component into the DOM with control over the mount node and unmounting behavior. It returns a function that takes component props and returns a promise that resolves with the result of the component rendering.
+
+## Installation
+
+To use `mountComponent`, you need to have React and ReactDOM installed in your project.
+To install Hooks into your code base use following command `yarn add @locoworks/reusejs-toolkit-react-hooks` or `npm install @locoworks/reusejs-toolkit-react-hooks`
+
+## External Dependencies
+
+This hook depends on **React** and **React/DOM**
+
+## Importing
+You can import the hook from the installed library, **@locoworks/reusejs-toolkit-react-hooks**
+```javascript
+import { useMountComponent } from "@locoworks/reusejs-toolkit-react-hooks"
+```
+
+## Input Parameters
+
+1. `Component` (React.ComponentType`<any>`): The React component to be mounted.
+2. `unmountDelay` (number, optional, default: 1000): The delay in milliseconds before unmounting the component after resolving or rejecting the promise.
+3. `mountingNode` (string, optional): The ID of the DOM element where the component will be mounted. If not provided, the component will be appended to the document body.
+4. `as` ("div" | "label" | "span" | "button", optional, default: "div"): The HTML tag name to use when creating the mount node.
+
+## Return Types
+
+(Function): A function that takes component props and returns a promise that resolves with the result of the component rendering.
+
+## Usage Example
+
+```javascript
+import React from "react";
+import { useMountComponent } from @locoworks/reusejs-toolkit-react-hooks
+
+// Define the component to be mounted
+const MyComponent = ({ message }) => <div>{message}</div>;
+
+// Mount the component with props and resolve the promise when done
+const mountAndResolve = mountComponent(MyComponent);
+
+mountAndResolve({ message: "Hello, world!" }).then((result) => {
+  console.log(result); // The result of the component rendering
+});
+```
+
+## Best Practices
+
+- Use `mountComponent` to mount components into specific DOM nodes or dynamically create mount nodes as needed.
+
+## Input/Return Types Table
+
+| Parameter      | Type                           | Description                                                   |
+| -------------- | ------------------------------ | ------------------------------------------------------------- |
+| Component      | React.ComponentType     | The React component to be mounted.                            |
+| unmountDelay   | number (optional)              | The delay in milliseconds before unmounting the component.    |
+| mountingNode   | string (optional)              | The ID of the DOM element where the component will be mounted.|
+| as             | "div" | "label" | "span" | "button" (optional) | The HTML tag name for the mount node.                         |
+| ReturnValue    | Function                       | A function that returns a promise resolving the component.    |
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
