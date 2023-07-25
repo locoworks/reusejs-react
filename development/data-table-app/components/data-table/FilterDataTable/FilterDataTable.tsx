@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HeadlessDataTable } from "@locoworks/reusejs-react-data-table";
+import { HeadlessDataTableWithFilter } from "@locoworks/reusejs-react-data-table";
 
 const FilterDataTable = () => {
 	const [userList, setUserLists] = useState([]);
@@ -82,7 +82,7 @@ const FilterDataTable = () => {
 		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
 			<div className="flex mx-10 items-center justify-between">
 				<select
-					className="flex py-2 px-4 rounded-md border border-gray-400 mb-10"
+					className="flex py-2 text-xl px-4 rounded-md border border-gray-400 mb-10"
 					value={dropDownValue}
 					onChange={(e) => {
 						setDropDownValue(e.target.value.toString());
@@ -109,11 +109,11 @@ const FilterDataTable = () => {
 						}}
 						value={searchString}
 						placeholder="Search Here..."
-						className="flex py-2 px-4 border border-gray-400 rounded-md mx-10"
+						className="flex py-2 px-4 border border-gray-400 rounded-md mx-10 bg-white"
 					/>
 
 					<button
-						className="border border-gray-400 rounded-md py-2 px-4"
+						className="border border-gray-400 rounded-md py-2 px-4 bg-white"
 						onClick={() => {
 							setSearchString("");
 							setSearchQueries([]);
@@ -124,7 +124,7 @@ const FilterDataTable = () => {
 					</button>
 				</div>
 			</div>
-			<HeadlessDataTable
+			<HeadlessDataTableWithFilter
 				tableData={userData}
 				itemsPerPage={5}
 				customTableHeader={tableHeader}
