@@ -1,6 +1,7 @@
 {
   "Components": [
     "Button",
+    "Data Table",
     "Input",
     "Input Group",
     "Otp Input",
@@ -9,6 +10,7 @@
   ],
   "Hooks": [
     "UseBetaForm",
+    "UseDataTable",
     "UseDebounceEffect",
     "UseDidMountEffect",
     "UseHeadlessSelectHook",
