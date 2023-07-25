@@ -5,6 +5,7 @@ author: "Md Amir Sohail"
 ---
 
 import Example  from "../../components/data-table/Example/Example.tsx"
+import FilterDataTable  from "../../components/data-table/FilterDataTable/FilterDataTable.tsx"
 
 ## DataTable Component Docs
 
@@ -45,14 +46,16 @@ The `DataTable` component accepts the following props:
 The `DataTable` component uses the `useDataTable` hook from the @locoworks/reusejs-toolkit-react-hooks library to manage pagination and other functionalities. The hook returns various properties that are used to render the table and handle pagination. Please refer to the hook section to get more visiblity
 
 When you use the DataTable component, it automatically paginates the tableData based on the itemsPerPage prop. It also sets up navigation buttons to move between pages of data.
+
 ## Example
 <Example />
-
-## Sample code demo
-
 ```js path=../../components/data-table/Example name=Example
 ```
 
+## DataTable (Column Based Filter)
+<FilterDataTable />
+```js path=../../components/data-table/FilterDataTable name=FilterDataTable
+```
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>

@@ -1,8 +1,10 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect } from "react";
 import { useDataTable } from "@locoworks/reusejs-toolkit-react-hooks";
 
 interface DataEntry {
 	tableData: any;
+	searchAll?: string;
+	queryObject?: { field: string; value: string }[];
 	customTableHeader?: any;
 	itemsPerPage?: number;
 	tableContainerClasses?: string | CSSProperties;
@@ -23,6 +25,8 @@ interface DataEntry {
 
 const HeadlessDataTable = ({
 	tableData,
+	searchAll = "",
+	queryObject = [],
 	customTableHeader = [],
 	itemsPerPage = 0,
 	tableContainerClasses,
@@ -41,14 +45,26 @@ const HeadlessDataTable = ({
 		totalItems,
 		totalPages,
 		tableHeaders,
+		setCurrentPage,
+		setSearchQueries,
+		setSearchQuery,
 		next,
 		previous,
 	} = useDataTable({
 		tableData: tableData,
 		itemsPerPage: itemsPerPage,
-		searchQueryObject: [],
-		queryAll: "",
+		searchQueryObject: queryObject,
+		queryAll: searchAll,
 	});
+
+	useEffect(() => {
+		setSearchQuery(searchAll);
+	}, [searchAll]);
+
+	useEffect(() => {
+		setSearchQueries(queryObject);
+		setCurrentPage(1);
+	}, [queryObject]);
 
 	return (
 		<div
