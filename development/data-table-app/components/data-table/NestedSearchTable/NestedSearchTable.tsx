@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { HeadlessDataTableWithFilter } from "@locoworks/reusejs-react-data-table";
+import { ReuseInput } from "@locoworks/reusejs-react-input";
+import { HeadlessButton } from "@locoworks/reusejs-react-button";
 
 const FilterDataTable = () => {
 	const [userList, setUserLists] = useState([]);
-	const [searchString, setSearchString] = useState<string>("");
+	const [searchQueries, setSearchQueries] = useState<
+		{
+			field: string;
+			value: string;
+		}[]
+	>([]);
+	const [nameField, setNameField] = useState("");
+	const [emailField, setEmailField] = useState("");
+	const [addressField, setAddressField] = useState("");
 
 	const fetchData = async (count: number) => {
 		try {
@@ -61,6 +71,34 @@ const FilterDataTable = () => {
 		);
 	};
 
+	const prepareSearchPayload = (
+		name: string,
+		email: string,
+		address: string,
+	) => {
+		let namePayload;
+		let emailPayload;
+		let addressPayload;
+
+		const queryObject: { field: string; value: string }[] = [];
+
+		if (name !== "") {
+			namePayload = { field: "Name", value: name };
+			setSearchQueries([...searchQueries, namePayload]);
+			queryObject.push(namePayload);
+		}
+		if (email !== "") {
+			emailPayload = { field: "Email", value: email };
+			queryObject.push(emailPayload);
+		}
+		if (address !== "") {
+			addressPayload = { field: "Address", value: address };
+			queryObject.push(addressPayload);
+		}
+
+		setSearchQueries(queryObject);
+	};
+
 	useEffect(() => {
 		fetchData(50);
 	}, []);
@@ -68,23 +106,49 @@ const FilterDataTable = () => {
 	return (
 		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
 			<div className="flex justify-center items-center mb-10">
-				<input
+				<ReuseInput
+					placeholder="Search Name..."
+					className="flex mx-4"
 					onChange={(e) => {
-						setSearchString(e.target.value);
+						setNameField(e.target.value);
 					}}
-					value={searchString}
-					placeholder="Search Here..."
-					className="flex py-2 px-4 border border-gray-400 rounded-md mx-10 bg-white"
+					value={nameField}
 				/>
-
-				<button
-					className="border border-gray-400 rounded-md py-2 px-4 bg-white"
+				<ReuseInput
+					placeholder="Search Email..."
+					className="flex mx-4"
+					onChange={(e) => {
+						setEmailField(e.target.value);
+					}}
+					value={emailField}
+				/>
+				<ReuseInput
+					placeholder="Search Address"
+					className="flex mx-4"
+					onChange={(e) => {
+						setAddressField(e.target.value);
+					}}
+					value={addressField}
+				/>
+				<HeadlessButton
+					className="bg-blue-200 border border-blue-400 rounded px-3 py-1 mx-2"
 					onClick={() => {
-						setSearchString("");
+						prepareSearchPayload(nameField, emailField, addressField);
 					}}
 				>
-					clear
-				</button>
+					Search
+				</HeadlessButton>
+				<HeadlessButton
+					className="bg-blue-200 border border-blue-400 rounded px-3 py-1"
+					onClick={() => {
+						setNameField("");
+						setEmailField("");
+						setAddressField("");
+						setSearchQueries([]);
+					}}
+				>
+					Clear Search
+				</HeadlessButton>
 			</div>
 			<HeadlessDataTableWithFilter
 				tableData={userData}
@@ -100,8 +164,8 @@ const FilterDataTable = () => {
 				tableClasses={"w-full"}
 				headingColumnClasses={"px-4 text-left border border-gray-500"}
 				headingRowClasses={"bg-gray-300 "}
-				queryObject={[]}
-				searchAll={searchString}
+				queryObject={searchQueries}
+				searchAll=""
 			/>
 		</div>
 	);

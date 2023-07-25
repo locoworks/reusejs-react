@@ -4,16 +4,38 @@ title: "ReuseJS data-table"
 author: "Md Amir Sohail"
 ---
 
-import Example  from "../../components/data-table/Example/Example.tsx"
+import PaginatedTable  from "../../components/data-table/PaginatedTable/PaginatedTable.tsx"
 import FilterDataTable  from "../../components/data-table/FilterDataTable/FilterDataTable.tsx"
 import SearchTable  from "../../components/data-table/SearchTable/SearchTable.tsx"
+import NestedSearchTable  from "../../components/data-table/NestedSearchTable/NestedSearchTable.tsx"
 
-## DataTable Component Docs
+## Overview
 
-Managing and presenting large datasets in a user-friendly manner is a common challenge in web development. With the HeadlessDataTable component, handling vast amounts of tabular data in your React applications becomes a breeze. This versatile and powerful component offers a seamless solution for displaying paginated and customizable tables, enabling you to present data in a clean and organized format.
+The `HeadlessDataTable` and `HeadlessDataTableWithFilter` components are reusable React components that provide data tables with pagination functionality. They are designed to display tabular data with customizable table headers and the ability to navigate through pages of data. The `HeadlessDataTableWithFilter` additionally allows for nested filtering of data based on search queries.
 
-Designed with efficiency and ease of use in mind, the HeadlessDataTable empowers developers to focus on creating exceptional user experiences without getting bogged down by the complexities of managing data presentation. Leveraging the power of the "@locoworks/reusejs-toolkit-react-hooks" package, this component brings the benefits of pagination and filtering straight to your fingertips.
-The `HeadlessDataTable` component is a reusable React component that provides a simple and customizable way to display tabular data. It supports pagination, column headers, and other useful features for working with large datasets.
+## Installation
+Before using these components, make sure you have already installed the required dependencies, including React and @locoworks/reusejs-toolkit-react-hooks. You can install the dependencies by running below command in terminal.
+
+```jsx
+yarn add @locoworks/reusejs-react-data-table
+or
+npm install @locoworks/reusejs-react-data-table import { HeadlessDataTableWithFilter } from
+
+```
+
+## External Dependencies:
+Both components depend on React and the `useDataTable` hook from the `@locoworks/reusejs-toolkit-react-hooks` package.
+
+## Importing:
+To use the components in your project, import them into your file. Import one which you want to use.
+
+```jsx
+import { HeadlessDataTableWithFilter } from "@locoworks/reusejs-react-data-table"
+or
+import { HeadlessDataTable } from "@locoworks/reusejs-react-data-table"
+```
+## Types/ Exported Components
+Both components uses TypeScript for type checking and define the `DataEntry` interface to specify the prop types. The main exported components are `HeadlessDataTable` and `HeadlessDataTableWithFilter`.
 
 ## Props
 The `DataTable` component accepts the following props:
@@ -42,15 +64,9 @@ The `DataTable` component accepts the following props:
 
 12. `customTableHeader` (optional): An array of string representing the table header. if not provided Table header will be create dfrom the `tableData`.
 
-
-## How It Works
-The `DataTable` component uses the `useDataTable` hook from the @locoworks/reusejs-toolkit-react-hooks library to manage pagination and other functionalities. The hook returns various properties that are used to render the table and handle pagination. Please refer to the hook section to get more visiblity
-
-When you use the DataTable component, it automatically paginates the tableData based on the itemsPerPage prop. It also sets up navigation buttons to move between pages of data.
-
 ## Example
-<Example />
-```js path=../../components/data-table/Example name=Example
+<PaginatedTable />
+```js path=../../components/data-table/PaginatedTable name=PaginatedTable
 ```
 
 ## DataTable (Column Based Filter)
@@ -62,6 +78,38 @@ When you use the DataTable component, it automatically paginates the tableData b
 <SearchTable />
 ```js path=../../components/data-table/SearchTable name=SearchTable
 ```
+
+## NestedSearchTable
+<NestedSearchTable />
+```js path=../../components/data-table/NestedSearchTable name=NestedSearchTable
+```
+
+## Props Table
+
+| Prop                 | Type               | Description                                                                                                                                                                                                                                 |
+| :------------------- | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `tableData`          | Array of Object    | An array of objects representing the data for the table. Each object represents a row, and its properties represent columns.                                                                                                              |
+| `itemsPerPage`       | Number             | An integer representing the number of items to display per page. If set to 0 or not provided, all data will be displayed on a single page without pagination.                                                                             |
+| `queryAll`           | String             | A string representing a global search query applied to the entire table. This allows users to search for a specific term across all columns.                                                                                              |
+| `searchQueryObject`  | Array of Object    | An array of search query objects that allow filtering the data based on specific column values. Each object in the array should have two properties: `field` (string) - The name of the column to filter, `value` (string) - The value to search for in the specified column. |
+| `tableContainerClasses` | String/Object   | Custom CSS classes or styles to be applied to the container element that wraps the table. Accepts either a string of space-separated class names or an object of inline styles.                                                              |
+| `tableClasses`       | String/Object      | Custom CSS classes or styles to be applied to the table element. Accepts either a string of space-separated class names or an object of inline styles.                                                                                   |
+| `tableRowClasses`    | String/Object      | Custom CSS classes or styles to be applied to the table rows (`tr` elements). Accepts either a string of space-separated class names or an object of inline styles.                                                                       |
+| `tableColumnClasses` | String/Object      | Custom CSS classes or styles to be applied to the table columns (`td` elements). Accepts either a string of space-separated class names or an object of inline styles.                                                                   |
+| `headingRowClasses`  | String/Object      | Custom CSS classes or styles to be applied to the heading row (`tr` element) of the table. Accepts either a string of space-separated class names or an object of inline styles.                                                           |
+| `headingColumnClasses` | String/Object   | Custom CSS classes or styles to be applied to the heading columns (`th` elements) of the table. Accepts either a string of space-separated class names or an object of inline styles.                                                     |
+| `buttonClasses`      | String/Object      | Custom CSS classes or styles to be applied to the navigation buttons. Accepts either a string of space-separated class names or an object of inline styles.                                                                               |
+| `buttonContainerClasses` | String/Object  | Custom CSS classes or styles to be applied to the container element that wraps the navigation buttons. Accepts either a string of space-separated class names or an object of inline styles.                                          |
+| `showDetails`        | Function           | A function that receives `totalPages`, `totalItems`, `currentPage`, and `itemsPerPage` as arguments. This function can be used to display additional information about the pagination or any custom details based on the current state of the data table. |
+| `customTableHeader`  | Array of Object    | An array of strings representing the table header. If not provided, the table header will be created from the `tableData`.                                                                                                                  |
+
+
+**Note:**
+- To utilize the Simple `DataTable` with Pagination, you can employ the `HeadlessDataTable` component. 
+- However, if you require `Search` and `Filter` functionalities in addition to `Pagination`, then you should utilize the `HeadlessDataTableWithFilter` component.
+- The `HeadlessDataTable/HeadlessDataTableWithFilter` component uses the `useDataTable` hook from the `@locoworks/reusejs-toolkit-react-hooks` library to manage `pagination` and other functionalities. The hook returns various properties that are used to render the table and handle `pagination`. Please refer to the hook section to get more visiblity
+
+- When you use the `HeadlessDataTable/HeadlessDataTableWithFilter` component, it automatically `paginates` the `tableData` based on the `itemsPerPage` prop. It also sets up navigation buttons to move between pages of data.
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
