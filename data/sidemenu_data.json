@@ -4,9 +4,11 @@
     "Input",
     "Input Group",
     "Otp Input",
+    "Progress Bar",
     "Select Dropdown"
   ],
   "Hooks": [
+    "UseBetaForm",
     "UseDebounceEffect",
     "UseDidMountEffect",
     "UseHeadlessSelectHook",

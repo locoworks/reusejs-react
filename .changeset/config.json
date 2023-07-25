@@ -14,6 +14,7 @@
     "reuse-docs",
     "select-dropdown-app",
     "otp-input-app",
-    "toolkits-app"
+    "toolkits-app",
+    "toast-app"
   ]
 }
