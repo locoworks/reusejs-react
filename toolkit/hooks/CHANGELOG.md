@@ -1,5 +1,11 @@
 # @locoworks/reusejs-toolkit-react-hooks
 
+## 0.5.0
+
+### Minor Changes
+
+- 9781410: Added useMountComponent and useClosableComponent hooks
+
 ## 0.4.0
 
 ### Minor Changes
