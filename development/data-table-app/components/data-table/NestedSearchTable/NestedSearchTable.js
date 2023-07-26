@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HeadlessDataTableWithFilter } from "@locoworks/reusejs-react-data-table";
+import { HeadlessDataTable } from "@locoworks/reusejs-react-data-table";
 
 const FilterDataTable = () => {
 	const [userList, setUserLists] = useState([]);
@@ -85,7 +85,7 @@ const FilterDataTable = () => {
 					clear
 				</button>
 			</div>
-			<HeadlessDataTableWithFilter
+			<HeadlessDataTable
 				tableData={userData}
 				itemsPerPage={5}
 				customTableHeader={tableHeader}

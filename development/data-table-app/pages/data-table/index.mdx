@@ -11,7 +11,8 @@ import NestedSearchTable  from "../../components/data-table/NestedSearchTable/Ne
 
 ## Overview
 
-The `HeadlessDataTable` and `HeadlessDataTableWithFilter` components are reusable React components that provide data tables with pagination functionality. They are designed to display tabular data with customizable table headers and the ability to navigate through pages of data. The `HeadlessDataTableWithFilter` additionally allows for nested filtering of data based on search queries.
+The `HeadlessDataTable` component is a **flexible** and **customizable** data table for **React** applications. It handles **pagination** and **filtering**, making it easy to **present**, **navigate**, and **search** through tabular data. With built-in support for **custom** headers and **styles**, it provides a **user-friendly** experience. Utilizing the `useDataTable` hook, it efficiently manages **data operations** and **optimizes** performance. Whether displaying **product** listings, user information, or **financial** data, this component **streamlines** data presentation and enhances the overall user interface. It **saves development time**, promotes **data organization**, and empowers developers to create **intuitive** and **efficient** data tables with **minimal effort**.
+
 
 ## Installation
 Before using these components, make sure you have already installed the required dependencies, including React and @locoworks/reusejs-toolkit-react-hooks. You can install the dependencies by running below command in terminal.
@@ -19,50 +20,20 @@ Before using these components, make sure you have already installed the required
 ```jsx
 yarn add @locoworks/reusejs-react-data-table
 or
-npm install @locoworks/reusejs-react-data-table import { HeadlessDataTableWithFilter } from
-
+npm install @locoworks/reusejs-react-data-table
 ```
 
 ## External Dependencies:
-Both components depend on React and the `useDataTable` hook from the `@locoworks/reusejs-toolkit-react-hooks` package.
+`HeadlessDataTable` components depend on React and the `useDataTable` hook from the `@locoworks/reusejs-toolkit-react-hooks` package.
 
 ## Importing:
-To use the components in your project, import them into your file. Import one which you want to use.
+To use the HeadlessDataTable component in your project, import it into your component. 
 
 ```jsx
-import { HeadlessDataTableWithFilter } from "@locoworks/reusejs-react-data-table"
-or
 import { HeadlessDataTable } from "@locoworks/reusejs-react-data-table"
 ```
 ## Types/ Exported Components
-Both components uses TypeScript for type checking and define the `DataEntry` interface to specify the prop types. The main exported components are `HeadlessDataTable` and `HeadlessDataTableWithFilter`.
-
-## Props
-The `DataTable` component accepts the following props:
-
-1. `tableData` (required): An array of objects representing the data to be displayed in the table.
-
-2. `itemsPerPage` (optional): The number of items to display per page. If not specified or set to 0, all items will be displayed on a single page.
-
-3. `tableContainerClasses` (optional): Custom CSS classes or styles to be applied to the container element that wraps the table. Accepts either a string of space-separated class names or an object of inline styles.
-
-4. `tableClasses` (optional): Custom CSS classes or styles to be applied to the table element. Accepts either a string of space-separated class names or an object of inline styles.
-
-5. `tableRowClasses` (optional): Custom CSS classes or styles to be applied to the table rows (tr elements). Accepts either a string of space-separated class names or an object of inline styles.
-
-6. `tableColumnClasses` (optional): Custom CSS classes or styles to be applied to the table columns (td elements). Accepts either a string of space-separated class names or an object of inline styles.
-
-7. `headingRowClasses` (optional): Custom CSS classes or styles to be applied to the heading row (tr element) of the table. Accepts either a string of space-separated class names or an object of inline styles.
-
-18. `headingColumnClasses` (optional): Custom CSS classes or styles to be applied to the heading columns (th elements) of the table. Accepts either a string of space-separated class names or an object of inline styles.
-
-9. `buttonClasses` (optional): Custom CSS classes or styles to be applied to the navigation buttons. Accepts either a string of space-separated class names or an object of inline styles.
-
-10. `buttonContainerClasses` (optional): Custom CSS classes or styles to be applied to the container element that wraps the navigation buttons. Accepts either a string of space-separated class names or an object of inline styles.
-
-11. `showDetails` (optional): A function that receives totalPages, totalItems, currentPage, and itemsPerPage as arguments. This function can be used to display additional information about the pagination or any custom details based on the current state of the data table.
-
-12. `customTableHeader` (optional): An array of string representing the table header. if not provided Table header will be create dfrom the `tableData`.
+HeadlessDataTable component uses TypeScript for type checking and define the `HeadlessDataTableInterface` interface to specify the prop types. The main exported component is `HeadlessDataTable`.
 
 ## Example
 <PaginatedTable />
@@ -105,11 +76,9 @@ The `DataTable` component accepts the following props:
 
 
 **Note:**
-- To utilize the Simple `DataTable` with Pagination, you can employ the `HeadlessDataTable` component. 
-- However, if you require `Search` and `Filter` functionalities in addition to `Pagination`, then you should utilize the `HeadlessDataTableWithFilter` component.
-- The `HeadlessDataTable/HeadlessDataTableWithFilter` component uses the `useDataTable` hook from the `@locoworks/reusejs-toolkit-react-hooks` library to manage `pagination` and other functionalities. The hook returns various properties that are used to render the table and handle `pagination`. Please refer to the hook section to get more visiblity
-
-- When you use the `HeadlessDataTable/HeadlessDataTableWithFilter` component, it automatically `paginates` the `tableData` based on the `itemsPerPage` prop. It also sets up navigation buttons to move between pages of data.
+- To utilize the Simple `DataTable` with Pagination or you require `Search` and `Filter` functionalities in addition to `Pagination`  then you should utilize `HeadlessDataTable`. 
+- The `HeadlessDataTable` component uses the `useDataTable` hook from the `@locoworks/reusejs-toolkit-react-hooks` library to manage `pagination` and other functionalities. The hook returns various properties that are used to render the table and handle `pagination`. Please refer to the hook section to get more visiblity
+- When you use the `HeadlessDataTable` component, it automatically `paginates` the `tableData` based on the `itemsPerPage` prop. It also sets up navigation buttons to move between pages of data.
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
