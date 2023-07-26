@@ -52,7 +52,7 @@ const HeadlessDataTable = ({
 	} = useDataTable({
 		tableData: tableData,
 		itemsPerPage: itemsPerPage,
-		searchQueryObject: typeof queryObject === "object" ? queryObject : [],
+		searchQueryObject: queryObject,
 		queryAll: searchAll,
 	});
 
