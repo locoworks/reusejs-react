@@ -2,6 +2,7 @@
   "name": "slider-carousel-app",
   "version": "0.0.1",
   "private": true,
+  "prettier": "@betalectic-reusejs/shared-config-prettier-ts",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
