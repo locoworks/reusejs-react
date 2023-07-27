@@ -46,12 +46,22 @@ function getHooksList(directory) {
     const files = fs.readdirSync(directory);
     let hooksList = [];
 
+    const replacer = (file) => {
+      if (file.includes(".jsx")) {
+        return file.replace(".jsx", "");
+      } else if (file.includes(".tsx")) {
+        return file.replace(".tsx", "");
+      } else if (file.includes(".js")) {
+        return file.replace(".js", "");
+      } else if (file.includes(".ts")) {
+        return file.replace(".ts", "");
+      } else {
+        return file;
+      }
+    };
+
     files.forEach((file) => {
-      const temp = file
-        .replace(".ts", "")
-        .replace("js", "")
-        .replace(".tsx", "")
-        .replace("jsx", "")
+      const temp = replacer(file)
         .split("-")
         .map((ele) => ele.charAt(0).toUpperCase() + ele.slice(1))
         .join("");

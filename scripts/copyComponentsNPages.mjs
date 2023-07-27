@@ -51,11 +51,12 @@ const getComponentFoldersList = () => {
     .readdirSync(devAppsPath)
     .filter((ele) => !ele.includes("toolkits-app"))
     .map((app) => "./development/" + app + "/pages");
-  componentList.forEach((sourcePath) =>
-    copyToFolder(sourcePath, "./docs/components")
-  );
+  componentList.forEach((sourcePath) => {
+    copyToFolder(sourcePath, "./docs/components");
+  });
   pagesList.forEach((sourcePath) => copyToFolder(sourcePath, "./docs/pages"));
   copyToFolder("./development/toolkits-app/pages", "./docs/pages");
+  copyToFolder("./development/toolkits-app/components", "./docs/components");
 };
 
 export default getComponentFoldersList;

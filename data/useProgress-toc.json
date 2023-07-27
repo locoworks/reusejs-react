@@ -6,11 +6,6 @@
   },
   {
     "depth": 2,
-    "value": "Table of contents",
-    "children": []
-  },
-  {
-    "depth": 2,
     "value": "useProgress Hook Documentation",
     "children": [
       {

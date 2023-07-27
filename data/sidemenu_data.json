@@ -6,20 +6,25 @@
     "Input Group",
     "Otp Input",
     "Progress Bar",
-    "Select Dropdown"
+    "Select Dropdown",
+    "Slider Carousel",
+    "Toast"
   ],
   "Hooks": [
     "UseBetaForm",
+    "UseClosableComponent",
     "UseDataTable",
     "UseDebounceEffect",
     "UseDidMountEffect",
     "UseHeadlessSelectHook",
     "UseIsoMorphicEffect",
+    "UseMountComponent",
     "UseOutsideClicker",
     "UseProgress",
     "UseSlider"
   ],
   "Utils": [
+    "DataLoaderOrchestrator",
     "env"
   ]
 }
