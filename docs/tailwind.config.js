@@ -13,6 +13,8 @@ module.exports = {
 "../../components/otp-input/**/*.{js,jsx.ts.tsx,mdx}",
 "../../components/progress-bar/**/*.{js,jsx.ts.tsx,mdx}",
 "../../components/select-dropdown/**/*.{js,jsx.ts.tsx,mdx}",
+"../../components/slider-carousel/**/*.{js,jsx.ts.tsx,mdx}",
+"../../components/toast/**/*.{js,jsx.ts.tsx,mdx}",
 		"./pages/**/*.{js,ts,jsx,tsx,mdx}",
 		"./components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",

@@ -1,0 +1,148 @@
+---
+HEAD OBJECT
+title: "ReuseJS toast"
+author: "John Doe"
+---
+
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../../data/toast-toc.json" 
+import HeadlessToastExample from "../../components/toast/HeadlessToastExample/HeadlessToastExample.tsx";
+import ToastPositionExample from "../../components/toast/ToastPositionExample/ToastPositionExample.tsx";
+import CustomPositionExample from "../../components/toast/CustomPositionExample/CustomPositionExample.tsx";
+import ToastWithIconExample from "../../components/toast/ToastWithIconExample/ToastWithIconExample.tsx";
+import ToastWithNoProgress from "../../components/toast/ToastWithNoProgress/ToastWithNoProgress.tsx";
+import CustomStyledExample from "../../components/toast/CustomStyledExample/CustomStyledExample.tsx";
+
+## Overview
+The Toast component library provides two components, HeadlessToast and ReuseToast, to display toast notifications in your React applications. Toasts are temporary, non-intrusive messages that appear at the bottom or top of the screen to provide users with feedback or important information.
+
+## Installation
+ReuseJS Exposes individual components in there own packages and as such you can install Toast by adding following package to your package.json
+```
+yarn add @locoworks/reusejs-react-toast
+or 
+npm install @locoworks/reusejs-react-toast
+```
+
+## External Dependencies
+One of the key aspect of a toast component is how they enter and exit the UI. For this we usually apply animation to any our toast components.
+Reusejs Toast provide user with Animation out of the box. We use **framer-motion** for applying these animation styles.
+
+Thus you need to add **framer-motion** to your application to use reusejs-toast
+```
+yarn add framer-motion
+or
+npm install framer-motion
+```
+
+## Importing
+`@locoworks/reusejs-react-toast` exports two components for the end user, which they can use depending upon their needs. These components are
+- **HeadlessToast**
+- **ReuseToast**
+
+To use above components we have to import them as follows
+```jsx
+import {HeadlessToast, ReuseToast} from "@locoworks/reusejs-react-toast";
+```
+
+## HeadlessToast
+The HeadlessToast component is a part of the Toast component library for React applications("@locoworks/reusejs-react-toast"). It is a higher-order component (HOC) that provides closable behavior to a wrapped component, allowing it to be displayed as a toast notification.
+
+As this component is headless it does not have any UI element to display out of the box instead it falls upon the user to create and style a Toast component, which they can than pass to the HeadlessToast component to be displayed as toast.
+
+### Input Parameters
+The HeadlessToast component accepts the following input parameters:
+
+- **timeout** (number, required): The time in milliseconds for which the toast should remain visible before automatically closing.
+- **component** (React.ReactNode, required): The React component that will be displayed as the content of the toast.
+
+### Return Type
+The HeadlessToast component it wraps the provided component with closable behavior and returns an enhanced component with toast behavior. Capture this is an async function. Call this function to mount the set component as a toast.
+
+## ReuseToast
+
+## ReuseToast Component
+
+The `ReuseToast` component provides a toast notification with customizable properties such as timeout duration, position, appearance, and progress indicator. It wraps the `HeadlessToast` component, which adds closable behavior to the toast, allowing it to automatically close after a specified timeout.
+
+### Props List
+
+The `ReuseToast` component accepts the following props:
+
+1. `timeout` (number, required): The time in milliseconds for which the toast should remain visible before automatically closing.
+2. `label` (string, required): The text content of the toast.
+3. `toastClasses` (string, optional): Additional CSS classes to be applied to the toast element.
+4. `icon` (React.ReactNode, optional): An optional React node to be displayed as an icon within the toast.
+5. `showProgress` (boolean, optional): A flag to control the display of a progress bar indicating the remaining time for the toast to close. Default is `true`.
+6. `progressClasses` (string, optional): Additional CSS classes to be applied to the progress bar element.
+7. `position` (string, optional): The position of the toast on the screen. Possible values: `"top-left"`, `"top-centre"`, `"top-right"`, `"centre-right"`, `"bottom-right"`, `"bottom-centre"`, `"bottom-left"`, `"centre-left"`. Default is `"bottom-centre"`.
+8. `customToastPosition` (string, optional): Custom CSS position value for the toast element if you want to override the pre-defined positions.
+9. `customAnimation` (object, optional): Custom animation configuration for the toast. It contains the following properties: `initial`, `animate`, `exit`, and `transition`.
+
+### Props Table
+
+| Prop                  | Type                   | Description                                                                                                                                                                         |
+|-----------------------|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| timeout               | number (required)      | The time in milliseconds for which the toast should remain visible before automatically closing.                                                                                  |
+| label                 | string (required)      | The text content of the toast.                                                                                                                                                     |
+| toastClasses          | string (optional)      | Additional CSS classes to be applied to the toast element.                                                                                                                         |
+| icon                  | React.ReactNode (optional) | An optional React node to be displayed as an icon within the toast.                                                                                                                |
+| showProgress          | boolean (optional)     | A flag to control the display of a progress bar indicating the remaining time for the toast to close. Default is `true`.                                                          |
+| progressClasses       | string (optional)      | Additional CSS classes to be applied to the progress bar element.                                                                                                                 |
+| position              | string (optional)      | The position of the toast on the screen. Possible values: `"top-left"`, `"top-centre"`, `"top-right"`, `"centre-right"`, `"bottom-right"`, `"bottom-centre"`, `"bottom-left"`, `"centre-left"`. Default is `"bottom-centre"`. |
+| customToastPosition   | string (optional)      | Custom CSS position value for the toast element if you want to override the pre-defined positions.                                                                                |
+| customAnimation       | object (optional)      | Custom animation configuration for the toast. It contains the following properties: `initial`, `animate`, `exit`, and `transition`.                                               |
+
+## Usage and examples
+Following are some example and code samples for toast example made using ReuseToast and HeadlessToast. You can also find the Code fragment to directly use for yourself
+
+### Headless Toast Example
+<HeadlessToastExample/>
+
+```js path=../../components/toast/HeadlessToastExample name=HeadlessToastExample
+```
+
+### Toast Positions Example
+
+<ToastPositionExample/>
+
+```js path=../../components/toast/ToastPositionExample name=ToastPositionExample
+```
+
+### Custom Position Toast
+
+This example shows a custom toast with custom animation for opacity
+
+<CustomPositionExample/>
+
+```js path=../../components/toast/CustomPositionExample name=CustomPositionExample
+```
+
+### Toast With Icon
+
+<ToastWithIconExample/>
+```js path=../../components/toast/ToastWithIconExample name=ToastWithIconExample
+```
+
+### Toast with No Progress Indicator
+
+<ToastWithNoProgress/>
+```js path=../../components/toast/ToastWithNoProgress name=ToastWithNoProgress
+```
+
+
+### Custom Styles Toast Example
+
+<CustomStyledExample/>
+```js path=../../components/toast/CustomStyledExample name=CustomStyledExample
+```
+### Notes
+
+- The `ReuseToast` component internally utilizes the `HeadlessToast` component to handle the toast's closable behavior.
+- The component allows customization of toast appearance, positioning, and progress indicator, making it suitable for various toast notifications.
+
+
+
+export default ({ children }) => {
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
+};

@@ -1,0 +1,100 @@
+[
+  {
+    "depth": 2,
+    "value": "HEAD OBJECT\ntitle: \"ReuseJS toast\"\nauthor: \"John Doe\"",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Overview",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Installation",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "External Dependencies",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Importing",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "HeadlessToast",
+    "children": [
+      {
+        "depth": 3,
+        "value": "Input Parameters",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Return Type",
+        "children": []
+      }
+    ]
+  },
+  {
+    "depth": 2,
+    "value": "ReuseToast",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "ReuseToast Component",
+    "children": [
+      {
+        "depth": 3,
+        "value": "Props List",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Props Table",
+        "children": []
+      }
+    ]
+  },
+  {
+    "depth": 2,
+    "value": "Usage and examples",
+    "children": [
+      {
+        "depth": 3,
+        "value": "Headless Toast Example",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Toast Positions Example",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Custom Position Toast",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Toast With Icon",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Toast with No Progress Indicator",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Custom Styles Toast Example",
+        "children": []
+      }
+    ]
+  }
+]
