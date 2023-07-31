@@ -1,7 +1,17 @@
 import React from "react";
 import { HeadlessBreadcrumbs } from "@locoworks/reusejs-react-breadcrumbs";
+import HomeIcon from "../Icons/HomeIcon";
 
-const breadcrumbsOptions = ["Home", "Application", "Breadcrumbs"];
+const breadcrumbsOptions = [
+	<div
+		className="flex justify-center items-center"
+		onClick={() => (window.location.href = "https://locoworks.org/")}
+	>
+		<HomeIcon /> <span className="flex px-4">Home</span>
+	</div>,
+	"Application",
+	"Breadcrumbs",
+];
 
 const SimpleBreadcrumbsThree = () => {
 	return (

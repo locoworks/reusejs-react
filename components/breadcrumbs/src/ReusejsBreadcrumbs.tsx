@@ -1,9 +1,11 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import HeadlessBreadcrumbs from "./HeadlessBreadcrumbs";
 
 interface ReusejsBreadcrumbsInterface {
 	breadcrumbs: (React.ReactNode | string)[];
 	separator?: React.ReactNode | string;
+	containerClasses?: string | CSSProperties;
+	maxItems?: number;
 }
 
 const HomeIcon = () => {
@@ -42,18 +44,23 @@ const defaultSeparator = () => {
 const ReusejsBreadcrumbs = ({
 	breadcrumbs,
 	separator,
+	containerClasses,
+	maxItems,
 }: ReusejsBreadcrumbsInterface) => {
 	return (
-		<div className="flex">
+		<div
+			className={typeof containerClasses === "string" ? containerClasses : ""}
+			style={typeof containerClasses === "object" ? containerClasses : {}}
+		>
 			<HomeIcon />
 			<HeadlessBreadcrumbs
 				breadcrumbs={breadcrumbs}
 				separator={separator ? separator : defaultSeparator()}
-				breadcrumbsClasses={
-					"flex items-center bg-white text-gray-700 px-4 py-2 mt-10"
-				}
+				breadcrumbsClasses={"flex items-center px-2 py-2 mt-0 cursor-pointer"}
 				breadcrumbsContainerClasses={"flex items-center hover:text-blue-600"}
 				separatorClasses={"px-2 text-gray-400"}
+				maxItems={maxItems}
+				spreadclasses={"flex"}
 			/>
 		</div>
 	);
