@@ -93,13 +93,13 @@ const HeadlessBreadcrumbs = ({
 							</div>
 						) : index === breadcrumbs.length - 1 ? (
 							<div
+								key={index}
 								className={
 									typeof spreadclasses === "string" ? spreadclasses : ""
 								}
 								style={typeof spreadclasses === "object" ? spreadclasses : {}}
 							>
 								<div
-									key={index}
 									className={
 										typeof breadcrumbsContainerClasses === "string"
 											? breadcrumbsContainerClasses
@@ -130,7 +130,6 @@ const HeadlessBreadcrumbs = ({
 								</div>
 
 								<div
-									key={index}
 									className={
 										typeof breadcrumbsContainerClasses === "string"
 											? breadcrumbsContainerClasses

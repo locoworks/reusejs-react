@@ -30,7 +30,7 @@ const SimpleBreadcrumbsFour = () => {
 				breadcrumbs={breadcrumbsOptions}
 				separator={"/"}
 				breadcrumbsClasses={
-					"flex items-center bg-cyan-800 text-black p-2 mt-10"
+					"flex items-center bg-cyan-800 text-black p-2 mt-10 flex-wrap"
 				}
 				breadcrumbsContainerClasses={"flex items-center"}
 			/>

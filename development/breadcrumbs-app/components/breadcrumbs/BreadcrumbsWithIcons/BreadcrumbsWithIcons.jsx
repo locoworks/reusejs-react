@@ -39,7 +39,7 @@ const BreadcrumbsWithIcons = () => {
 				breadcrumbs={breadcrumbsOptions}
 				separator={<SeparatorIcon />}
 				breadcrumbsClasses={
-					"flex items-center bg-cyan-100 text-black px-4 py-2 mt-10 "
+					"flex items-center bg-cyan-100 text-black px-4 py-2 mt-10 flex-wrap"
 				}
 				breadcrumbsContainerClasses={"flex items-center hover:text-blue-500"}
 				separatorClasses={"px-2 text-black"}

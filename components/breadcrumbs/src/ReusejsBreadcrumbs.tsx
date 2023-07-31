@@ -6,6 +6,7 @@ interface ReusejsBreadcrumbsInterface {
 	separator?: React.ReactNode | string;
 	containerClasses?: string | CSSProperties;
 	maxItems?: number;
+	iconClasses?: string | CSSProperties;
 }
 
 const HomeIcon = () => {
@@ -46,17 +47,25 @@ const ReusejsBreadcrumbs = ({
 	separator,
 	containerClasses,
 	maxItems,
+	iconClasses,
 }: ReusejsBreadcrumbsInterface) => {
 	return (
 		<div
 			className={typeof containerClasses === "string" ? containerClasses : ""}
 			style={typeof containerClasses === "object" ? containerClasses : {}}
 		>
-			<HomeIcon />
+			<div
+				className={typeof iconClasses === "string" ? iconClasses : ""}
+				style={typeof iconClasses === "object" ? iconClasses : {}}
+			>
+				<HomeIcon />
+			</div>
 			<HeadlessBreadcrumbs
 				breadcrumbs={breadcrumbs}
 				separator={separator ? separator : defaultSeparator()}
-				breadcrumbsClasses={"flex items-center px-2 py-2 mt-0 cursor-pointer"}
+				breadcrumbsClasses={
+					"flex items-center px-2 py-2 mt-0 cursor-pointer flex-wrap"
+				}
 				breadcrumbsContainerClasses={"flex items-center hover:text-blue-600"}
 				separatorClasses={"px-2 text-gray-400"}
 				maxItems={maxItems}
