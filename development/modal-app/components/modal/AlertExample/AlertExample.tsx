@@ -3,13 +3,14 @@ import React from "react";
 import { HeadlessModal } from "@locoworks/reusejs-react-modal";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
 import CancelIcon from "../icons/CancelIcon";
+import AlertIcon from "../icons/AlertIcon";
 
-const Example = () => {
+const AlertExample = () => {
 	const Modal = (props: any, ref: any) => {
 		return (
 			<div
 				ref={ref}
-				className="relative bg-white text-black px-2 py-5 rounded border-2 flex flex-col items-center gap-y-5 w-[400px]"
+				className="relative bg-red-50 text-red-700 px-2 py-8 rounded-lg border-2 border-red-700 flex flex-col items-center gap-y-5 w-[400px] font-bold text-lg"
 			>
 				<div
 					className="text-gray-500 bg-transparent absolute top-2 right-2 p-0 cursor-pointer"
@@ -19,28 +20,29 @@ const Example = () => {
 				>
 					<CancelIcon />
 				</div>
-				<label>This is a sample Modal!</label>
+				<AlertIcon />
+				<label>This is a sample Alert!!</label>
 				<ReuseButton
-					className="rounded bg-blue-400 px-3 py-1 w-fit"
+					className="rounded bg-red-400  text-red-700 px-3 py-1 w-fit hover:bg-red-500 font-bold"
 					onClick={() => {
-						props.onAction("Closed");
+						props.onAction(true);
 					}}
 				>
-					Close
+					Confirm
 				</ReuseButton>
 			</div>
 		);
 	};
-
 	const showModal = async () => {
 		const result = await HeadlessModal({
 			component: Modal,
-			backdropClasses: "bg-green-500",
-			inputValues: {
-				input: "Hello",
-			},
+			backdropClasses: "bg-black",
 		});
-		console.log(result);
+		if (result) {
+			setTimeout(() => {
+				alert("Confirmed");
+			}, 500);
+		}
 	};
 
 	return (
@@ -52,4 +54,4 @@ const Example = () => {
 	);
 };
 
-export default Example;
+export default AlertExample;
