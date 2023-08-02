@@ -44,7 +44,11 @@
     "@locoworks/reusejs-react-select-dropdown": "*",
     "@locoworks/reusejs-toolkit-react-hooks": "*",
     "@locoworks/reusejs-toolkit-utils": "*",
-    "@locoworks/reusejs-react-progress-bar": "*"
+    "@locoworks/reusejs-react-progress-bar": "*",
+    "@locoworks/reusejs-react-data-table": "*",
+    "@locoworks/reusejs-react-slider-carousel": "*",
+    "@locoworks/reusejs-react-toast": "*",
+    "framer-motion": "^10.13.0"
   },
   "devDependencies": {
     "prettier": "^3.0.0",

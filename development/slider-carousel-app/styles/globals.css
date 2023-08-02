@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hash-link::before {
+  content: "#";
+  margin-right: 2px;
+  color: #4455ff;
+  text-decoration-color: #4455ff;
+  text-decoration: none !important;
+}
+
+.hashlink {
+  text-decoration: none;
+}
+
+
+.slide-to-left {
+  animation: slideToLeft 0.2 ease;
+  animation-delay: 2s;
+}
+
+.slide-right-to-left {
+  animation: slideRightToLeft 0.5s ease;
+} 
+
+@keyframes slideRightToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideToLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
