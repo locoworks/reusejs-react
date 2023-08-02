@@ -18,7 +18,7 @@ const HeadlessSliderCarousel: FC<HeadlessSliderCarouselInterface> = ({
 
   const resumeSlides = () => {
     if (parent !== null) {
-      let autoScroll = async () => {
+      const autoScroll = async () => {
         setScrollLeft((prev) => {
           return prev + childWidth;
         });
@@ -53,7 +53,7 @@ const HeadlessSliderCarousel: FC<HeadlessSliderCarouselInterface> = ({
   }, [dependency]);
   return (
     <div ref={parentRef} {...rest}>
-      {slides.map((slide: React.ReactNode, index: number) => {
+      {slides.map((slide: React.ReactNode) => {
         return slide;
       })}
     </div>

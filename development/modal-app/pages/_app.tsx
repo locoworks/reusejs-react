@@ -3,6 +3,8 @@ import React from "react";
 import Head from "next/head";
 import { MDXProvider } from "@mdx-js/react";
 import { CodeProcessor } from "@locoworks/reusejs-react-code-preview";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 type StringKeyStringObject = { [key: string]: string };
 
@@ -38,12 +40,21 @@ export default function App({ Component, pageProps }: any) {
 		},
 		pre: (props: any) => {
 			if (props.children?.props?.children?.includes("[TO-SPLIT]")) {
-				return CodeProcessor(props?.children?.props?.children);
+				return CodeProcessor(
+					props?.children?.props?.children,
+					(language: any, code: any) => {
+						return (
+							<SyntaxHighlighter language={language} style={dracula}>
+								{code}
+							</SyntaxHighlighter>
+						);
+					},
+				);
 			} else {
 				return (
-					<pre>
-						<code>{props.children}</code>
-					</pre>
+					<SyntaxHighlighter language="javascript" style={dracula}>
+						{props?.children?.props?.children}
+					</SyntaxHighlighter>
 				);
 			}
 		},
