@@ -9,6 +9,8 @@ import ConfirmExample from "../../components/modal/ConfirmExample/ConfirmExample
 import AlertExample from "../../components/modal/AlertExample/AlertExample.tsx"
 import SuccessExample from "../../components/modal/SuccessExample/SuccessExample.tsx"
 import InputModal from "../../components/modal/InputModal/InputModal.tsx"
+import BottomModal from "../../components/modal/BottomModal/BottomModal.tsx"
+
 
 ## Table of contents
 # ReuseJS Modal
@@ -65,7 +67,17 @@ function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any): Rea
 The `config` parameter is an object that provides configuration options for the modal component. The `unmountDelay` parameter is optional and specifies the delay (in milliseconds) before the modal unmounts. The `mountingNode` parameter is also optional and determines where the modal should be mounted in the DOM.
 
 ## Props
-The `HeadlessModal` component does not take any props itself. However, the modal component created using this hook will receive props based on the configuration provided through the `config` object.
+The `HeadlessModal` component takes in the following props for styling the backdrop and the modal-wrapper which is used to apply animations to the modal component.
+
+- `modalWrapperClasses`(string): [Optional].  These are style classes which will be appplied to the modal wrapper element. These classes will be merged with the default classes.
+- `backdropClasses`(string): [Optional] These are tailwind styles which will be applied to the backdrop component which acts as a layer between the main page UI and Modal.
+- `animations`(object): [Optional] HeadlessModal comes with some predefined animation for backdrop and modal. These animations can be furthur customised by the user using this prop. `animation` prop accept two key value pairs of backdrop and modal, where *backdrop* and *modal* are the key and value will be an object with following keys:
+      - *initial*: For enter animation
+      - *animate*: For normal position
+      - *exit*: for exit animation
+      - *transition*: for specifying which animation should be used for showing animation.
+- `component`: This is the component passed to the HeadlessModal wrapper. This component will be render as the modal and hence you can control exactly how the modal will look by passing your own custom component.
+> Modal use framer-motion for animation hence accepts its key:value pairs to create animations. Thus we can use framer-motion 
 
 ## Examples and Usage 
 
@@ -92,6 +104,11 @@ The `HeadlessModal` component does not take any props itself. However, the modal
 ### Input Modal Example
 <InputModal/>
 ```js path=../../components/modal/InputModal name=InputModal
+```
+
+### Bottom Modal Example
+<BottomModal/>
+```js path=../../components/modal/BottomModal name=BottomModal
 ```
 
 ## Styling

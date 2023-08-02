@@ -39,6 +39,13 @@ const Example = () => {
 			inputValues: {
 				input: "Hello",
 			},
+			animations: {
+				modal: {
+					initial: { opacity: 0, x: -400, y: -400 },
+					animate: { opacity: 1, x: 0, y: 0 },
+					exit: { opacity: 0, x: 400, y: 400 },
+				},
+			},
 		});
 		console.log(result);
 	};

@@ -8,7 +8,18 @@ import {
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
 
-function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any) {
+const DEFAULTBACKDROPANIMATION = {
+	initial: { opacity: 0 },
+	animate: { opacity: 1 },
+	exit: { opacity: 0 },
+};
+const DEFAULTMODALANIMATION = {
+	initial: { opacity: 0, y: -100 },
+	animate: { opacity: 1, y: 0 },
+	exit: { opacity: 0, y: 100 },
+};
+
+const HeadlessModal = (config: any, unmountDelay = 200, mountingNode?: any) => {
 	const ModalBase: any = React.forwardRef((props: any, ref: any) => {
 		const visRef = useOutsideClicker(() => {
 			setOpen(false);
@@ -16,8 +27,19 @@ function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any) {
 		});
 		const [open, setOpen] = useState(true);
 
+		let backdropAnimations = DEFAULTBACKDROPANIMATION;
+		let modalAnimations = DEFAULTMODALANIMATION;
+
+		if (props?.animations?.backdrop) {
+			backdropAnimations = props.animations.backdrop;
+		}
+		if (props?.animations?.modal) {
+			modalAnimations = props.animations.modal;
+		}
+
 		const defaultBackdropClasses =
 			"fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-50 flex justify-center items-center";
+		const defaultModalWrapperClasses = "relative";
 
 		const onRemoveAction = (payload: any) => {
 			setOpen(false);
@@ -29,18 +51,17 @@ function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any) {
 				{open && (
 					<motion.div
 						key={"backdrop"}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
+						{...backdropAnimations}
 						className={twMerge(defaultBackdropClasses, props.backdropClasses)}
 					>
 						<motion.div
 							key="modal-wrapper"
-							initial={{ opacity: 0, y: -100 }}
-							animate={{ opacity: 1, y: 0 }}
-							exit={{ opacity: 0, y: 100 }}
+							{...modalAnimations}
 							ref={visRef}
-							className="relative"
+							className={twMerge(
+								defaultModalWrapperClasses,
+								props.modalWrapperClasses,
+							)}
 						>
 							{props.component({ ...props, onAction: onRemoveAction }, ref)}
 						</motion.div>
@@ -49,6 +70,7 @@ function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any) {
 			</AnimatePresence>
 		);
 	});
+
 	if (config.timeout === undefined) {
 		config.timeout = 0;
 	}
@@ -57,6 +79,6 @@ function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any) {
 		unmountDelay,
 		mountingNode,
 	)(config);
-}
+};
 
 export default HeadlessModal;
