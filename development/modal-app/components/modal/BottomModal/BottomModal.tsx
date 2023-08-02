@@ -55,7 +55,7 @@ const BottomModal = () => {
 			inputValues: {
 				input: "Hello",
 			},
-			modalWrapperClass: "absolute bottom-0",
+			modalWrapperClasses: "absolute bottom-0",
 			animations: {
 				modal: {
 					initial: { opacity: 0, y: 400 },
