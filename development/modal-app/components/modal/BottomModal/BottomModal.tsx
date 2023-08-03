@@ -1,20 +1,24 @@
 /* eslint-disable react/display-name */
-import React from "react";
+import React, { useState } from "react";
 import { HeadlessModal } from "@locoworks/reusejs-react-modal";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
 import HandleIcon from "../icons/HandleIcon";
 
 const BottomModal = () => {
-	const Modal = (props: any, ref: any) => {
+	const Modal = React.forwardRef((props: any, ref: any) => {
+		const [full, setFull] = useState(false);
 		return (
 			<div
 				ref={ref}
-				className="w-screen bottom-0 bg-white max-h-[90vh] h-fit rounded-t-xl flex flex-col items-center py-3 gap-y-3"
+				className={
+					"w-screen bottom-0 bg-white rounded-t-xl flex flex-col items-center py-3 gap-y-3 transition-all " +
+					(full ? " h-screen" : " max-h-[90vh] h-fit ")
+				}
 			>
 				<div
-					className="w-fit h-fit cursor-pointer"
+					className={"w-fit h-fit cursor-pointer " + (full ? "" : "rotate-180")}
 					onClick={() => {
-						props.onAction(false);
+						setFull(!full);
 					}}
 				>
 					<HandleIcon />
@@ -46,7 +50,7 @@ const BottomModal = () => {
 				</div>
 			</div>
 		);
-	};
+	});
 
 	const showModal = async () => {
 		const result = await HeadlessModal({

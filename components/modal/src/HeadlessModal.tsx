@@ -63,7 +63,15 @@ const HeadlessModal = (config: any, unmountDelay = 200, mountingNode?: any) => {
 								props.modalWrapperClasses,
 							)}
 						>
-							{props.component({ ...props, onAction: onRemoveAction }, ref)}
+							{typeof props.component === "object" && (
+								<props.component
+									{...props}
+									onAction={onRemoveAction}
+									ref={ref}
+								/>
+							)}
+							{typeof props.component === "function" &&
+								props.component({ ...props, onAction: onRemoveAction }, ref)}
 						</motion.div>
 					</motion.div>
 				)}
