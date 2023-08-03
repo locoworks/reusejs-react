@@ -46,8 +46,6 @@ const HeadlessModal = (config: any, unmountDelay = 200, mountingNode?: any) => {
 			props.onAction(payload);
 		};
 
-		console.log(">>>>>>>>>>>>>>>>>", typeof props.component);
-
 		return (
 			<AnimatePresence>
 				{open && (
