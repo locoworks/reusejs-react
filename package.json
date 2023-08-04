@@ -17,6 +17,8 @@
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
 		"breadcrumbs:dev": "turbo run dev --filter=breadcrumbs-app...",
 		"breadcrumbs:build": "turbo run build --filter=@locoworks/reusejs-react-breadcrumbs...",
+		"modal:dev": "turbo run dev --filter=modal-app...",
+		"modal:build": "turbo run build --filter=@locoworks/reusejs-react-modal...",
     "slider-carousel:dev": "turbo run dev --filter=slider-carousel-app...",
     "slider-carousel:build": "turbo run build --filter=@locoworks/reusejs-react-slider-carousel...",
     "data-table:dev": "turbo run dev --filter=data-table-app...",
