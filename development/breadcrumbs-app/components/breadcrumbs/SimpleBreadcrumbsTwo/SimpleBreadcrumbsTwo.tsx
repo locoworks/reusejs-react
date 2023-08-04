@@ -17,7 +17,6 @@ const SimpleBreadcrumbsTwo = () => {
 				containerClasses={
 					"flex items-center hover:text-green-500 cursor-pointer"
 				}
-				maxItems={3}
 			/>
 		</div>
 	);

@@ -7,7 +7,8 @@ interface HeadlessBreadcrumbsInterface {
 	breadcrumbsContainerClasses?: string | CSSProperties;
 	separatorClasses?: string | CSSProperties;
 	maxItems?: number;
-	spreadclasses?: string | CSSProperties;
+	left?: number;
+	right?: number;
 }
 
 const HeadlessBreadcrumbs = ({
@@ -17,7 +18,8 @@ const HeadlessBreadcrumbs = ({
 	breadcrumbsContainerClasses,
 	separatorClasses,
 	maxItems = breadcrumbs.length,
-	spreadclasses,
+	left = -1,
+	right = -1,
 }: HeadlessBreadcrumbsInterface) => {
 	const [maxItemShow, setMaxItemShow] = useState<number>(maxItems);
 
@@ -28,10 +30,15 @@ const HeadlessBreadcrumbs = ({
 			}
 			style={typeof breadcrumbsClasses === "object" ? breadcrumbsClasses : {}}
 		>
-			{maxItemShow === breadcrumbs.length || maxItemShow < 2
+			{maxItemShow === breadcrumbs.length ||
+			maxItemShow < 2 ||
+			left < 1 ||
+			right < 1 ||
+			maxItemShow !== left + right
 				? breadcrumbs.map((item: React.ReactNode, index: number) => {
 						return (
 							<div
+								onClick={() => setMaxItemShow(maxItems)}
 								key={index}
 								className={
 									typeof breadcrumbsContainerClasses === "string"
@@ -44,7 +51,7 @@ const HeadlessBreadcrumbs = ({
 										: {}
 								}
 							>
-								{item}{" "}
+								{item}
 								{index < breadcrumbs.length - 1 ? (
 									<div
 										className={
@@ -64,8 +71,9 @@ const HeadlessBreadcrumbs = ({
 							</div>
 						);
 				  })
-				: breadcrumbs.map((item: React.ReactNode, index: number) => {
-						return index < maxItemShow - 1 ? (
+				: left + right < breadcrumbs.length && left + right === maxItemShow
+				? breadcrumbs.map((item: React.ReactNode, index: number) => {
+						return (
 							<div
 								key={index}
 								className={
@@ -79,73 +87,82 @@ const HeadlessBreadcrumbs = ({
 										: {}
 								}
 							>
-								{item}
-								<div
-									className={
-										typeof separatorClasses === "string" ? separatorClasses : ""
-									}
-									style={
-										typeof separatorClasses === "object" ? separatorClasses : {}
-									}
-								>
-									{separator}
-								</div>
-							</div>
-						) : index === breadcrumbs.length - 1 ? (
-							<div
-								key={index}
-								className={
-									typeof spreadclasses === "string" ? spreadclasses : ""
-								}
-								style={typeof spreadclasses === "object" ? spreadclasses : {}}
-							>
-								<div
-									className={
-										typeof breadcrumbsContainerClasses === "string"
-											? breadcrumbsContainerClasses
-											: ""
-									}
-									style={
-										typeof breadcrumbsContainerClasses === "object"
-											? breadcrumbsContainerClasses
-											: {}
-									}
-									onClick={() => setMaxItemShow(breadcrumbs.length)}
-								>
-									...
+								{index < left ? (
+									<>
+										{item}{" "}
+										<div
+											className={
+												typeof separatorClasses === "string"
+													? separatorClasses
+													: ""
+											}
+											style={
+												typeof separatorClasses === "object"
+													? separatorClasses
+													: {}
+											}
+										>
+											{separator}
+										</div>
+									</>
+								) : null}
+								{index === left ? (
 									<div
 										className={
-											typeof separatorClasses === "string"
-												? separatorClasses
+											typeof breadcrumbsContainerClasses === "string"
+												? breadcrumbsContainerClasses
 												: ""
 										}
 										style={
-											typeof separatorClasses === "object"
-												? separatorClasses
+											typeof breadcrumbsContainerClasses === "object"
+												? breadcrumbsContainerClasses
 												: {}
 										}
+										onClick={() => setMaxItemShow(breadcrumbs.length)}
 									>
-										{separator}
+										...
+										<div
+											className={
+												typeof separatorClasses === "string"
+													? separatorClasses
+													: ""
+											}
+											style={
+												typeof separatorClasses === "object"
+													? separatorClasses
+													: {}
+											}
+										>
+											{separator}
+										</div>
 									</div>
-								</div>
-
-								<div
-									className={
-										typeof breadcrumbsContainerClasses === "string"
-											? breadcrumbsContainerClasses
-											: ""
-									}
-									style={
-										typeof breadcrumbsContainerClasses === "object"
-											? breadcrumbsContainerClasses
-											: {}
-									}
-								>
-									{item}
-								</div>
+								) : null}
+								{index >= breadcrumbs.length - right &&
+								index < breadcrumbs.length - 1 ? (
+									<>
+										{item}{" "}
+										<div
+											className={
+												typeof separatorClasses === "string"
+													? separatorClasses
+													: ""
+											}
+											style={
+												typeof separatorClasses === "object"
+													? separatorClasses
+													: {}
+											}
+										>
+											{separator}
+										</div>
+									</>
+								) : index > left + 1 && index === breadcrumbs.length - 1 ? (
+									item
+								) : null}
 							</div>
-						) : null;
-				  })}
+						);
+				  })
+				: ""}
 		</div>
 	);
 };

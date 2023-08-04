@@ -23,6 +23,9 @@ const SimpleBreadcrumbs = () => {
 				breadcrumbs={breadcrumbsOptions}
 				containerClasses={"flex justify-center bg-white pl-2"}
 				iconClasses={"flex h-fit w-fit pt-3"}
+				maxItems={5}
+				left={3}
+				right={2}
 			/>
 		</div>
 	);

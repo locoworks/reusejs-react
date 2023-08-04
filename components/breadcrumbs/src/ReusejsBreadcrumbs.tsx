@@ -7,6 +7,8 @@ interface ReusejsBreadcrumbsInterface {
 	containerClasses?: string | CSSProperties;
 	maxItems?: number;
 	iconClasses?: string | CSSProperties;
+	left?: number;
+	right?: number;
 }
 
 const HomeIcon = () => {
@@ -46,8 +48,10 @@ const ReusejsBreadcrumbs = ({
 	breadcrumbs,
 	separator,
 	containerClasses,
-	maxItems,
+	maxItems = 3,
 	iconClasses,
+	left = 1,
+	right = 2,
 }: ReusejsBreadcrumbsInterface) => {
 	return (
 		<div
@@ -69,7 +73,8 @@ const ReusejsBreadcrumbs = ({
 				breadcrumbsContainerClasses={"flex items-center hover:text-blue-600"}
 				separatorClasses={"px-2 text-gray-400"}
 				maxItems={maxItems}
-				spreadclasses={"flex"}
+				left={left}
+				right={right}
 			/>
 		</div>
 	);

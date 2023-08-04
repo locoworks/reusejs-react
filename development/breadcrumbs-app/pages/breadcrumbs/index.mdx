@@ -71,7 +71,9 @@ The first two example demonstrates how to use ReusejsBreadcrumbs, while the rest
 | breadcrumbsContainerClasses?    | string \| CSSProperties?       | No       | Additional CSS classes or inline styles to be applied to each individual breadcrumb item container.                                                                                                               |
 | separatorClasses?               | string \| CSSProperties?       | No       | Additional CSS classes or inline styles to be applied to the separator element.         
 | maxItems?                       | number                       | No      | The maximum number of breadcrumbs items to be shown, the rest colapsed into a single spreadable item. By default, it will display all breadcrumbs items.                                               |
-| spreadclasses?                  | string \| CSSProperties     | No       | Additional CSS classes or inline styles to be applied to the spreadable item that appears when breadcrumbs are collapsed.        
+| left?                           | number                       | No      | The Maximum number of breadcrumbs shown from left side |
+| rigth?                          | number                       | No      | The Maximum number of breadcrumbs shown from the right side |
+
 
 ## Props Table ReusejsBreadcrumbs
 | Prop | Type | Required | Description |
@@ -81,6 +83,8 @@ The first two example demonstrates how to use ReusejsBreadcrumbs, while the rest
 | containerClasses | string \| CSSProperties | No | Additional CSS classes or inline styles to be applied to the container of the entire breadcrumb component. |
 | maxItems | number | No | The maximum number of breadcrumbs items to be shown before collapsing the rest into a single spreadable item. By default, it will display all breadcrumb items. |                                                                                                                    |
 | iconClasses | string \| CSSProperties | No | You Can handle the Icon position and it style with this props.|                                                                                                                    |
+| left?                           | number                       | No      | The Maximum number of breadcrumbs shown from left side |
+| rigth?                          | number                       | No      | The Maximum number of breadcrumbs shown from the right side |
 
 **Note**
 MaxItems Prop: If there are more breadcrumb items than you can handle, you can choose how many you want to display using the MaxItems prop, as demonstrated in the [Examples](#usageexamples).
