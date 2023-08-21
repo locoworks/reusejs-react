@@ -12,7 +12,7 @@
   ],
   "Hooks": [
     "UseBetaForm",
-    "UseClosableComponent",
+    "UseClosable",
     "UseDataTable",
     "UseDebounceEffect",
     "UseDidMountEffect",
