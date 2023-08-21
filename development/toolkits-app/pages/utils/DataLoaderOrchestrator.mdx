@@ -1,0 +1,108 @@
+---
+HEAD OBJECT
+title: "ReuseJS DataLoaderOrchestrator"
+author: "Shrey Dhyani"
+---
+
+
+import DataLoaderOrchestratorExample from "../../components/DataLoaderOrchestratorExample/DataLoaderOrchestratorExample.tsx";
+
+# Reusejs Utils Toolkit
+
+## Overview
+
+The `DataLoaderOrchestrator` component is a data management utility that handles asynchronous data fetching and renders different state components based on the data response. It provides an imperative handle to trigger data reloads from external components.
+
+## Installation
+
+To use the `DataLoaderOrchestrator` component, you need to install it as a dependency in your project, as is a part of reusejs toolkit-utils, you can add the them to you packages as shown below
+
+```bash
+npm install @locoworks/reusejs-toolkit-utils
+# or
+yarn add @locoworks/reusejs-toolkit-utils
+```
+
+## Importing
+
+You can import the `Orchestrator` component in your code as follows:
+
+```jsx
+import DataLoaderOrchestrator from "@locoworks/reusejs-toolkit-utils";
+```
+
+## Input Parameters
+
+The `DataLoaderOrchestrator` component accepts the following input parameters:
+
+1. `handler` (function, required): A function that performs data fetching. It should return a promise that resolves to the data response. This function is responsible for handling asynchronous data fetching.
+
+2. `components` (object, required): An object that maps state names to corresponding state components. Each state component will be rendered based on the state of the data received from the `handler` function.
+
+## Return Types
+
+The `DataLoaderOrchestrator` component does not have a specific return type, as it handles rendering different state components internally. However, it provides an imperative handle to trigger data reloads externally.
+
+## Usage Example
+
+### Sample
+```jsx
+import React from "react";
+import DataLoaderOrchestrator from "@locoworks/reusejs-toolkit-utils";
+import LoadingComponent from "./LoadingComponent";
+import SuccessComponent from "./SuccessComponent";
+import ErrorComponent from "./ErrorComponent";
+
+const MyDataComponent = () => {
+  const handler = async (args) => {
+    // Perform data fetching here
+    // Return the data response or throw an error in case of failure
+  };
+
+  const components = {
+    loading: LoadingComponent,
+    success: SuccessComponent,
+    error: ErrorComponent,
+  };
+
+  return (
+    <DataLoaderOrchestrator handler={handler} components={components} />
+  );
+};
+```
+
+### Example with code 
+
+<DataLoaderOrchestratorExample/>
+
+```js path=../../components/DataLoaderOrchestratorExample name=DataLoaderOrchestratorExample
+```
+
+## Best Practices
+
+- Make sure to handle errors gracefully in the `handler` function and update the state accordingly for error states.
+
+- Keep the `components` object updated with valid state components to avoid rendering issues.
+
+## Input/Return Types Table (Work in Progress)
+
+| Prop          | Type                         | Description                                           |
+|---------------|------------------------------|-------------------------------------------------------|
+| `handler`     | `(args?: any) => Promise<any>` | Function for data fetching                            |
+| `components`  | `{ [key: string]: React.ComponentType<any> }` | Object mapping state names to state components        |
+
+## Live Example
+
+For a live example of the `Orchestrator` component, you can check out the following CodeSandbox:
+
+[Live Example on CodeSandbox](https://codesandbox.io/s/orchestrator-component-example-tlwus)
+
+## Notes
+
+- Please ensure that you provide valid state components and a valid `handler` function to the `Orchestrator` component for proper functionality.
+
+- The `Orchestrator` component is designed to manage data loading and rendering based on different states. It does not handle data caching or other advanced data management features. If you require more complex data management, consider using additional data management libraries or patterns.
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+}; 

@@ -1,0 +1,115 @@
+---
+HEAD OBJECT
+title: "ReuseJS slider-carousel"
+author: "Md Amir Sohail"
+---
+import SliderWithButton from "../../components/slider-carousel/Example/SliderWithButton/SliderWithButton.tsx"
+import SimpleSlider from "../../components/slider-carousel/Example/SimpleSlider/SimpleSlider.tsx"
+import HeadlessSlider from "../../components/slider-carousel/Example/HeadlessSliderExample/HeadlessSlider.tsx"
+
+## Overview
+Take your website to the next level with `ReuseSliderCarousel`. Effortlessly create stunning image carousels and captivating `slideshows`. Customize slide intervals, enable looping, and add intuitive button controls. Engage your visitors with seamless transitions and eye-catching animations. Showcase your content in style and leave a lasting impression.
+
+## Installation
+To use `ReuseSliderCarousel` or `HeadlessSliderCarousel` you need to install below packages. Install which one You want to use in your project.
+
+```jsx
+yarn add@locoworks/reusejs-react-slider-carousel
+or
+npm install @locoworks/reusejs-react-slider-carousel
+```
+
+## External Dependencies
+`ReuseSliderCarousel` and `HeadlessSliderCarousel` user useSlider hook to achieve functionality of Changing slide. Need to install useSldier 
+
+```jsx
+yarn add @locoworks/reusejs-toolkit-react-hooks
+or 
+npm install @locoworks/reusejs-toolkit-react-hooks
+```
+
+## Importing 
+
+```jsx
+import { ReuseSliderCarousel } from "@locoworks/reusejs-react-slider-carousel";
+or
+import { HeadlessSliderCarousel } from "@locoworks/reusejs-react-slider-carousel";
+```
+
+## HeadlessSliderCarousel props
+- **slides** (required) :  An array of ReactNode elements representing the individual slides to be displayed in the carousel.
+- **dependency** (required) : A dependency value that triggers the carousel to resume scrolling when it changes. This can be useful when you want to update the carousel based on external changes, such as data updates.
+- Apart from above it also accepts all the props a HTMLDivElement Accepts.
+
+## ReuseSliderCarousel Overview
+The `ReuseSliderCarousel` component is a reusable carousel component that displays a collection of slides. It provides functionality for `automatic slide transitions`, `navigation buttons`, and `customizable styles`.
+- React component that renders a slider carousel using the `ReuseSliderCarousel` component from the `@locoworks/reusejs-react-slider-carousel` library. The slider displays a list of slides, and it automatically transitions between slides at a specified interval.
+- The slider component from `ReuseSliderCarousel` has the feature to go to the next or previous slide when clicked, based on the click position. It detects the click position relative to the `slider container` and determines whether the user clicked on the left or right side of the container.
+
+## ReuseSliderCarousel Props
+- `slideInterval` (number): The interval (in milliseconds) between slide transitions.
+- `slides` (React.ReactNode[]): An array of ReactNode elements representing the slides to be displayed.
+- `loop` (boolean): A boolean value indicating whether the carousel should loop back to the first slide after reaching the last slide.
+- `wrapperClasses` (string): Additional CSS classes to be applied to the wrapper container element.
+- `enableButtons` (boolean): A boolean value indicating whether navigation buttons should be displayed.
+- `previousButton` (React.ReactNode): Custom ReactNode element to be used as the previous button to back on the previous slide.
+- `nextButton` (React.ReactNode): Custom ReactNode element to be used as the next button to go to the next slide.
+- `animationStyle` (string): Determines the animation style of the slider. Set this prop to 'continue' to enable continuous looping with slide chaining. When set to 'continue', the slider will seamlessly transition from the last slide to the first slide, creating a continuous loop effect.
+- `sliderContainerClasses` (string): This custom **class**, "slide-right-to-left", is specifically created for animation purposes.
+You have the flexibility to create personalized animations by designing your own custom animations. Simply replace the default class name 'slide-right-to-left' with your own animation class name, allowing you to achieve your desired animation effects.
+
+## Examples
+### Slider without button
+<SimpleSlider />
+```js path=../../components/slider-carousel/Example/SimpleSlider name=SimpleSlider
+```
+
+### Slider With Buttons
+- If the `enableButtons` prop is set to `true`, the ReuseSliderCarousel component will display next and previous buttons instead of relying on the container click event. The container click event handling code can be removed in this case.
+<SliderWithButton />
+```js path=../../components/slider-carousel/Example/SliderWithButton name=SliderWithButton
+```
+
+### Slider With LinearSlideChain
+<HeadlessSlider />
+```js path=../../components/slider-carousel/Example/HeadlessSliderExample name=HeadlessSlider
+```
+
+## HeadlessSliderCarousel Props Table
+
+| Prop          | Type              | Description                                                                                               |
+|---------------|-------------------|-----------------------------------------------------------------------------------------------------------|
+| slides        | Array of ReactNode| An array of ReactNode elements representing the individual slides to be displayed in the carousel.      |
+| dependency    | Any               | A dependency value that triggers the carousel to resume scrolling when it changes.                      |
+|               |                   | This can be useful when you want to update the carousel based on external changes, such as data updates. |
+| HTMLDivProps  | Any               | Apart from the above, it also accepts all the props that an HTMLDivElement accepts.                      |
+
+## ReuseSliderCarousel Props Table
+
+| Prop               | Type              | Description                                                                                                              |
+|--------------------|-------------------|--------------------------------------------------------------------------------------------------------------------------|
+| slideInterval      | number            | The interval (in milliseconds) between slide transitions.                                                               |
+| slides             | Array of ReactNode| An array of ReactNode elements representing the slides to be displayed.                                                 |
+| loop               | boolean           | A boolean value indicating whether the carousel should loop back to the first slide after reaching the last slide.     |
+| wrapperClasses     | string            | Additional CSS classes to be applied to the wrapper container element.                                                   |
+| enableButtons      | boolean           | A boolean value indicating whether navigation buttons should be displayed.                                               |
+| previousButton     | React.ReactNode   | Custom ReactNode element to be used as the previous button to go back to the previous slide.                            |
+| nextButton         | React.ReactNode   | Custom ReactNode element to be used as the next button to go to the next slide.                                          |
+| animationStyle     | string            | Determines the animation style of the slider. Set this prop to 'continue' to enable continuous looping with slide chaining.|
+| sliderContainerClasses | string         | This custom class, "slide-right-to-left", is specifically created for animation purposes.                               |
+
+## HeadlessSliderCarousel Functionality
+
+- Automatic Scrolling: The carousel automatically scrolls through the slides horizontally. It uses the scrollLeft property and scrollTo method to control the scrolling behavior.
+
+- Slide Resizing: The component adjusts the size of the slides dynamically based on the width of the parent container. This ensures that the slides are responsive and fill the available space.
+
+- Looping: The carousel loops back to the beginning once it reaches the end of the slides. This creates a seamless scrolling experience.
+
+- Customizability: The component is designed to be headless, allowing you to customize the presentation and styling of the slides as per your requirements. You can provide any React components or content as slides.
+## Node
+- The HeadlessSliderCarousel component is a customizable carousel/slider component for displaying a set of slides. It provides automatic scrolling functionality and is designed to be headless, meaning it handles the core functionality of the slider while allowing you to control the presentation and styling.
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};

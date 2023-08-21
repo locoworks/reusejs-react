@@ -1,0 +1,117 @@
+---
+HEAD OBJECT
+title: "ReuseJS Toolkit"
+author: "Shrey Dhyani"
+---
+
+# Reusejs Use Closable HOC
+
+## Overview
+
+The `Closable` Higher-Order Component (HOC) enhances a wrapped component by adding closable behavior to it. It automatically closes the wrapped component after a specified timeout, if provided, and invokes a callback function when the component is closed.
+
+## Installation
+
+To use the `Closable` HOC, you need to have React and its dependencies installed in your project. This HOC is the part of react toolkit so install `npm install @locoworks/reusejs-toolkit-react-hooks`
+To install Hooks into your code base use following command `yarn add @locoworks/reusejs-toolkit-react-hooks` or `npm install @locoworks/reusejs-toolkit-react-hooks`
+
+## External Dependencies
+
+No External Dependencies
+
+## Importing
+
+You can import the hook from the installed library, **@locoworks/reusejs-toolkit-react-hooks**
+```jsx
+import { useClosableComponent as Closable,} from "@locoworks/reusejs-toolkit-react-hooks"
+```
+
+## Input Parameters
+
+- `Component` (React.Component): The component to be wrapped with closable behavior.
+
+## Return Types
+
+- (React.Component): The enhanced component with closable behavior.
+
+## Usage Example
+
+### Closable as Wrapper Example
+
+```jsx
+import { useClosableComponent as Closable } from "@locoworks/reusejs-toolkit-react-hooks"
+
+// Suppose we have a component named MyComponent that needs to be closable
+import MyComponent from "./MyComponent"; // Replace with the actual path to your component
+
+// Wrap MyComponent with the Closable HOC
+const ClosableMyComponent = Closable(MyComponent);
+
+// Use the enhanced ClosableMyComponent as you would normally use MyComponent
+```
+
+### Closable with resolve and timeout
+
+Suppose you have a custom component named `Notification` that you want to make closable with a timeout. The `Notification` component might look like this:
+
+```jsx
+import React from "react";
+
+const Notification = ({ message }) => {
+  return <div className="notification">{message}</div>;
+};
+
+export default Notification;
+```
+
+Now, you can wrap the `Notification` component with the `Closable` HOC to add closable behavior:
+
+```jsx
+import React from "react";
+import Closable from "./Closable"; // Replace with the actual path to the Closable HOC file
+import Notification from "./Notification"; // Replace with the actual path to your Notification component
+
+const ClosableNotification = Closable(Notification);
+
+const App = () => {
+  const handleNotificationClose = (closedDueToTimeout) => {
+    if (closedDueToTimeout) {
+      console.log("Notification automatically closed due to timeout");
+    } else {
+      console.log("Notification manually closed");
+    }
+  };
+
+  return (
+    <div>
+      <h1>My App</h1>
+      {/* Render the ClosableNotification with the resolve and timeout props */}
+      <ClosableNotification
+        message="This is a closable notification with a timeout of 3 seconds."
+        timeout={3000} // Set the timeout to 3 seconds
+        resolve={handleNotificationClose}
+      />
+    </div>
+  );
+};
+
+export default App;
+```
+
+In this example, we create an `App` component that renders the `ClosableNotification` component. The `ClosableNotification` is wrapped with the `Closable` HOC, and we pass the `timeout` prop with a value of `3000` (3 seconds) to specify the duration after which the notification should automatically close. We also provide the `resolve` prop with the `handleNotificationClose` callback function, which will be called when the notification is closed.
+
+When the app is run, the `ClosableNotification` will automatically close after 3 seconds, and the `handleNotificationClose` function will be called with `true` to indicate that the closure was due to the timeout. If the user manually closes the notification before the timeout, the `handleNotificationClose` function will be called with `false`.
+
+## Best Practices
+
+- Use the `Closable` HOC when you need to add closable behavior to a component that should automatically close after a specific timeout.
+
+## Notes
+
+- The `Closable` HOC is useful for components that need to be automatically closed after a certain duration or when a specific action occurs.
+- Make sure to provide the necessary props to the wrapped component, such as `timeout` and `resolve`, as described in the usage example.
+
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};

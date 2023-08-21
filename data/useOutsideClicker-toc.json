@@ -1,0 +1,33 @@
+[
+  {
+    "depth": 2,
+    "value": "HEAD OBJECT\ntitle: \"ReuseJS Outside Clicker\"\nauthor: \"Shrey Dhyani\"",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Reusejs Use Outside Clicker",
+    "children": [
+      {
+        "depth": 3,
+        "value": "Parameters",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Return Value",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Description",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Usage",
+        "children": []
+      }
+    ]
+  }
+]

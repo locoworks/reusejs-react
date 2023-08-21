@@ -1,0 +1,83 @@
+---
+HEAD OBJECT
+title: "ReuseJS BetaForm"
+author: "Shrey Dhyani"
+---
+
+## Reusejs BetaForm
+
+**BetaForm** is custom React hook for form handling and validation. It exports a function that can be used to create a form state object with various form-related functionalities.
+
+### Functionalities
+
+This custom hook provides the following functionalities:
+
+- `value`: The current form values stored in the value state.
+- `setValue`: A function to update the form values.
+- `errors`: An object that manages form errors, likely provided by the useBetaErrors hook.
+- `busy`: A boolean indicating if the form is currently in a busy/processing state.
+- `setValidationRules`: A function to set the validation rules for the form.
+- `validate`: A function to trigger form validation based on the defined validation rules.
+- `validateSingleField`: A function to validate a single field in the form based on its value and specific rules.
+- `setField`: A function to set a field value in the form state using dot-separated path notation.
+- `startProcessing`: A function to indicate the start of form processing by resetting errors and setting the form as busy.
+- `finishProcessing`: A function to indicate the completion of form processing by setting the form as not busy and successful.
+- `resetStatus`: A function to reset the form status by clearing errors and setting the form as not busy and not successful.
+- `setErrors`: A function to set form errors manually.
+- `pushError`: A function to add an error to the form errors.
+- `forgetErrors`: A function to clear all form errors.
+- `removeError`: A function to remove a specific error from the form errors.
+- `getField`: A function to retrieve the value of a specific field in the form state using dot-separated path notation.
+This hook provides a convenient way to manage form state, handle form validation, and track form processing status in React applications.
+
+## Usage
+
+### How to Import BetaForm?
+
+Betaform is a part of **@locoworks/reusejs-toolkit-react-hooks** hence it can be imported from as a hook. Following is the sysntax for importing BetaFoprm.
+> Notice the useBetaForm syntax which is a hook hence starts with *use*
+
+```js
+import { useBetaForm } from "@locoworks/reusejs-toolkit-react-hooks";
+```
+
+### How to use BetaForm?
+
+BetaForm takes an object as input and provides state for value, errors and functions such as validation, processing etc. I t also allows us to get and set individual values for the form field and use getField and setField functions to create controlled form inputs.
+Following is the syntax to define a Betaform
+
+```js
+import {useBetaForm} from "@locoworks/reusejs-toolkit-react-hooks";
+
+const form = useBetaForm({
+  name: ""
+  email: ""
+  phone: ""
+})
+```
+
+We can also map constaints to individual keys using validate.js. A sample is shown below:
+
+```js
+const constraints = {
+    name: {
+      presence: { allowEmpty: false },
+    },
+    email: {
+      presence: { allowEmpty: false },
+      email: true,
+    },
+    phone:{
+      presence: { allowEmpty:false },
+      length: { is: 10 }
+    }
+  };
+
+  form.setValidationRules(constraints);
+```
+
+A working sample of **BetaForm** with controlled inputs and form validation can be found [here](https://locoworks.org/reusejs-react/input-group#betaform-sample)
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};

@@ -1,0 +1,112 @@
+---
+HEAD OBJECT
+title: "ReuseJS otp-input"
+author: "John Doe"
+---
+
+import Sample from "../../components/otp-input/Sample/Sample.tsx"
+import ReuseExample from "../../components/otp-input/ReuseExample/ReuseExample.tsx";
+import ReuseNumberExample from "../../components/otp-input/ReuseNumberExample/ReuseNumberExample.tsx";
+import ReuseNumberWithPasteExample from "../../components/otp-input/ReuseNumberWithPasteExample/ReuseNumberWithPasteExample.tsx";
+import EmailVerification from "../../components/otp-input/EmailVerification/EmailVerification.tsx";
+import ColorFill from "../../components/otp-input/ColorFill/ColorFill.tsx";
+
+## List of exported Components:
+
+### HeadlessOtpInput 
+
+This is the OTP input component with no inherit styles. user will have to provide styles to the component.
+
+In this OTP input component, we can pass  number of inputs with the prop `numInputs`.
+
+We need to use the HTML input element to render the boxes. if we need to add a wrapper to input components with help of renderInput prop. 
+
+Here is the list of all available props for the HeadlessOtpInput
+
+`numInputs:number`: Number of OTP inputs to be rendered.
+
+`renderInput:function`: A function that returns the input that is supposed to be rendered for each of the input fields. The function will get two arguments: `inputProps` and index. `inputProps` is an object that contains all the props that should be passed to the input being rendered index is the index of the input being rendered.
+
+`onChange:function`: Returns OTP code typed in inputs.
+
+`value: string/number`: The value of the OTP passed into the component.
+
+`placeholder:string`: Specify an expected value of each input. The length of this string should be equal to numInputs.
+
+`renderSeparator:component/function`: Provide a custom separator between inputs by passing a component. For instance, <span>-</span> would add - between each input.
+
+`containerStyle:style (object)/className (string)`: Style applied or class passed to container of inputs.
+
+`inputStyle:style (object)/className (string)`: Style applied or class passed to each input.
+
+`inputType:<input> type`: The type of the input that will be passed to the input element being rendered.
+
+`shouldAutoFocus: boolean`: This is optional prop and it Auto focuses input on initial page load.
+
+
+
+#### Sample Code Demo
+
+<Sample/>
+
+```js path=../../components/otp-input/Sample name=Sample
+```
+
+
+### ReuseOtpInput
+
+The **`ReuseOtpInput`** component extends the functionality of **`HeadlessOtpInput`** by providing additional features and default styling options, which can be overridden to customize components according to your specific use case.
+
+User can pass the custom styles using this prop `inputClassName: "w-12 h-14 bg-slate-300 border rounded-xl text-2xl font-semibold"`. 
+
+By leveraging these props, users can fully customize the **ReuseOtpInput** component to suit their specific requirements and design preferences.
+
+Automatically populate the OTP field when the user copies the OTP from an SMS and selects it from the keypad, eliminating the need for manual input.
+
+
+#### ReuseExample
+
+<ReuseExample/>
+
+```js path=../../components/otp-input/ReuseExample name=ReuseExample
+```
+
+#### ReuseNumberExample
+
+This example demonstrates an OTP component that accepts only number type values.
+
+ We have added css to hide the default html number arrows (up and down)
+
+* It won't support the Copy and paste of the OTP value. 
+
+<ReuseNumberExample/>
+
+```js path=../../components/otp-input/ReuseNumberExample name=ReuseNumberExample
+```
+
+
+#### ReuseNumberWithPasteExample
+
+This example demonstrating the accepting the only number type values with support the past the values.
+
+<ReuseNumberWithPasteExample/>
+
+```js path=../../components/otp-input/ReuseNumberWithPasteExample name=ReuseNumberWithPasteExample
+```
+
+#### Email Verification
+We have made a email verification component using ReuseOTPInput.Just give the email and add the functionality to this component and you can use it in your application.
+<EmailVerification/>
+
+```js path=../../components/otp-input/EmailVerification name=EmailVerification
+```
+#### Round and Color Fill
+We made this OTP component to have a beautiful rose color background with red borders on focus which you can customize to whatever color you want in inputClassname prop. Also the OTP container is made to be rounded.
+This component has inputClassName prop with the following style: **inputClassName="rounded-full text-center flex flex-col items-center justify-center text-center outline-none text-white-600 focus:bg-rose-200 focus:ring-1 focus-text-white-600 ring-red-300"**
+<ColorFill/>
+```js path=../../components/otp-input/ColorFill name=ColorFill
+```
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};

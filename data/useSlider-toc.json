@@ -1,0 +1,53 @@
+[
+  {
+    "depth": 2,
+    "value": "HEAD OBJECT\ntitle: \"ReuseJS Slider/Carousel\"\nauthor: \"Md Amir Sohail\"",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "Documentation",
+    "children": []
+  },
+  {
+    "depth": 2,
+    "value": "useSlider Hook Description:",
+    "children": [
+      {
+        "depth": 3,
+        "value": "Props",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Return Value",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Functionality",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Usage",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Installation",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Importing",
+        "children": []
+      },
+      {
+        "depth": 3,
+        "value": "Example",
+        "children": []
+      }
+    ]
+  }
+]

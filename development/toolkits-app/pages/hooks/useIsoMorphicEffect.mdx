@@ -1,0 +1,42 @@
+---
+HEAD OBJECT
+title: "ReuseJS IsoMorphic"
+author: "Shrey Dhyani"
+---
+
+## Reusejs IsoMorphic Effect
+
+The `useIsoMorphicEffect` hook is a custom hook that offers an isomorphic (server-client) effect based on the execution environment. It allows you to specify an effect function to be executed and an optional array of dependencies.
+
+### Parameters
+
+- `effect` (Function): The effect function to be executed.
+- `deps` (Array): An optional array of dependencies for the effect.
+
+### Description
+
+The `useIsoMorphicEffect` hook determines the execution environment and selects the appropriate effect hook accordingly. In server-side rendering (SSR) environments, it uses the `useEffect` hook, while in client-side rendering (CSR) environments, it employs the `useLayoutEffect` hook. This ensures consistent behavior and proper synchronization between the server-rendered content and the client-side updates.
+
+### Usage
+
+1. Import `useIsoMorphicEffect` hook to your React project:
+
+```jsx
+import { useIsoMorphicEffect } from '@locoworks/reusejs-toolkit-react-hooks';
+```
+
+2. To utilize the `useIsoMorphicEffect` hook, import it into your React component and call it with your effect function and dependencies. The hook will handle the underlying effect hook selection, ensuring that the effect is executed appropriately in both server-side and client-side environments.
+
+```jsx
+useIsoMorphicEffect(() => {
+  // Effect logic here
+}, [dependency1, dependency2]);
+```
+
+3. It's recommended to provide the necessary dependencies in the `deps` array to control the effect's re-execution. Omitting the `deps` parameter will cause the effect to be executed on every render.
+
+By leveraging the `useIsoMorphicEffect` hook, you can write React components with effects that function consistently and correctly across different rendering scenarios, enhancing the reliability and predictability of your application.
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
