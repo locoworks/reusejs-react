@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- 9781410: Added useMountComponent and useClosableComponent hooks
+- 9781410: Added useMountComponent and useClosable hooks
 
 ## 0.4.0
 

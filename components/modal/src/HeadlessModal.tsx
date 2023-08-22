@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {
 	useOutsideClicker,
 	useMountComponent as mountComponent,
-	useClosableComponent as Closable,
+	useClosable as Closable,
 } from "@locoworks/reusejs-toolkit-react-hooks";
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
