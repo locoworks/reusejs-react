@@ -1,7 +1,7 @@
 import React from "react";
 import {
 	useMountComponent,
-	useClosableComponent as Closable,
+	useClosable as Closable,
 } from "@locoworks/reusejs-toolkit-react-hooks";
 
 export interface HeadlessToastProps {
@@ -14,7 +14,7 @@ const ToastWrapper: any = ({ timeout, component }: HeadlessToastProps) => {
 		return (
 			<div
 				key={JSON.stringify(new Date())}
-				className="fixed h-full top-0 left-0 w-screen h-screen pointer-events-none"
+				className="fixed top-0 left-0 w-screen h-full h-screen pointer-events-none"
 			>
 				{component}
 			</div>
