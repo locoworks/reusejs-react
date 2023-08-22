@@ -39,7 +39,7 @@ const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
 				}
 				onClick={() => setOpen(!open)}
 			>
-				<h1 className="w-fit">{heading}</h1>
+				<h1 className="px-1 w-fit">{heading}</h1>
 
 				{open ? <ChevronDown /> : <ChevronRight />}
 			</div>

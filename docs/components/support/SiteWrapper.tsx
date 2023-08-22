@@ -153,9 +153,9 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
 
 	return (
 		<main className="h-screen">
-			<div className="z-10 h-[6%] flex items-center py-6 md:py-4 pl-5 md:pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
+			<div className="z-10 h-[6%] flex items-center py-5 pl-5 lg:pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
 				<div
-					className="flex pl-0 pr-4 md:hidden"
+					className="flex pl-0 pr-4 lg:hidden"
 					onClick={() => setisSidebarOpen((prev) => !prev)}
 				>
 					<SidebarIcon />
@@ -186,18 +186,18 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
 				onTouchMove={handleTouchMove}
 			>
 				<div
-					className={`${isSidebarOpen ? "flex z-10" : "hidden"}
-				 md:flex md:flex-col md:w-[20%] md:z-0 h-full border-r border-[#5501BF36] px-2 pt-10`}
+					className={`${isSidebarOpen ? "flex flex-col z-10" : "hidden"}
+					lg:flex lg:flex-col lg:w-[20%] lg:z-0 h-full border-r border-[#5501BF36] px-2 pt-10`}
 				>
 					<Sidebar />
 				</div>
 				<div
-					className="w-full md:w-[58%] overflow-scroll px-2"
+					className="w-full lg:w-[58%] overflow-scroll px-2"
 					onClick={handleContentClick}
 				>
 					{children}
 				</div>
-				<div className="hidden md:flex w-[22%] bg-[#b99cdc36] flex-col px-2 pt-10">
+				<div className="hidden lg:flex w-[22%] bg-[#b99cdc36] flex-col px-2 pt-10">
 					<label className="font-bold text-md">Table of Contents</label>
 					<ul className="ml-2 list-image-[`#`]">{toc && renderToC(toc)}</ul>
 				</div>
