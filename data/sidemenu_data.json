@@ -1,9 +1,11 @@
 {
   "Components": [
+    "Banner",
     "Button",
     "Data Table",
     "Input",
     "Input Group",
+    "Modal",
     "Otp Input",
     "Progress Bar",
     "Select Dropdown",
