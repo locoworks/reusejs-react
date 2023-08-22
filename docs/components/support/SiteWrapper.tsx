@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import GitHubIcon from "./GitHubIcon";
 import Link from "next/link";
 import { DocSearch } from "@docsearch/react";
 import "@docsearch/css";
+import SidebarIcon from "./SidebarIcon";
 
 interface TocNode {
 	depth: number;
@@ -127,9 +128,38 @@ const renderToC = (toc: TocNode[]): any => {
 };
 
 export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
+	const [isSidebarOpen, setisSidebarOpen] = useState<boolean>(false);
+
+	let touchStartX = 0;
+
+	const handleTouchStart = (e: React.TouchEvent) => {
+		touchStartX = e.touches[0].clientX;
+	};
+
+	const handleTouchMove = (e: React.TouchEvent) => {
+		const touchCurrentX = e.touches[0].clientX;
+		const touchDeltaX = touchCurrentX - touchStartX;
+
+		if (touchStartX < 150 && touchDeltaX > 30) {
+			setisSidebarOpen((prev) => !prev);
+		}
+	};
+
+	const handleContentClick = () => {
+		if (isSidebarOpen) {
+			setisSidebarOpen(false);
+		}
+	};
+
 	return (
 		<main className="h-screen">
-			<div className="z-10 h-[6%] flex items-center py-4 pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
+			<div className="z-10 h-[6%] flex items-center py-6 md:py-4 pl-5 md:pl-10 pr-4 justify-between border border-[#5501BF36] bg-white">
+				<div
+					className="flex pl-0 pr-4 md:hidden"
+					onClick={() => setisSidebarOpen((prev) => !prev)}
+				>
+					<SidebarIcon />
+				</div>
 				<label className="text-lg text-[#5501BF] cursor-pointer">
 					<Link href={"/"}>
 						<span className="font-bold">LOCO</span>WORKS
@@ -149,11 +179,24 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
 					</Link>
 				</div>
 			</div>
-			<div className="flex h-[94%]">
-				<div className="hidden md:flex md:flex-col w-[20%] h-full border-r border-[#5501BF36] px-2 pt-10">
+
+			<div
+				className="flex h-[94%]"
+				onTouchStart={handleTouchStart}
+				onTouchMove={handleTouchMove}
+			>
+				<div
+					className={`${isSidebarOpen ? "flex z-10" : "hidden"}
+				 md:flex md:flex-col md:w-[20%] md:z-0 h-full border-r border-[#5501BF36] px-2 pt-10`}
+				>
 					<Sidebar />
 				</div>
-				<div className="w-full md:w-[58%] overflow-scroll px-2">{children}</div>
+				<div
+					className="w-full md:w-[58%] overflow-scroll px-2"
+					onClick={handleContentClick}
+				>
+					{children}
+				</div>
 				<div className="hidden md:flex w-[22%] bg-[#b99cdc36] flex-col px-2 pt-10">
 					<label className="font-bold text-md">Table of Contents</label>
 					<ul className="ml-2 list-image-[`#`]">{toc && renderToC(toc)}</ul>

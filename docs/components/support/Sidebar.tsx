@@ -61,7 +61,7 @@ const SideBarSection: React.FC<SideBarSectionProps> = ({ arr, heading }) => {
 								key={"ele" + index}
 								className=" hover:bg-[#5501BF36] mb-2"
 							>
-								<h2 className="ml-6 w-fit cursor-pointer">
+								<h2 className="ml-6 cursor-pointer w-fit">
 									<Link href={"/reusejs-react" + route}>{val}</Link>
 								</h2>
 							</motion.div>
