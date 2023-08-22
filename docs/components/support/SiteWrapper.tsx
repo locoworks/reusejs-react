@@ -191,12 +191,12 @@ export default function SiteWrapper({ children, toc }: SiteWrapperProps) {
 							? "flex flex-col z-40 fixed left-0 bg-white w-[75%]"
 							: "hidden"
 					}
-					lg:flex lg:flex-col lg:w-[20%] lg:z-0 h-full border-r border-[#5501BF36] px-2 pt-10`}
+					lg:flex lg:flex-col md:w-[20%] lg:z-0 h-full border-r border-[#5501BF36] px-2 pt-10`}
 				>
 					<Sidebar />
 				</div>
 				<div
-					className="w-full lg:ml-[20%] lg:w-[58%] overflow-scroll px-2"
+					className="w-full lg:w-[58%] overflow-scroll px-2"
 					onClick={handleContentClick}
 				>
 					{children}
