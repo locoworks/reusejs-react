@@ -56,6 +56,7 @@ import { HeadlessModal } from '@locoworks/reusejs-react-modal';
 ```
 
 ## Types/ Exported Components
+
 The `HeadlessModal` function takes several parameters and returns a headless modal component. It has the following signature:
 
 ```typescript
@@ -65,6 +66,7 @@ function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any): Rea
 The `config` parameter is an object that provides configuration options for the modal component. The `unmountDelay` parameter is optional and specifies the delay (in milliseconds) before the modal unmounts. The `mountingNode` parameter is also optional and determines where the modal should be mounted in the DOM.
 
 ## Props
+
 The `HeadlessModal` component takes in the following props for styling the backdrop and the modal-wrapper which is used to apply animations to the modal component.
 
 - `modalWrapperClasses`(string): [Optional].  These are style classes which will be appplied to the modal wrapper element. These classes will be merged with the default classes.
@@ -77,7 +79,7 @@ The `HeadlessModal` component takes in the following props for styling the backd
 - `component`: This is the component passed to the HeadlessModal wrapper. This component will be render as the modal and hence you can control exactly how the modal will look by passing your own custom component.
 > Modal use framer-motion for animation hence accepts its key:value pairs to create animations. Thus we can use framer-motion 
 
-## Examples and Usage 
+## Usage/Examples
 
 ### Headless Modal Example
 <Example/>
