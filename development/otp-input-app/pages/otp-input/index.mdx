@@ -11,7 +11,36 @@ import ReuseNumberWithPasteExample from "../../components/otp-input/ReuseNumberW
 import EmailVerification from "../../components/otp-input/EmailVerification/EmailVerification.tsx";
 import ColorFill from "../../components/otp-input/ColorFill/ColorFill.tsx";
 
-## List of exported Components:
+## ReuseJS OtpInput Component
+
+## Overview
+
+The `HeadlessOtpInput ` and `ReuseOtpInput` component facilitates the handling of One-Time Password (OTP) input fields within your React applications. Designed with simplicity and efficiency in mind, this component empowers developers to seamlessly integrate OTP input functionality, enhancing user authentication processes.
+
+## Installation
+
+To use the `HeadlessOtpInput` or `ReuseOtpInput` component, install it in your project:
+
+```bash
+npm install @locoworks/reusejs-react-otp-input
+or 
+yarn add @locoworks/reusejs-react-otp-input
+```
+
+## Importing
+
+To use HeadlessOtpInput in your project, install it in your project
+```jsx
+import { HeadlessOtpInput } from "@locoworks/reusejs-react-otp-input";
+```
+or
+
+To use ReuseOTPInput in your project, install it in your project
+```jsx
+import { ReuseOTPInput } from "@locoworks/reusejs-react-otp-input";
+```
+
+## Types/ Exported Components
 
 ### HeadlessOtpInput 
 
@@ -21,7 +50,28 @@ In this OTP input component, we can pass  number of inputs with the prop `numInp
 
 We need to use the HTML input element to render the boxes. if we need to add a wrapper to input components with help of renderInput prop. 
 
-Here is the list of all available props for the HeadlessOtpInput
+#### Sample Code Demo
+
+<Sample/>
+
+```js path=../../components/otp-input/Sample name=Sample
+```
+
+
+### ReuseOtpInput
+
+The **`ReuseOtpInput`** component extends the functionality of **`HeadlessOtpInput`** by providing additional features and default styling options, which can be overridden to customize components according to your specific use case.
+
+User can pass the custom styles using this prop `inputClassName: "w-12 h-14 bg-slate-300 border rounded-xl text-2xl font-semibold"`. 
+
+By leveraging these props, users can fully customize the **ReuseOtpInput** component to suit their specific requirements and design preferences.
+
+Automatically populate the OTP field when the user copies the OTP from an SMS and selects it from the keypad, eliminating the need for manual input.
+
+
+## Props
+
+Here is the list of all available props for the `HeadlessOtpInput`
 
 `numInputs:number`: Number of OTP inputs to be rendered.
 
@@ -44,26 +94,7 @@ Here is the list of all available props for the HeadlessOtpInput
 `shouldAutoFocus: boolean`: This is optional prop and it Auto focuses input on initial page load.
 
 
-
-#### Sample Code Demo
-
-<Sample/>
-
-```js path=../../components/otp-input/Sample name=Sample
-```
-
-
-### ReuseOtpInput
-
-The **`ReuseOtpInput`** component extends the functionality of **`HeadlessOtpInput`** by providing additional features and default styling options, which can be overridden to customize components according to your specific use case.
-
-User can pass the custom styles using this prop `inputClassName: "w-12 h-14 bg-slate-300 border rounded-xl text-2xl font-semibold"`. 
-
-By leveraging these props, users can fully customize the **ReuseOtpInput** component to suit their specific requirements and design preferences.
-
-Automatically populate the OTP field when the user copies the OTP from an SMS and selects it from the keypad, eliminating the need for manual input.
-
-
+## Usage/Examples
 #### ReuseExample
 
 <ReuseExample/>
@@ -106,6 +137,12 @@ This component has inputClassName prop with the following style: **inputClassNam
 <ColorFill/>
 ```js path=../../components/otp-input/ColorFill name=ColorFill
 ```
+
+## Styling
+Styling the `HeadlessOtpInput` component can be done by passing Tailwind CSS or custom CSS to the props:
+`containerStyle:style (object)/className (string)`
+`inputStyle:style (object)/className (string)`
+
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
