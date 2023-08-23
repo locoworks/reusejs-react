@@ -10,10 +10,11 @@ type StringKeyStringObject = { [key: string]: string };
 
 function convertArrayToObject(array: string[]) {
 	const obj: StringKeyStringObject = {};
+
 	array.forEach((item) => {
 		const [key, value] = item.split(":");
 		const trimmedKey = key.trim();
-		const trimmedValue = value.trim().replace(/(^"|"$)/g, "");
+		const trimmedValue = value?.trim().replace(/(^"|"$)/g, "");
 		obj[trimmedKey] = trimmedValue;
 	});
 	return obj;

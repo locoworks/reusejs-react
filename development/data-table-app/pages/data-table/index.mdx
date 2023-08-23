@@ -6,14 +6,35 @@ author: "Md Amir Sohail"
 
 import Example  from "../../components/data-table/Example/Example.tsx"
 
-## DataTable Component Docs
+## DataTable Component
+
+## Overview
 
 Managing and presenting large datasets in a user-friendly manner is a common challenge in web development. With the HeadlessDataTable component, handling vast amounts of tabular data in your React applications becomes a breeze. This versatile and powerful component offers a seamless solution for displaying paginated and customizable tables, enabling you to present data in a clean and organized format.
 
 Designed with efficiency and ease of use in mind, the HeadlessDataTable empowers developers to focus on creating exceptional user experiences without getting bogged down by the complexities of managing data presentation. Leveraging the power of the "@locoworks/reusejs-toolkit-react-hooks" package, this component brings the benefits of pagination and filtering straight to your fingertips.
 The `HeadlessDataTable` component is a reusable React component that provides a simple and customizable way to display tabular data. It supports pagination, column headers, and other useful features for working with large datasets.
 
+## Installation
+
+To use the `HeadlessDataTable` component, install it in your project:
+
+```bash
+npm install @locoworks/reusejs-react-data-table
+or 
+yarn add @locoworks/reusejs-react-data-table
+```
+
+## Importing
+
+Import the `HeadlessDataTable` component :
+
+```jsx
+import { HeadlessDataTable } from "@locoworks/reusejs-react-data-table";
+```
+
 ## Props
+
 The `DataTable` component accepts the following props:
 
 1. `tableData` (required): An array of objects representing the data to be displayed in the table.
@@ -40,18 +61,31 @@ The `DataTable` component accepts the following props:
 
 12. `customTableHeader` (optional): An array of string representing the table header. if not provided Table header will be create dfrom the `tableData`.
 
+## Usage/Examples
 
-## How It Works
 The `DataTable` component uses the `useDataTable` hook from the @locoworks/reusejs-toolkit-react-hooks library to manage pagination and other functionalities. The hook returns various properties that are used to render the table and handle pagination. Please refer to the hook section to get more visiblity
 
 When you use the DataTable component, it automatically paginates the tableData based on the itemsPerPage prop. It also sets up navigation buttons to move between pages of data.
+
 ## Example
+
 <Example />
 
 ```js path=../../components/data-table/Example name=Example
 ```
 
-
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };
+
+## Styling
+
+Styling the `HeadlessDataTable` component can be done by passing Tailwind CSS or custom CSS to the props:
+`tableContainerClasses`
+`tableClasses`
+`tableRowClasses`
+`tableColumnClasses`
+`headingRowClasses`
+`headingColumnClasses`
+`buttonClasses`
+`buttonContainerClasses`
