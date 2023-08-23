@@ -17,11 +17,30 @@ import ForwardRefInput from "../../components/input/ForwardRefInput/ForwardRefIn
 
 ## ReuseJS React Input
 
-Input component is the precursor of `input-group` component which provides functionality specific to input component like placeholder, disable input, autocomplet etc. Along with some additional features like **show/hide passwords** using props showPassword.
+## Overview
+
+Input component is the precursor of `input-group` component which provides functionality specific to input component like placeholder, disable input, autocomplete etc. Along with some additional features like **show/hide passwords** using props showPassword.
 Additionally since **reusejs-input** extends **html-input** it supports all the functionality of a default browser input like types, autocomplete, form, alt, for etc.
 
+## Installation
 
-## Form Styles
+To use the `ReuseInput` component, install it in your project:
+
+```bash
+npm install @locoworks/reusejs-react-input
+or 
+yarn add @locoworks/reusejs-react-input
+```
+
+## Importing
+
+Import the `ReuseInput` component :
+
+```jsx
+import {ReuseInput } from "@locoworks/reusejs-react-input";
+```
+
+### Form Styles
 
 If you have been using input elements for long, especially if using tailwind for styling, you will have encountered the issue of overridding the default styles in input, especially on focus, such as ring, focus-border etc. Tailwind forms provide an easy to
 use set of utilities that allow users to override these styles quite easily.
@@ -48,7 +67,17 @@ module.exports = {
 }
 ```
 
-## Examples
+## Types/ Exported Components
+
+The following types and exported components are available from the `@locoworks/reusejs-react-input` package:
+
+- `ReuseInput`: The main component to create a input field.
+
+## Props
+
+The `ReuseInput` component is designed to function similarly to the standard HTML `<input>` tag, allowing you to create input elements within your React applications. It accepts all the props that a regular `<input>` tag does, making it a versatile and flexible component for handling user input.
+
+## Usage/Examples
 
 ### Sample Code Demo
 
@@ -120,3 +149,7 @@ module.exports = {
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };
+
+## Styling
+
+Styling the `ReuseInput` component can be done using Tailwind CSS or custom CSS. The component itself does not include any specific styling.
