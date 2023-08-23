@@ -17,14 +17,45 @@ import IconButton from "../../components/button/IconButton/IconButton.tsx";
 import ButtonWithIcon from "../../components/button/ButtonWithIcon/ButtonWithIcon.tsx";
 import NeutralButton from "../../components/button/NeutralButton/NeutralButton.tsx";
 
+
+## Button Component
+
 ## Overview
 
-This Button component documentation serves as a visual reference and demonstration of different button styles and configurations available for use in your application. It aims to provide inspiration and guidance in selecting and implementing buttons that align with your design requirements and user experience goals.
+This Button component serves as a visual reference and demonstration of different button styles and configurations available for use in your application. It aims to provide inspiration and guidance in selecting and implementing buttons that align with your design requirements and user experience goals.
 
 This page has **multiple button styles** and **interactive button samples** along with their **Code snippets** which you can include in your projects.
 The code snippets are available in **TypeScript** as well as **JavaScript**.
 
-## Headless Button
+## Installation
+
+To use the `Button` component, install it in your project:
+
+```bash
+npm install @locoworks/reusejs-react-button
+or 
+yarn add @locoworks/reusejs-react-button
+```
+
+## Importing
+
+Import the `HeadlessButton` component and necessary enums:
+
+```jsx
+import {HeadlessButton } from "@locoworks/reusejs-react-button";
+```
+
+## Types/ Exported Components
+
+The following components are available from the `@locoworks/reusejs-react-button` package:
+
+- `HeadlessButton`: The button component with no inherent styles.
+- `ReuseButton`: The button component with sample styles included.
+
+## Usage/Examples
+
+
+### Headless Button
 This is the button component with no inherent styles, so to render this component user will have to provide styles to the component.
 
 This Button provides the feature of adding **busy state**, **busy text** which will be shown in busy state, ability to add button **Prefix** and button **Suffix**.
@@ -36,7 +67,7 @@ It uses following tailwind classes for providing styles: ** ``` w-1/2 bg-red-400
 ```js path=../../components/button/HeadlessSample name=HeadlessSample
 ```
 
-### Sample Code Demo
+### Reuse Button
 This is the sample styles included when you return **ReuseButton** as shown in the demo code. It has the features of setting the **busy state** and the **busy text** which will be visible when in **busy state**.
 <Sample/>
 
@@ -98,6 +129,17 @@ These buttons can be associated with a functionality of theme or they can be use
 ```js path=../../components/button/NeutralButton name=NeutralButton
 ```
 
+### Icon Button
+This is a simple icon button. In the code snippet we have given it a sample right arrow image. You can give it any image you want as per your requirements.
+<IconButton/>
+
+```js path=../../components/button/IconButton name=IconButton
+```
+
+## Styling
+
+Styling the `HeadlessButton` component and `ReuseButton` component can be done using Tailwind CSS or custom CSS.
+
 ## Live Playground
 
 This is a live playground sample that you can use to create a working sample of your code and copy to use in your own application.
@@ -107,11 +149,3 @@ This is a live playground sample that you can use to create a working sample of 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };
-
-
-{/* ## Icon Button
-This is a simple icon button. In the code snippet we have given it a sample right arrow image. You can give it any image you want as per your requirements.
-<IconButton/>
-
-```js path=../../components/button/IconButton name=IconButton
-``` */}

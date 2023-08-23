@@ -5,7 +5,7 @@ const { ncp } = pkg;
 
 const replacementText = process.argv[2];
 
-//Function to Replace all occurances of <to-replace> wuth the given component name
+//Function to Replace all occurances of <to-replace> with the given component name
 function reformat(folderPath) {
   try {
     fs.readdirSync(folderPath).forEach((file) => {
