@@ -14,6 +14,8 @@ import BetaFormSample from "../../components/input-group/BetaFormSample/BetaForm
 
 ## Headless Input Group
 
+## Overview
+
 The Headless Input Group is an extension of the Input component that allows users to add supporting components such as headers, helper text, prefixes/suffixes, etc. These supporting components are design elements commonly used alongside input elements. By incorporating them into a single component, users have the flexibility to customize their inputs as desired. It extends HeadlessInput Group and thus accepts all from from HeadlessInput and HTMLInput.
 
 In line with our commitment to keeping components flexible and adaptable, we offer different layers of props for the HeadlessInputGroup component. These props enable users to incorporate their own components and position them according to their preferences.
@@ -41,15 +43,35 @@ The prop `wrapperClasses` is used to style the componnets relative to each other
 
 By following this rendering order, users can seamlessly integrate the desired components into the Headless Input Group, creating a cohesive and customized input experience.
  
- 
-### Sample Code Demo
+## Installation
+
+To use the `HeadlessInputGroup` component, install it in your project:
+
+```bash
+npm install @locoworks/reusejs-react-input-group
+or 
+yarn add @locoworks/reusejs-react-input-group
+```
+
+## Importing
+
+Import the `HeadlessInputGroup` component and necessary enums:
+
+```jsx
+import {HeadlessInputGroup } from "@locoworks/reusejs-react-input-group";
+```
+
+## Types/ Exported Components
+
+### HeadlessInputGroup
 
 <Sample/>
 
 ```js path=../../components/input-group/Sample name=Sample
 ```
 
-## ReuseJS Input Group
+## Props
+### ReuseJS Input Group
 The **`ReuseInputGroup`** component extends the functionality of **`HeadlessInputGroup`** by providing additional features out of the box. These features include input headers, error messages, helper text, prefixes/suffixes, and more. **`ReuseInputGroup`** utilizes the header and footer layout of **`HeadlessInputGroup`** to render labels with default styling options, which can be overridden to customize components according to your specific use case.
 
 **`ReuseInputGroup`** offers several props to enhance its functionality, such as **errorText**, **headerText**, and **helperText**. These props utilize default components to render the corresponding messages. While using the default styles should be sufficient, users have the flexibility to override styles using props like **errorStyle**, **helperStyle**, **headerStyle**, **inputErrorStyle**, and **className**.
@@ -76,6 +98,8 @@ Here is the list of all available props for the **`ReuseInputGroup`** component:
 - **`wrapperClasses`**: Styles for the wrapper element.
 
 By leveraging these props, users can fully customize the **ReuseInputGroup** component to suit their specific requirements and design preferences.
+
+## Usage/Examples
 
 ### ReuseInputGroup Example
 
@@ -124,6 +148,10 @@ This will handle all states and error using **BetaForm** without creating any ex
 
 ```js path=../../components/input-group/BetaFormSample name=BetaFormSample
 ```
+
+## Styling
+
+Styling the `ReuseInputGroup` component can be done using Tailwind CSS or custom CSS.
 
 
 export default ({ children }) => {
