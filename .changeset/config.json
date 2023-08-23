@@ -15,6 +15,8 @@
     "select-dropdown-app",
     "otp-input-app",
     "toolkits-app",
-    "toast-app"
+    "toast-app",
+    "banner-app",
+    "tooltip-app"
   ]
 }

@@ -1,0 +1,23 @@
+---
+HEAD OBJECT
+title: "ReuseJS tooltip"
+author: "John Doe"
+---
+
+import Example from "../../components/tooltip/Example/Example.tsx"
+
+{/* ## Table of contents */}
+
+## Sample Code Demo
+
+## Intro
+This is a tool tip component 
+
+<Example/>
+
+```js path=../../components/tooltip/Example name=Example
+```
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
