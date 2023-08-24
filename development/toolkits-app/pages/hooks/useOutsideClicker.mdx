@@ -4,23 +4,37 @@ title: "ReuseJS Outside Clicker"
 author: "Shrey Dhyani"
 ---
 
-## Reusejs Use Outside Clicker
+## ReuseJS useOutsideClicker
 
-The `useOutsideClicker` hook is a custom hook that enables the detection of clicks outside a specified element and triggers a callback function accordingly.
+## Overview
+The `useOutsideClicker` hook is a custom hook that facilitates the detection of clicks outside of a designated element, triggering a specified callback function in response.
 
-### Parameters
+This hook simplifies the process of monitoring click events and their targets. By employing the `useOutsideClicker` hook, an event listener is established on the document itself. Whenever a click event occurs, the hook compares the clicked element with the reference of the designated element (`visRef`). Should the click fall outside the specified element, the provided `callback` function is invoked.
+
+## Installation
+```
+yarn add @locoworks/reusejs-toolkit-react-hooks
+or 
+npm install @locoworks/reusejs-toolkit-react-hooks
+```
+
+## External Dependencies
+No External Dependencies
+
+## Importing
+```jsx
+import {useOutsideClicker} from "@locoworks/reusejs-toolkit-react-hooks";
+```
+
+## Input Parameters
 
 - `callback` (Function): The callback function to be invoked when an outside click is detected.
 
-### Return Value
+## Return Types
 
 - `visRef` (React.MutableRefObject): A mutable ref object that should be assigned to the component or element that you want to track for outside clicks.
 
-### Description
-
-The `useOutsideClicker` hook sets up an event listener on the document to capture click events. It compares the clicked element with the specified element's ref (`visRef`) and invokes the provided `callback` function if the click occurred outside the specified element.
-
-### Usage
+## Usage/Examples
 
 1. Import `useOutsideClicker` hook to your react project.
 

@@ -106,14 +106,14 @@ const HeadlessSelectSample = ({}) => {
   });
 
   return (
-    <div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-      <div className="flex flex-col  w-full px-4">
+    <div className="flex flex-col items-center justify-center py-10 mt-10 border rounded gap-x-3 bg-gray-50">
+      <div className="flex flex-col w-full px-4">
         {/* {header && header} */}
         <div>Select</div>
         <div className="relative" ref={outsideClickRef}>
           {!open ? (
             <div
-              className="bg-white border border-black rounded px-4 flex items-center w-48 h-10 cursor-pointer"
+              className="flex items-center w-48 h-10 px-4 bg-white border border-black rounded cursor-pointer"
               onClick={() => {
                 setOpen((prev) => !prev);
               }}
@@ -126,16 +126,16 @@ const HeadlessSelectSample = ({}) => {
             </div>
           ) : (
             <input
-              className="form-input bg-white border border-black rounded px-4 flex items-center w-48 h-10 cursor-pointer"
+              className="flex items-center w-48 h-10 px-4 bg-white border border-black rounded cursor-pointer form-input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
           )}
           {open && (
-            <div className="absolute top-10 bg-white rounded px-3 py-2 border border-slate-100 w-1/2 max-h-48 overflow-scroll">
+            <div className="absolute w-1/2 px-3 py-2 overflow-scroll bg-white border rounded top-10 border-slate-100 max-h-48">
               {/* {searchFilter && (
                 <input
-                  className=" sticky top-0 w-full rounded bg-slate-200 px-2"
+                  className="sticky top-0 w-full px-2 rounded bg-slate-200"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />

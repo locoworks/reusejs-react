@@ -4,20 +4,37 @@ title: "ReuseJS IsoMorphic"
 author: "Shrey Dhyani"
 ---
 
-## Reusejs IsoMorphic Effect
+## ReuseJS useIsoMorphicEffect
 
-The `useIsoMorphicEffect` hook is a custom hook that offers an isomorphic (server-client) effect based on the execution environment. It allows you to specify an effect function to be executed and an optional array of dependencies.
+## Overview
 
-### Parameters
+The `useIsoMorphicEffect` hook is a custom hook that offers an isomorphic (server-client) effect based on the execution environment. This hook allows you to specify an effect function to be executed, along with an optional array of dependencies.
+
+The key advantage of the `useIsoMorphicEffect` hook lies in its ability to seamlessly adapt to different execution environments. In server-side rendering (SSR) contexts, it employs the `useEffect` hook for effect management. Conversely, in client-side rendering (CSR) environments, it utilizes the `useLayoutEffect` hook. This intelligent selection of effect hooks ensures uniform behavior and proper synchronization between server-rendered content and client-side updates.
+
+By incorporating the `useIsoMorphicEffect` hook into your codebase, you can maintain consistent and reliable effects execution while accommodating the specific needs of server and client rendering scenarios.
+
+## Installation
+```
+yarn add @locoworks/reusejs-toolkit-react-hooks
+or 
+npm install @locoworks/reusejs-toolkit-react-hooks
+```
+
+## External Dependencies
+No External Dependencies
+
+## Importing
+```jsx
+import {useIsoMorphicEffect} from "@locoworks/reusejs-toolkit-react-hooks";
+```
+
+## Input Parameters
 
 - `effect` (Function): The effect function to be executed.
 - `deps` (Array): An optional array of dependencies for the effect.
 
-### Description
-
-The `useIsoMorphicEffect` hook determines the execution environment and selects the appropriate effect hook accordingly. In server-side rendering (SSR) environments, it uses the `useEffect` hook, while in client-side rendering (CSR) environments, it employs the `useLayoutEffect` hook. This ensures consistent behavior and proper synchronization between the server-rendered content and the client-side updates.
-
-### Usage
+## Usage/Examples
 
 1. Import `useIsoMorphicEffect` hook to your React project:
 

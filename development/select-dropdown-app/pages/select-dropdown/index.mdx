@@ -8,98 +8,31 @@ import HeadlessSelectSample from "../../components/select-dropdown/HeadlessSelec
 import ReuseSelect from "../../components/select-dropdown/ReuseSelect/ReuseSelect.tsx"
 import ForwardRefSelectDropdown from "../../components/select-dropdown/ForwardRefSelectDropdown/ForwardRefSelectDropdown.tsx"
 
-## useHeadlessSelectHook
-
-The `useHeadlessSelectHook` is a custom hook that provides a set of state variables and functions for managing the behavior of a headless select component in React applications.
-
-### Parameters
-
-The `useHeadlessSelectHook` accepts an options object with the following properties:
-
-- `options` (array): An array of options for the select. Each option is an object with key-value pairs representing the option's properties.
-- `valueKey` (string): The key in each option object that represents the unique identifier for the option. It is used to determine if an option is selected or not.
-- `onChange` (function): An optional callback function invoked when the selected option(s) change. It receives the selected option(s) as an argument.
-- `filterFunction` (function): An optional custom filter function used to filter the options based on the query entered by the user. It takes an option object and the query as arguments and should return a boolean indicating whether the option matches the query or not.
-- `clearQuery` (boolean): If set to `true`, the query is cleared when the select is closed.
-- `defaultSelected` (array): An optional array of option objects representing the initially selected option(s). This value is used as the initial state for `selectedValues`.
-- `defaultOpen` (boolean): An optional boolean indicating whether the select should be initially open or not.
-- `defaultQuery` (string): An optional string representing the initial query value for filtering the options.
-- `refresh` (any): An optional value used to trigger a refresh of the select options or behavior when it changes.
-
-### Return Value
-
-The `useHeadlessSelectHook` returns an object with the following properties and functions:
-
-- `open` (boolean): A boolean representing the current open/close state of the select.
-- `setOpen` (function): A function to update the open/close state of the select.
-- `query` (string): The current query value for filtering the options.
-- `setQuery` (function): A function to update the query value.
-- `selectedValues` (array): An array of option objects representing the currently selected option(s).
-- `setSelectedValues` (function): A function to update the selected option(s).
-- `filteredOptions` (array): An array of option objects representing the filtered options based on the current query.
-
-### Usage
-
-To use the `useHeadlessSelectHook`, import it and invoke it within a functional component. It returns an object containing the state variables and functions needed to control the headless select component.
-
-Example usage:
-
-```jsx
-import { useHeadlessSelectHook } from './hooks';
-
-// Define options for the select
-const options = [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' },
-  // ...
-];
-
-// Define a change handler function
-const handleChange = (selectedOption) => {
-  console.log('Selected option:', selectedOption);
-};
-
-// Use the useHeadlessSelectHook
-const MyComponent = () => {
-  const {
-    open,
-    setOpen,
-    query,
-    setQuery,
-    selectedValues,
-    setSelectedValues,
-    filteredOptions,
-    setFilteredOptions,
-    addOrRemove,
-    outsideClickRef,
-  } = useHeadlessSelectHook({
-    options,
-    valueKey: 'value',
-    onChange: handleChange,
-    defaultSelected: [],
-    defaultOpen: false,
-    defaultQuery: '',
-    refresh: '',
-  });
-
-  // ... render the select component and use the hook values and functions ...
-};
-```
-
-
-<HeadlessSelectSample />
-
-```js path=../../components/select-dropdown/HeadlessSelectSample name=HeadlessSelectSample
-```
-
-
-## ReuseSample
-
 ## ReuseSelectDropDown
+
+## Overview
 
 The `ReuseSelectDropDown` component is a reusable dropdown select component in React that provides a customizable and headless dropdown select functionality.
 
-### Props
+## Installation
+
+```js
+npm install @locoworks/reusejs-react-select-dropdown
+```
+or 
+```js
+yarn add @locoworks/reusejs-react-select-dropdown
+```
+
+## Importing
+
+To Import `ReuseSelectDropdown`:
+
+```jsx
+import { ReuseSelectDropdown } from "@locoworks/reusejs-react-select-dropdown";
+```
+
+## Props
 
 The `ReuseSelectDropDown` component accepts the following props:
 
@@ -156,8 +89,7 @@ The `ReuseSelectDropDown` component accepts the following props:
 
 - `refresh` (optional, any): A value used to trigger a refresh of the dropdown options or behavior when it changes.
 
-
-### Usage
+##Usage/Examples
 
 ```jsx
 import ReuseSelectDropDown from "./ReuseSelectDropDown";
@@ -204,6 +136,98 @@ This is a basic usage example of the `ReuseSelectDropDown` component. You can cu
 
 ```js path=../../components/select-dropdown/ForwardRefSelectDropdown name=ForwardRefSelectDropdown
 ```
+### useHeadlessSelectHook Component
+
+The `useHeadlessSelectHook` is a custom hook that provides a set of state variables and functions for managing the behavior of a headless select component in React applications.
+
+#### Props
+
+The `useHeadlessSelectHook` accepts an options object with the following properties:
+
+- `options` (array): An array of options for the select. Each option is an object with key-value pairs representing the option's properties.
+- `valueKey` (string): The key in each option object that represents the unique identifier for the option. It is used to determine if an option is selected or not.
+- `onChange` (function): An optional callback function invoked when the selected option(s) change. It receives the selected option(s) as an argument.
+- `filterFunction` (function): An optional custom filter function used to filter the options based on the query entered by the user. It takes an option object and the query as arguments and should return a boolean indicating whether the option matches the query or not.
+- `clearQuery` (boolean): If set to `true`, the query is cleared when the select is closed.
+- `defaultSelected` (array): An optional array of option objects representing the initially selected option(s). This value is used as the initial state for `selectedValues`.
+- `defaultOpen` (boolean): An optional boolean indicating whether the select should be initially open or not.
+- `defaultQuery` (string): An optional string representing the initial query value for filtering the options.
+- `refresh` (any): An optional value used to trigger a refresh of the select options or behavior when it changes.
+
+#### Exported Properties
+
+The `useHeadlessSelectHook` returns an object with the following properties and functions:
+
+- `open` (boolean): A boolean representing the current open/close state of the select.
+- `setOpen` (function): A function to update the open/close state of the select.
+- `query` (string): The current query value for filtering the options.
+- `setQuery` (function): A function to update the query value.
+- `selectedValues` (array): An array of option objects representing the currently selected option(s).
+- `setSelectedValues` (function): A function to update the selected option(s).
+- `filteredOptions` (array): An array of option objects representing the filtered options based on the current query.
+
+#### Usage
+
+To use the `useHeadlessSelectHook`, import it and invoke it within a functional component. It returns an object containing the state variables and functions needed to control the headless select component.
+
+Example usage:
+
+```jsx
+import { useHeadlessSelectHook } from './hooks';
+
+// Define options for the select
+const options = [
+  { value: 'option1', label: 'Option 1' },
+  { value: 'option2', label: 'Option 2' },
+  // ...
+];
+
+// Define a change handler function
+const handleChange = (selectedOption) => {
+  console.log('Selected option:', selectedOption);
+};
+
+// Use the useHeadlessSelectHook
+const MyComponent = () => {
+  const {
+    open,
+    setOpen,
+    query,
+    setQuery,
+    selectedValues,
+    setSelectedValues,
+    filteredOptions,
+    setFilteredOptions,
+    addOrRemove,
+    outsideClickRef,
+  } = useHeadlessSelectHook({
+    options,
+    valueKey: 'value',
+    onChange: handleChange,
+    defaultSelected: [],
+    defaultOpen: false,
+    defaultQuery: '',
+    refresh: '',
+  });
+
+  // ... render the select component and use the hook values and functions ...
+};
+```
+
+
+<HeadlessSelectSample />
+
+```js path=../../components/select-dropdown/HeadlessSelectSample name=HeadlessSelectSample
+```
+
+## Styling
+
+Styling the `ReuseSelectDropDown` component can be done by passing Tailwind CSS or custom CSS to the props:
+`optionsWrapper`
+`selectWrapper`
+`selectButtonStyles`
+`selectButtonOverflowWrappper`
+`inputStyles`
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>

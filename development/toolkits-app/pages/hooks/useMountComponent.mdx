@@ -4,15 +4,15 @@ title: "ReuseJS Toolkit"
 author: "Shrey Dhyani"
 ---
 
-# Reusejs Mount Component Function
+# ReuseJS useMountComponent
 
 ## Overview
 
-The `mountComponent` function is a utility that allows mounting a React component into the DOM with control over the mount node and unmounting behavior. It returns a function that takes component props and returns a promise that resolves with the result of the component rendering.
+The `useMountComponent` function is a utility that allows mounting a React component into the DOM with control over the mount node and unmounting behavior. It returns a function that takes component props and returns a promise that resolves with the result of the component rendering.
 
 ## Installation
 
-To use `mountComponent`, you need to have React and ReactDOM installed in your project.
+To use `useMountComponent`, you need to have React and ReactDOM installed in your project.
 To install Hooks into your code base use following command `yarn add @locoworks/reusejs-toolkit-react-hooks` or `npm install @locoworks/reusejs-toolkit-react-hooks`
 
 ## External Dependencies
@@ -36,7 +36,7 @@ import { useMountComponent } from "@locoworks/reusejs-toolkit-react-hooks"
 
 (Function): A function that takes component props and returns a promise that resolves with the result of the component rendering.
 
-## Usage Example
+## Usage/Examples
 
 ```javascript
 import React from "react";
@@ -54,18 +54,7 @@ mountAndResolve({ message: "Hello, world!" }).then((result) => {
 ```
 
 ## Best Practices
-
-- Use `mountComponent` to mount components into specific DOM nodes or dynamically create mount nodes as needed.
-
-## Input/Return Types Table
-
-| Parameter      | Type                           | Description                                                   |
-| -------------- | ------------------------------ | ------------------------------------------------------------- |
-| Component      | React.ComponentType     | The React component to be mounted.                            |
-| unmountDelay   | number (optional)              | The delay in milliseconds before unmounting the component.    |
-| mountingNode   | string (optional)              | The ID of the DOM element where the component will be mounted.|
-| as             | "div" | "label" | "span" | "button" (optional) | The HTML tag name for the mount node.                         |
-| ReturnValue    | Function                       | A function that returns a promise resolving the component.    |
+Use `mountComponent` to mount components into specific DOM nodes or dynamically create mount nodes as needed.
 
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>

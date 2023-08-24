@@ -4,44 +4,48 @@ title: "ReuseJS Headless Select"
 author: "Shrey Dhyani"
 ---
 
-## Reusejs Use Headless Select Hook
+## ReuseJS useHeadlessSelectHook
 
-### Description
+## Overview
 
 The `useHeadlessSelectHook` is a custom hook designed to create a headless select component in React. It provides a convenient way to manage the state and functionality of the select component, including options, selection, filtering, and handling outside clicks.
 
-The `options` parameter is an array of objects representing the available options in the select component. Each option object can have any number of key-value pairs, but it must contain the `valueKey` specified as a parameter to identify the value of the option.
+## Installation
+```
+yarn add @locoworks/reusejs-toolkit-react-hooks
+or 
+npm install @locoworks/reusejs-toolkit-react-hooks
+```
 
-The `onChange` parameter is an optional callback function that will be called whenever the selected values in the select component change. It receives the selected option(s) as an argument.
+## External Dependencies
+No External Dependencies
 
-You can also provide a custom `filterFunction` to define how the options should be filtered based on a query. This function takes an option object and the current query as parameters and should return a boolean indicating whether the option matches the query or not.
+## Importing
+```jsx
+import {useHeadlessSelectHook} from "@locoworks/reusejs-toolkit-react-hooks";
+```
 
-By default, when the select component is closed, the query is cleared unless the `clearQuery` parameter is set to `false`.
+## Input Parameters
 
-The `defaultSelected` parameter allows you to specify an initial selection for the select component. It should be an array of option objects corresponding to the desired default selection.
+- options (Array of Objects): An array of objects representing the available options in the select component. Each option object can have any number of key-value pairs, but it must contain the valueKey specified as a parameter to identify the value of the option.
 
-You can control the initial open state of the select component using the `defaultOpen` parameter. Set it to `true` if you want the select component to be initially open, or `false` otherwise.
+- valueKey (String): The key in the options objects that represents the value.
 
-The `defaultQuery` parameter allows you to specify a default query for filtering the options when the component is initialized.
+- onChange (Function, optional): A callback function that will be called whenever the selected values in the select component change. It receives the selected option(s) as an argument.
 
-If you want to trigger a refresh of the select component based on a certain dependency, you can pass that dependency as the `refresh` parameter. Whenever the `refresh` value changes, the select component will be refreshed.
+- filterFunction (Function, optional): A custom filter function to define how the options should be filtered based on a query. This function takes an option object and the current query as parameters and should return a boolean indicating whether the option matches the query or not.
 
-By utilizing the `useHeadlessSelectHook` in your React components, you can easily create a  select component with customizable options, selection behavior, filtering capabilities, and more. The hook abstracts away the complex state management and provides a clean and reusable solution for implementing select components in your applications.
+- clearQuery (Boolean): By default, when the select component is closed, the query is cleared unless the clearQuery parameter is set to false.
 
-### Parameters
+- defaultSelected (Array): An array of option objects corresponding to the desired default selection.
 
-To use the useHeadlessSelectHook, you need to pass in the following parameters:
-- `options` (Object): An array of options to be displayed in the select component.
-- `valueKey` (string): The key in the options objects that represents the value.
-- `onChange` (Function): Optional callback function called when the selected values change.
-- `filterFunction` (Function): Optional custom filter function to filter the options based on the query.
-- `clearQuery` (boolean): Flag indicating whether to clear the query when the select component closes.
-- `defaultSelected` (Array): The default selected values for the select component.
-- `defaultOpen` (boolean): The default open state of the select component.
-- `defaultQuery` (string): The default query for filtering the options.
-- `refresh` (any): Dependency to refresh the select component.
+- defaultOpen (Boolean): Control the initial open state of the select component. Set it to true if you want the select component to be initially open, or false otherwise.
 
-### Returns
+- defaultQuery (String): Specify a default query for filtering the options when the component is initialized.
+
+- refresh (Any): If you want to trigger a refresh of the select component based on a certain dependency, you can pass that dependency as the refresh parameter. Whenever the refresh value changes, the select component will be refreshed.
+
+## Return Types
 
 An object containing the state and functions of the headless select component.
 
@@ -56,7 +60,7 @@ An object containing the state and functions of the headless select component.
 - `addOrRemove` (function): Function to add or remove selected values based on the multiple selection mode.
 - `outsideClickRef` (React.MutableRefObject): Ref object for handling outside clicks to close the select component.
 
-Example:
+## Usage/Examples
 
 ```jsx
 import React from 'react';

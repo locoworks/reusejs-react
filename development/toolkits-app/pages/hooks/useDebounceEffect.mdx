@@ -4,19 +4,38 @@ title: "ReuseJS Debounce"
 author: "Shrey Dhyani"
 ---
 
-## Reusejs Debounce Hook
+## ReuseJS useDebounceEffect
 
-### Description
+## Overview
 
 The `useDebounceEffect` is a custom hook for creating a debounce effect in React. It delays the execution of a callback function until a specified amount of time has passed without any additional triggers.
 
-Parameters:
+## Installation
+```
+yarn add @locoworks/reusejs-toolkit-react-hooks
+or 
+npm install @locoworks/reusejs-toolkit-react-hooks
+```
+
+## External Dependencies
+No External Dependencies
+
+## Importing
+```jsx
+import {useDebounceEffect} from "@locoworks/reusejs-toolkit-react-hooks";
+```
+
+## Input Parameters
 - `callback` (Function): The callback function to be executed after the debounce delay.
 - `delay` (number): The debounce delay in milliseconds.
 - `deps` (Array): An array of dependencies that determines when the effect should re-run. The effect will re-run if any of the dependencies in the array change.
 
-### Usage
+## Return Types
+The `useDebounceEffect` hook is a void function.
 
+## Usage/Examples
+
+### Usage
 1. Import the `useDebounceEffect` hook from the appropriate location.
 
 ```jsx

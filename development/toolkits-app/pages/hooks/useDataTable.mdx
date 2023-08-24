@@ -4,13 +4,28 @@ title: "ReuseJS Progress"
 author: "Md Amir Sohail"
 ---
 
-### useDataTable Hook Documentation
+## ReuseJS useDataTable
 
-**Description**:
+## Overview
+
 The useDataTable hook is a custom React hook that facilitates filtering and pagination for tabular data. It allows you to manage search queries, pagination, and data filtering efficiently. This hook can be used to enhance the functionality of a data table component in a React application.
 
+## Installation
+```
+yarn add @locoworks/reusejs-toolkit-react-hooks
+or 
+npm install @locoworks/reusejs-toolkit-react-hooks
+```
 
-## Props    
+## External Dependencies
+No External Dependencies
+
+## Importing
+```jsx
+import {useDataTable} from "@locoworks/reusejs-toolkit-react-hooks";
+```
+
+## Props
 
 The `useDataTable` hook accepts the following props:
 
@@ -26,7 +41,7 @@ The `useDataTable` hook accepts the following props:
 - `value` (string): The value to search for in the specified column.
 
 
-## Return Value
+## Return Types
 
 The `useDataTable` hook returns an object with the following properties and functions:
 
@@ -56,7 +71,7 @@ The `useDataTable` hook returns an object with the following properties and func
 
 13. `clearFilter` (function): A function to clear all applied filters and search queries. It resets the searchQueries, searchQuery, and currentPage to their initial values.
 
-## Usage
+## Usage/Examples
 
 ```jsx
 import React from "react";

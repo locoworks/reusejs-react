@@ -4,12 +4,35 @@ title: "ReuseJS Slider/Carousel"
 author: "Md Amir Sohail"
 ---
 
-## Documentation 
+## ReuseJS useSlider 
 
-## useSlider Hook Description:
-The useSlider hook is a custom React hook that provides functionality for creating a slider/carousel component. It manages the state and actions for transitioning between slides.
+## Overview
+The `useSlider` hook is a custom React hook that provides functionality for creating a slider/carousel component. It manages the state and actions for transitioning between slides.
 
-### Props
+## Installation
+Install the hook using npm or yarn:
+
+```jsx
+npm install @locoworks/reusejs-toolkit-react-hook
+```
+
+or
+
+```jsx 
+yarn add @locoworks/reusejs-toolkit-react-hook
+```
+
+## External Dependencies
+No External Dependencies
+
+## Importing
+Import the useSlider hook into your component file:
+
+```jsx
+import useSlider from '@locoworks/reusejs-toolkit-react-hooks';
+```
+
+## Props
 - The `useSlider` hook accepts the following props:
 
 - `slides` (required): An array of React nodes representing the slides to be displayed in the slider.
@@ -19,7 +42,7 @@ The useSlider hook is a custom React hook that provides functionality for creati
 - `loop` (required): A boolean flag indicating whether the slider should loop back to the first slide after reaching the last slide. If set to `true`, the slider will continuously cycle through the slides. If set to `false`, the slider will stop at the last slide.
 
 
-### Return Value
+## Return Types
 - The `useSlider` hook returns an object containing the following values and functions:
 
 - `currentSlideIndex`: The index of the current slide in the slides array.
@@ -34,9 +57,12 @@ The useSlider hook is a custom React hook that provides functionality for creati
 
 - `pauseSlider()`: A function that pauses the automatic slide transition. It stops the slider from advancing automatically and stores the current slide index for later use.
 
+
+## Usage/Examples
+To use the `useSlider` hook in your React application, follow the above steps.
 ### Functionality
 
-- The `useSlider` hook provides the following functionality:
+ The `useSlider` hook provides the following functionality:
 
 - `Automatic Slide Transition`: The hook automatically transitions to the next slide based on the specified slideInterval prop.
 
@@ -46,31 +72,9 @@ The useSlider hook is a custom React hook that provides functionality for creati
 
 - `Pause Slider`: You can pause the automatic slide transition using the pauseSlider() function. This is useful when you want to temporarily halt the automatic advancement of slides.
 
-### Usage
-To use the `useSlider` hook in your React application, follow these steps:
-
-### Installation
-- First, install the hook using npm or yarn:
-
-```jsx
-npm install @locoworks/reusejs-toolkit-react-hook
-```
-
-or
-
-```jsx 
-yarn add @locoworks/reusejs-toolkit-react-hook
-```
-
-### Importing
-Import the useSlider hook into your component file:
-
-```jsx
-import useSlider from '@locoworks/reusejs-toolkit-react-hooks';
-
-```
 
 ### Example
+
 Here's an example of how to use the `useSlider` hook:
 
 ```jsx

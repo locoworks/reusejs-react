@@ -4,11 +4,31 @@ title: "ReuseJS BetaForm"
 author: "Shrey Dhyani"
 ---
 
-## Reusejs BetaForm
+## ReuseJS useBetaForm
+
+## Overview
 
 **BetaForm** is custom React hook for form handling and validation. It exports a function that can be used to create a form state object with various form-related functionalities.
 
-### Functionalities
+## Installation
+```
+yarn add @locoworks/reusejs-toolkit-react-hooks
+or 
+npm install @locoworks/reusejs-toolkit-react-hooks
+```
+
+## External Dependencies
+No External Dependencies
+
+## Importing
+Betaform is a part of **@locoworks/reusejs-toolkit-react-hooks** hence it can be imported from as a hook. Following is the sysntax for importing BetaFoprm.
+> Notice the useBetaForm syntax which is a hook hence starts with *use*
+
+```jsx
+import {useBetaForm} from "@locoworks/reusejs-toolkit-react-hooks";
+```
+
+### Props
 
 This custom hook provides the following functionalities:
 
@@ -28,20 +48,10 @@ This custom hook provides the following functionalities:
 - `forgetErrors`: A function to clear all form errors.
 - `removeError`: A function to remove a specific error from the form errors.
 - `getField`: A function to retrieve the value of a specific field in the form state using dot-separated path notation.
+
 This hook provides a convenient way to manage form state, handle form validation, and track form processing status in React applications.
 
-## Usage
-
-### How to Import BetaForm?
-
-Betaform is a part of **@locoworks/reusejs-toolkit-react-hooks** hence it can be imported from as a hook. Following is the sysntax for importing BetaFoprm.
-> Notice the useBetaForm syntax which is a hook hence starts with *use*
-
-```js
-import { useBetaForm } from "@locoworks/reusejs-toolkit-react-hooks";
-```
-
-### How to use BetaForm?
+## Usage/Example
 
 BetaForm takes an object as input and provides state for value, errors and functions such as validation, processing etc. I t also allows us to get and set individual values for the form field and use getField and setField functions to create controlled form inputs.
 Following is the syntax to define a Betaform

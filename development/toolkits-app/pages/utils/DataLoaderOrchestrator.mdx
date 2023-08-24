@@ -4,10 +4,9 @@ title: "ReuseJS DataLoaderOrchestrator"
 author: "Shrey Dhyani"
 ---
 
-
 import DataLoaderOrchestratorExample from "../../components/DataLoaderOrchestratorExample/DataLoaderOrchestratorExample.tsx";
 
-# Reusejs Utils Toolkit
+# ReuseJS Utils Toolkit
 
 ## Overview
 
@@ -22,6 +21,9 @@ npm install @locoworks/reusejs-toolkit-utils
 # or
 yarn add @locoworks/reusejs-toolkit-utils
 ```
+
+## External Dependencies
+No External Dependencies
 
 ## Importing
 
@@ -39,11 +41,17 @@ The `DataLoaderOrchestrator` component accepts the following input parameters:
 
 2. `components` (object, required): An object that maps state names to corresponding state components. Each state component will be rendered based on the state of the data received from the `handler` function.
 
+| Prop          | Type                         | Description                                           |
+|---------------|------------------------------|-------------------------------------------------------|
+| `handler`     | `(args?: any) => Promise<any>` | Function for data fetching                            |
+| `components`  | `{ [key: string]: React.ComponentType<any> }` | Object mapping state names to state components        |
+
+
 ## Return Types
 
 The `DataLoaderOrchestrator` component does not have a specific return type, as it handles rendering different state components internally. However, it provides an imperative handle to trigger data reloads externally.
 
-## Usage Example
+## Usage/Examples
 
 ### Sample
 ```jsx
@@ -84,20 +92,13 @@ const MyDataComponent = () => {
 
 - Keep the `components` object updated with valid state components to avoid rendering issues.
 
-## Input/Return Types Table (Work in Progress)
-
-| Prop          | Type                         | Description                                           |
-|---------------|------------------------------|-------------------------------------------------------|
-| `handler`     | `(args?: any) => Promise<any>` | Function for data fetching                            |
-| `components`  | `{ [key: string]: React.ComponentType<any> }` | Object mapping state names to state components        |
-
 ## Live Example
 
 For a live example of the `Orchestrator` component, you can check out the following CodeSandbox:
 
 [Live Example on CodeSandbox](https://codesandbox.io/s/orchestrator-component-example-tlwus)
 
-## Notes
+**Note:**
 
 - Please ensure that you provide valid state components and a valid `handler` function to the `Orchestrator` component for proper functionality.
 
