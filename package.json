@@ -23,7 +23,7 @@
     "slider-carousel:build": "turbo run build --filter=@locoworks/reusejs-react-slider-carousel...",
     "data-table:dev": "turbo run dev --filter=data-table-app...",
     "data-table:build": "turbo run build --filter=@locoworks/reusejs-react-data-table...",
-    "toast:dev": "turbo run dev --filter=toast-app...",
+    "toast:dev": "turbo run dev --filter=toast-app... --concurrency 11",
     "toast:build": "turbo run build --filter=@locoworks/reusejs-react-toast...",
     "progress-bar:dev": "turbo run dev --filter=progress-bar-app...",
     "progress-bar:build": "turbo run build --filter=@locoworks/reusejs-react-progress-bar...",
@@ -60,7 +60,9 @@
     "postcss": "^8.4.23",
     "prettier": "^3.0.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.2",
+    "common-tsconfig":"*",
+    "common-rollupconfig":"*"
   },
   "name": "reusev2-sample",
   "packageManager": "yarn@1.22.19",
@@ -69,7 +71,7 @@
     "development/*",
     "docs",
     "packages/*",
-    "tsconfig",
+    "common-configs/*",
     "toolkit/*"
   ],
   "dependencies": {

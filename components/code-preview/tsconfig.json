@@ -1,15 +1,5 @@
 {
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable","ES2021"],
-    "declaration": true,
-    "declarationDir": "dist/types",
-    "esModuleInterop": true,
-    "moduleResolution": "Node",
-    "jsx": "react",
-    "resolveJsonModule": true,
-    "strict": true,
-    "target": "ESNext"
-  },
+  "extends":"common-tsconfig/component.json",
   "include": ["","src"],
   "exclude": ["dist/**", "src/main.tsx"]
 }

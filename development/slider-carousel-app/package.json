@@ -36,6 +36,7 @@
     "@locoworks/remark-folder-import": "*"
   },
   "devDependencies": {
-    "@types/react-syntax-highlighter": "^15.5.7"
+    "@types/react-syntax-highlighter": "^15.5.7",
+    "common-tsconfig":"*"
   }
 }

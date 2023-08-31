@@ -1,0 +1,11 @@
+{
+    "name": "common-rollupconfig",
+    "version": "1.0.0",
+    "description": "Common rollupconfig",
+    "license": "MIT",
+    "files": ["component/rollup.base.config.ts"],
+    "publishConfig": {
+      "access": "public"
+    }
+  }
+  

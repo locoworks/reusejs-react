@@ -1,0 +1,10 @@
+{
+  "name": "common-tsconfig",
+  "version": "1.0.0",
+  "description": "Common tsconfig",
+  "license": "MIT",
+  "files": ["component.json","dev-app.json"],
+  "publishConfig": {
+    "access": "public"
+  }
+}
