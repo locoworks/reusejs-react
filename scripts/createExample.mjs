@@ -16,7 +16,7 @@ if (!exampleName) {
   process.exit(2);
 }
 
-const sourcePath = "./scripts/scaffold/dev-app/components/<to-replace>";
+const sourcePath = "./scripts/scaffold/dev-app/components/_to-replace_";
 const targetPath = `./development/${devAppName}-app/components/${devAppName}`;
 
 const renameFolders = () => {
