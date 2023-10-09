@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 
-const useTimer = () => {
+interface TimerHook {
+	start: (value: number) => void;
+	stop: () => void;
+	startFromZero: () => void;
+	value: number;
+	hasStopped: boolean;
+}
+
+export const useTimer = (): TimerHook => {
 	const [started, setStarted] = useState<boolean>(false);
 	const [countUp, setCountUp] = useState<boolean>(false);
 	const [seconds, setSeconds] = useState<number>(0);
@@ -51,5 +59,3 @@ const useTimer = () => {
 	};
 	return { start, stop, value: seconds, startFromZero, hasStopped };
 };
-
-export default useTimer;

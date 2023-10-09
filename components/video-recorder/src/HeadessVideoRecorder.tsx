@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import useTimer from "./useTimer";
+import { useTimer } from "./useTimer";
 
 interface HeadessVideoRecorderProps {
 	autoStop?: boolean;
@@ -197,12 +197,7 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 	const renderFooter = () => {
 		switch (recording) {
 			case "preview":
-				return (
-					<PreviewFooter
-						autoStop={autoStop}
-						handleStartRecording={handleStartRecording}
-					/>
-				);
+				return <PreviewFooter handleStartRecording={handleStartRecording} />;
 			case "recording":
 				return (
 					<RecordingFooter
