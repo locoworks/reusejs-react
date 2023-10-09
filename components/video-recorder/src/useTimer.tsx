@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const useTimer = () => {
 	const [started, setStarted] = useState<boolean>(false);
+	const [countUp, setCountUp] = useState<boolean>(false);
 	const [seconds, setSeconds] = useState<number>(0);
 	const [hasStopped, setHasStopped] = useState<boolean>(false);
 
@@ -21,6 +22,16 @@ const useTimer = () => {
 		return;
 	}, [started, seconds]);
 
+	useEffect(() => {
+		if (countUp) {
+			const interval = setInterval(() => {
+				setSeconds((prevSeconds) => prevSeconds + 1);
+			}, 1000);
+
+			return () => clearInterval(interval);
+		}
+	}, [countUp, seconds]);
+
 	const start = (value: number) => {
 		setStarted(true);
 		setSeconds(value);
@@ -29,10 +40,16 @@ const useTimer = () => {
 
 	const stop = () => {
 		setStarted(false);
+		setCountUp(false);
 		setHasStopped(true);
 	};
 
-	return { start, stop, value: seconds, hasStopped };
+	const startFromZero = () => {
+		setCountUp(true);
+		setSeconds(0);
+		setHasStopped(true);
+	};
+	return { start, stop, value: seconds, startFromZero, hasStopped };
 };
 
 export default useTimer;

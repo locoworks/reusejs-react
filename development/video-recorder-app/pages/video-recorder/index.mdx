@@ -5,6 +5,8 @@ author: "John Doe"
 ---
 
 import Example from "../../components/video-recorder/Example/Example.tsx"
+import AutoStopVideoRecorder from "../../components/video-recorder/autoStop/autoStop.tsx"
+import ManualStopVideoRecorder from "../../components/video-recorder/manualStop/manualStop.tsx"
 
 ## Table of contents
 
@@ -13,6 +15,16 @@ import Example from "../../components/video-recorder/Example/Example.tsx"
 ```js path=../../components/video-recorder/Example name=Example
 ```
 
+## AutoStop Code Demo
+<AutoStopVideoRecorder/>
+```js path=../../components/video-recorder/Example name=Example
+```
+## ManualStop Code Demo
+<ManualStopVideoRecorder/>
+```js path=../../components/video-recorder/Example name=Example
+```
+
 export default ({ children }) => {
   return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
 };
+

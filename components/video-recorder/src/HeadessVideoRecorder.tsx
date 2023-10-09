@@ -3,25 +3,22 @@ import useTimer from "./useTimer";
 
 interface HeadessVideoRecorderProps {
 	autoStop?: boolean;
-	timerDur?: number;
+	timeInMs?: number;
 }
 type VideoMimeTypes = "video/mp4" | "video/webm";
 
 const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
-	autoStop = true,
-	timerDur = 15000,
+	autoStop = false,
+	timeInMs = 15000,
 	// ...props
 }) => {
 	const [recording, setRecording] = useState("preview");
-	// const [loading, setLoading] = useState(false);
-	// const [isRecordingStopped, setRecordingStopped] = useState(false);
-	// const [recordedVideoSrc, setRecordedVideoSrc] = useState(null);
 
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const playbackRef = useRef<HTMLVideoElement>(null);
 	const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
-	const recordingTime = timerDur;
+	const recordingTime = timeInMs;
 
 	const timer = useTimer();
 	const isSupportedMimeType = (mimeTypes: VideoMimeTypes[]) => {
@@ -34,9 +31,9 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 				result.push(mimeType);
 			}
 		});
-
 		return result.length === 0 ? undefined : result[0];
 	};
+
 	const supportedMimeType = isSupportedMimeType(["video/mp4", "video/webm"]);
 	const mimeType = supportedMimeType;
 	const blobType = supportedMimeType;
@@ -61,7 +58,7 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 					console.log("Loading false");
 				};
 			}
-			console.log("Show Preview");
+			// console.log("Show Preview");
 		} catch (error) {
 			console.log(error, "Preview Error__");
 		}
@@ -76,15 +73,11 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 	};
 
 	const record = async (stream: MediaStream, lengthInMs: number) => {
-		// console.log(lengthInMs,"lengthInMs__");
-
 		const recorder = new MediaRecorder(stream, {
-			// mimeType: 'video/webm',
 			mimeType,
 			videoBitsPerSecond: 2500000,
 		});
 		mediaRecorderRef.current = recorder;
-
 		const data: Blob[] = [];
 
 		recorder.ondataavailable = (event) => {
@@ -92,20 +85,17 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 		};
 
 		recorder.start();
-		// autoStop
-		timer.start(lengthInMs / 1000);
 
+		timer.start(lengthInMs / 1000);
 		const recorded = await wait(lengthInMs);
+
 		if (recorder.state === "recording") {
 			recorder.stop();
-			// stopTimer();
 			timer.stop();
 		}
-
 		const stopped = new Promise((resolve, reject) => {
 			recorder.onstop = resolve;
 			recorder.onerror = (event) => {
-				// stopTimer();
 				timer.stop();
 				reject(event);
 			};
@@ -115,7 +105,6 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 			await Promise.all([stopped, recorded]);
 			return data;
 		} catch (error) {
-			// stopTimer();
 			timer.stop();
 			console.log(error);
 		}
@@ -129,34 +118,57 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 		}
 	};
 
+	const onStopMediaStream = (recordedChunks: Blob[] | undefined) => {
+		const recorderBlob = new Blob(recordedChunks, { type: blobType });
+		const videoSrc = URL.createObjectURL(recorderBlob);
+		// console.log(videoSrc, "___VideoSrc__");
+
+		// const extension = fileExtension;
+		// const recordedFile = new File([recorderBlob],`video.${extension}`, {
+		//     type : extension
+		// });
+
+		if (playbackRef.current) {
+			playbackRef.current.src = videoSrc;
+		}
+	};
+
 	const handleStartRecording = async () => {
 		try {
-			setRecording("recording");
-			// startTimer();
-			if (videoRef.current?.srcObject instanceof MediaStream) {
-				const recordedChunks: any = await record(
-					videoRef.current?.srcObject,
-					recordingTime,
-				);
-
-				const recorderBlob = new Blob(recordedChunks, { type: blobType });
-
-				// const extension = 'video/mp4';
-				// const recordedFile = new File([recorderBlob],`video.${extension}`, {
-				//     type : extension
-				// });
-
-				const videoSrc = URL.createObjectURL(recorderBlob);
-				console.log(videoSrc, "___VideoSrc__");
-
-				if (playbackRef.current) {
-					playbackRef.current.src = videoSrc;
+			if (autoStop) {
+				setRecording("recording");
+				if (videoRef.current?.srcObject instanceof MediaStream) {
+					const recordedChunks: Blob[] | undefined = await record(
+						videoRef.current?.srcObject,
+						recordingTime,
+					);
+					onStopMediaStream(recordedChunks);
+					setRecording("recorded");
+					stopPreviewStream();
+					// setFile(recordedFile);
 				}
-
-				setRecording("recorded");
-
-				stopPreviewStream();
-				// setFile(recordedFile);
+			} else {
+				if (videoRef.current?.srcObject instanceof MediaStream) {
+					mediaRecorderRef.current = new MediaRecorder(
+						videoRef.current?.srcObject,
+						{
+							mimeType,
+							videoBitsPerSecond: 2500000,
+						},
+					);
+					const chunks: Blob[] = [];
+					mediaRecorderRef.current.ondataavailable = (e) => {
+						if (e.data.size > 0) {
+							chunks.push(e.data);
+						}
+					};
+					mediaRecorderRef.current.onstop = () => {
+						onStopMediaStream(chunks);
+					};
+					mediaRecorderRef.current.start();
+					timer.startFromZero();
+					setRecording("recording");
+				}
 			}
 		} catch (error) {
 			console.log(error);
@@ -164,22 +176,21 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 	};
 
 	const handleStopRecording = () => {
+		if (mediaRecorderRef.current && recording == "recording") {
+			mediaRecorderRef.current?.stop();
+			timer.stop();
+		}
 		stopPreviewStream();
-
 		setRecording("recorded");
-		// setRecordingStopped(true);
-		timer.stop();
 	};
 
 	const handleContinue = () => {
 		setRecording("preview");
-		// setRecordingStopped(false);
 		showPreview();
 	};
 
 	const handleRetake = () => {
 		setRecording("preview");
-		// setRecordingStopped(false);
 		showPreview();
 	};
 
@@ -196,6 +207,7 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 				return (
 					<RecordingFooter
 						countDown={timer.value}
+						autoStop={autoStop}
 						onStop={handleStopRecording}
 					/>
 				);
@@ -218,7 +230,7 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 				className={`${
 					recording == "preview" || recording == "recording"
 						? "block"
-						: " hidden"
+						: "hidden"
 				}`}
 			/>
 			<video
@@ -232,8 +244,12 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 		</div>
 	);
 };
-
-const PreviewFooter = ({ handleStartRecording }: any) => {
+type PreviewFooterProps = {
+	handleStartRecording: () => void;
+};
+const PreviewFooter: React.FC<PreviewFooterProps> = ({
+	handleStartRecording,
+}) => {
 	return (
 		<div className="flex gap-2 footer px-7">
 			<button
@@ -245,7 +261,17 @@ const PreviewFooter = ({ handleStartRecording }: any) => {
 		</div>
 	);
 };
-const RecordingFooter = ({ countDown, autoStop, onStop }: any) => {
+
+type RecordingFooterProps = {
+	countDown: number;
+	autoStop: boolean;
+	onStop: () => void;
+};
+const RecordingFooter: React.FC<RecordingFooterProps> = ({
+	countDown,
+	autoStop,
+	onStop,
+}) => {
 	return (
 		<div className="absolute bottom-0 left-0 right-0 py-5 mt-2 footer gradient-black-to-white px-7">
 			<div className="flex justify-between">
@@ -264,7 +290,14 @@ const RecordingFooter = ({ countDown, autoStop, onStop }: any) => {
 		</div>
 	);
 };
-const RecordedFooter = ({ onContinue, onRetake }: any) => {
+type RecordedFooterProps = {
+	onContinue: () => void;
+	onRetake: () => void;
+};
+const RecordedFooter: React.FC<RecordedFooterProps> = ({
+	onContinue,
+	onRetake,
+}) => {
 	return (
 		<div className="flex gap-2 footer px-7">
 			<button
