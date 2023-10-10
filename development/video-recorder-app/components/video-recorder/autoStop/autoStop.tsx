@@ -46,10 +46,10 @@ const AutoStopVideoRecorder: React.FC = () => {
 				ref={videoRecorderRef}
 				autoStop={true}
 				timeInMs={10000}
-				handleDownloadCallback={(setRecording) => {
-					console.log(setRecording);
-					setRecording("preview");
-				}}
+				// handleDownloadCallback={(setRecording) => {
+				// 	console.log(setRecording);
+				// 	setRecording("preview");
+				// }}
 			/>
 			{!isLoading && videoRecorderRef.current && (
 				<>
