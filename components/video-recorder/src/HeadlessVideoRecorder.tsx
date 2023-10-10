@@ -1,18 +1,41 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+	useCallback,
+	useImperativeHandle,
+	useRef,
+	useState,
+} from "react";
 import { useTimer } from "./useTimer";
 
-interface HeadessVideoRecorderProps {
+interface HeadlessVideoRecorderRef {
+	recording: string;
+	handleDownload: () => void;
+	showPreview: () => void;
+}
+interface HeadlessVideoRecorderProps {
 	autoStop?: boolean;
 	timeInMs?: number;
+	// handleDownloadCallback: (setRecording: any) => void;
+	// handleShowPreview : () => void
+	// handleshowPreviewClicked?: () => void;
 }
+
 type VideoMimeTypes = "video/mp4" | "video/webm";
 
-const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
-	autoStop = false,
-	timeInMs = 15000,
-	// ...props
-}) => {
-	const [recording, setRecording] = useState("preview");
+const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
+	HeadlessVideoRecorderRef,
+	HeadlessVideoRecorderProps
+> = (
+	{
+		autoStop = true,
+		timeInMs = 15000,
+		//  ...props
+	},
+	ref,
+) => {
+	// inactive, preview, recording, recorded
+	const [recording, setRecording] = useState<string>("inactive");
+	const [file, setFile] = useState<File | null>(null);
+	const [loading, setLoading] = useState(false);
 
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const playbackRef = useRef<HTMLVideoElement>(null);
@@ -21,6 +44,7 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 	const recordingTime = timeInMs;
 
 	const timer = useTimer();
+
 	const isSupportedMimeType = (mimeTypes: VideoMimeTypes[]) => {
 		const result: VideoMimeTypes[] = [];
 		mimeTypes.forEach((mimeType) => {
@@ -37,11 +61,12 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 	const supportedMimeType = isSupportedMimeType(["video/mp4", "video/webm"]);
 	const mimeType = supportedMimeType;
 	const blobType = supportedMimeType;
-	// const fileExtension = supportedMimeType?.split("/")[1];
+	const fileExtension = supportedMimeType?.split("/")[1];
 
 	const showPreview = useCallback(async () => {
 		try {
-			// setLoading(true);
+			setLoading(true);
+			setRecording("preview");
 			const stream = await navigator.mediaDevices.getUserMedia({
 				video: {
 					width: { ideal: 640, max: 640 },
@@ -54,19 +79,52 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 			if (videoRef.current) {
 				videoRef.current.srcObject = stream;
 				videoRef.current.onloadedmetadata = () => {
-					// setLoading(false);
-					console.log("Loading false");
+					setLoading(false);
+					// console.log("Loading false");
+					// console.log(recording, "recording__");
 				};
 			}
-			// console.log("Show Preview");
 		} catch (error) {
 			console.log(error, "Preview Error__");
 		}
+		// handleDownloadCallback && handleDownloadCallback(setRecording);
 	}, []);
 
-	useEffect(() => {
-		showPreview();
-	}, [showPreview]);
+	// const handleshowPreviewClicked = () => {
+	// 	showPreview();
+	// };
+	const handleDownload = useCallback(() => {
+		if (file) {
+			const url = URL.createObjectURL(file);
+			const a = document.createElement("a");
+			a.href = url;
+			a.download = file.name || "recorded-video";
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+			URL.revokeObjectURL(url);
+		} else {
+			console.log("_update handleDownloadFunction");
+		}
+		// handleDownloadCallback && handleDownloadCallback(file as File);
+	}, [file]);
+
+	// useEffect(() => {
+	// 	showPreview();
+	// }, [showPreview]);
+
+	useImperativeHandle(
+		ref,
+		() => {
+			console.log("CHILD- Recording state changed: ", recording);
+			return {
+				recording,
+				handleDownload,
+				showPreview,
+			};
+		},
+		[recording, handleDownload, showPreview],
+	);
 
 	const wait = (delayInMS: number) => {
 		return new Promise((resolve) => setTimeout(resolve, delayInMS));
@@ -123,12 +181,12 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 		const videoSrc = URL.createObjectURL(recorderBlob);
 		// console.log(videoSrc, "___VideoSrc__");
 
-		// const extension = fileExtension;
-		// const recordedFile = new File([recorderBlob],`video.${extension}`, {
-		//     type : extension
-		// });
-
-		if (playbackRef.current) {
+		const extension = fileExtension;
+		const recordedFile = new File([recorderBlob], `video.${extension}`, {
+			type: extension,
+		});
+		setFile(recordedFile);
+		if (playbackRef?.current) {
 			playbackRef.current.src = videoSrc;
 		}
 	};
@@ -145,7 +203,6 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 					onStopMediaStream(recordedChunks);
 					setRecording("recorded");
 					stopPreviewStream();
-					// setFile(recordedFile);
 				}
 			} else {
 				if (videoRef.current?.srcObject instanceof MediaStream) {
@@ -217,28 +274,31 @@ const HeadessVideoRecorder: React.FC<HeadessVideoRecorderProps> = ({
 
 	return (
 		<div className="relative flex flex-col flex-1">
-			<video
-				ref={videoRef}
-				autoPlay
-				playsInline
-				muted
-				className={`${
-					recording == "preview" || recording == "recording"
-						? "block"
-						: "hidden"
-				}`}
-			/>
-			<video
-				ref={playbackRef}
-				controls
-				playsInline
-				className={`${recording == "recorded" ? "block" : " hidden"}`}
-			/>
-
-			{renderFooter()}
+			{loading && "Loading Preview...."}
+			<>
+				<video
+					ref={videoRef}
+					autoPlay
+					playsInline
+					muted
+					className={`${
+						recording == "preview" || recording == "recording"
+							? "block"
+							: "hidden"
+					}`}
+				/>
+				<video
+					ref={playbackRef}
+					controls
+					playsInline
+					className={`${recording == "recorded" ? "block" : " hidden"}`}
+				/>
+				{renderFooter()}
+			</>
 		</div>
 	);
 };
+
 type PreviewFooterProps = {
 	handleStartRecording: () => void;
 };
@@ -311,4 +371,4 @@ const RecordedFooter: React.FC<RecordedFooterProps> = ({
 	);
 };
 
-export default HeadessVideoRecorder;
+export default React.forwardRef(HeadlessVideoRecorder);
