@@ -1,5 +1,5 @@
 {
-  "name": "@locoworks/reusejs-react-<to-replace>",
+  "name": "@locoworks/reusejs-react-_to-replace_",
   "version": "0.0.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",

@@ -5,14 +5,14 @@ const { ncp } = pkg;
 
 const replacementText = process.argv[2];
 
-//Function to Replace all occurances of <to-replace> with the given component name
+//Function to Replace all occurances of _to-replace_ wuth the given component name
 function reformat(folderPath) {
   try {
     fs.readdirSync(folderPath).forEach((file) => {
       const filePath = path.join(folderPath, file);
       if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
         let fileContent = fs.readFileSync(filePath, "utf-8");
-        fileContent = fileContent.replace(/<to-replace>/g, replacementText);
+        fileContent = fileContent.replace(/_to-replace_/g, replacementText);
         fs.writeFileSync(filePath, fileContent, "utf-8");
       } else {
         reformat(path.join(folderPath, file));
@@ -68,10 +68,10 @@ const addToPackageJSON = () => {
 
 //Rename folders in dev-app
 const renameFolders = () => {
-  const folderpath2 = `./development/${replacementText}-app/pages/<to-replace>`;
+  const folderpath2 = `./development/${replacementText}-app/pages/_to-replace_`;
   const foldernewName2 = `./development/${replacementText}-app/pages/${replacementText}`;
 
-  const folderpath3 = `./development/${replacementText}-app/components/<to-replace>`;
+  const folderpath3 = `./development/${replacementText}-app/components/_to-replace_`;
   const foldernewName3 = `./development/${replacementText}-app/components/${replacementText}`;
 
   const renameFolder = (oldFolderPath, newFolderPath) => {
