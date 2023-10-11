@@ -1,11 +1,11 @@
 import React, {
 	useCallback,
+	useEffect,
 	useImperativeHandle,
 	useRef,
 	useState,
 } from "react";
 import { useTimer } from "./useTimer";
-
 interface HeadlessVideoRecorderRef {
 	recording: string;
 	handleDownload: () => void;
@@ -14,9 +14,8 @@ interface HeadlessVideoRecorderRef {
 interface HeadlessVideoRecorderProps {
 	autoStop?: boolean;
 	timeInMs?: number;
-	// handleDownloadCallback: (setRecording: any) => void;
-	// handleShowPreview : () => void
-	// handleshowPreviewClicked?: () => void;
+	handleStateChange?: (state: string) => void;
+	handleDownloadCallback?: (file: any) => void;
 }
 
 type VideoMimeTypes = "video/mp4" | "video/webm";
@@ -28,7 +27,8 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	{
 		autoStop = true,
 		timeInMs = 15000,
-		//  ...props
+		handleStateChange,
+		handleDownloadCallback,
 	},
 	ref,
 ) => {
@@ -63,6 +63,18 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	const blobType = supportedMimeType;
 	const fileExtension = supportedMimeType?.split("/")[1];
 
+	const handleStreamPreview = useCallback(
+		(stream: MediaStream) => {
+			if (videoRef.current) {
+				videoRef.current.srcObject = stream;
+				videoRef.current.onloadedmetadata = () => {
+					setLoading(false);
+				};
+			}
+		},
+		[videoRef],
+	);
+
 	const showPreview = useCallback(async () => {
 		try {
 			setLoading(true);
@@ -76,24 +88,17 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 				},
 				audio: true,
 			});
-			if (videoRef.current) {
-				videoRef.current.srcObject = stream;
-				videoRef.current.onloadedmetadata = () => {
-					setLoading(false);
-					// console.log("Loading false");
-					// console.log(recording, "recording__");
-				};
-			}
+			handleStreamPreview(stream);
 		} catch (error) {
 			console.log(error, "Preview Error__");
 		}
-		// handleDownloadCallback && handleDownloadCallback(setRecording);
-	}, []);
+	}, [handleStreamPreview]);
 
-	// const handleshowPreviewClicked = () => {
-	// 	showPreview();
-	// };
-	const handleDownload = useCallback(() => {
+	useEffect(() => {
+		handleStateChange && handleStateChange(recording);
+	}, [recording]);
+
+	const handleFileDownload = useCallback(() => {
 		if (file) {
 			const url = URL.createObjectURL(file);
 			const a = document.createElement("a");
@@ -109,14 +114,14 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		// handleDownloadCallback && handleDownloadCallback(file as File);
 	}, [file]);
 
-	// useEffect(() => {
-	// 	showPreview();
-	// }, [showPreview]);
+	const handleDownload = useCallback(() => {
+		(handleDownloadCallback || handleFileDownload)(file);
+	}, [file]);
 
 	useImperativeHandle(
 		ref,
 		() => {
-			console.log("CHILD- Recording state changed: ", recording);
+			// console.log("CHILD- Recording state changed: ", recording);
 			return {
 				recording,
 				handleDownload,
@@ -186,7 +191,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 			type: extension,
 		});
 		setFile(recordedFile);
-		if (playbackRef?.current) {
+		if (playbackRef.current) {
 			playbackRef.current.src = videoSrc;
 		}
 	};
@@ -241,11 +246,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		setRecording("recorded");
 	};
 
-	const handleContinue = () => {
-		setRecording("preview");
-		showPreview();
-	};
-
 	const handleRetake = () => {
 		setRecording("preview");
 		showPreview();
@@ -264,9 +264,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 					/>
 				);
 			case "recorded":
-				return (
-					<RecordedFooter onContinue={handleContinue} onRetake={handleRetake} />
-				);
+				return <RecordedFooter onRetake={handleRetake} />;
 			default:
 				return <></>;
 		}
@@ -275,26 +273,20 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	return (
 		<div className="relative flex flex-col flex-1">
 			{loading && "Loading Preview...."}
-			<>
-				<video
-					ref={videoRef}
-					autoPlay
-					playsInline
-					muted
-					className={`${
-						recording == "preview" || recording == "recording"
-							? "block"
-							: "hidden"
-					}`}
-				/>
-				<video
-					ref={playbackRef}
-					controls
-					playsInline
-					className={`${recording == "recorded" ? "block" : " hidden"}`}
-				/>
-				{renderFooter()}
-			</>
+			<video
+				ref={videoRef}
+				autoPlay
+				playsInline
+				muted
+				className={`${recording !== "recorded" ? "block" : "hidden"}`}
+			/>
+			<video
+				ref={playbackRef}
+				controls
+				playsInline
+				className={`${recording === "recorded" ? "block" : "hidden"}`}
+			/>
+			{renderFooter()}
 		</div>
 	);
 };
@@ -346,21 +338,11 @@ const RecordingFooter: React.FC<RecordingFooterProps> = ({
 	);
 };
 type RecordedFooterProps = {
-	onContinue: () => void;
 	onRetake: () => void;
 };
-const RecordedFooter: React.FC<RecordedFooterProps> = ({
-	onContinue,
-	onRetake,
-}) => {
+const RecordedFooter: React.FC<RecordedFooterProps> = ({ onRetake }) => {
 	return (
 		<div className="flex gap-2 footer px-7">
-			<button
-				className="p-3 bg-blue-400 border border-red-200 rounded-lg"
-				onClick={onContinue}
-			>
-				Continue
-			</button>
 			<button
 				className="p-3 bg-blue-400 border border-red-200 rounded-lg"
 				onClick={onRetake}

@@ -1,8 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useState } from "react";
 import { HeadlessVideoRecorder } from "@locoworks/reusejs-react-video-recorder";
 
-// Import New Component created here
-// import <component-name> from "@locoworks/remark-folder-<component-name>"
 interface HeadlessVideoRecorderRef {
 	recording: string;
 	handleDownload: () => void;
@@ -10,19 +8,9 @@ interface HeadlessVideoRecorderRef {
 }
 const AutoStopVideoRecorder: React.FC = () => {
 	const videoRecorderRef = useRef<HeadlessVideoRecorderRef>(null);
-	const [isLoading, setIsLoading] = React.useState(true);
-
-	useEffect(() => {
-		console.log(
-			"Recording in PARENT changed",
-			videoRecorderRef.current?.recording,
-		);
-		console.log(videoRecorderRef.current, "___obj__");
-
-		if (videoRecorderRef.current?.recording === "inactive") {
-			setIsLoading(false);
-		}
-	}, [videoRecorderRef.current?.recording]);
+	const [recordingState, setRecordingState] = useState<string>(
+		videoRecorderRef.current?.recording || "inactive",
+	);
 
 	const downloadHandler = () => {
 		if (videoRecorderRef.current) {
@@ -46,27 +34,18 @@ const AutoStopVideoRecorder: React.FC = () => {
 				ref={videoRecorderRef}
 				autoStop={true}
 				timeInMs={10000}
-				// handleDownloadCallback={(setRecording) => {
-				// 	console.log(setRecording);
-				// 	setRecording("preview");
-				// }}
+				handleStateChange={(state) => setRecordingState(state)}
 			/>
-			{!isLoading && videoRecorderRef.current && (
-				<>
-					{videoRecorderRef.current.recording === "inactive" && (
-						<button className="p-2 bg-blue-300 border" onClick={showPreview}>
-							Show Preview
-						</button>
-					)}
-					{videoRecorderRef.current.recording === "recorded" && (
-						<button
-							className="p-2 bg-blue-300 border"
-							onClick={downloadHandler}
-						>
-							Download Video
-						</button>
-					)}
-				</>
+
+			{recordingState == "inactive" && (
+				<button className="p-2 bg-blue-300 border" onClick={showPreview}>
+					Show Preview
+				</button>
+			)}
+			{recordingState == "recorded" && (
+				<button className="p-2 bg-blue-300 border" onClick={downloadHandler}>
+					Download Video
+				</button>
 			)}
 		</div>
 	);
