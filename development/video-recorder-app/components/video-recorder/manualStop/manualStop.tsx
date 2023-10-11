@@ -87,11 +87,6 @@ const ManualStopVideoRecorder: React.FC = () => {
 					Show Preview
 				</button>
 			)}
-			{/* {recordingState == "recorded" && (
-				<button className="p-2 bg-blue-300 border" onClick={downloadHandler}>
-					Download Video
-				</button>
-			)} */}
 		</div>
 	);
 };
