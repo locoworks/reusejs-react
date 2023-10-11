@@ -76,18 +76,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	const blobType = supportedMimeType;
 	const fileExtension = supportedMimeType?.split("/")[1];
 
-	// const handleStreamPreview = useCallback(
-	// 	(stream: MediaStream) => {
-	// 		if (videoRef.current) {
-	// 			videoRef.current.srcObject = stream;
-	// 			videoRef.current.onloadedmetadata = () => {
-	// 				setLoading(false);
-	// 			};
-	// 		}
-	// 	},
-	// 	[videoRef],
-	// );
-
 	const showPreview = useCallback(async () => {
 		try {
 			setLoading(true);
@@ -100,7 +88,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 				},
 				audio: true,
 			});
-			// handleStreamPreview(stream);
 			if (videoRef.current) {
 				videoRef.current.srcObject = stream;
 				videoRef.current.onloadedmetadata = () => {
@@ -111,7 +98,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		} catch (error) {
 			console.log(error, "Preview Error__");
 		}
-		// }, [handleStreamPreview]);
 	}, [videoRef]);
 
 	useEffect(() => {
@@ -144,7 +130,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	useImperativeHandle(
 		ref,
 		() => {
-			// console.log("CHILD- Recording state changed: ", recording);
 			return {
 				recording,
 				handleDownload,
@@ -197,7 +182,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	};
 
 	const stopPreviewStream = () => {
-		// stop input stream
 		if (videoRef.current?.srcObject instanceof MediaStream) {
 			const stream = videoRef.current?.srcObject;
 			stream?.getTracks().forEach((track) => track.stop());
@@ -207,7 +191,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	const onStopMediaStream = (recordedChunks: Blob[] | undefined) => {
 		const recorderBlob = new Blob(recordedChunks, { type: blobType });
 		const videoSrc = URL.createObjectURL(recorderBlob);
-		// console.log(videoSrc, "___VideoSrc__");
 
 		const extension = fileExtension;
 		const recordedFile = new File([recorderBlob], `video.${extension}`, {
