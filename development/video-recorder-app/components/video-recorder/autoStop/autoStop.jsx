@@ -1,9 +1,17 @@
 import React, { useRef, useState } from "react";
-import { HeadlessVideoRecorder } from "@locoworks/reusejs-react-video-recorder";
+import HeadlessVideoRecorder from "@locoworks/reusejs-react-video-recorder";
 
 const AutoStopVideoRecorder = () => {
   const videoRecorderRef = useRef(null);
   const [recordingState, setRecordingState] = useState("inactive");
+
+  const downloadHandler = () => {
+    if (videoRecorderRef.current) {
+      videoRecorderRef.current.handleDownload();
+    } else {
+      console.error("videoRecorderRef is null");
+    }
+  };
 
   const showPreview = () => {
     if (videoRecorderRef.current) {
@@ -21,16 +29,12 @@ const AutoStopVideoRecorder = () => {
     );
   };
 
-  const DownloadButton = ({ onDownload }) => {
-    return (
-      <button className="p-2 bg-blue-200 border" onClick={onDownload}>
-        Download Recording
-      </button>
-    );
-  };
-
   const CountDown = ({ count }) => {
-    return <div className="flex p-2 border">{count}</div>;
+    return (
+      <div className="flex p-2 font-semibold border">
+        00:{count < 10 ? `0${count}` : count}
+      </div>
+    );
   };
 
   const StartRecording = ({ onStart }) => {
@@ -48,11 +52,11 @@ const AutoStopVideoRecorder = () => {
         autoPreview={false}
         autoStop={true}
         timeInMs={8000}
-        customDownloadButton={(onDownload) => (
-          <DownloadButton onDownload={onDownload} />
-        )}
+        customDownloadButton={(onDownload) => <></>}
         handleStateChange={(state) => setRecordingState(state)}
-        customRetakeButton={(onRetake) => <RetakeButton onRetake={onRetake} />}
+        customRetakeButton={(onRetake) => (
+          <RetakeButton onRetake={onRetake} />
+        )}
         customCountDown={(count) => <CountDown count={count} />}
         customStartRecording={(onStart) => <StartRecording onStart={onStart} />}
       />
@@ -62,7 +66,11 @@ const AutoStopVideoRecorder = () => {
           Show Preview
         </button>
       )}
-
+      {recordingState === "recorded" && (
+        <button className="bg-blue-300 border -2" onClick={downloadHandler}>
+          Download Video in Parent
+        </button>
+      )}
     </div>
   );
 };

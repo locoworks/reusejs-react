@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { HeadlessVideoRecorder } from "@locoworks/reusejs-react-video-recorder";
+import HeadlessVideoRecorder from "@locoworks/reusejs-react-video-recorder";
 
 const ManualStopVideoRecorder = () => {
   const videoRecorderRef = useRef(null);
@@ -15,7 +15,7 @@ const ManualStopVideoRecorder = () => {
 
   const RetakeButton = ({ onRetake }) => {
     return (
-      <button className="w-auto p-2 bg-blue-200 border " onClick={onRetake}>
+      <button className="w-auto p-2 bg-blue-200 border" onClick={onRetake}>
         Retake Recording
       </button>
     );
@@ -30,7 +30,11 @@ const ManualStopVideoRecorder = () => {
   };
 
   const CountDown = ({ count }) => {
-    return <div className="flex p-2 border">{count}</div>;
+    return (
+      <div className="flex p-2 font-semibold border">
+        00:{count < 10 ? `0${count}` : count}
+      </div>
+    );
   };
 
   const StopRecording = ({ onStop }) => {
@@ -56,8 +60,12 @@ const ManualStopVideoRecorder = () => {
         autoStop={false}
         autoPreview={false}
         handleStateChange={(state) => setRecordingState(state)}
-        customRetakeButton={(onRetake) => <RetakeButton onRetake={onRetake} />}
-        customDownloadButton={(onDownload) => <DownloadButton onDownload={onDownload} />}
+        customRetakeButton={(onRetake) => (
+          <RetakeButton onRetake={onRetake} />
+        )}
+        customDownloadButton={(onDownload) => (
+          <DownloadButton onDownload={onDownload} />
+        )}
         customCountDown={(count) => <CountDown count={count} />}
         customStopRecording={(onStop) => <StopRecording onStop={onStop} />}
         customStartRecording={(onStart) => <StartRecording onStart={onStart} />}

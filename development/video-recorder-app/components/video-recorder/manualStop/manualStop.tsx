@@ -1,24 +1,13 @@
 import React, { useRef, useState } from "react";
-import { HeadlessVideoRecorder } from "@locoworks/reusejs-react-video-recorder";
-
-type VideoState = "inactive" | "preview" | "recording" | "recorded";
-interface HeadlessVideoRecorderRef {
-	recording: string;
-	handleDownload: () => void;
-	showPreview: () => void;
-}
+import {
+	HeadlessVideoRecorder,
+	HeadlessVideoRecorderRef,
+	VideoState,
+} from "@locoworks/reusejs-react-video-recorder";
 
 const ManualStopVideoRecorder: React.FC = () => {
 	const videoRecorderRef = useRef<HeadlessVideoRecorderRef>(null);
 	const [recordingState, setRecordingState] = useState<VideoState>("inactive");
-
-	// const downloadHandler = () => {
-	// 	if (videoRecorderRef.current) {
-	// 		videoRecorderRef.current.handleDownload();
-	// 	} else {
-	// 		console.error("videoRecorderRef is null");
-	// 	}
-	// };
 
 	const showPreview = () => {
 		if (videoRecorderRef.current) {
@@ -45,7 +34,11 @@ const ManualStopVideoRecorder: React.FC = () => {
 	};
 
 	const CountDown = ({ count }: any) => {
-		return <div className="flex p-2 border">{count}</div>;
+		return (
+			<div className="flex p-2 font-semibold border">
+				00:{count < 10 ? `0${count}` : count}
+			</div>
+		);
 	};
 
 	const StopRecording = ({ onStop }: any) => {

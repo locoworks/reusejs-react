@@ -1,25 +1,21 @@
 import React, { useRef, useState } from "react";
-import { HeadlessVideoRecorder } from "@locoworks/reusejs-react-video-recorder";
-
-type VideoState = "inactive" | "preview" | "recording" | "recorded";
-interface HeadlessVideoRecorderRef {
-	recording: string;
-	handleDownload: () => void;
-	showPreview: () => void;
-}
+import {
+	HeadlessVideoRecorder,
+	HeadlessVideoRecorderRef,
+	VideoState,
+} from "@locoworks/reusejs-react-video-recorder";
 
 const AutoStopVideoRecorder: React.FC = () => {
 	const videoRecorderRef = useRef<HeadlessVideoRecorderRef>(null);
 	const [recordingState, setRecordingState] = useState<VideoState>("inactive");
 
-	// const downloadHandler = () => {
-	// 	if (videoRecorderRef.current) {
-	// 		videoRecorderRef.current.handleDownload();
-	// 		// using download inside component
-	// 	} else {
-	// 		console.error("videoRecorderRef is null");
-	// 	}
-	// };
+	const downloadHandler = () => {
+		if (videoRecorderRef.current) {
+			videoRecorderRef.current.handleDownload();
+		} else {
+			console.error("videoRecorderRef is null");
+		}
+	};
 
 	const showPreview = () => {
 		if (videoRecorderRef.current) {
@@ -29,10 +25,6 @@ const AutoStopVideoRecorder: React.FC = () => {
 		}
 	};
 
-	// const customdownloadHandler = (file: File) => {
-	// 	console.log("Custom download", file);
-	// };
-
 	const RetakeButton = ({ onRetake }: any) => {
 		return (
 			<button className="p-2 bg-blue-200 border" onClick={onRetake}>
@@ -41,16 +33,12 @@ const AutoStopVideoRecorder: React.FC = () => {
 		);
 	};
 
-	const DownloadButton = ({ onDownload }: any) => {
-		return (
-			<button className="p-2 bg-blue-200 border" onClick={onDownload}>
-				Download Recording
-			</button>
-		);
-	};
-
 	const CountDown = ({ count }: any) => {
-		return <div className="flex p-2 border">{count}</div>;
+		return (
+			<div className="flex p-2 font-semibold border">
+				00:{count < 10 ? `0${count}` : count}
+			</div>
+		);
 	};
 
 	const StartRecording = ({ onStart }: any) => {
@@ -67,10 +55,7 @@ const AutoStopVideoRecorder: React.FC = () => {
 				autoPreview={false}
 				autoStop={true}
 				timeInMs={8000}
-				// customhandleDownload={customdownloadHandler}
-				customDownloadButton={(onDownload) => (
-					<DownloadButton onDownload={onDownload} />
-				)}
+				customDownloadButton={() => <></>}
 				handleStateChange={(state) => setRecordingState(state)}
 				customRetakeButton={(onRetake: any) => (
 					<RetakeButton onRetake={onRetake} />
@@ -84,11 +69,11 @@ const AutoStopVideoRecorder: React.FC = () => {
 					Show Preview
 				</button>
 			)}
-			{/* {recordingState == "recorded" && (
-				<button className="p-2 bg-blue-300 border" onClick={downloadHandler}>
-					Download Video
+			{recordingState == "recorded" && (
+				<button className="bg-blue-300 border -2 " onClick={downloadHandler}>
+					Download Video in Parent
 				</button>
-			)} */}
+			)}
 		</div>
 	);
 };

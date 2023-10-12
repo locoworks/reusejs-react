@@ -1,12 +1,14 @@
 import React, {
+	useRef,
+	useState,
+	CSSProperties,
 	useCallback,
 	useEffect,
 	useImperativeHandle,
-	useRef,
-	useState,
 } from "react";
-import { useTimer } from "./useTimer";
-interface HeadlessVideoRecorderRef {
+import { twMerge } from "tailwind-merge";
+import { useTimer } from "@locoworks/reusejs-toolkit-react-hooks";
+export interface HeadlessVideoRecorderRef {
 	recording: string;
 	handleDownload: () => void;
 	showPreview: () => void;
@@ -22,10 +24,27 @@ interface HeadlessVideoRecorderProps {
 	customStopRecording?: (onStop: any) => React.ReactNode;
 	customStartRecording?: (onStart: any) => React.ReactNode;
 	customDownloadButton?: (onDownload: any) => React.ReactNode;
+	mediaConstraints?: MediaStreamConstraints;
+	recorderContainerClasses?: string | CSSProperties;
+	loader?: React.ReactNode;
+	videoRecorderClasses?: string | CSSProperties;
+	playbackVideoClasses?: string | CSSProperties;
+	footerContainerClasses?: string | CSSProperties;
+	startRecordingbuttonClasses?: string | CSSProperties;
+	recordingFooterClasses?: string | CSSProperties;
+	previewFooterClasses?: string | CSSProperties;
+	recordedFooterClasses?: string | CSSProperties;
+	retakeButtonClasses?: string | CSSProperties;
+	downloadButtonClasses?: string | CSSProperties;
+	retakeLabel?: string;
+	downloadLabel?: string;
+	stopLabel?: string;
+	startLabel?: string;
 }
 
+export type VideoState = "inactive" | "preview" | "recording" | "recorded";
+
 type VideoMimeTypes = "video/mp4" | "video/webm";
-type VideoState = "inactive" | "preview" | "recording" | "recorded";
 
 const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	HeadlessVideoRecorderRef,
@@ -35,6 +54,8 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		autoStop = true,
 		autoPreview = true,
 		timeInMs = 15000,
+		mediaConstraints,
+		loader,
 		handleStateChange,
 		customhandleDownload,
 		customRetakeButton,
@@ -42,10 +63,23 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		customStopRecording,
 		customStartRecording,
 		customDownloadButton,
+		recorderContainerClasses,
+		videoRecorderClasses,
+		playbackVideoClasses,
+		footerContainerClasses,
+		recordingFooterClasses,
+		previewFooterClasses,
+		recordedFooterClasses,
+		startRecordingbuttonClasses,
+		retakeButtonClasses,
+		downloadButtonClasses,
+		retakeLabel,
+		downloadLabel,
+		stopLabel,
+		startLabel,
 	},
 	ref,
 ) => {
-	// inactive, preview, recording, recorded
 	const [recording, setRecording] = useState<VideoState>("inactive");
 	const [file, setFile] = useState<File | null>(null);
 	const [loading, setLoading] = useState(false);
@@ -79,15 +113,30 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	const showPreview = useCallback(async () => {
 		try {
 			setLoading(true);
+
+			let mergeVideoConstraints: MediaStreamConstraints["video"] = {
+				width: { ideal: 640, max: 640 },
+				height: { ideal: 480, max: 480 },
+				facingMode: "user",
+				frameRate: { ideal: 15, max: 30 },
+			};
+
+			if (
+				typeof mediaConstraints?.video === "object" &&
+				mediaConstraints.video !== null
+			) {
+				mergeVideoConstraints = {
+					...mergeVideoConstraints,
+					...mediaConstraints.video,
+				};
+			}
+			const mergeAudioConstraints = mediaConstraints?.audio ?? true;
+
 			const stream = await navigator.mediaDevices.getUserMedia({
-				video: {
-					width: { ideal: 640, max: 640 },
-					height: { ideal: 480, max: 480 },
-					facingMode: "user",
-					frameRate: { ideal: 15, max: 30 },
-				},
-				audio: true,
+				video: mergeVideoConstraints,
+				audio: mergeAudioConstraints,
 			});
+
 			if (videoRef.current) {
 				videoRef.current.srcObject = stream;
 				videoRef.current.onloadedmetadata = () => {
@@ -96,7 +145,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 			}
 			setRecording("preview");
 		} catch (error) {
-			console.log(error, "Preview Error__");
+			console.log("Preview Error__", error);
 		}
 	}, [videoRef]);
 
@@ -119,7 +168,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 			document.body.removeChild(a);
 			URL.revokeObjectURL(url);
 		} else {
-			console.log("_update handleDownloadFunction");
+			console.log("File not Found!");
 		}
 	}, [file]);
 
@@ -264,6 +313,10 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 					<PreviewFooter
 						handleStartRecording={handleStartRecording}
 						customStartRecording={customStartRecording}
+						footerContainerClasses={footerContainerClasses}
+						startRecordingbuttonClasses={startRecordingbuttonClasses}
+						previewFooterClasses={previewFooterClasses}
+						startLabel={startLabel}
 					/>
 				);
 			case "recording":
@@ -274,6 +327,9 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 						onStop={handleStopRecording}
 						customCountDown={customCountDown}
 						customStopRecording={customStopRecording}
+						footerContainerClasses={footerContainerClasses}
+						recordingFooterClasses={recordingFooterClasses}
+						stopLabel={stopLabel}
 					/>
 				);
 			case "recorded":
@@ -283,6 +339,12 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 						onDownload={handleDownload}
 						customRetakeButton={customRetakeButton}
 						customDownloadButton={customDownloadButton}
+						recordedFooterClasses={recordedFooterClasses}
+						footerContainerClasses={footerContainerClasses}
+						retakeButtonClasses={retakeButtonClasses}
+						downloadButtonClasses={downloadButtonClasses}
+						retakeLabel={retakeLabel}
+						downloadLabel={downloadLabel}
 					/>
 				);
 			default:
@@ -290,21 +352,55 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		}
 	};
 
+	const defaultRecorderContainerClasses = "relative flex flex-col flex-1";
+	const defaultVideoRecorderClasses = `${
+		recording !== "recorded" ? "block" : "hidden"
+	}`;
+	const defaultPlaybackVideoClasses = `${
+		recording === "recorded" ? "block" : "hidden"
+	}`;
+
 	return (
-		<div className="relative flex flex-col flex-1">
-			{loading && "Loading Preview...."}
+		<div
+			className={
+				typeof recorderContainerClasses === "string"
+					? twMerge(defaultRecorderContainerClasses, recorderContainerClasses)
+					: defaultRecorderContainerClasses
+			}
+			style={
+				typeof recorderContainerClasses === "object"
+					? recorderContainerClasses
+					: {}
+			}
+		>
+			{loading && (loader ? loader : "Loading Preview....")}
+
 			<video
 				ref={videoRef}
 				autoPlay
 				playsInline
 				muted
-				className={`${recording !== "recorded" ? "block" : "hidden"}`}
+				className={
+					typeof videoRecorderClasses === "string"
+						? twMerge(defaultVideoRecorderClasses, videoRecorderClasses)
+						: defaultVideoRecorderClasses
+				}
+				style={
+					typeof videoRecorderClasses === "object" ? videoRecorderClasses : {}
+				}
 			/>
 			<video
 				ref={playbackRef}
 				controls
 				playsInline
-				className={`${recording === "recorded" ? "block" : "hidden"}`}
+				className={
+					typeof playbackVideoClasses === "string"
+						? twMerge(defaultPlaybackVideoClasses, playbackVideoClasses)
+						: defaultPlaybackVideoClasses
+				}
+				style={
+					typeof playbackVideoClasses === "object" ? playbackVideoClasses : {}
+				}
 			/>
 			{renderFooter()}
 		</div>
@@ -314,23 +410,67 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 type PreviewFooterProps = {
 	handleStartRecording: () => void;
 	customStartRecording?: (onStart: any) => React.ReactNode;
+	footerContainerClasses?: string | CSSProperties;
+	startRecordingbuttonClasses?: string | CSSProperties;
+	previewFooterClasses?: string | CSSProperties;
+	startLabel?: string;
 };
 const PreviewFooter: React.FC<PreviewFooterProps> = ({
 	handleStartRecording,
 	customStartRecording,
+	footerContainerClasses,
+	startRecordingbuttonClasses,
+	previewFooterClasses,
+	startLabel,
 }) => {
+	const defaultFooterContainerClasses = "";
+	const defaultPreviewFooterClasses = "flex gap-2 footer px-7 ";
+	const defaultStartRecordingbuttonClasses =
+		"p-3 bg-blue-400 border border-red-200 rounded-lg";
 	return (
-		<div className="flex gap-2 footer px-7">
-			{customStartRecording ? (
-				customStartRecording(handleStartRecording)
-			) : (
-				<button
-					className="p-3 bg-blue-400 border border-red-200 rounded-lg"
-					onClick={handleStartRecording}
-				>
-					Start Recording
-				</button>
-			)}
+		<div
+			className={
+				typeof footerContainerClasses === "string"
+					? twMerge(defaultFooterContainerClasses, footerContainerClasses)
+					: defaultFooterContainerClasses
+			}
+			style={
+				typeof footerContainerClasses === "object" ? footerContainerClasses : {}
+			}
+		>
+			<div
+				className={
+					typeof previewFooterClasses === "string"
+						? twMerge(defaultPreviewFooterClasses, previewFooterClasses)
+						: defaultPreviewFooterClasses
+				}
+				style={
+					typeof previewFooterClasses === "object" ? previewFooterClasses : {}
+				}
+			>
+				{customStartRecording ? (
+					customStartRecording(handleStartRecording)
+				) : (
+					<button
+						className={
+							typeof startRecordingbuttonClasses === "string"
+								? twMerge(
+										defaultStartRecordingbuttonClasses,
+										startRecordingbuttonClasses,
+								  )
+								: defaultStartRecordingbuttonClasses
+						}
+						style={
+							typeof startRecordingbuttonClasses === "object"
+								? startRecordingbuttonClasses
+								: {}
+						}
+						onClick={handleStartRecording}
+					>
+						{startLabel ?? "Start Recording"}
+					</button>
+				)}
+			</div>
 		</div>
 	);
 };
@@ -341,6 +481,9 @@ type RecordingFooterProps = {
 	onStop: () => void;
 	customCountDown?: (count: number) => React.ReactNode;
 	customStopRecording?: (onStop: any) => React.ReactNode;
+	footerContainerClasses?: string | CSSProperties;
+	recordingFooterClasses?: string | CSSProperties;
+	stopLabel?: string;
 };
 const RecordingFooter: React.FC<RecordingFooterProps> = ({
 	countDown,
@@ -348,10 +491,35 @@ const RecordingFooter: React.FC<RecordingFooterProps> = ({
 	autoStop,
 	onStop,
 	customStopRecording,
+	footerContainerClasses,
+	recordingFooterClasses,
+	stopLabel,
 }) => {
+	const defaultFooterContainerClasses = "py-5 mt-2 footer px-7";
+	const defaultRecordingFooterClasses = "flex justify-between";
 	return (
-		<div className="py-5 mt-2 footer px-7">
-			<div className="flex justify-between">
+		<div
+			className={
+				typeof footerContainerClasses === "string"
+					? twMerge(defaultFooterContainerClasses, footerContainerClasses)
+					: defaultFooterContainerClasses
+			}
+			style={
+				typeof footerContainerClasses === "object" ? footerContainerClasses : {}
+			}
+		>
+			<div
+				className={
+					typeof recordingFooterClasses === "string"
+						? twMerge(defaultRecordingFooterClasses, recordingFooterClasses)
+						: defaultRecordingFooterClasses
+				}
+				style={
+					typeof recordingFooterClasses === "object"
+						? recordingFooterClasses
+						: {}
+				}
+			>
 				{customCountDown ? (
 					customCountDown(countDown)
 				) : (
@@ -367,7 +535,7 @@ const RecordingFooter: React.FC<RecordingFooterProps> = ({
 							className="p-3 bg-blue-400 border border-red-200 rounded-lg"
 							onClick={onStop}
 						>
-							Stop Recording
+							{stopLabel ?? "Stop Recording"}
 						</button>
 					))}
 			</div>
@@ -379,35 +547,84 @@ type RecordedFooterProps = {
 	customRetakeButton?: (onRetake: any) => React.ReactNode;
 	onDownload: () => void;
 	customDownloadButton?: (onDownload: any) => React.ReactNode;
+	footerContainerClasses?: string | CSSProperties;
+	recordedFooterClasses?: string | CSSProperties;
+	retakeButtonClasses?: string | CSSProperties;
+	downloadButtonClasses?: string | CSSProperties;
+	retakeLabel?: string;
+	downloadLabel?: string;
 };
 const RecordedFooter: React.FC<RecordedFooterProps> = ({
 	onRetake,
 	customRetakeButton,
 	onDownload,
 	customDownloadButton,
+	footerContainerClasses,
+	recordedFooterClasses,
+	retakeButtonClasses,
+	downloadButtonClasses,
+	retakeLabel,
+	downloadLabel,
 }) => {
+	const defaultFooterContainerClasses = "py-5 mt-2 footer px-7";
+	const defaultRecordedClasses = "flex justify-between";
+	const defaultButtonClasses =
+		"p-3 bg-blue-400 border border-red-200 rounded-lg";
 	return (
-		<div className="py-5 mt-2 footer px-7">
-			{customRetakeButton ? (
-				customRetakeButton(onRetake)
-			) : (
-				<button
-					className="p-3 bg-blue-400 border border-red-200 rounded-lg"
-					onClick={onRetake}
-				>
-					Retake Video
-				</button>
-			)}
-			{customDownloadButton ? (
-				customDownloadButton(onDownload)
-			) : (
-				<button
-					className="p-3 bg-blue-400 border border-red-200 rounded-lg"
-					onClick={onDownload}
-				>
-					Download Video
-				</button>
-			)}
+		<div
+			className={
+				typeof footerContainerClasses === "string"
+					? twMerge(defaultFooterContainerClasses, footerContainerClasses)
+					: defaultFooterContainerClasses
+			}
+			style={
+				typeof footerContainerClasses === "object" ? footerContainerClasses : {}
+			}
+		>
+			<div
+				className={
+					typeof recordedFooterClasses === "string"
+						? twMerge(defaultRecordedClasses, recordedFooterClasses)
+						: defaultRecordedClasses
+				}
+			>
+				{customRetakeButton ? (
+					customRetakeButton(onRetake)
+				) : (
+					<button
+						className={
+							typeof retakeButtonClasses === "string"
+								? twMerge(defaultButtonClasses, retakeButtonClasses)
+								: defaultButtonClasses
+						}
+						style={
+							typeof retakeButtonClasses === "object" ? retakeButtonClasses : {}
+						}
+						onClick={onRetake}
+					>
+						{retakeLabel ?? "Retake Video"}
+					</button>
+				)}
+				{customDownloadButton ? (
+					customDownloadButton(onDownload)
+				) : (
+					<button
+						className={
+							typeof downloadButtonClasses === "string"
+								? twMerge(defaultButtonClasses, downloadButtonClasses)
+								: defaultButtonClasses
+						}
+						style={
+							typeof downloadButtonClasses === "object"
+								? downloadButtonClasses
+								: {}
+						}
+						onClick={onDownload}
+					>
+						{downloadLabel ?? "Download Video"}
+					</button>
+				)}
+			</div>
 		</div>
 	);
 };

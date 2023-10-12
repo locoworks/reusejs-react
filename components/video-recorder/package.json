@@ -18,7 +18,8 @@
     "dev": "rollup -c -w --bundleConfigAsCjs"
   },
   "dependencies": {
-    "tailwind-merge": "^1.12.0"
+    "tailwind-merge": "^1.12.0",
+    "@locoworks/reusejs-toolkit-react-hooks": "*"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
