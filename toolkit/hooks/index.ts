@@ -9,3 +9,4 @@ export { useBetaForm } from "./src/use-beta-form/index";
 export { useDataTable } from "./src/use-data-table";
 export { default as useClosableComponent } from "./src/use-closable-component";
 export { default as useMountComponent } from "./src/use-mount-component";
+export { useTimer } from "./src/use-timer";
