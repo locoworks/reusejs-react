@@ -110,44 +110,48 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 	const blobType = supportedMimeType;
 	const fileExtension = supportedMimeType?.split("/")[1];
 
+	const showStreamPreview = useCallback(async () => {
+		let mergeVideoConstraints: MediaStreamConstraints["video"] = {
+			width: { ideal: 640, max: 640 },
+			height: { ideal: 480, max: 480 },
+			facingMode: "user",
+			frameRate: { ideal: 15, max: 30 },
+		};
+
+		if (
+			typeof mediaConstraints?.video === "object" &&
+			mediaConstraints.video !== null
+		) {
+			mergeVideoConstraints = {
+				...mergeVideoConstraints,
+				...mediaConstraints.video,
+			};
+		}
+		const mergeAudioConstraints = mediaConstraints?.audio ?? true;
+
+		const stream = await navigator.mediaDevices.getUserMedia({
+			video: mergeVideoConstraints,
+			audio: mergeAudioConstraints,
+		});
+
+		if (videoRef.current) {
+			videoRef.current.srcObject = stream;
+			videoRef.current.onloadedmetadata = () => {
+				setLoading(false);
+			};
+		}
+	}, [videoRef]);
+
 	const showPreview = useCallback(async () => {
 		try {
 			setLoading(true);
 
-			let mergeVideoConstraints: MediaStreamConstraints["video"] = {
-				width: { ideal: 640, max: 640 },
-				height: { ideal: 480, max: 480 },
-				facingMode: "user",
-				frameRate: { ideal: 15, max: 30 },
-			};
-
-			if (
-				typeof mediaConstraints?.video === "object" &&
-				mediaConstraints.video !== null
-			) {
-				mergeVideoConstraints = {
-					...mergeVideoConstraints,
-					...mediaConstraints.video,
-				};
-			}
-			const mergeAudioConstraints = mediaConstraints?.audio ?? true;
-
-			const stream = await navigator.mediaDevices.getUserMedia({
-				video: mergeVideoConstraints,
-				audio: mergeAudioConstraints,
-			});
-
-			if (videoRef.current) {
-				videoRef.current.srcObject = stream;
-				videoRef.current.onloadedmetadata = () => {
-					setLoading(false);
-				};
-			}
+			showStreamPreview();
 			setRecording("preview");
 		} catch (error) {
 			console.log("Preview Error__", error);
 		}
-	}, [videoRef]);
+	}, [showStreamPreview]);
 
 	useEffect(() => {
 		autoPreview && showPreview();
