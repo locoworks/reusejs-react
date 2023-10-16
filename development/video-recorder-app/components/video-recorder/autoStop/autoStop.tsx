@@ -70,7 +70,7 @@ const AutoStopVideoRecorder: React.FC = () => {
 				</button>
 			)}
 			{recordingState == "recorded" && (
-				<button className="bg-blue-300 border -2 " onClick={downloadHandler}>
+				<button className="bg-blue-300 border-2 " onClick={downloadHandler}>
 					Download Video in Parent
 				</button>
 			)}

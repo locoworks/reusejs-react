@@ -60,6 +60,7 @@ type VideoState = "inactive" | "preview" | "recording" | "recorded";
 - `autoStop` (optional, default: true):  Automatically stops recording after a specified time.
 - `autoPreview` (optional, default: true):  Automatically shows a preview.
 - `timeInMs` (optional, default: 15000):  Time in milliseconds for recording (only applicable if autoStop is true).
+- `videoBitsPerSecond` (optional, default: 2500000): The video encoding bit rate used to determine both the quality and size of the recorded video.
 - `loader` (optional, default: "Loading Preview..."):  Loader component to display while the preview is loading.
 - `handleStateChange` (optional):  Callback function triggered on state change.
 - `customhandleDownload` (optional):  Custom function for handling the download of the recorded file.
@@ -68,7 +69,6 @@ type VideoState = "inactive" | "preview" | "recording" | "recorded";
 - `customStopRecording` (optional):  Custom component or function for the stop recording button.
 - `customStartRecording` (optional):  Custom component or function for the start recording button.
 - `customDownloadButton` (optional):  Custom component or function for the download button.
-- `mediaConstraints` (optional):  Media constraints to customize video and audio settings.
 - `recorderContainerClasses` (optional):  Classes or styles for the recorder container.
 - `videoRecorderClasses` (optional):  Classes or styles for the video recorder element.
 - `playbackVideoClasses `(optional):  Classes or styles for the playback video element.
@@ -83,7 +83,16 @@ type VideoState = "inactive" | "preview" | "recording" | "recorded";
 - `downloadLabel` (optional, default: "Download Video"):  Label for the download button.
 - `stopLabel` (optional, default: "Stop Recording"):  Label for the stop recording button.
 - `startLabel` (optional, default: "Start Recording"):  Label for the start recording button.
-
+- `mediaConstraints` (optional):  Media constraints to customize video and audio settings. The format of the `mediaConstraints` can be as follows:
+    - `video` (optional): A boolean value indicating whether to include video in the media stream. It can also be an object of type MediaTrackConstraintSet to specify additional constraints for the video track.
+    - `audio` (optional): A boolean value indicating whether to include audio in the media stream. It can also be an object of type MediaTrackConstraintSet to specify additional constraints for the audio track.
+Refer [MediaTrackConstraints Documentation](https://udn.realityripple.com/docs/Web/API/MediaTrackConstraints) for details.
+      ```jsx
+      interface MediaStreamConstraints {
+        video?: boolean | MediaTrackConstraintSet;
+        audio?: boolean | MediaTrackConstraintSet;
+      }
+      ```
 ## Usage/Examples
 
 ### Sample Code Fragment
@@ -127,32 +136,34 @@ The following table lists the props available for the `HeadlessVideoRecorder` co
 
 | Prop                   | Type                              | Default                  | Description                                                                                                                                                                                   |
 | ---------------------- | --------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `autoStop`             | `boolean`                         | `true`                   | Automatically stops recording after a specified time.                                                                                                                                        |
-| `autoPreview`          | `boolean`                         | `true`                   | Automatically shows a preview.                                                                                                |
-| `timeInMs`             | `number`                          | `15000`                  | Time in milliseconds for recording (only applicable if `autoStop` is true).                                                    |
-| `handleStateChange`    | `(state: VideoState) => void`     |                          | Callback function triggered on state change.                                                                                                                                                |
-| `customhandleDownload` | `(file: any) => void`              |                          | Custom function for handling the download of the recorded file.                                                                                                                             |
-| `customCountDown`      | `(count: number) => React.ReactNode` |                      | Custom component or function for displaying the countdown during recording.                                                                                                                |
-| `customRetakeButton`   | `(onRetake: any) => React.ReactNode` |                     | Custom component or function for the retake button.                                                                                                                                         |
-| `customStopRecording`  | `(onStop: any) => React.ReactNode`  |                         | Custom component or function for the stop recording button.                                                                                                                                |
-| `customStartRecording` | `(onStart: any) => React.ReactNode` |                        | Custom component or function for the start recording button.                                                                                                                               |
-| `customDownloadButton` | `(onDownload: any) => React.ReactNode` |                    | Custom component or function for the download button.                                                                                                                                      |
-| `mediaConstraints`     | `MediaStreamConstraints`           |                          | Media constraints to customize video and audio settings.                                                                                                                                   |
-| `recorderContainerClasses` | `string \| CSSProperties`        |                          | Classes or styles for the recorder container.                                                                                                                                               |
-| `videoRecorderClasses` | `string \| CSSProperties`            |                          | Classes or styles for the video recorder element.                                                                                                                                          |
-| `playbackVideoClasses` | `string \| CSSProperties`             |                          | Classes or styles for the playback video element.                                                                                                                                          |
-| `footerContainerClasses` | `string \| CSSProperties`           |                          | Classes or styles for the footer container.                                                                                                                                                |
-| `recordingFooterClasses` | `string \| CSSProperties`          |                          | Classes or styles for the recording footer.                                                                                                                                               |
-| `previewFooterClasses` | `string \| CSSProperties`            |                          | Classes or styles for the preview footer.                                                                                                                                                 |
-| `recordedFooterClasses` | `string \| CSSProperties`           |                          | Classes or styles for the recorded footer.                                                                                                                                                |
-| `startRecordingbuttonClasses` | `string \| CSSProperties`   |                          | Classes or styles for the start recording button.                                                                                                                                        |
-| `retakeButtonClasses`  | `string \| CSSProperties`            |                          | Classes or styles for the retake button.                                                                                                                                                  |
-| `downloadButtonClasses` | `string \| CSSProperties`           |                          | Classes or styles for the download button.                                                                                                                                               |
-| `loader`               | `React.ReactNode`                 | "Loading Preview..."    | Loader component to display while the preview is loading.                                                                                                                                  |
-| `retakeLabel`          | `string`                          | "Retake Video"           | Label for the retake button.                                                                                                                                                                |
-| `downloadLabel`        | `string`                          | "Download Video"         | Label for the download button.                                                                                                                                                             |
-| `stopLabel`            | `string`                          | "Stop Recording"         | Label for the stop recording button.                                                                                                                                                       |
-| `startLabel`           | `string`                          | "Start Recording"        | Label for the start recording button.                                                                                                                                                      |
+| `autoStop`             | `boolean`                         | `true`                   | Automatically stops recording after a specified time.|
+| `autoPreview`          | `boolean`                         | `true`                   | Automatically shows a preview.|
+| `timeInMs`             | `number`                          | `15000`                  | Time in milliseconds for recording (only applicable if `autoStop` is true).|
+| `videoBitsPerSecond`    | `number`                          | `2500000`                  |  The video encoding bit rate used to determine both the quality and size of the recorded video.|
+| `handleStateChange`    | `(state: VideoState) => void`     |                          | Callback function triggered on state change.|
+| `customhandleDownload` | `(file: any) => void`              |                          | Custom function for handling the download of the recorded file.|
+| `customCountDown`      | `(count: number) => React.ReactNode` |                      | Custom component or function for displaying the countdown during recording.|
+| `customRetakeButton`   | `(onRetake: any) => React.ReactNode` |                     | Custom component or function for the retake button.|
+| `customStopRecording`  | `(onStop: any) => React.ReactNode`  |                         | Custom component or function for the stop recording button.|
+| `customStartRecording` | `(onStart: any) => React.ReactNode` |                        | Custom component or function for the start recording button.|
+| `customDownloadButton` | `(onDownload: any) => React.ReactNode` |                    | Custom component or function for the download button.|
+| `mediaConstraints`     | `MediaStreamConstraints`           |                          | Media constraints to customize video and audio settings.|
+| `recorderContainerClasses` | `string \| CSSProperties`        |                          | Classes or styles for the recorder container.|
+| `videoRecorderClasses` | `string \| CSSProperties`            |                          | Classes or styles for the video recorder element.|
+| `playbackVideoClasses` | `string \| CSSProperties`             |                          | Classes or styles for the playback video element.|
+| `footerContainerClasses` | `string \| CSSProperties`           |                          | Classes or styles for the footer container.|
+| `recordingFooterClasses` | `string \| CSSProperties`          |                          | Classes or styles for the recording footer.|
+| `previewFooterClasses` | `string \| CSSProperties`            |                          | Classes or styles for the preview footer.|
+| `recordedFooterClasses` | `string \| CSSProperties`           |                          | Classes or styles for the recorded footer.|
+| `startRecordingbuttonClasses` | `string \| CSSProperties`   |                          | Classes or styles for the start recording button.|
+| `retakeButtonClasses`  | `string \| CSSProperties`            |                          | Classes or styles for the retake button.|
+| `downloadButtonClasses` | `string \| CSSProperties`           |                          | Classes or styles for the download button.|
+| `loader`               | `React.ReactNode`                 | "Loading Preview..."    | Loader component to display while the preview is loading.|
+| `retakeLabel`          | `string`                          | "Retake Video"           | Label for the retake button.|
+| `downloadLabel`        | `string`                          | "Download Video"         | Label for the download button.|
+| `stopLabel`            | `string`                          | "Stop Recording"         | Label for the stop recording button.|
+| `startLabel`           | `string`                          | "Start Recording"        | Label for the start recording button.|
+
 
 ## Notes
 

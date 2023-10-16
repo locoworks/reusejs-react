@@ -4,8 +4,8 @@ import { HeadlessVideoRecorder } from "@locoworks/reusejs-react-video-recorder";
 const Example = () => {
 	const mediaConstraints = {
 		video: {
-			width: 440,
-			height: 280,
+			width: { ideal: 440, max: 440 },
+			height: { ideal: 280, max: 280 },
 		},
 		audio: false,
 	};

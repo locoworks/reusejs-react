@@ -8,6 +8,9 @@ import React, {
 } from "react";
 import { twMerge } from "tailwind-merge";
 import { useTimer } from "@locoworks/reusejs-toolkit-react-hooks";
+import { PreviewFooter } from "./PreviewFooter";
+import { RecordingFooter } from "./RecordingFooter";
+import { RecordedFooter } from "./RecordedFooter";
 export interface HeadlessVideoRecorderRef {
 	recording: string;
 	handleDownload: () => void;
@@ -17,16 +20,16 @@ interface HeadlessVideoRecorderProps {
 	autoStop?: boolean;
 	autoPreview?: boolean;
 	timeInMs?: number;
+	videoBitsPerSecond?: number;
 	handleStateChange?: (state: VideoState) => void;
-	customhandleDownload?: (file: any) => void;
+	customhandleDownload?: (file: File | null) => void;
 	customCountDown?: (count: number) => React.ReactNode;
-	customRetakeButton?: (onRetake: any) => React.ReactNode;
-	customStopRecording?: (onStop: any) => React.ReactNode;
-	customStartRecording?: (onStart: any) => React.ReactNode;
-	customDownloadButton?: (onDownload: any) => React.ReactNode;
+	customRetakeButton?: (onRetake: () => void) => React.ReactNode;
+	customStopRecording?: (onStop: () => void) => React.ReactNode;
+	customStartRecording?: (onStart: () => void) => React.ReactNode;
+	customDownloadButton?: (onDownload: () => void) => React.ReactNode;
 	mediaConstraints?: MediaStreamConstraints;
 	recorderContainerClasses?: string | CSSProperties;
-	loader?: React.ReactNode;
 	videoRecorderClasses?: string | CSSProperties;
 	playbackVideoClasses?: string | CSSProperties;
 	footerContainerClasses?: string | CSSProperties;
@@ -36,6 +39,7 @@ interface HeadlessVideoRecorderProps {
 	recordedFooterClasses?: string | CSSProperties;
 	retakeButtonClasses?: string | CSSProperties;
 	downloadButtonClasses?: string | CSSProperties;
+	loader?: React.ReactNode;
 	retakeLabel?: string;
 	downloadLabel?: string;
 	stopLabel?: string;
@@ -54,6 +58,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		autoStop = true,
 		autoPreview = true,
 		timeInMs = 15000,
+		videoBitsPerSecond = 2500000,
 		mediaConstraints,
 		loader,
 		handleStateChange,
@@ -196,10 +201,14 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		return new Promise((resolve) => setTimeout(resolve, delayInMS));
 	};
 
-	const record = async (stream: MediaStream, lengthInMs: number) => {
+	const record = async (
+		stream: MediaStream,
+		lengthInMs: number,
+		videoBitsPerSecond: number = 2500000,
+	) => {
 		const recorder = new MediaRecorder(stream, {
 			mimeType,
-			videoBitsPerSecond: 2500000,
+			videoBitsPerSecond,
 		});
 		mediaRecorderRef.current = recorder;
 		const data: Blob[] = [];
@@ -234,7 +243,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		}
 	};
 
-	const stopPreviewStream = () => {
+	const stopPreviewStream: () => void = () => {
 		if (videoRef.current?.srcObject instanceof MediaStream) {
 			const stream = videoRef.current?.srcObject;
 			stream?.getTracks().forEach((track) => track.stop());
@@ -263,6 +272,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 					const recordedChunks: Blob[] | undefined = await record(
 						videoRef.current?.srcObject,
 						recordingTime,
+						videoBitsPerSecond,
 					);
 					onStopMediaStream(recordedChunks);
 					setRecording("recorded");
@@ -296,7 +306,7 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		}
 	};
 
-	const handleStopRecording = () => {
+	const handleStopRecording: () => void = () => {
 		if (mediaRecorderRef.current && recording == "recording") {
 			mediaRecorderRef.current?.stop();
 			timer.stop();
@@ -305,12 +315,12 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 		setRecording("recorded");
 	};
 
-	const handleRetake = () => {
+	const handleRetake: () => void = () => {
 		setRecording("preview");
 		showPreview();
 	};
 
-	const renderFooter = () => {
+	const renderFooter: () => React.JSX.Element = () => {
 		switch (recording) {
 			case "preview":
 				return (
@@ -407,228 +417,6 @@ const HeadlessVideoRecorder: React.ForwardRefRenderFunction<
 				}
 			/>
 			{renderFooter()}
-		</div>
-	);
-};
-
-type PreviewFooterProps = {
-	handleStartRecording: () => void;
-	customStartRecording?: (onStart: any) => React.ReactNode;
-	footerContainerClasses?: string | CSSProperties;
-	startRecordingbuttonClasses?: string | CSSProperties;
-	previewFooterClasses?: string | CSSProperties;
-	startLabel?: string;
-};
-const PreviewFooter: React.FC<PreviewFooterProps> = ({
-	handleStartRecording,
-	customStartRecording,
-	footerContainerClasses,
-	startRecordingbuttonClasses,
-	previewFooterClasses,
-	startLabel,
-}) => {
-	const defaultFooterContainerClasses = "";
-	const defaultPreviewFooterClasses = "flex gap-2 footer px-7 ";
-	const defaultStartRecordingbuttonClasses =
-		"p-3 bg-blue-400 border border-red-200 rounded-lg";
-	return (
-		<div
-			className={
-				typeof footerContainerClasses === "string"
-					? twMerge(defaultFooterContainerClasses, footerContainerClasses)
-					: defaultFooterContainerClasses
-			}
-			style={
-				typeof footerContainerClasses === "object" ? footerContainerClasses : {}
-			}
-		>
-			<div
-				className={
-					typeof previewFooterClasses === "string"
-						? twMerge(defaultPreviewFooterClasses, previewFooterClasses)
-						: defaultPreviewFooterClasses
-				}
-				style={
-					typeof previewFooterClasses === "object" ? previewFooterClasses : {}
-				}
-			>
-				{customStartRecording ? (
-					customStartRecording(handleStartRecording)
-				) : (
-					<button
-						className={
-							typeof startRecordingbuttonClasses === "string"
-								? twMerge(
-										defaultStartRecordingbuttonClasses,
-										startRecordingbuttonClasses,
-								  )
-								: defaultStartRecordingbuttonClasses
-						}
-						style={
-							typeof startRecordingbuttonClasses === "object"
-								? startRecordingbuttonClasses
-								: {}
-						}
-						onClick={handleStartRecording}
-					>
-						{startLabel ?? "Start Recording"}
-					</button>
-				)}
-			</div>
-		</div>
-	);
-};
-
-type RecordingFooterProps = {
-	countDown: number;
-	autoStop: boolean;
-	onStop: () => void;
-	customCountDown?: (count: number) => React.ReactNode;
-	customStopRecording?: (onStop: any) => React.ReactNode;
-	footerContainerClasses?: string | CSSProperties;
-	recordingFooterClasses?: string | CSSProperties;
-	stopLabel?: string;
-};
-const RecordingFooter: React.FC<RecordingFooterProps> = ({
-	countDown,
-	customCountDown,
-	autoStop,
-	onStop,
-	customStopRecording,
-	footerContainerClasses,
-	recordingFooterClasses,
-	stopLabel,
-}) => {
-	const defaultFooterContainerClasses = "py-5 mt-2 footer px-7";
-	const defaultRecordingFooterClasses = "flex justify-between";
-	return (
-		<div
-			className={
-				typeof footerContainerClasses === "string"
-					? twMerge(defaultFooterContainerClasses, footerContainerClasses)
-					: defaultFooterContainerClasses
-			}
-			style={
-				typeof footerContainerClasses === "object" ? footerContainerClasses : {}
-			}
-		>
-			<div
-				className={
-					typeof recordingFooterClasses === "string"
-						? twMerge(defaultRecordingFooterClasses, recordingFooterClasses)
-						: defaultRecordingFooterClasses
-				}
-				style={
-					typeof recordingFooterClasses === "object"
-						? recordingFooterClasses
-						: {}
-				}
-			>
-				{customCountDown ? (
-					customCountDown(countDown)
-				) : (
-					<span className="block font-semibold text-neutral-0">
-						00:{countDown < 10 ? `0${countDown}` : countDown}
-					</span>
-				)}
-				{!autoStop &&
-					(customStopRecording ? (
-						customStopRecording(onStop)
-					) : (
-						<button
-							className="p-3 bg-blue-400 border border-red-200 rounded-lg"
-							onClick={onStop}
-						>
-							{stopLabel ?? "Stop Recording"}
-						</button>
-					))}
-			</div>
-		</div>
-	);
-};
-type RecordedFooterProps = {
-	onRetake: () => void;
-	customRetakeButton?: (onRetake: any) => React.ReactNode;
-	onDownload: () => void;
-	customDownloadButton?: (onDownload: any) => React.ReactNode;
-	footerContainerClasses?: string | CSSProperties;
-	recordedFooterClasses?: string | CSSProperties;
-	retakeButtonClasses?: string | CSSProperties;
-	downloadButtonClasses?: string | CSSProperties;
-	retakeLabel?: string;
-	downloadLabel?: string;
-};
-const RecordedFooter: React.FC<RecordedFooterProps> = ({
-	onRetake,
-	customRetakeButton,
-	onDownload,
-	customDownloadButton,
-	footerContainerClasses,
-	recordedFooterClasses,
-	retakeButtonClasses,
-	downloadButtonClasses,
-	retakeLabel,
-	downloadLabel,
-}) => {
-	const defaultFooterContainerClasses = "py-5 mt-2 footer px-7";
-	const defaultRecordedClasses = "flex justify-between";
-	const defaultButtonClasses =
-		"p-3 bg-blue-400 border border-red-200 rounded-lg";
-	return (
-		<div
-			className={
-				typeof footerContainerClasses === "string"
-					? twMerge(defaultFooterContainerClasses, footerContainerClasses)
-					: defaultFooterContainerClasses
-			}
-			style={
-				typeof footerContainerClasses === "object" ? footerContainerClasses : {}
-			}
-		>
-			<div
-				className={
-					typeof recordedFooterClasses === "string"
-						? twMerge(defaultRecordedClasses, recordedFooterClasses)
-						: defaultRecordedClasses
-				}
-			>
-				{customRetakeButton ? (
-					customRetakeButton(onRetake)
-				) : (
-					<button
-						className={
-							typeof retakeButtonClasses === "string"
-								? twMerge(defaultButtonClasses, retakeButtonClasses)
-								: defaultButtonClasses
-						}
-						style={
-							typeof retakeButtonClasses === "object" ? retakeButtonClasses : {}
-						}
-						onClick={onRetake}
-					>
-						{retakeLabel ?? "Retake Video"}
-					</button>
-				)}
-				{customDownloadButton ? (
-					customDownloadButton(onDownload)
-				) : (
-					<button
-						className={
-							typeof downloadButtonClasses === "string"
-								? twMerge(defaultButtonClasses, downloadButtonClasses)
-								: defaultButtonClasses
-						}
-						style={
-							typeof downloadButtonClasses === "object"
-								? downloadButtonClasses
-								: {}
-						}
-						onClick={onDownload}
-					>
-						{downloadLabel ?? "Download Video"}
-					</button>
-				)}
-			</div>
 		</div>
 	);
 };
