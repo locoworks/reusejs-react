@@ -2,10 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useDayzed } from "dayzed";
 import Calendar, { CalendarBaseClassesProps } from "./Calendar";
 
+type DateObj = {
+	date: Date;
+	nextMonth: boolean;
+	prevMonth: boolean;
+	selectable: boolean;
+	selected: boolean;
+	today: boolean;
+};
+
 export interface SingleDatePickerProps {
-	onChange?: any;
-	userTimezone?: any;
-	selected?: any;
+	onChange: (date: any) => void;
+	// userTimezone?: any;
+	selected: Date;
 	maxDate?: Date;
 	minDate?: Date;
 	showOutsideDays?: boolean;
@@ -13,19 +22,16 @@ export interface SingleDatePickerProps {
 }
 
 export default function SingleDatePicker({
-	selected,
+	selected = new Date(),
 	onChange,
 	minDate,
 	maxDate,
 	showOutsideDays = true,
+	calendarBaseClasses,
 }: SingleDatePickerProps) {
-	const [selectedDate, setSelectedDate] = useState<Date>(
-		selected || new Date(),
-	);
+	const [selectedDate, setSelectedDate] = useState<Date>(selected);
 
-	const handleOnDateSelected = (date: any, e: React.SyntheticEvent): void => {
-		console.log(date, "__date", e, "__event");
-
+	const handleOnDateSelected = (date: DateObj): void => {
 		setSelectedDate(date.date);
 		onChange(date.date);
 	};
@@ -43,5 +49,5 @@ export default function SingleDatePicker({
 		showOutsideDays: showOutsideDays,
 	});
 
-	return <Calendar {...dayzedData} />;
+	return <Calendar {...dayzedData} calendarBaseClasses={calendarBaseClasses} />;
 }

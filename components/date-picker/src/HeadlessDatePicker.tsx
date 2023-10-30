@@ -1,8 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useOutsideClicker } from "@locoworks/reusejs-toolkit-react-hooks";
+import React, { useState, useRef } from "react";
+import {
+	useOutsideClicker,
+	useDateHelpers,
+} from "@locoworks/reusejs-toolkit-react-hooks";
 import SingleDatePicker from "./SingleDatePicker";
 import { CalendarBaseClassesProps } from "./Calendar";
-import { useDateHelpers } from "./useDateHelpers";
 
 interface Props {
 	defaultValue?: Date;
@@ -25,15 +27,16 @@ const HeadlessDatePicker = ({
 	minDate,
 	maxDate,
 	dateFormat = "MM/dd/yyyy",
-	wrapperClasses,
-	datePickerWrapperClasses,
 	label = "Select Date",
+	suffix = <></>,
+	helperText = <></>,
+	errorText = <></>,
+	wrapperClasses,
 	inputClasses,
-	suffix = "Suffix",
+	datePickerWrapperClasses,
 	calendarContainerClasses,
 	invalidDateClasses,
-	helperText = "Helper text",
-	errorText = "Error Text",
+	calendarBaseClasses,
 }: Props) => {
 	const { isValidDate } = useDateHelpers();
 
@@ -76,9 +79,6 @@ const HeadlessDatePicker = ({
 		setTempDate(newState.tempDate);
 	};
 
-	useEffect(() => {
-		console.log(selectedDate, "selected Date________", tempDate, "__tempDAte");
-	});
 	return (
 		<div className={wrapperClasses}>
 			<div className="relative" ref={datePickerRef}>
@@ -119,6 +119,7 @@ const HeadlessDatePicker = ({
 				>
 					<SingleDatePicker
 						selected={selectedDate}
+						calendarBaseClasses={calendarBaseClasses}
 						//   userTimezone={userTimezone}
 						onChange={(d: any) => {
 							onChangeCallback(d);

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable","ES2016"],
+    "lib": ["dom", "dom.iterable", "ES2016"],
     "declaration": true,
     "declarationDir": "dist/types",
     "esModuleInterop": true,
@@ -10,6 +10,6 @@
     "strict": true,
     "target": "ESNext"
   },
-  "include": ["","src"],
+  "include": ["", "src", "../../toolkit/hooks/src/use-date-helper.tsx"],
   "exclude": ["dist/**", "src/main.tsx"]
 }

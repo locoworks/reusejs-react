@@ -2,22 +2,19 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 const calendardefaultClasses = {
-	defaultSelectableTextStyle:
-		"bg-white hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-800",
+	defaultSelectableTextStyle: "bg-white hover:bg-gray-100 ",
 	defaultDateButtonStyle: "inline-block w-1/7 border-none rounded-md",
-	selectedOrTodayStyles: "font-semibold",
-	selectedTextStyles:
-		"text-white dark:text-gray-200 font-semibold bg-blue-600 dark:bg-blue-500",
-	selectableTextStyles: "text-gray-800 dark:text-gray-100",
-	todayButNotSelectedStyles: "bg-blue-400 dark:bg-blue-300",
-	weekendStyles: "text-red-400 dark:text-red-300",
+	selectedOrTodayStyles: "font-semibold border border-blue-300",
+	selectedTextStyles: "text-white font-semibold bg-blue-400",
+	selectableTextStyles: "text-gray-800 ",
+	todayButNotSelectedStyles: "bg-blue-300",
+	weekendStyles: "text-red-400 ",
 	topLeftBorderStyles: "rounded-tl-lg",
 	topRightBorderStyles: "rounded-tr-lg",
 	bottomLeftBorderStyles: "rounded-bl-lg",
 	bottomRightBorderStyles: "rounded-br-lg",
-	notCurrentMonthStyles:
-		"text-gray-800 dark:text-gray-500 bg-gray-50 dark:bg-gray-100 opacity-80",
-	dateButtonsUnSelectableStyles: "bg-gray-50 dark:bg-gray-800",
+	notCurrentMonthStyles: "text-gray-800  bg-gray-50  opacity-80",
+	dateButtonsUnSelectableStyles: "bg-gray-50 ",
 };
 
 export interface CalendarBaseClassesProps {
