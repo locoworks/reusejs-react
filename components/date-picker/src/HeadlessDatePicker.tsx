@@ -14,8 +14,10 @@ interface Props {
 	wrapperClasses?: string;
 	datePickerWrapperClasses?: string;
 	label?: React.ReactNode;
+	inputWrapperClasses?: string;
 	inputClasses?: string;
 	invalidDateClasses?: string;
+	suffixWrapperClasses?: string;
 	suffix?: React.ReactNode;
 	calendarContainerClasses?: string;
 	helperText?: React.ReactNode;
@@ -24,26 +26,28 @@ interface Props {
 }
 const HeadlessDatePicker = ({
 	defaultValue = new Date(),
-	minDate,
+	minDate = new Date("1000,0,1"),
 	maxDate,
-	dateFormat = "MM/dd/yyyy",
+	dateFormat = "MM-dd-yyyy",
 	label = "Select Date",
 	suffix = <></>,
 	helperText = <></>,
 	errorText = <></>,
 	wrapperClasses,
+	inputWrapperClasses,
 	inputClasses,
+	suffixWrapperClasses,
 	datePickerWrapperClasses,
 	calendarContainerClasses,
 	invalidDateClasses,
 	calendarBaseClasses,
 }: Props) => {
-	const { isValidDate } = useDateHelpers();
+	const { isValidDate, getFormattedDate, parseCustomDate } = useDateHelpers();
 
 	const [selectedDate, setSelectedDate] = useState<Date>(defaultValue);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [tempDate, setTempDate] = useState<string>(
-		selectedDate.toLocaleDateString(),
+		getFormattedDate(selectedDate, dateFormat),
 	);
 	const [invalidDate, setInvalidDate] = useState<boolean>(false);
 
@@ -54,12 +58,13 @@ const HeadlessDatePicker = ({
 	});
 
 	const onChangeCallback = (date: Date) => {
-		setTempDate(date.toLocaleDateString());
+		setTempDate(getFormattedDate(date, dateFormat));
 		setSelectedDate(date);
 	};
 
 	const updateDate = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = event.target;
+
 		const newState: {
 			tempDate: string;
 			invalidDate: boolean;
@@ -71,7 +76,7 @@ const HeadlessDatePicker = ({
 
 		if (isValidDate(value, dateFormat)) {
 			newState.invalidDate = false;
-			newState.currentSelected = new Date(value);
+			newState.currentSelected = parseCustomDate(value, dateFormat);
 			onChangeCallback(newState.currentSelected);
 		}
 
@@ -83,26 +88,28 @@ const HeadlessDatePicker = ({
 		<div className={wrapperClasses}>
 			<div className="relative" ref={datePickerRef}>
 				<div
-					className={`flex flex-col p-3 font-sm ${
-						datePickerWrapperClasses || ""
-					}`}
+					className={datePickerWrapperClasses || ""}
 					onClick={() => setIsOpen(true)}
 				>
 					<label>{label}</label>
 
-					<div className="relative">
+					<div className={`relative ${inputWrapperClasses || ""}`}>
 						<input
 							type="text"
 							name="date"
 							placeholder={dateFormat}
-							className={`relative w-full flex-1 py-2 px-4 text-base font-ubuntu font-normal tracking-wider justify-start outline-none text-theme-gray rounded-lg border border-border-gray
+							className={`
 							${inputClasses || ""}
 							${invalidDate && `border-red-300 ${invalidDateClasses || ""}`} `}
 							value={tempDate}
-							onChange={(e: any) => updateDate(e)}
+							onChange={(event: any) => updateDate(event)}
 							ref={inputRef}
 						/>
-						<div className="absolute inset-y-0 flex items-center pr-2 right-3">
+						<div
+							className={`absolute inset-y-0 flex items-center pr-2 right-3 ${
+								suffixWrapperClasses || ""
+							}`}
+						>
 							{suffix}
 						</div>
 					</div>
@@ -120,7 +127,6 @@ const HeadlessDatePicker = ({
 					<SingleDatePicker
 						selected={selectedDate}
 						calendarBaseClasses={calendarBaseClasses}
-						//   userTimezone={userTimezone}
 						onChange={(d: any) => {
 							onChangeCallback(d);
 							setIsOpen(false);

@@ -12,8 +12,7 @@ type DateObj = {
 };
 
 export interface SingleDatePickerProps {
-	onChange: (date: any) => void;
-	// userTimezone?: any;
+	onChange: (date: Date) => void;
 	selected: Date;
 	maxDate?: Date;
 	minDate?: Date;
