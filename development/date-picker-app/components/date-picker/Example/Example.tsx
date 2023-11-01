@@ -14,6 +14,7 @@ const Example: React.FC = () => {
 				suffix="Suffix"
 				helperText="Helper text"
 				errorText="Error Text"
+				invalidDateClasses="outline outline-red-500"
 				calendarBaseClasses={calendarClasses}
 			/>
 		</div>

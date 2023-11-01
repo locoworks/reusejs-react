@@ -100,7 +100,7 @@ const HeadlessDatePicker = ({
 							placeholder={dateFormat}
 							className={`
 							${inputClasses || ""}
-							${invalidDate && `border-red-300 ${invalidDateClasses || ""}`} `}
+							${invalidDate && `${invalidDateClasses || ""}`} `}
 							value={tempDate}
 							onChange={(event: any) => updateDate(event)}
 							ref={inputRef}
