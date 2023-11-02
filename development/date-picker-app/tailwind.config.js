@@ -14,9 +14,6 @@ module.exports = {
 				"gradient-conic":
 					"conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
 			},
-			width: {
-				"1/7": "calc(100% / 7)",
-			},
 		},
 	},
 	plugins: [require("@tailwindcss/typography")],
