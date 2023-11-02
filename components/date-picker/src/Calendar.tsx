@@ -3,7 +3,8 @@ import { twMerge } from "tailwind-merge";
 
 const calendardefaultClasses = {
 	defaultSelectableTextStyle: "bg-white hover:bg-gray-100 ",
-	defaultDateButtonStyle: "inline-block w-1/7 border-none rounded-md",
+	defaultDateButtonStyle:
+		"inline-block w-[calc(100% / 7)] border-none rounded-md",
 	selectedOrTodayStyles: "font-semibold border border-blue-300",
 	selectedTextStyles: "text-white font-semibold bg-blue-400",
 	selectableTextStyles: "text-gray-800 ",
@@ -117,7 +118,7 @@ export default function Calendar({
 							{weekdayNamesShort.map((weekday) => (
 								<div
 									key={`${calendar.month}${calendar.year}${weekday}`}
-									className={`inline-block text-center bg-transparent border-none w-1/7 ${
+									className={`inline-block text-center bg-transparent border-none w-[calc(100% / 7)] ${
 										calendarBaseClasses?.weekNameClasses || ""
 									}`}
 								>
@@ -133,7 +134,7 @@ export default function Calendar({
 									return (
 										<div
 											key={key}
-											className="inline-block px-2 bg-transparent border-none w-1/7"
+											className="inline-block px-2 bg-transparent border-none w-[calc(100% / 7)]"
 										/>
 									);
 								}

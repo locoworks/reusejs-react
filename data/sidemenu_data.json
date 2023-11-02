@@ -1,19 +1,24 @@
 {
   "Components": [
+    "Banner",
     "Button",
     "Data Table",
+    "Date Picker",
     "Input",
     "Input Group",
+    "Modal",
     "Otp Input",
     "Progress Bar",
     "Select Dropdown",
     "Slider Carousel",
-    "Toast"
+    "Toast",
+    "Video Recorder"
   ],
   "Hooks": [
     "UseBetaForm",
     "UseClosableComponent",
     "UseDataTable",
+    "UseDateHelper",
     "UseDebounceEffect",
     "UseDidMountEffect",
     "UseHeadlessSelectHook",
