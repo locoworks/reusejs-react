@@ -1,0 +1,89 @@
+[
+  {
+    "depth": 2,
+    "value": "HEAD OBJECT\ntitle: \"ReuseJS Modal\"\nauthor: \"Shrey Dhyani\"",
+    "children": []
+  },
+  {
+    "depth": 1,
+    "value": "ReuseJS Modal",
+    "children": [
+      {
+        "depth": 2,
+        "value": "Overview",
+        "children": []
+      },
+      {
+        "depth": 2,
+        "value": "Installation",
+        "children": []
+      },
+      {
+        "depth": 2,
+        "value": "External Dependencies",
+        "children": []
+      },
+      {
+        "depth": 2,
+        "value": "Importing",
+        "children": []
+      },
+      {
+        "depth": 2,
+        "value": "Types/ Exported Components",
+        "children": []
+      },
+      {
+        "depth": 2,
+        "value": "Props",
+        "children": []
+      },
+      {
+        "depth": 2,
+        "value": "Examples and Usage",
+        "children": [
+          {
+            "depth": 3,
+            "value": "Headless Modal Example",
+            "children": []
+          },
+          {
+            "depth": 3,
+            "value": "Confirm Modal Example",
+            "children": []
+          },
+          {
+            "depth": 3,
+            "value": "Alert Modal Example",
+            "children": []
+          },
+          {
+            "depth": 3,
+            "value": "Success Modal Example",
+            "children": []
+          },
+          {
+            "depth": 3,
+            "value": "Input Modal Example",
+            "children": []
+          },
+          {
+            "depth": 3,
+            "value": "Bottom Modal Example",
+            "children": []
+          }
+        ]
+      },
+      {
+        "depth": 2,
+        "value": "Styling",
+        "children": []
+      },
+      {
+        "depth": 2,
+        "value": "Best Practices",
+        "children": []
+      }
+    ]
+  }
+]

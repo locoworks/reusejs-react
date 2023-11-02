@@ -1,0 +1,55 @@
+---
+HEAD OBJECT
+title: "ReuseJS DateHelper"
+author: "Upneet Kaur Hunjan"
+---
+
+# Reusejs DateHelper
+
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../../data/useDateHelpers-toc.json"
+
+## Overview
+
+The `useDateHelpers` hook provides utility functions for handling and formatting dates. It includes methods for converting dates to specific timezones, formatting dates, and validating date strings.
+
+## Installation
+
+To use `useDateHelpers`, you need to have React and ReactDOM installed in your project.
+To install Hooks into your code base use following command 
+
+```bash
+npm install @locoworks/reusejs-toolkit-react-hooks
+# or
+yarn add @locoworks/reusejs-toolkit-react-hooks
+```
+
+## External Dependencies
+
+The `useDateHelpers` hook uses the `ts-luxon` library for date and time manipulation. Ensure you have `ts-luxon` installed in your project.
+
+## Importing
+
+You can import the hook from the installed library, **@locoworks/reusejs-toolkit-react-hooks**
+```javascript
+import { useDateHelpers } from "@locoworks/reusejs-toolkit-react-hooks"
+```
+
+## Input Parameters
+
+The useDateHelpers hook accepts no input parameters.
+
+## Return Types
+
+The hook returns an object with the following methods:
+
+- `getFormattedDate`: Formats a date string or timestamp.
+- `isValidDate`: Validates a date string against a specified format.
+
+## Usage Example
+
+A working sample of **DateHelper** can be found [here](https://locoworks.org/reusejs-react/date-picker#Usage/Examples)
+
+export default ({ children }) => {
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
+};

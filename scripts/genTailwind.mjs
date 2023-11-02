@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import _ from "lodash";
 import fs from "node:fs";
 import { readFile } from "fs/promises";
@@ -53,6 +54,7 @@ const readTailwindConfig = async (paths) => {
     generatedTailwindObject["content"] = [...new Set(values.flat())];
   });
   const themePromise = Promise.all(themePromiseArray).then((values) => {
+    console.log(">>>>", values);
     generatedTailwindObject["theme"] = _.merge(
       ...values.map((val) => JSON.parse(val))
     );
@@ -119,6 +121,7 @@ const themeFetcher = async (path, regex) => {
     .replace(/,\s*$/, "");
   const validString = array.replace(
     /(['"])?([a-zA-Z0-9_-]+)(['"])?:/g,
+    // eslint-disable-next-line prettier/prettier
     '"$2": '
   );
   return validString;

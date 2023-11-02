@@ -17,6 +17,8 @@
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
 		"video-recorder:dev": "turbo run dev --filter=video-recorder-app...",
 		"video-recorder:build": "turbo run build --filter=@locoworks/reusejs-react-video-recorder...",
+		"date-picker:dev": "turbo run dev --filter=date-picker-app...",
+		"date-picker:build": "turbo run build --filter=@locoworks/reusejs-react-date-picker...",
     "banner:dev": "turbo run dev --filter=banner-app...",
     "banner:build": "turbo run build --filter=@locoworks/reusejs-react-banner...",
     "modal:dev": "turbo run dev --filter=modal-app...",

@@ -1,6 +1,6 @@
 {
   "name": "@locoworks/reusejs-toolkit-react-hooks",
-  "version": "0.5.1",
+  "version": "2.0.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
@@ -21,7 +21,8 @@
     "tailwind-merge": "^1.12.0",
     "@locoworks/reusejs-toolkit-utils": "*",
     "lodash": "^4.17.21",
-    "validate.js": "^0.13.1"
+    "validate.js": "^0.13.1",
+    "ts-luxon": "^4.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

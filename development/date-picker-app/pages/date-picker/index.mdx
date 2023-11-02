@@ -1,0 +1,142 @@
+---
+HEAD OBJECT
+title: "ReuseJS date-picker"
+author: "Upneet Kaur"
+---
+import Example  from "../../components/date-picker/Example/Example.tsx"
+
+## Date Picker
+
+## Overview
+
+The `HeadlessDatePicker` component is a versatile date picker component for React applications. It allows for easy date selection and customization.
+
+## Installation
+
+To install the `HeadlessDatePicker` component, use npm or yarn:
+
+```bash
+npm install @locoworks/reusejs-react-date-picker
+# or
+yarn add @locoworks/reusejs-react-date-picker
+```
+
+## External Dependencies
+
+The HeadlessDatePicker component relies on external dependencies such as @locoworks/reusejs-toolkit-react-hooks. Ensure you have these dependencies installed in your project.
+
+## Importing
+
+Import the `HeadlessDatePicker` component into your React application as follows:
+
+```jsx
+import { HeadlessDatePicker, CalendarBaseClassesProps } from "@locoworks/reusejs-react-date-picker";
+```
+
+## Types/ Exported Components
+
+The component exports the following types and components:
+
+- `HeadlessDatePicker` : The main component to create a datePicker
+- `CalendarBaseClassesProps` : A type for customizing the calendar's appearance.
+
+## Props
+
+The `HeadlessDatePicker` component accepts the following props:
+
+- `defaultValue` (optional): The default date value (default: current date).
+- `minDate` (optional): The minimum selectable date (default: January 1, 1000).
+- `maxDate` (optional): The maximum selectable date.
+- `dateFormat` (optional): The date format for the input field (default: "MM/dd/yyyy").
+- `label` (optional): The label for the date picker.
+- `inputWrapperClasses` (optional): Additional classes for the input wrapper.
+- `inputClasses` (optional): Additional classes for the input field.
+- `suffix` (optional): A React node to be displayed as a suffix in the input field.
+- `suffixWrapperClasses` (optional): Additional classes for the suffix wrapper.
+- `calendarContainerClasses` (optional): Additional classes for the calendar container.
+- `invalidDateClasses` (optional): Additional classes for the input when the date is invalid.
+- `calendarBaseClasses` (optional): Props for customizing the calendar appearance.
+
+### `CalendarBaseClassesProps` Props
+
+`CalendarBaseClassesProps` is an interface that allows you to customize the appearance of the calendar. It includes the following props:
+
+- `calendarWrapperClasses` : CSS classes for the calendar wrapper.
+- `calendarHeaderButtonsWrapper` : CSS classes for the header buttons wrapper.
+- `headerButtonClasses` : CSS classes for the header buttons.
+- `singleCalenderSectionWrapper` : CSS classes for the single calendar section wrapper.
+- `monthNameClasses` : CSS classes for the month name.
+- `weekNameWrapper` : CSS classes for the week name wrapper.
+- `weekNameClasses` : CSS classes for the week name.
+- `selectableClasses` : CSS classes for selectable dates.
+- `selectedOrTodayClasses` : CSS classes for selected or today's dates.
+- `weekendClasses` : CSS classes for weekend dates.
+- `notCurrentMonthClasses` : CSS classes for dates not in the current month.
+- `selectedTextClasses` : CSS classes for the selected date text.
+- `selectableTextClasses` : CSS classes for the selectable date text.
+- `todayButNotSelectedClasses` : CSS classes for today's date when not selected.
+
+## Usage/Examples 
+
+<Example/>
+```js path=../../components/date-picker/Example name=Example
+```
+
+## Styling
+
+You can style the component using Tailwind CSS and CSS. Feel free to customize the component's appearance as per your project's requirements.
+
+## Props
+
+| Prop                 | Type               | Default Value      | Description                                                        |
+|----------------------|--------------------|--------------------|--------------------------------------------------------------------|
+| `defaultValue`       | `Date` (optional)  | Current date       | The default date value.                                           |
+| `minDate`            | `Date` (optional)  | -  January 1, 1000                | The minimum selectable date.                                      |
+| `maxDate`            | `Date` (optional)  | -                  | The maximum selectable date.                                      |
+| `dateFormat`         | `string` (optional)| "MM/dd/yyyy"       | The date format for the input field.                               |
+| `label`              | `ReactNode` (optional) | "Select Date" | The label for the date picker.                                    |
+| `inputWrapperClasses` | `string` (optional) | -               | Additional classes for the input wrapper.                         |
+| `inputClasses`       | `string` (optional) | -                  | Additional classes for the input field.                            |
+| `suffix`             | `ReactNode` (optional) | -                | A React node to be displayed as suffix in the input field.     |
+| `suffixWrapperClasses` | `string` (optional) | -              | Additional classes for the suffix wrapper.                         |
+| `calendarContainerClasses` | `string` (optional) | -      | Additional classes for the calendar container.                    |
+| `invalidDateClasses` | `string` (optional) | -                 | Additional classes for the input when the date is invalid.        |
+| `calendarBaseClasses` | `CalendarBaseClassesProps` (optional) | - | Props for customizing the calendar appearance.                  |
+
+### `CalendarBaseClassesProps` Props
+
+`CalendarBaseClassesProps` is an interface that allows you to customize the appearance of the calendar. It includes the following props:
+
+| Prop Name                   | Type       | Default Value | Description                                            |
+|-----------------------------|------------|---------------|--------------------------------------------------------|
+| `calendarWrapperClasses`    | `string`   | -             | CSS classes for the calendar wrapper.                 |
+| `calendarHeaderButtonsWrapper` | `string` | -             | CSS classes for the header buttons wrapper.         |
+| `headerButtonClasses`       | `string`   | -             | CSS classes for the header buttons.                   |
+| `singleCalenderSectionWrapper` | `string` | -            | CSS classes for the single calendar section wrapper. |
+| `monthNameClasses`          | `string`   | -             | CSS classes for the month name.                       |
+| `weekNameWrapper`           | `string`   | -             | CSS classes for the week name wrapper.                |
+| `weekNameClasses`           | `string`   | -             | CSS classes for the week name.                        |
+| `selectableClasses`         | `string`   | -             | CSS classes for selectable dates.                     |
+| `selectedOrTodayClasses`    | `string`   | -             | CSS classes for selected or today's dates.            |
+| `weekendClasses`            | `string`   | -             | CSS classes for weekend dates.                        |
+| `notCurrentMonthClasses`    | `string`   | -             | CSS classes for dates not in the current month.       |
+| `selectedTextClasses`       | `string`   | -             | CSS classes for the selected date text.               |
+| `selectableTextClasses`     | `string`   | -             | CSS classes for the selectable date text.             |
+| `todayButNotSelectedClasses` | `string`  | -            | CSS classes for today's date when not selected.        |
+
+
+## Notes
+> Date formats supported by the `HeadlessDatePicker` component include:
+  - dd/MM/yyyy
+  - MM/dd/yyyy
+  - yyyy/MM/dd
+  - dd-MM-yyyy
+  - MM-dd-yyyy
+  - yyyy-MM-dd
+  - dd MM yyyy
+  - MM dd yyyy
+  - yyyy MM dd
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
