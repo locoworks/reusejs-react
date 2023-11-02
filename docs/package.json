@@ -51,8 +51,7 @@
     "framer-motion": "^10.13.0",
     "@locoworks/reusejs-react-banner": "*",
     "@locoworks/reusejs-react-date-picker": "*",
-    "@locoworks/reusejs-react-modal": "*",
-    "@locoworks/reusejs-react-video-recorder": "*"
+    "@locoworks/reusejs-react-modal": "*"
   },
   "devDependencies": {
     "prettier": "^3.0.0",
