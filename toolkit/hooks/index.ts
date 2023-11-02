@@ -10,4 +10,4 @@ export { useDataTable } from "./src/use-data-table";
 export { useDateHelpers } from "./src/use-date-helper";
 export { default as useClosableComponent } from "./src/use-closable-component";
 export { default as useMountComponent } from "./src/use-mount-component";
-export { useTimer } from "./src/use-timer";
+export { default as useTimer } from "./src/use-timer";

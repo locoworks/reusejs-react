@@ -8,7 +8,7 @@ interface useTimerHook {
 	hasStopped: boolean;
 }
 
-export const useTimer = (): useTimerHook => {
+const useTimer = (): useTimerHook => {
 	const [started, setStarted] = useState<boolean>(false);
 	const [countUp, setCountUp] = useState<boolean>(false);
 	const [seconds, setSeconds] = useState<number>(0);
@@ -65,3 +65,5 @@ export const useTimer = (): useTimerHook => {
 		hasStopped,
 	};
 };
+
+export default useTimer;

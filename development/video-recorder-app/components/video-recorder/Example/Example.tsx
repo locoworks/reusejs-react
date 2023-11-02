@@ -1,5 +1,8 @@
-import React from "react";
-import { HeadlessVideoRecorder } from "@locoworks/reusejs-react-video-recorder";
+import React, { useRef } from "react";
+import {
+	HeadlessVideoRecorder,
+	HeadlessVideoRecorderRef,
+} from "@locoworks/reusejs-react-video-recorder";
 
 const Example = () => {
 	const mediaConstraints = {
@@ -9,9 +12,25 @@ const Example = () => {
 		},
 		audio: false,
 	};
+	const videoRecorderRef = useRef<HeadlessVideoRecorderRef>(null);
+	const showPreview = () => {
+		if (videoRecorderRef.current) {
+			videoRecorderRef.current.showPreview();
+		} else {
+			console.error("videoRecorderRef is null");
+		}
+	};
+
 	return (
 		<div className="flex flex-col items-center justify-center py-10 mt-10 border rounded gap-x-3 bg-gray-50">
-			<HeadlessVideoRecorder mediaConstraints={mediaConstraints} />
+			<button className="p-2 bg-blue-300 border" onClick={showPreview}>
+				Show Preview
+			</button>
+			<HeadlessVideoRecorder
+				ref={videoRecorderRef}
+				mediaConstraints={mediaConstraints}
+				autoPreview={false}
+			/>
 		</div>
 	);
 };
