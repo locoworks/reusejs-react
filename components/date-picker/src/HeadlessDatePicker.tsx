@@ -5,6 +5,7 @@ import {
 } from "@locoworks/reusejs-toolkit-react-hooks";
 import SingleDatePicker from "./SingleDatePicker";
 import { CalendarBaseClassesProps } from "./Calendar";
+import { twMerge } from "tailwind-merge";
 
 interface Props {
 	defaultValue?: Date;
@@ -28,7 +29,7 @@ const HeadlessDatePicker = ({
 	defaultValue = new Date(),
 	minDate = new Date("1000,0,1"),
 	maxDate,
-	dateFormat = "MM-dd-yyyy",
+	dateFormat = "MM/dd/yyyy",
 	label = "Select Date",
 	suffix = <></>,
 	helperText = <></>,
@@ -98,17 +99,21 @@ const HeadlessDatePicker = ({
 							type="text"
 							name="date"
 							placeholder={dateFormat}
-							className={`
-							${inputClasses || ""}
-							${invalidDate && `${invalidDateClasses || ""}`} `}
+							className={twMerge(
+								inputClasses,
+								invalidDate && invalidDateClasses,
+							)}
 							value={tempDate}
-							onChange={(event: any) => updateDate(event)}
+							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+								updateDate(event)
+							}
 							ref={inputRef}
 						/>
 						<div
-							className={`absolute inset-y-0 flex items-center pr-2 right-3 ${
-								suffixWrapperClasses || ""
-							}`}
+							className={twMerge(
+								"absolute inset-y-0 flex items-center pr-2 right-3",
+								suffixWrapperClasses,
+							)}
 						>
 							{suffix}
 						</div>
@@ -120,14 +125,15 @@ const HeadlessDatePicker = ({
 			{isOpen && !invalidDate && (
 				<div
 					ref={calendarRef}
-					className={`absolute z-10 grid items-center justify-center p-4 transform -translate-x-6 bg-white rounded-lg shadow-md w-72 ${
-						calendarContainerClasses || ""
-					}`}
+					className={twMerge(
+						"absolute z-10 grid items-center justify-center p-4 transform -translate-x-6 bg-white rounded-lg shadow-md w-72",
+						calendarContainerClasses,
+					)}
 				>
 					<SingleDatePicker
 						selected={selectedDate}
 						calendarBaseClasses={calendarBaseClasses}
-						onChange={(d: any) => {
+						onChange={(d: Date) => {
 							onChangeCallback(d);
 							setIsOpen(false);
 						}}

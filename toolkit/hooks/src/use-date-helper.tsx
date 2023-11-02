@@ -5,6 +5,10 @@ function useDateHelpers() {
 		return date.replace(/(\b\d\b)/g, "0$&");
 	};
 
+	const MonthFormat = ["MM", "M"];
+	const DayFormat = ["dd", "d"];
+	const YearFormat = ["yyyy"];
+
 	const parseCustomDate = (date: string, format = "dd/MM/yyyy") => {
 		date = addLeadingZeroes(date);
 		const formatParts = format.split(/[- /]/);
@@ -27,21 +31,11 @@ function useDateHelpers() {
 			const formatPart = formatParts[i];
 			const datePart = dateParts[i];
 
-			if (formatPart == "yyyy" || formatPart == "YYYY") {
+			if (YearFormat.includes(formatPart)) {
 				dateValues.year = parseInt(datePart);
-			} else if (
-				formatPart == "MM" ||
-				formatPart == "M" ||
-				formatPart == "mm" ||
-				formatPart == "m"
-			) {
+			} else if (MonthFormat.includes(formatPart)) {
 				dateValues.month = parseInt(datePart);
-			} else if (
-				formatPart == "DD" ||
-				formatPart == "D" ||
-				formatPart == "dd" ||
-				formatPart == "d"
-			) {
+			} else if (DayFormat.includes(formatPart)) {
 				dateValues.day = parseInt(datePart);
 			}
 		}
