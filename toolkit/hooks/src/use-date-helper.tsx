@@ -47,8 +47,7 @@ function useDateHelpers() {
 
 	const getFormattedDate = (date: Date, format = "dd/MM/yyyy") => {
 		const newDate = DateTime.fromISO(date.toISOString());
-		const n = newDate.toFormat(format);
-		return n;
+		return newDate.toFormat(format);
 	};
 
 	const isValidDate = (date: string, format = "dd/MM/yyyy") => {
@@ -57,8 +56,6 @@ function useDateHelpers() {
 			const parsedDate = DateTime.fromFormat(preprocessedInputDate, format);
 
 			if (parsedDate.isValid) {
-				const standardizedDate = parsedDate.toFormat("yyyy-MM-dd");
-				console.log("Valid date:", standardizedDate);
 				return true;
 			} else {
 				return false;
