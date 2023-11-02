@@ -86,7 +86,7 @@ const HeadlessDatePicker = ({
 	};
 
 	return (
-		<div className={wrapperClasses}>
+		<div className={`relative ${wrapperClasses}`}>
 			<div className="relative" ref={datePickerRef}>
 				<div
 					className={datePickerWrapperClasses || ""}
@@ -126,7 +126,7 @@ const HeadlessDatePicker = ({
 				<div
 					ref={calendarRef}
 					className={twMerge(
-						"absolute z-10 grid items-center justify-center p-4 transform -translate-x-6 bg-white rounded-lg shadow-md w-72",
+						"absolute z-10 items-center justify-center p-4 transform -translate-x-6 bg-white rounded-lg shadow-md w-72",
 						calendarContainerClasses,
 					)}
 				>
