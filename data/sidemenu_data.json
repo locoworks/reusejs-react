@@ -11,8 +11,7 @@
     "Progress Bar",
     "Select Dropdown",
     "Slider Carousel",
-    "Toast",
-    "Video Recorder"
+    "Toast"
   ],
   "Hooks": [
     "UseBetaForm",
@@ -28,8 +27,5 @@
     "UseProgress",
     "UseSlider"
   ],
-  "Utils": [
-    "DataLoaderOrchestrator",
-    "env"
-  ]
+  "Utils": ["DataLoaderOrchestrator", "env"]
 }
