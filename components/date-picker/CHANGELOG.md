@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-date-picker
 
+## 2.0.1
+
+### Patch Changes
+
+- 17c646c: Added Grid layout to datepicker
+
 ## 2.0.0
 
 ### Major Changes
