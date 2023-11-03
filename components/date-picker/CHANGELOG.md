@@ -1,5 +1,12 @@
 # @locoworks/reusejs-react-date-picker
 
+## 3.0.0
+
+### Major Changes
+
+- 19f3501: - Resolved the error related to the missing declaration file for the '@locoworks/reusejs-react-date-picker' module.
+  - Removed the inclusion of the hook from the tsconfig configuration.
+
 ## 2.0.1
 
 ### Patch Changes
