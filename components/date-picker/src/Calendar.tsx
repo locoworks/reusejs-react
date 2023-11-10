@@ -59,6 +59,8 @@ export interface CalenderProps {
 	prevMonthLabel?: React.ReactNode;
 	nextMonthLabel?: React.ReactNode;
 	calendarBaseClasses?: CalendarBaseClassesProps;
+	customNextMonthComponent?: ({ props }: any) => React.ReactNode;
+	customPrevMonthComponent?: ({ props }: any) => React.ReactNode;
 }
 
 export default function Calendar({
@@ -69,7 +71,10 @@ export default function Calendar({
 	calendarBaseClasses,
 	prevMonthLabel = "Back",
 	nextMonthLabel = "Next",
+	customNextMonthComponent,
+	customPrevMonthComponent,
 }: CalenderProps) {
+	// console.log(">>>>>>>", customNextMonthComponent);
 	if (calendars.length) {
 		return (
 			<div className={calendarBaseClasses?.calendarWrapperClasses || "grid"}>
@@ -78,22 +83,38 @@ export default function Calendar({
 						calendarBaseClasses?.calenderHeaderButtonsWrapper || ""
 					}`}
 				>
-					<button
-						className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
-						{...getBackProps({
-							calendars,
-						})}
-					>
-						{prevMonthLabel}
-					</button>
-					<button
-						className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
-						{...getForwardProps({
-							calendars,
-						})}
-					>
-						{nextMonthLabel}
-					</button>
+					{customPrevMonthComponent ? (
+						customPrevMonthComponent({
+							...getBackProps({
+								calendars,
+							}),
+						})
+					) : (
+						<button
+							className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
+							{...getBackProps({
+								calendars,
+							})}
+						>
+							{prevMonthLabel}
+						</button>
+					)}
+					{customNextMonthComponent ? (
+						customNextMonthComponent({
+							...getForwardProps({
+								calendars,
+							}),
+						})
+					) : (
+						<button
+							className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
+							{...getForwardProps({
+								calendars,
+							})}
+						>
+							{nextMonthLabel}
+						</button>
+					)}
 				</div>
 				{calendars.map((calendar: any) => (
 					<div

@@ -24,7 +24,11 @@ interface Props {
 	helperText?: React.ReactNode;
 	errorText?: React.ReactNode;
 	calendarBaseClasses?: CalendarBaseClassesProps;
+	customNextMonthComponent?: ({ props }: any) => React.ReactNode;
+	customPrevMonthComponent?: ({ props }: any) => React.ReactNode;
+	dateCallback?: (date: Date) => void;
 }
+
 const HeadlessDatePicker = ({
 	defaultValue = new Date(),
 	minDate = new Date("1000,0,1"),
@@ -42,6 +46,9 @@ const HeadlessDatePicker = ({
 	calendarContainerClasses,
 	invalidDateClasses,
 	calendarBaseClasses,
+	customNextMonthComponent,
+	customPrevMonthComponent,
+	dateCallback,
 }: Props) => {
 	const { isValidDate, getFormattedDate, parseCustomDate } = useDateHelpers();
 
@@ -78,7 +85,9 @@ const HeadlessDatePicker = ({
 		if (isValidDate(value, dateFormat)) {
 			newState.invalidDate = false;
 			newState.currentSelected = parseCustomDate(value, dateFormat);
-			onChangeCallback(newState.currentSelected);
+			if (newState?.currentSelected) {
+				onChangeCallback(newState.currentSelected);
+			}
 		}
 
 		setInvalidDate(newState.invalidDate);
@@ -136,9 +145,12 @@ const HeadlessDatePicker = ({
 						onChange={(d: Date) => {
 							onChangeCallback(d);
 							setIsOpen(false);
+							dateCallback && dateCallback(d);
 						}}
 						maxDate={maxDate}
 						minDate={minDate}
+						customNextMonthComponent={customNextMonthComponent}
+						customPrevMonthComponent={customPrevMonthComponent}
 					/>
 				</div>
 			)}
