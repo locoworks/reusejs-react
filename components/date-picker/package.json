@@ -24,6 +24,7 @@
   "devDependencies": {
     "@betalectic-reusejs/shared-config-eslint-reactts": "^1.0.1",
     "@betalectic-reusejs/shared-config-prettier-ts": "^1.0.0",
+    "@locoworks/reusejs-toolkit-react-hooks": "*",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
