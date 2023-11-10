@@ -1,5 +1,17 @@
 # @locoworks/reusejs-react-date-picker
 
+## 3.0.1
+
+### Patch Changes
+
+- 3ecf021: Changes:
+
+  - Custom Buttons for prev and next months
+  - Top Label: (Hide, Pass Custom Text, Pass Custom Component)
+  - Call back for getting new selected date.
+
+- 303a559: - Implemented usage of twMerge in Calendar and HeadlessDatePicker
+
 ## 3.0.0
 
 ### Major Changes
