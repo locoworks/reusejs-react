@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-date-picker
 
+## 3.0.2
+
+### Patch Changes
+
+- 19ec0bb: Fixed Types path for new bundle
+
 ## 3.0.1
 
 ### Patch Changes
