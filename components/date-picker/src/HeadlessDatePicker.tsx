@@ -97,7 +97,7 @@ const HeadlessDatePicker = ({
 	};
 
 	return (
-		<div className={`relative ${wrapperClasses || ""}`}>
+		<div className={twMerge("relative", wrapperClasses)}>
 			<div className="relative" ref={datePickerRef}>
 				<div
 					className={datePickerWrapperClasses}

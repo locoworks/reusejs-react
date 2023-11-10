@@ -72,14 +72,17 @@ export default function Calendar({
 }: CalenderProps) {
 	if (calendars.length) {
 		return (
-			<div className={calendarBaseClasses?.calendarWrapperClasses || "grid"}>
+			<div
+				className={twMerge("grid", calendarBaseClasses?.calendarWrapperClasses)}
+			>
 				<div
-					className={`flex justify-between ${
-						calendarBaseClasses?.calenderHeaderButtonsWrapper || ""
-					}`}
+					className={twMerge(
+						"flex justify-between",
+						calendarBaseClasses?.calenderHeaderButtonsWrapper,
+					)}
 				>
 					<button
-						className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
+						className={calendarBaseClasses?.headerButtonClasses}
 						{...getBackProps({
 							calendars,
 						})}
@@ -87,7 +90,7 @@ export default function Calendar({
 						{prevMonthLabel}
 					</button>
 					<button
-						className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
+						className={calendarBaseClasses?.headerButtonClasses}
 						{...getForwardProps({
 							calendars,
 						})}
@@ -98,29 +101,33 @@ export default function Calendar({
 				{calendars.map((calendar: any) => (
 					<div
 						key={`${calendar.month}${calendar.year}`}
-						className={`box-border grid inline-block ${
-							calendarBaseClasses?.singleCalenderSectionWrapper || ""
-						}`}
+						className={twMerge(
+							"box-border grid inline-block",
+							calendarBaseClasses?.singleCalenderSectionWrapper,
+						)}
 					>
 						<div
-							className={`text-center ${
-								calendarBaseClasses?.monthNameClasses || ""
-							}`}
+							className={twMerge(
+								"text-center",
+								calendarBaseClasses?.monthNameClasses,
+							)}
 						>
 							{monthNamesShort[calendar.month]} {calendar.year}
 						</div>
 
 						<div
-							className={`grid grid-cols-7 ${
-								calendarBaseClasses?.weekNameWrapper || ""
-							}`}
+							className={twMerge(
+								"grid grid-cols-7",
+								calendarBaseClasses?.weekNameWrapper,
+							)}
 						>
 							{weekdayNamesShort.map((weekday) => (
 								<div
 									key={`${calendar.month}${calendar.year}${weekday}`}
-									className={`inline-block text-center bg-transparent border-none ${
-										calendarBaseClasses?.weekNameClasses || ""
-									}`}
+									className={twMerge(
+										"inline-block text-center bg-transparent border-none",
+										calendarBaseClasses?.weekNameClasses,
+									)}
 								>
 									{weekday}
 								</div>
