@@ -18,8 +18,8 @@ export interface SingleDatePickerProps {
 	minDate?: Date;
 	showOutsideDays?: boolean;
 	calendarBaseClasses?: CalendarBaseClassesProps;
-	customNextMonthComponent?: ({ props }: any) => React.ReactNode;
-	customPrevMonthComponent?: ({ props }: any) => React.ReactNode;
+	prevMonthLabel?: React.ReactNode;
+	nextMonthLabel?: React.ReactNode;
 }
 
 export default function SingleDatePicker({
@@ -29,8 +29,8 @@ export default function SingleDatePicker({
 	maxDate,
 	showOutsideDays = true,
 	calendarBaseClasses,
-	customNextMonthComponent,
-	customPrevMonthComponent,
+	prevMonthLabel,
+	nextMonthLabel,
 }: SingleDatePickerProps) {
 	const [selectedDate, setSelectedDate] = useState<Date>(selected);
 
@@ -56,8 +56,8 @@ export default function SingleDatePicker({
 		<Calendar
 			{...dayzedData}
 			calendarBaseClasses={calendarBaseClasses}
-			customNextMonthComponent={customNextMonthComponent}
-			customPrevMonthComponent={customPrevMonthComponent}
+			prevMonthLabel={prevMonthLabel}
+			nextMonthLabel={nextMonthLabel}
 		/>
 	);
 }

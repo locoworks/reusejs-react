@@ -4,6 +4,7 @@ title: "ReuseJS date-picker"
 author: "Upneet Kaur"
 ---
 import Example  from "../../components/date-picker/Example/Example.tsx"
+import CustomDatePicker from "../../components/date-picker/CustomDatePicker/CustomDatePicker.tsx"
 
 ## Date Picker
 
@@ -51,10 +52,14 @@ The `HeadlessDatePicker` component accepts the following props:
 - `label` (optional): The label for the date picker.
 - `inputWrapperClasses` (optional): Additional classes for the input wrapper.
 - `inputClasses` (optional): Additional classes for the input field.
+- `labelClasses` (optional): Additional classes for styling label field.
 - `suffix` (optional): A React node to be displayed as a suffix in the input field.
 - `suffixWrapperClasses` (optional): Additional classes for the suffix wrapper.
 - `calendarContainerClasses` (optional): Additional classes for the calendar container.
 - `invalidDateClasses` (optional): Additional classes for the input when the date is invalid.
+- `prevMonthLabel` (optional): A React Component on calendar for navigating to previous month.
+- `nextMonthLabel` (optional): A React Component on calendar for navigating to next month.
+- `dateCallback` (optional): A callback function for accessing the selected date.
 - `calendarBaseClasses` (optional): Props for customizing the calendar appearance.
 
 ### `CalendarBaseClassesProps` Props
@@ -79,8 +84,14 @@ The `HeadlessDatePicker` component accepts the following props:
 
 ## Usage/Examples 
 
+### Sample Code Demo
 <Example/>
 ```js path=../../components/date-picker/Example name=Example
+```
+
+### Customised Date Picker
+<CustomDatePicker/>
+```js path=../../components/date-picker/CustomDatePicker name=CustomDatePicker
 ```
 
 ## Styling
@@ -102,6 +113,10 @@ You can style the component using Tailwind CSS and CSS. Feel free to customize t
 | `suffixWrapperClasses` | `string` (optional) | -              | Additional classes for the suffix wrapper.                         |
 | `calendarContainerClasses` | `string` (optional) | -      | Additional classes for the calendar container.                    |
 | `invalidDateClasses` | `string` (optional) | -                 | Additional classes for the input when the date is invalid.        |
+| `labelClasses` | `string` (optional) | -                 | Additional classes for the label field.        |
+| `prevMonthLabel` | `ReactNode` (optional) | -                 | The label for previous month in the calendar.        |
+| `nextMonthLabel` | `ReactNode` (optional) | -                 | The label for next month in the calendar.        |
+| `dateCallback` | `(Date) => void` (optional) | -                 | A callback function for accessing the selected date.        |
 | `calendarBaseClasses` | `CalendarBaseClassesProps` (optional) | - | Props for customizing the calendar appearance.                  |
 
 ### `CalendarBaseClassesProps` Props

@@ -59,8 +59,6 @@ export interface CalenderProps {
 	prevMonthLabel?: React.ReactNode;
 	nextMonthLabel?: React.ReactNode;
 	calendarBaseClasses?: CalendarBaseClassesProps;
-	customNextMonthComponent?: ({ props }: any) => React.ReactNode;
-	customPrevMonthComponent?: ({ props }: any) => React.ReactNode;
 }
 
 export default function Calendar({
@@ -71,10 +69,7 @@ export default function Calendar({
 	calendarBaseClasses,
 	prevMonthLabel = "Back",
 	nextMonthLabel = "Next",
-	customNextMonthComponent,
-	customPrevMonthComponent,
 }: CalenderProps) {
-	// console.log(">>>>>>>", customNextMonthComponent);
 	if (calendars.length) {
 		return (
 			<div className={calendarBaseClasses?.calendarWrapperClasses || "grid"}>
@@ -83,38 +78,22 @@ export default function Calendar({
 						calendarBaseClasses?.calenderHeaderButtonsWrapper || ""
 					}`}
 				>
-					{customPrevMonthComponent ? (
-						customPrevMonthComponent({
-							...getBackProps({
-								calendars,
-							}),
-						})
-					) : (
-						<button
-							className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
-							{...getBackProps({
-								calendars,
-							})}
-						>
-							{prevMonthLabel}
-						</button>
-					)}
-					{customNextMonthComponent ? (
-						customNextMonthComponent({
-							...getForwardProps({
-								calendars,
-							}),
-						})
-					) : (
-						<button
-							className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
-							{...getForwardProps({
-								calendars,
-							})}
-						>
-							{nextMonthLabel}
-						</button>
-					)}
+					<button
+						className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
+						{...getBackProps({
+							calendars,
+						})}
+					>
+						{prevMonthLabel}
+					</button>
+					<button
+						className={`${calendarBaseClasses?.headerButtonClasses || ""}`}
+						{...getForwardProps({
+							calendars,
+						})}
+					>
+						{nextMonthLabel}
+					</button>
 				</div>
 				{calendars.map((calendar: any) => (
 					<div
@@ -160,7 +139,7 @@ export default function Calendar({
 										return (
 											<div
 												key={key}
-												className="inline-block px-2 bg-transparent border-none "
+												className="inline-block px-2 bg-transparent border-none"
 											/>
 										);
 									}
