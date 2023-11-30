@@ -130,6 +130,12 @@ export const useHeadlessSelectHook = ({
 		[selectedValues],
 	);
 
+	useEffect(() => {
+		if (defaultSelected.length > 0) {
+			setSelectedValues(defaultSelected);
+		}
+	}, []);
+
 	return {
 		open,
 		setOpen,
