@@ -1,0 +1,12 @@
+export { default as BoldIcon } from "./BoldIcon";
+export { default as BulletListIcon } from "./BulletListIcon";
+export { default as HeadingIcon } from "./HeadingIcon";
+export { default as ImageIcon } from "./ImageIcon";
+export { default as ItalicIcon } from "./ItalicIcon";
+export { default as ParagraphIcon } from "./ParagraphIcon";
+export { default as PlusIcon } from "./PlusIcon";
+export { default as RedoIcon } from "./RedoIcon";
+export { default as TableIcon } from "./TableIcon";
+export { default as UnderlineIcon } from "./UnderlineIcon";
+export { default as UndoIcon } from "./UndoIcon";
+export { default as UserIcon } from "./UserIcon";

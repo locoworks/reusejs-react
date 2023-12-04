@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "ES2020", "ESNext"],
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext"
+  },
+  "include": ["", "src", "utils"],
+  "exclude": ["dist/**", "src/main.tsx"]
+}
