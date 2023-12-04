@@ -17,12 +17,15 @@ const Example = () => {
 		}
 		return null;
 	}
-
+	function OnChange(editorRef: any, payload: any) {
+		console.log(payload, "payload", editorRef, "editorRef");
+	}
 	return (
-		<div className="flex flex-col items-center justify-center py-10 mt-10 border rounded gap-x-3 bg-gray-50">
+		<div className="flex flex-col items-center justify-center py-10 mt-10 bg-gray-100 border rounded gap-x-3">
 			<TextEditor
 				useMentionLookupService={useMentionLookupService}
 				convertFileToImageUrl={convertFileToImageUrl}
+				onChangeCallback={OnChange}
 			/>
 		</div>
 	);

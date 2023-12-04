@@ -36,12 +36,14 @@ type EditorProps = {
 		label: string;
 	}>;
 	convertFileToImageUrl: (files: FileList | null) => string | null;
+	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 };
 function Editor({
 	editorRef,
 	editState,
 	useMentionLookupService,
 	convertFileToImageUrl,
+	onChangeCallback,
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
@@ -65,8 +67,7 @@ function Editor({
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
 			setData(payload["html"]);
-			// console.log(payload["html"], "HTML___");
-			// console.log(payload["json"], "JSON_____");
+			onChangeCallback?.(editorRef.current, payload);
 		});
 		return (editorRef.current = editor);
 	};

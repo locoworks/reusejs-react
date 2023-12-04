@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
@@ -18,23 +18,17 @@ type Props = {
 		label: string;
 	}>;
 	convertFileToImageUrl: (files: FileList | null) => string | null;
-	onEditorRefChange?: (editorRef: LexicalEditor | null) => void;
+	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	wrapperClass?: string;
 };
 const TextEditor = ({
 	useMentionLookupService,
 	convertFileToImageUrl,
-	onEditorRefChange,
+	onChangeCallback,
 	wrapperClass,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
-	const [editable, setEditable] = useState<boolean>(true);
-
-	useEffect(() => {
-		if (onEditorRefChange) {
-			onEditorRefChange(editorRef.current);
-		}
-	}, [editorRef]);
+	const [editable, setEditable] = useState<boolean>(false);
 
 	const initialConfig = {
 		namespace: "MyEditor",
@@ -52,11 +46,16 @@ const TextEditor = ({
 			MentionNode,
 			ImageNode,
 		],
-		editable: editable,
+		editable: true,
 	};
 
 	return (
-		<div className={wrapperClass || "w-full bg-gray-50"}>
+		<div
+			className={
+				(wrapperClass || "w-full bg-gray-50 ") +
+				`${editable ? " cursor-pointer" : " cursor-text"}`
+			}
+		>
 			<LexicalComposer initialConfig={initialConfig}>
 				<TableContext>
 					<div
@@ -68,6 +67,7 @@ const TextEditor = ({
 						<Editor
 							convertFileToImageUrl={convertFileToImageUrl}
 							useMentionLookupService={useMentionLookupService}
+							onChangeCallback={onChangeCallback}
 							editState={editable}
 							editorRef={editorRef}
 						/>

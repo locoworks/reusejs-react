@@ -40,7 +40,7 @@ The `TextEditor` component accepts the following props:
 
 - `useMentionLookupService`: A function to handle mention lookup and return results.
 - `convertFileToImageUrl`: A function to convert files to image URLs and return imageUrls.
-- `onEditorRefChange`: An optional callback for editor reference changes.
+- `onChangeCallback`: An optional callback for editor reference changes and payload.
 - `wrapperClass`: An optional class for styling the editor wrapper.
 
 ## Usage/Examples
@@ -62,7 +62,7 @@ import "@locoworks/reusejs-react-text-editor/css";
 ## Best Practices
 
 - Ensure that necessary dependencies are installed.
-- Handle editor reference changes using the onEditorRefChange prop.
+- Handle editor reference changes and payload using the onChangeCallback prop.
 
 ## Props Table
 
@@ -70,7 +70,7 @@ import "@locoworks/reusejs-react-text-editor/css";
 | ------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `useMentionLookupService` | `(mentionString: string \| null) => Array<{ mentionName: string; label: string; }>` | Function to handle mention lookup and return results.                                                                                                   |
 | `convertFileToImageUrl`   | `(files: FileList \| null) => string \| null`                     | Function to convert files to image URLs and return imageUrls.                                                                                              |
-| `onEditorRefChange`       | `(editorRef: LexicalEditor \| null) => void`                       | Optional callback for editor reference changes.                                                                                     |
+| `onChangeCallback`       | `onChangeCallback?: onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;`                       | Optional callback for editor reference changes.                                                                                     |
 | `wrapperClass`            | `string`                                                           | Optional class for styling the editor wrapper.                                                                                        |
 
 ## Notes
