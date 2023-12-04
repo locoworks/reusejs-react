@@ -50,12 +50,7 @@ const TextEditor = ({
 	};
 
 	return (
-		<div
-			className={
-				(wrapperClass || "w-full bg-gray-50 ") +
-				`${editable ? " cursor-pointer" : " cursor-text"}`
-			}
-		>
+		<div className={wrapperClass || "w-full bg-gray-50 cursor-text "}>
 			<LexicalComposer initialConfig={initialConfig}>
 				<TableContext>
 					<div
