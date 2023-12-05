@@ -4,6 +4,7 @@ title: "ReuseJS text-editor"
 author: "Upneet Kaur Hunjan"
 ---
 import Example from "../../components/text-editor/Example/Example.tsx";
+import PrepopulatedTextEditor from "../../components/text-editor/PrepopulatedTextEditor/PrepopulatedTextEditor.tsx";
 
 ## Text-Editor
 
@@ -47,12 +48,19 @@ The `TextEditor` component accepts the following props:
 - `convertFileToImageUrl`: A function to convert files to image URLs and return imageUrls.
 - `onChangeCallback`: An optional callback for editor reference changes and payload.
 - `wrapperClass`: An optional class for styling the editor wrapper.
+- `editable`: A boolean indicating the edit state of the editor.
+- `prePopulate`: An optional function to set the intialState of the editor.
 
 ## Usage/Examples
 
-### TextEditor demo Code
+### TextEditor demo
 <Example/>
 ```js path=../../components/text-editor/Example name=Example
+```
+
+### PrepopulatedTextEditor 
+<PrepopulatedTextEditor/>
+```js path=../../components/text-editor/PrepopulatedTextEditor name=PrepopulatedTextEditor
 ```
 
 ## Styling
@@ -71,12 +79,14 @@ import "@locoworks/reusejs-react-text-editor/css";
 
 ## Props Table
 
-| Prop                      | Type                                                               | Description                                                                                                                            |
-| ------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `useMentionLookupService` | `(mentionString: string \| null) => Array<{ mentionName: string; label: string; }>` | Function to handle mention lookup and return results.                                                                                                   |
-| `convertFileToImageUrl`   | `(files: FileList \| null) => string \| null`                     | Function to convert files to image URLs and return imageUrls.                                                                                              |
-| `onChangeCallback`       | `onChangeCallback?: onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;`                       | Optional callback for editor reference changes.                                                                                     |
-| `wrapperClass`            | `string`                                                           | Optional class for styling the editor wrapper.                                                                                        |
+| Prop                  | Type                                 | Description                                                                                                       |
+| --------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| `useMentionLookupService` | Function                             | A function to handle mention lookup and return results.                                                           |
+| `convertFileToImageUrl`   | Function                             | A function to convert files to image URLs and return image URLs.                                                  |
+| `onChangeCallback`       | Function                             | An optional callback for editor reference changes and payload.                                                    |
+| `wrapperClass`           | String                               | An optional class for styling the editor wrapper.                                                                  |
+| `editable`               | Boolean                              | A boolean indicating the edit state of the editor.                                                                |
+| `prePopulate`            | Function                             | An optional function to set the initial state of the editor.                                                       |
 
 ## Notes
 >The TextEditor component uses the Lexical library for rich text editing.
