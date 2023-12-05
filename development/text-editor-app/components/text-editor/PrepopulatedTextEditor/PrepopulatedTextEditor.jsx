@@ -55,7 +55,7 @@ const PrepopulatedTextEditor = () => {
 				</button>
 			) : (
 				<div
-					className="w-full min-h-[50px] cursor-text"
+					className="w-full min-h-[50px] cursor-text bg-white"
 					dangerouslySetInnerHTML={{ __html: data }}
 					onClick={() => {
 						setEditable(true);
