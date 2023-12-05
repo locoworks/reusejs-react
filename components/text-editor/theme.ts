@@ -16,14 +16,11 @@ export const EditorTheme: EditorThemeClasses = {
 		nested: {
 			listitem: "EditorTheme__nestedListItem",
 		},
-		olDepth: [
-			"EditorTheme__ol1",
-			"EditorTheme__ol2",
-			"EditorTheme__ol3",
-			"EditorTheme__ol4",
-			"EditorTheme__ol5",
+		ulDepth: [
+			"list-inside list-disc",
+			"list-inside list-[circle]",
+			"list-inside list-[square]",
 		],
-		ul: "EditorTheme__ul",
 	},
 	ltr: "EditorTheme__ltr",
 	paragraph: "EditorTheme__paragraph",
