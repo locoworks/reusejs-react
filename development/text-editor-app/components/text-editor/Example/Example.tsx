@@ -22,17 +22,18 @@ const Example = () => {
 		return null;
 	}
 
-	function OnChange(_editorRef: LexicalEditor | null, payload: any) {
+	function onChange(_editorRef: LexicalEditor | null, payload: any) {
 		setData(payload["html"]);
 	}
 
 	return (
 		<div className="flex flex-col items-center justify-center py-10 mt-10 bg-gray-100 border rounded gap-x-3">
 			<TextEditor
+				wrapperClass="w-2/3 h-fit bg-red-300"
 				editable={editable}
 				useMentionLookupService={useMentionLookupService}
 				convertFileToImageUrl={convertFileToImageUrl}
-				onChangeCallback={OnChange}
+				onChangeCallback={onChange}
 			/>
 			{editable ? (
 				<button

@@ -26,9 +26,11 @@ const PrepopulatedTextEditor = () => {
 		}
 		return null;
 	}
-	function OnChange(_editorRef: LexicalEditor | null, payload: any) {
+
+	function onChange(_editorRef: LexicalEditor | null, payload: any) {
 		setData(payload["html"]);
 	}
+
 	function prepopulatedRichText() {
 		const root = $getRoot();
 		if (root.getFirstChild() === null) {
@@ -37,6 +39,7 @@ const PrepopulatedTextEditor = () => {
 			root.append(paragraph);
 		}
 	}
+
 	return (
 		<div className="flex flex-col items-center justify-center py-10 mt-10 bg-gray-100 border rounded gap-x-3">
 			<TextEditor
@@ -44,7 +47,7 @@ const PrepopulatedTextEditor = () => {
 				editable={editable}
 				useMentionLookupService={useMentionLookupService}
 				convertFileToImageUrl={convertFileToImageUrl}
-				onChangeCallback={OnChange}
+				onChangeCallback={onChange}
 			/>
 			{editable ? (
 				<button

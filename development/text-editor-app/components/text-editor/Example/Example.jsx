@@ -21,7 +21,7 @@ const Example = () => {
 		return null;
 	}
 
-	function OnChange(_editorRef, payload) {
+	function onChange(_editorRef, payload) {
 		setData(payload["html"]);
 	}
 
@@ -31,7 +31,7 @@ const Example = () => {
 				editable={editable}
 				useMentionLookupService={useMentionLookupService}
 				convertFileToImageUrl={convertFileToImageUrl}
-				onChangeCallback={OnChange}
+				onChangeCallback={onChange}
 			/>
 			{editable ? (
 				<button
