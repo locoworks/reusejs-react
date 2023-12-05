@@ -61,7 +61,7 @@ import {
 	TableNode,
 } from "./TableNode";
 import { CellContext } from "./TablePlugin";
-import { PlusIcon } from "../../icons";
+import { ChevronDownIcon, PlusIcon } from "../../icons";
 
 declare global {
 	interface Document {
@@ -363,8 +363,15 @@ function TableActionMenu({
 		const dropdownElem = dropDownRef.current;
 		if (dropdownElem !== null) {
 			const rect = menuElem.getBoundingClientRect();
-			dropdownElem.style.top = `${rect.y}px`;
-			dropdownElem.style.left = `${rect.x}px`;
+
+			dropdownElem.style.top = `${rect.bottom}px`;
+			dropdownElem.style.left = `${rect.left}px`;
+
+			const dropdownRect = dropdownElem.getBoundingClientRect();
+			const viewPortHeight = window.innerHeight;
+			if (dropdownRect.bottom > viewPortHeight) {
+				dropdownElem.style.top = `${rect.top - dropdownRect.height}px`;
+			}
 		}
 	}, [menuElem]);
 
@@ -378,9 +385,19 @@ function TableActionMenu({
 				event.stopPropagation();
 			}
 		};
-
+		const handleScroll = () => {
+			const dropdownElem = dropDownRef.current;
+			if (dropdownElem !== null) {
+				onClose();
+			}
+		};
 		window.addEventListener("click", handleClickOutside);
-		return () => window.removeEventListener("click", handleClickOutside);
+		window.addEventListener("scroll", handleScroll);
+
+		return () => {
+			window.removeEventListener("click", handleClickOutside);
+			window.removeEventListener("scroll", handleScroll);
+		};
 	}, [onClose]);
 	const coords = cellCoordMap.get(cell.id);
 
@@ -662,7 +679,7 @@ function TableCell({
 							e.stopPropagation();
 						}}
 					>
-						<i className="chevron-down" />
+						<ChevronDownIcon />
 					</button>
 				</div>
 			)}
@@ -1748,65 +1765,67 @@ export default function TableComponent({
 	}
 
 	return (
-		<div
-			style={{
-				position: "relative",
-				width: (tableRef.current?.offsetWidth || 0) + "px",
-			}}
-		>
-			<table
-				className={`${theme.table} ${isSelected ? theme.tableSelected : ""}`}
-				ref={tableRef}
-				tabIndex={-1}
+		<>
+			<div
+				style={{
+					position: "relative",
+					width: (tableRef.current?.offsetWidth || 0) + "px",
+				}}
 			>
-				<tbody>
-					{rows.map((row) => (
-						<tr key={row.id} className={theme.tableRow}>
-							{row.cells.map((cell) => {
-								const { id } = cell;
-								return (
-									<TableCell
-										key={id}
-										cell={cell}
-										theme={theme}
-										isSelected={selectedCellSet.has(id)}
-										isPrimarySelected={primarySelectedCellID === id}
-										isEditing={isEditing}
-										sortingOptions={sortingOptions}
-										cellEditor={cellEditor}
-										updateCellsByID={updateCellsByID}
-										updateTableNode={updateTableNode}
-										cellCoordMap={cellCoordMap}
-										rows={rows}
-										setSortingOptions={setSortingOptions}
-									/>
-								);
-							})}
-						</tr>
-					))}
-				</tbody>
-			</table>
-			{showAddColumns && (
-				<button className={theme.tableAddColumns} onClick={addColumns}>
-					<i className="contents">
-						<PlusIcon />
-					</i>
-				</button>
-			)}
-			{showAddRows && (
-				<button
-					className={theme.tableAddRows}
-					onClick={addRows}
-					ref={addRowsRef}
+				<table
+					className={`${theme.table} ${isSelected ? theme.tableSelected : ""}`}
+					ref={tableRef}
+					tabIndex={-1}
 				>
-					<i className="contents">
-						<PlusIcon />
-					</i>
-				</button>
-			)}
-			{resizingID !== null && (
-				<div className={theme.tableResizeRuler} ref={tableResizerRulerRef} />
-			)}
-		</div>
+					<tbody>
+						{rows.map((row) => (
+							<tr key={row.id} className={theme.tableRow}>
+								{row.cells.map((cell) => {
+									const { id } = cell;
+									return (
+										<TableCell
+											key={id}
+											cell={cell}
+											theme={theme}
+											isSelected={selectedCellSet.has(id)}
+											isPrimarySelected={primarySelectedCellID === id}
+											isEditing={isEditing}
+											sortingOptions={sortingOptions}
+											cellEditor={cellEditor}
+											updateCellsByID={updateCellsByID}
+											updateTableNode={updateTableNode}
+											cellCoordMap={cellCoordMap}
+											rows={rows}
+											setSortingOptions={setSortingOptions}
+										/>
+									);
+								})}
+							</tr>
+						))}
+					</tbody>
+				</table>
+				{showAddColumns && (
+					<button className={theme.tableAddColumns} onClick={addColumns}>
+						<i className="contents">
+							<PlusIcon />
+						</i>
+					</button>
+				)}
+				{showAddRows && (
+					<button
+						className={theme.tableAddRows}
+						onClick={addRows}
+						ref={addRowsRef}
+					>
+						<i className="contents">
+							<PlusIcon />
+						</i>
+					</button>
+				)}
+				{resizingID !== null && (
+					<div className={theme.tableResizeRuler} ref={tableResizerRulerRef} />
+				)}
+			</div>
+		</>
 	);
 }

@@ -61,9 +61,7 @@ export function InsertImageUriDialogBody({
 			<div className="flex justify-end mt-5">
 				<button
 					disabled={isDisabled}
-					className={
-						"bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-					}
+					className="button"
 					onClick={() => {
 						onClick({ altText, src });
 					}}
@@ -169,29 +167,21 @@ export function InsertImageDialog({
 	return (
 		<>
 			{!mode && (
-				<div className="flex flex-col justify-end">
+				<div className="Modal__container">
 					<button
-						data-test-id="image-modal-option-sample"
-						onClick={() =>
-							onClick({
-								altText: "Pink flowers",
-								src: "https://images.unsplash.com/photo-1682686581030-7fa4ea2b96c3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8",
-							})
-						}
-					>
-						Sample
-					</button>
-					<button
+						className="Modal__options"
 						data-test-id="image-modal-option-url"
 						onClick={() => setMode("url")}
 					>
-						URL
+						Enter URL
 					</button>
+					<p>OR</p>
 					<button
+						className="Modal__options"
 						data-test-id="image-modal-option-file"
 						onClick={() => setMode("file")}
 					>
-						File
+						Select File
 					</button>
 				</div>
 			)}
