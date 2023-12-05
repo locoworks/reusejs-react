@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-button
 
+## 1.0.0
+
+### Major Changes
+
+- 9647df9: Changed type declaration of busyText in headlessButton to 'React.ReactNode | string'
+
 ## 0.1.1
 
 ### Patch Changes

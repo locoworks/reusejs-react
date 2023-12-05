@@ -1,0 +1,87 @@
+---
+HEAD OBJECT
+title: "ReuseJS text-editor"
+author: "Upneet Kaur Hunjan"
+---
+import Example from "../../components/text-editor/Example/Example.tsx";
+
+## Text-Editor
+
+## Overview
+
+The `TextEditor` component is a rich text editor built using the Lexical Composer library. It provides a user-friendly interface for editing and formatting text, supporting features such as mentions, links, tables, images and more.
+
+## Installation
+
+To use the `TextEditor` component in your project, you can install it via npm or yarn:
+
+```bash
+npm install @locoworks/reusejs-react-text-editor
+# or
+yarn add @locoworks/reusejs-react-text-editor
+```
+
+## External Dependencies
+
+The `TextEditor` component relies on external dependencies such as `lexical` and `@lexical/react`.
+
+```bash
+npm install lexical @lexical/react
+# or
+yarn add lexical @lexical/react
+```
+
+## Importing
+
+Import the `TextEditor` component into your React application as follows:
+
+```jsx
+import { TextEditor } from "@locoworks/reusejs-react-text-editor";
+```
+
+## Types/ Exported Components
+
+The `TextEditor` component accepts the following props:
+
+- `useMentionLookupService`: A function to handle mention lookup and return results.
+- `convertFileToImageUrl`: A function to convert files to image URLs and return imageUrls.
+- `onChangeCallback`: An optional callback for editor reference changes and payload.
+- `wrapperClass`: An optional class for styling the editor wrapper.
+
+## Usage/Examples
+
+### TextEditor demo Code
+<Example/>
+```js path=../../components/text-editor/Example name=Example
+```
+
+## Styling
+
+The styling of the editorWrapper can be customized using Tailwind CSS .
+
+> Note: To use the styling of the editor component , you must import the StyleSheet in your application.
+```jsx
+import "@locoworks/reusejs-react-text-editor/css";
+```
+
+## Best Practices
+
+- Ensure that necessary dependencies are installed.
+- Handle editor reference changes and payload using the onChangeCallback prop.
+
+## Props Table
+
+| Prop                      | Type                                                               | Description                                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `useMentionLookupService` | `(mentionString: string \| null) => Array<{ mentionName: string; label: string; }>` | Function to handle mention lookup and return results.                                                                                                   |
+| `convertFileToImageUrl`   | `(files: FileList \| null) => string \| null`                     | Function to convert files to image URLs and return imageUrls.                                                                                              |
+| `onChangeCallback`       | `onChangeCallback?: onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;`                       | Optional callback for editor reference changes.                                                                                     |
+| `wrapperClass`            | `string`                                                           | Optional class for styling the editor wrapper.                                                                                        |
+
+## Notes
+>The TextEditor component uses the Lexical library for rich text editing.
+Check the Lexical Composer documentation for advanced configuration options.
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
