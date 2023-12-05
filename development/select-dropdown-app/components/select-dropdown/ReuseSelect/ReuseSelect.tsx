@@ -87,6 +87,9 @@ const ReuseSample = () => {
 				multiple
 				enableSearch
 				refresh={refresher}
+				onChange={(selected) => {
+					console.log("Selected Values Are>>>", selected);
+				}}
 			/>
 		</div>
 	);

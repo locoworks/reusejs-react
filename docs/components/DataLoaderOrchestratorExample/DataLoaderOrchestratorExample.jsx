@@ -25,7 +25,7 @@ const DataLoaderOrchestratorExample = () => {
 		console.log(">>>>>Loding Props", props, ref);
 		return (
 			<div className="w-1/2 h-10 flex items-center justify-center bg-blue-400">
-				<label>Loading</label>
+				<label>Loading...</label>
 			</div>
 		);
 	};
@@ -49,7 +49,17 @@ const DataLoaderOrchestratorExample = () => {
 	};
 
 	return (
-		<div className="flex gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
+		<div className="flex flex-col gap-x-3 justify-center items-center pb-10 mt-10 border rounded bg-gray-50">
+			<div className="w-full flex justify-end px-2 py-2">
+				<button
+					className="bg-white border border-gray-500 rounded px-2 py-1"
+					onClick={() => {
+						window.location.reload();
+					}}
+				>
+					Refresh
+				</button>
+			</div>
 			<DataLoaderOrchestrator
 				handler={handler}
 				ref={orchestratorRef}

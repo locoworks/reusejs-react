@@ -48,7 +48,10 @@
     "@locoworks/reusejs-react-data-table": "*",
     "@locoworks/reusejs-react-slider-carousel": "*",
     "@locoworks/reusejs-react-toast": "*",
-    "framer-motion": "^10.13.0"
+    "framer-motion": "^10.13.0",
+    "@locoworks/reusejs-react-banner": "*",
+    "@locoworks/reusejs-react-date-picker": "*",
+    "@locoworks/reusejs-react-modal": "*"
   },
   "devDependencies": {
     "prettier": "^3.0.0",

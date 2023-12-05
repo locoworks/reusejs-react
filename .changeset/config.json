@@ -9,12 +9,19 @@
   "updateInternalDependencies": "patch",
   "ignore": [
     "button-app",
+    "banner-app",
+    "data-table-app",
+    "date-picker-app",
     "input-app",
     "input-group-app",
+    "modal-app",
     "reuse-docs",
-    "select-dropdown-app",
     "otp-input-app",
-    "toolkits-app",
-    "toast-app"
+    "progress-bar-app",
+    "select-dropdown-app",
+    "slider-carousel-app",
+    "text-editor-app",
+    "toast-app",
+    "toolkits-app"
   ]
 }

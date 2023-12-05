@@ -19,7 +19,7 @@ export interface ReuseSelectProps {
 	defaultSelected?: OptionInterface[];
 	header?: React.ReactNode;
 	footer?: React.ReactNode;
-	onChange?: () => void;
+	onChange?: (selected?: any) => void;
 	valueKey: string;
 	displayKey: string;
 	noOptionsRenderer?: React.ReactNode;

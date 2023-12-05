@@ -1,0 +1,69 @@
+---
+HEAD OBJECT
+title: "ReuseJS DateHelper"
+author: "Upneet Kaur Hunjan"
+---
+
+# Reusejs DateHelper
+
+## Overview
+
+The `useDateHelpers` hook provides a collection of date-related utility functions for parsing, formatting, and validating dates.
+
+## Installation
+
+To use `useDateHelpers`,you don't need to install this hook separately. It's a utility function you can use in your project. Ensure you have the necessary dependencies, including `ts-luxon` and `@locoworks/reusejs-toolkit-react-hooks`.
+To install Hooks into your code base use following command 
+
+```bash
+npm install @locoworks/reusejs-toolkit-react-hooks
+# or
+yarn add @locoworks/reusejs-toolkit-react-hooks
+```
+
+## External Dependencies
+
+The `useDateHelpers` hook uses the `ts-luxon` library for date and time manipulation. Ensure you have `ts-luxon` installed in your project.
+
+## Importing
+
+You can import the hook from the installed library, **@locoworks/reusejs-toolkit-react-hooks**
+```javascript
+import { useDateHelpers } from "@locoworks/reusejs-toolkit-react-hooks"
+```
+
+## Input Parameters
+
+The useDateHelpers hook does not have any input parameters as it consists of utility functions.
+
+## Return Types
+
+This hook returns an object with the following functions:
+
+- `parseCustomDate`(date: string, format: string): Parses a custom date string into a JavaScript Date object.
+- `getFormattedDate`(date: Date, format: string): Formats a JavaScript Date object into a string with a specified format.
+- `isValidDate`(date: string, format: string): Validates if a date string is in a valid format.
+
+## Usage Example
+
+A working sample of **DateHelper** can be found [here](https://locoworks.org/reusejs-react/date-picker#Usage/Examples)
+```jsx
+  import { useDateHelpers } from '@locoworks/reusejs-toolkit-react-hooks';
+
+  const { parseCustomDate, getFormattedDate, isValidDate } = useDateHelpers();
+
+  const customDate = "10/5/2023";
+  const parsedDate = parseCustomDate(customDate, "dd/MM/yyyy");
+  console.log(parsedDate); // Output: Tue Oct 05 2023 00:00:00 GMT+0000 (Coordinated Universal Time)
+
+  const date = new Date(2023, 9, 5);
+  const formattedDate = getFormattedDate(date, "dd/MM/yyyy");
+  console.log(formattedDate); // Output: 05/10/2023
+
+  const isValid = isValidDate("05/10/2023", "dd/MM/yyyy");
+  console.log(isValid); // Output: true
+```
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
