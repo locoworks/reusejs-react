@@ -1,8 +1,10 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useEffect, useMemo } from "react";
 import { useDataTable } from "@locoworks/reusejs-toolkit-react-hooks";
 
-interface DataEntry {
+interface HeadlessDataTableInterface {
 	tableData: any;
+	searchAll?: string;
+	queryObject?: { field: string; value: string }[];
 	customTableHeader?: any;
 	itemsPerPage?: number;
 	tableContainerClasses?: string | CSSProperties;
@@ -23,6 +25,8 @@ interface DataEntry {
 
 const HeadlessDataTable = ({
 	tableData,
+	searchAll = "",
+	queryObject = [],
 	customTableHeader = [],
 	itemsPerPage = 0,
 	tableContainerClasses,
@@ -34,21 +38,36 @@ const HeadlessDataTable = ({
 	buttonClasses,
 	buttonContainerClasses,
 	showDetails,
-}: DataEntry) => {
+}: HeadlessDataTableInterface) => {
 	const {
 		currentPage,
 		paginatedData,
 		totalItems,
 		totalPages,
 		tableHeaders,
+		setSearchQueries,
+		setSearchQuery,
 		next,
 		previous,
 	} = useDataTable({
 		tableData: tableData,
 		itemsPerPage: itemsPerPage,
-		searchQueryObject: [],
-		queryAll: "",
+		searchQueryObject: queryObject,
+		queryAll: searchAll,
 	});
+
+	const memoizedQueryObject = useMemo(
+		() => JSON.stringify(queryObject),
+		[queryObject],
+	);
+
+	useEffect(() => {
+		setSearchQuery(searchAll);
+	}, [searchAll]);
+
+	useEffect(() => {
+		setSearchQueries(queryObject);
+	}, [memoizedQueryObject]);
 
 	return (
 		<div
@@ -87,7 +106,7 @@ const HeadlessDataTable = ({
 												: {}
 										}
 									>
-										{header}
+										{header?.toLocaleUpperCase()?.replace(/_/g, " ")}
 									</th>
 							  ))
 							: tableHeaders.map((header: string) => (
@@ -104,7 +123,7 @@ const HeadlessDataTable = ({
 												: {}
 										}
 									>
-										{header}
+										{header?.toLocaleUpperCase()?.replace(/_/g, " ")}
 									</th>
 							  ))}
 					</tr>
@@ -135,7 +154,7 @@ const HeadlessDataTable = ({
 												: {}
 										}
 									>
-										{item[header as keyof DataEntry]}
+										{item[header as keyof HeadlessDataTableInterface]}
 									</td>
 								))}
 							</tr>
