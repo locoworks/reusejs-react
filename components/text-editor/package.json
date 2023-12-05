@@ -23,6 +23,9 @@
     "bundle": "rollup -c --bundleConfigAsCjs",
     "dev": "rollup -c -w --bundleConfigAsCjs"
   },
+  "dependencies": {
+    "tailwind-merge": "^1.12.0"
+  },
   "devDependencies": {
     "@lexical/react": "^0.12.4",
     "lexical": "^0.12.4",

@@ -4,6 +4,7 @@ import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { LexicalEditor } from "lexical";
+import { twMerge } from "tailwind-merge";
 
 import Editor from "./Editor";
 import { EditorTheme } from "../theme";
@@ -54,7 +55,7 @@ const TextEditor = ({
 	};
 
 	return (
-		<div className={wrapperClass || "w-full"}>
+		<div className={twMerge("w-full", wrapperClass)}>
 			<LexicalComposer initialConfig={initialConfig}>
 				<TableContext>
 					<div className="editor-shell">
