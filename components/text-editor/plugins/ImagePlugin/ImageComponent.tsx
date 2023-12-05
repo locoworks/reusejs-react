@@ -355,7 +355,6 @@ export default function ImageComponent({
 						<LexicalNestedComposer initialEditor={caption}>
 							<AutoFocusPlugin />
 							<HistoryPlugin />
-							{/* <MentionsPlugin /> */}
 							<RichTextPlugin
 								contentEditable={
 									<ContentEditable className="ImageNode__contentEditable" />

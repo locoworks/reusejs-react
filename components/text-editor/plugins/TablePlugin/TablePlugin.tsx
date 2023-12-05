@@ -152,11 +152,7 @@ export function InsertNewTableDialog({
 				className="flex justify-end mt-5"
 				data-test-id="table-model-confirm-insert"
 			>
-				<button
-					className="px-4 py-2 font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
-					disabled={isDisabled}
-					onClick={onClick}
-				>
+				<button className="button" disabled={isDisabled} onClick={onClick}>
 					Confirm
 				</button>
 			</div>

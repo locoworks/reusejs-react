@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { LexicalEditor } from "lexical";
+import { twMerge } from "tailwind-merge";
 
 import Editor from "./Editor";
 import { EditorTheme } from "../theme";
@@ -20,18 +21,22 @@ type Props = {
 	convertFileToImageUrl: (files: FileList | null) => string | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	wrapperClass?: string;
+	editable: boolean;
+	prePopulate?: () => void;
 };
+
 const TextEditor = ({
 	useMentionLookupService,
 	convertFileToImageUrl,
 	onChangeCallback,
 	wrapperClass,
+	editable,
+	prePopulate,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
-	const [editable, setEditable] = useState<boolean>(false);
-
 	const initialConfig = {
-		namespace: "MyEditor",
+		editorState: prePopulate || null,
+		namespace: "Editor",
 		theme: EditorTheme,
 		onError: (error: Error) => {
 			throw error;
@@ -50,15 +55,10 @@ const TextEditor = ({
 	};
 
 	return (
-		<div className={wrapperClass || "w-full bg-gray-50 cursor-text "}>
+		<div className={twMerge("w-full", wrapperClass)}>
 			<LexicalComposer initialConfig={initialConfig}>
 				<TableContext>
-					<div
-						className="editor-shell"
-						onClick={() => {
-							setEditable(true);
-						}}
-					>
+					<div className="editor-shell">
 						<Editor
 							convertFileToImageUrl={convertFileToImageUrl}
 							useMentionLookupService={useMentionLookupService}
@@ -69,16 +69,6 @@ const TextEditor = ({
 					</div>
 				</TableContext>
 			</LexicalComposer>
-			{editable && (
-				<button
-					className="px-4 py-2 font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
-					onClick={() => {
-						setEditable(false);
-					}}
-				>
-					Save
-				</button>
-			)}
 		</div>
 	);
 };

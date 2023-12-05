@@ -385,7 +385,6 @@ export default function ToolbarPlugin({
 				</i>
 				<span className="text">Image</span>
 			</button>
-			<Divider />
 			{modal}
 		</div>
 	);

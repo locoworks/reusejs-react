@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { $getRoot, $createTextNode, $createParagraphNode } from "lexical";
 import { TextEditor } from "@locoworks/reusejs-react-text-editor";
 import "@locoworks/reusejs-react-text-editor/css";
 
-const Example = () => {
+const PrepopulatedTextEditor = () => {
 	const [editable, setEditable] = useState(false);
-	const [data, setData] = useState("Here");
+	const [data, setData] = useState("");
 
 	function useMentionLookupService() {
 		return [
@@ -25,9 +26,19 @@ const Example = () => {
 		setData(payload["html"]);
 	}
 
+	function prepopulatedRichText() {
+		const root = $getRoot();
+		if (root.getFirstChild() === null) {
+			const paragraph = $createParagraphNode();
+			paragraph.append($createTextNode("Start here!"));
+			root.append(paragraph);
+		}
+	}
+
 	return (
 		<div className="flex flex-col items-center justify-center py-10 mt-10 bg-gray-100 border rounded gap-x-3">
 			<TextEditor
+				prePopulate={prepopulatedRichText}
 				editable={editable}
 				useMentionLookupService={useMentionLookupService}
 				convertFileToImageUrl={convertFileToImageUrl}
@@ -55,4 +66,4 @@ const Example = () => {
 	);
 };
 
-export default Example;
+export default PrepopulatedTextEditor;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
@@ -47,18 +47,13 @@ function Editor({
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
-	const [data, setData] = useState<string>("");
 
 	useEffect(() => {
 		editor.setEditable(editState);
 	}, [editState, editor]);
 
 	const text = "Enter some text";
-	const placeholder = (
-		<div className="absolute inline-block overflow-hidden text-sm text-gray-600 truncate pointer-events-none select-none top-20 left-6 whitespace-nowrap ">
-			{text}
-		</div>
-	);
+	const placeholder = <div className="placeholder">{text}</div>;
 
 	const onChange = (_editorState: EditorState, editor: LexicalEditor) => {
 		editor.update(() => {
@@ -66,7 +61,6 @@ function Editor({
 			const htmlString = $generateHtmlFromNodes(editor, null);
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
-			setData(payload["html"]);
 			onChangeCallback?.(editorRef.current, payload);
 		});
 		return (editorRef.current = editor);
@@ -104,7 +98,7 @@ function Editor({
 
 	return (
 		<>
-			{isEditable ? (
+			{isEditable && (
 				<div className="editor-container">
 					<ToolbarPlugin convertFileToImageUrl={convertFileToImageUrl} />
 					<ListPlugin />
@@ -113,7 +107,7 @@ function Editor({
 						contentEditable={
 							<div className="editor-scroller">
 								<div className="editor">
-									<ContentEditable className="min-h-[100px] p-6" />
+									<ContentEditable className="editor-contentEditable" />
 								</div>
 							</div>
 						}
@@ -142,8 +136,6 @@ function Editor({
 					{isEditable && <LexicalClickableLinkPlugin />}
 					<OnChangePlugin onChange={onChange} />
 				</div>
-			) : (
-				<div dangerouslySetInnerHTML={{ __html: data }} />
 			)}
 		</>
 	);

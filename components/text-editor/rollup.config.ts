@@ -18,7 +18,13 @@ export default [
 				inlineDynamicImports: true,
 			},
 		],
-		external: ["react", "react-dom", "lexical", "@lexical/react"],
+		external: [
+			"react",
+			"react-dom",
+			"lexical",
+			"@lexical/react",
+			"tailwind-merge",
+		],
 		plugins: [
 			resolve(),
 			commonjs(),
