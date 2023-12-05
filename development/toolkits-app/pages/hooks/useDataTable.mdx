@@ -4,13 +4,27 @@ title: "ReuseJS Progress"
 author: "Md Amir Sohail"
 ---
 
-### useDataTable Hook Documentation
 
-**Description**:
+## Overview
 The useDataTable hook is a custom React hook that facilitates filtering and pagination for tabular data. It allows you to manage search queries, pagination, and data filtering efficiently. This hook can be used to enhance the functionality of a data table component in a React application.
 
+## Installation
 
-## Props    
+To install the `useDataTable` hook, simply execute the following command in your terminal.This command will download and install the useDataTable hook package, making it available for use in your project.
+
+```jsx
+npm install @locoworks/reusejs-toolkit-react-hook
+or
+yarn add @locoworks/reusejs-toolkit-react-hook
+```
+
+## Importing
+Once the installation of the hook is complete, you can begin using it in your project by importing it.
+```jsx
+import { useDataTable } from "@locoworks/reusejs-toolkit-react-hooks";
+```
+
+## Input Parameters   
 
 The `useDataTable` hook accepts the following props:
 
@@ -25,8 +39,7 @@ The `useDataTable` hook accepts the following props:
 - `field` (string): The name of the column to filter.
 - `value` (string): The value to search for in the specified column.
 
-
-## Return Value
+## Return Types
 
 The `useDataTable` hook returns an object with the following properties and functions:
 
@@ -97,8 +110,16 @@ const YourDataTableComponent = ({ data }) => {
 };
 
 export default YourDataTableComponent;
-
 ```
+
+## Props Table 
+|Props|Type|Description|
+|:----|:----|:----|
+|tableData|Array of Object|An array of objects representing the data for the table. Each object represents a row, and its properties represent columns.|
+|itemsPerPage|Number|An integer representing the number of items to display per page. If set to 0 or not provided, all data will be displayed on a single page without pagination.|
+|queryAll|String|A string representing a global search query applied to the entire table. This allows users to search for a specific term across all columns.|
+|searchQueryObject|Object|An array of search query objects that allow filtering the data based on specific column values. Each object in the array should have two properties: `field (string): The name of the column to filter. value (string): The value to search for in the specified column.`|
+| | | |
 
 **Note:**
 
