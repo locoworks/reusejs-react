@@ -106,7 +106,7 @@ const HeadlessDataTable = ({
 												: {}
 										}
 									>
-										{header}
+										{header?.toLocaleUpperCase()?.replace(/_/g, " ")}
 									</th>
 							  ))
 							: tableHeaders.map((header: string) => (
@@ -123,7 +123,7 @@ const HeadlessDataTable = ({
 												: {}
 										}
 									>
-										{header}
+										{header?.toLocaleUpperCase()?.replace(/_/g, " ")}
 									</th>
 							  ))}
 					</tr>

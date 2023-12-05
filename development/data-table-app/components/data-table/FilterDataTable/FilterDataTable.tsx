@@ -22,33 +22,33 @@ const FilterDataTable = () => {
 	};
 
 	const userData: {
-		Name: string;
-		Gender: string;
-		Age: string;
-		Email: string;
-		"Contact Details": string;
-		Address: string;
+		name: string;
+		gender: string;
+		age: string;
+		email: string;
+		contact_details: string;
+		address: string;
 	}[] = [];
 	userList.forEach((user: any) => {
 		const userObject = {
-			Name: `${user.name.title} ${user.name.first} ${user.name.last}`,
-			Gender: user.gender,
-			Age: `${user.dob.age}`,
-			Email: user.email,
-			"Contact Details": user.cell,
-			Address: `${user.location.country} ${user.location.postcode}`,
+			name: `${user.name.title} ${user.name.first} ${user.name.last}`,
+			gender: user.gender,
+			age: `${user.dob.age}`,
+			email: user.email,
+			contact_details: user.cell,
+			address: `${user.location.country} ${user.location.postcode}`,
 		};
 
 		userData.push(userObject);
 	});
 
 	const tableHeader = [
-		"Name",
-		"Gender",
-		"Age",
-		"Email",
-		"Contact Details",
-		"Address",
+		"name",
+		"email",
+		"age",
+		"email",
+		"contact_details",
+		"address",
 	];
 
 	const ShowRecordInfo = (
