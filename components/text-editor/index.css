@@ -91,6 +91,16 @@
   outline: none;
 }
 
+.html_mention {
+  color: rgb(53, 113, 198);
+  text-decoration: none;
+}
+
+.html_mention:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .EditorTheme__table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -721,6 +731,7 @@ button.item.dropdown-item-active i {
   box-shadow: rgb(180 213 255) 0px 0px 0px 2px;
   outline: none;
 }
+
 .button {
   margin: 2px;
   padding: 0.5rem 1rem;
