@@ -1,14 +1,3 @@
-button.item i {
-  opacity: 0.6;
-}
-
-button.item.dropdown-item-active {
-  background-color: rgba(223, 232, 250, 0.3);
-}
-
-button.item.dropdown-item-active i {
-  opacity: 1;
-}
 .placeholder {
   position: absolute;
   display: inline-block;
@@ -25,8 +14,6 @@ button.item.dropdown-item-active i {
   background: #fff;
   position: relative;
   display: block;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   overflow-x: auto;
 }
 .editor {
@@ -34,11 +21,12 @@ button.item.dropdown-item-active i {
   position: relative;
   resize: vertical;
   z-index: -1;
+  height: inherit;
 }
 
 .editor-contentEditable {
-  min-height: 100px;
-  padding: 24px;
+  height: 100%;
+  padding: 20px;
 }
 
 .EditorTheme__ltr {
@@ -213,7 +201,7 @@ button.item.dropdown-item-active i {
 }
 
 .EditorTheme__blockCursor:after {
-  content: "";
+  content: " ";
   display: block;
   position: absolute;
   top: -2px;
@@ -275,6 +263,36 @@ button.item.dropdown-item-active i {
 .EditorTheme__nestedListItem:after {
   display: none;
 }
+
+.EditorTheme__ol1 {
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+}
+.EditorTheme__ol2 {
+  padding: 0;
+  margin: 0;
+  list-style-type: upper-alpha;
+  list-style-position: inside;
+}
+.EditorTheme__ol3 {
+  padding: 0;
+  margin: 0;
+  list-style-type: lower-alpha;
+  list-style-position: inside;
+}
+.EditorTheme__ol4 {
+  padding: 0;
+  margin: 0;
+  list-style-type: upper-roman;
+  list-style-position: inside;
+}
+.EditorTheme__ol5 {
+  padding: 0;
+  margin: 0;
+  list-style-type: lower-roman;
+  list-style-position: inside;
+}
 .EditorTheme__embedBlock {
   user-select: none;
 }
@@ -312,102 +330,6 @@ button.item.dropdown-item-active i {
   z-index: 3;
 }
 
-.dropdown {
-  z-index: 100;
-  display: block;
-  position: fixed;
-  box-shadow:
-    0 12px 28px 0 rgba(0, 0, 0, 0.2),
-    0 2px 4px 0 rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  min-height: 40px;
-  background-color: #fff;
-  overflow-y: scroll;
-  max-height: 200px;
-}
-
-.dropdown .item {
-  margin: 0 8px 0 8px;
-  padding: 8px;
-  color: #050505;
-  cursor: pointer;
-  line-height: 16px;
-  font-size: 15px;
-  display: flex;
-  align-content: center;
-  flex-direction: row;
-  flex-shrink: 0;
-  justify-content: space-between;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 0;
-  max-width: 250px;
-  min-width: 100px;
-}
-
-.dropdown .item.fontsize-item,
-.dropdown .item.fontsize-item .text {
-  min-width: unset;
-}
-
-.dropdown .item .active {
-  display: flex;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-}
-
-.dropdown .item:first-child {
-  margin-top: 8px;
-}
-
-.dropdown .item:last-child {
-  margin-bottom: 8px;
-}
-
-.dropdown .item:hover {
-  background-color: #eee;
-}
-
-.dropdown .item .text {
-  display: flex;
-  line-height: 20px;
-  flex-grow: 1;
-  min-width: 150px;
-}
-
-.dropdown .item .icon {
-  display: flex;
-  width: 20px;
-  height: 20px;
-  user-select: none;
-  margin-right: 12px;
-  line-height: 16px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.dropdown .divider {
-  width: auto;
-  background-color: #eee;
-  margin: 4px 8px;
-  height: 1px;
-}
-
-@media screen and (max-width: 1100px) {
-  .dropdown-button-text {
-    display: none !important;
-  }
-  .font-size .dropdown-button-text {
-    display: flex !important;
-  }
-  .code-language .dropdown-button-text {
-    display: flex !important;
-  }
-}
-
 .editor-paragraph {
   margin: 0 0 15px 0;
   position: relative;
@@ -433,7 +355,12 @@ button.item.dropdown-item-active i {
   background-color: rgb(228, 228, 228);
   cursor: pointer;
 }
-
+.toolbar__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -448,6 +375,12 @@ button.item.dropdown-item-active i {
   position: sticky;
   top: 0;
   z-index: 2;
+}
+
+.toolbar .divider {
+  width: 1px;
+  background-color: #eee;
+  margin: 0 4px;
 }
 
 button.toolbar-item {
@@ -521,6 +454,7 @@ button.toolbar-item.active i {
 
 .toolbar .toolbar-item .icon {
   display: flex;
+  align-items: center;
   width: 20px;
   height: 20px;
   user-select: none;
@@ -553,7 +487,6 @@ button.toolbar-item.active i {
   background-color: #eee;
   margin: 0 4px;
 }
-
 button.item i {
   opacity: 0.6;
 }
@@ -570,7 +503,6 @@ button.item.dropdown-item-active i {
   background: #fff;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
-  position: fixed;
 }
 
 .typeahead-popover ul {
