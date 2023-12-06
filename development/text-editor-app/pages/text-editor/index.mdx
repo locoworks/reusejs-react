@@ -49,6 +49,7 @@ The `TextEditor` component accepts the following props:
 - `onChangeCallback`: An optional callback for editor reference changes and payload.
 - `wrapperClass`: An optional class for styling the editor wrapper.
 - `editable`: A boolean indicating the edit state of the editor.
+- `setEditable`: A function to set the editable state of the editor. It is a React state setter function that accepts a boolean value.
 - `prePopulate`: An optional function to set the intialState of the editor.
 
 ## Usage/Examples
@@ -81,12 +82,13 @@ import "@locoworks/reusejs-react-text-editor/css";
 
 | Prop                  | Type                                 | Description                                                                                                       |
 | --------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `useMentionLookupService` | Function                             | A function to handle mention lookup and return results.                                                           |
-| `convertFileToImageUrl`   | Function                             | A function to convert files to image URLs and return image URLs.                                                  |
-| `onChangeCallback`       | Function                             | An optional callback for editor reference changes and payload.                                                    |
-| `wrapperClass`           | String                               | An optional class for styling the editor wrapper.                                                                  |
-| `editable`               | Boolean                              | A boolean indicating the edit state of the editor.                                                                |
-| `prePopulate`            | Function                             | An optional function to set the initial state of the editor.                                                       |
+| `useMentionLookupService` | `(mentionString: string \| null) => Array<{ mentionName: string; label: string; }>`                             | A function to handle mention lookup and return results.                                                           |
+| `convertFileToImageUrl`   | `(files: FileList \| null) => string \| null`                             | A function to convert files to image URLs and return image URLs.                                                  |
+| `onChangeCallback`       | `(editorRef: LexicalEditor \| null, payload: any) => void`                             | An optional callback for editor reference changes and payload.                                                    |
+| `wrapperClass`           | `String`                               | An optional class for styling the editor wrapper.                                                                  |
+| `editable`               | `Boolean`                              | A boolean indicating the edit state of the editor.                                                                |
+| `setEditable`            | `React.Dispatch<React.SetStateAction<boolean>>`                             | Sets the editable state of the editor.                        |
+| `prePopulate`            | `() => void`                             | An optional function to set the initial state of the editor.                                                       |
 
 ## Notes
 >The TextEditor component uses the Lexical library for rich text editing.
