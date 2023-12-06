@@ -7,7 +7,7 @@
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
-  top: 5rem;
+  top: 4rem;
   left: 1.5rem;
 }
 .editor-shell .editor-container {
@@ -19,7 +19,6 @@
 .editor {
   flex: auto;
   position: relative;
-  resize: vertical;
   z-index: -1;
   height: inherit;
 }
@@ -27,6 +26,8 @@
 .editor-contentEditable {
   height: auto;
   padding: 20px;
+  overflow: auto;
+  resize: vertical;
 }
 
 .EditorTheme__ltr {
@@ -393,6 +394,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid slategrey;
 }
 .toolbar {
   display: flex;
@@ -623,6 +625,7 @@ button.item.dropdown-item-active i {
   .font-size .dropdown-button-text {
     display: flex !important;
   }
+
   .code-language .dropdown-button-text {
     display: flex !important;
   }
@@ -754,8 +757,8 @@ button.item.dropdown-item-active i {
   position: relative;
   outline: 0;
   z-index: 0;
-  overflow: auto;
-  resize: vertical;
+  resize: inherit;
+  overflow: hidden;
 }
 .editor-shell {
   margin: 20px auto;
