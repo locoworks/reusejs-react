@@ -15,6 +15,8 @@
     "gen:example": "node ./scripts/createExample.mjs",
     "input-group:dev": "turbo run dev --filter=input-group-app...",
     "input-group:build": "turbo run build --filter=@locoworks/reusejs-react-input-group...",
+    "switch:dev": "turbo run dev --filter=switch-app...",
+    "switch:build": "turbo run build --filter=@locoworks/reusejs-react-switch...",
     "text-editor:dev": "turbo run dev --filter=text-editor-app...",
     "text-editor:build": "turbo run build --filter=@locoworks/reusejs-react-text-editor...",
     "date-picker:dev": "turbo run dev --filter=date-picker-app...",
