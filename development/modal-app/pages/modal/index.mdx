@@ -10,6 +10,7 @@ import AlertExample from "../../components/modal/AlertExample/AlertExample.tsx"
 import SuccessExample from "../../components/modal/SuccessExample/SuccessExample.tsx"
 import InputModal from "../../components/modal/InputModal/InputModal.tsx"
 import BottomModal from "../../components/modal/BottomModal/BottomModal.tsx"
+import DisabledOutsideClick from "../../components/modal/DisabledOutsideClick/DisabledOutsideClick.tsx"
 
 # ReuseJS Modal
 
@@ -75,6 +76,7 @@ The `HeadlessModal` component takes in the following props for styling the backd
       - *exit*: for exit animation
       - *transition*: for specifying which animation should be used for showing animation.
 - `component`: This is the component passed to the HeadlessModal wrapper. This component will be render as the modal and hence you can control exactly how the modal will look by passing your own custom component.
+- `disableOutsideClick` : This prop is used to control weather the modal will disapper if any outside click is registered. By default this prop is *undefined* or *false*. To dissable outside click you can pass this props as *true*
 > Modal use framer-motion for animation hence accepts its key:value pairs to create animations. Thus we can use framer-motion 
 
 ## Examples and Usage 
@@ -107,6 +109,11 @@ The `HeadlessModal` component takes in the following props for styling the backd
 ### Bottom Modal Example
 <BottomModal/>
 ```js path=../../components/modal/BottomModal name=BottomModal
+```
+
+### Disabled Outside Click Modal Example
+<DisabledOutsideClick/>
+```js path=../../components/modal/DisabledOutsideClick name=DisabledOutsideClick
 ```
 
 ## Styling
