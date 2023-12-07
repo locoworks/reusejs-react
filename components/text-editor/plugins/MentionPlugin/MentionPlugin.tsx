@@ -10,6 +10,7 @@ import {
 } from "@lexical/react/LexicalTypeaheadMenuPlugin";
 
 import { $createMentionNode } from "./MentionNode";
+import { UserIcon } from "../../icons";
 
 const PUNCTUATION =
 	"\\.,\\+\\*\\?\\$\\@\\|#{}\\(\\)\\^\\-\\[\\]\\\\/!%'\"~=<>_:;";
@@ -88,7 +89,7 @@ function checkForAtSignMentions(
 }
 
 function getPossibleQueryMatch(text: string): MenuTextMatch | null {
-	return checkForAtSignMentions(text, 1);
+	return checkForAtSignMentions(text, 0);
 }
 
 class MentionTypeaheadOption extends MenuOption {
@@ -163,7 +164,11 @@ export default function NewMentionsPlugin({
 					(result) =>
 						new MentionTypeaheadOption(
 							result.mentionName,
-							<i className="icon user" />,
+							(
+								<i className="icon">
+									<UserIcon />
+								</i>
+							),
 							result.label,
 						),
 				)

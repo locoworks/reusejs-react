@@ -40,20 +40,12 @@ const PrepopulatedTextEditor = () => {
 			<TextEditor
 				prePopulate={prepopulatedRichText}
 				editable={editable}
+				setEditable={setEditable}
 				useMentionLookupService={useMentionLookupService}
 				convertFileToImageUrl={convertFileToImageUrl}
 				onChangeCallback={onChange}
 			/>
-			{editable ? (
-				<button
-					className="button"
-					onClick={() => {
-						setEditable(false);
-					}}
-				>
-					Save
-				</button>
-			) : (
+			{!editable && (
 				<div
 					className="w-full min-h-[50px] cursor-text bg-white"
 					dangerouslySetInnerHTML={{ __html: data }}

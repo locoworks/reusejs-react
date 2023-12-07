@@ -31,6 +31,7 @@ import ToolbarPlugin from "./Toolbar";
 type EditorProps = {
 	editorRef: React.MutableRefObject<LexicalEditor | null>;
 	editState: boolean;
+	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 	useMentionLookupService: (mentionString: string | null) => Array<{
 		mentionName: string;
 		label: string;
@@ -41,6 +42,7 @@ type EditorProps = {
 function Editor({
 	editorRef,
 	editState,
+	setEditable,
 	useMentionLookupService,
 	convertFileToImageUrl,
 	onChangeCallback,
@@ -100,7 +102,10 @@ function Editor({
 		<>
 			{isEditable && (
 				<div className="editor-container">
-					<ToolbarPlugin convertFileToImageUrl={convertFileToImageUrl} />
+					<ToolbarPlugin
+						convertFileToImageUrl={convertFileToImageUrl}
+						setEditable={setEditable}
+					/>
 					<ListPlugin />
 					<AutoFocusPlugin />
 					<RichTextPlugin
@@ -124,7 +129,7 @@ function Editor({
 						<AutoFocusPlugin />
 						<RichTextPlugin
 							contentEditable={
-								<ContentEditable className="EditorTheme__table" />
+								<ContentEditable className="TableNode__contentEditable" />
 							}
 							placeholder={null}
 							ErrorBoundary={LexicalErrorBoundary}

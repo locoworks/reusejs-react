@@ -21,6 +21,13 @@ export const EditorTheme: EditorThemeClasses = {
 			"list-inside list-[circle]",
 			"list-inside list-[square]",
 		],
+		olDepth: [
+			"EditorTheme__ol1",
+			"EditorTheme__ol2",
+			"EditorTheme__ol3",
+			"EditorTheme__ol4",
+			"EditorTheme__ol5",
+		],
 	},
 	ltr: "EditorTheme__ltr",
 	paragraph: "EditorTheme__paragraph",

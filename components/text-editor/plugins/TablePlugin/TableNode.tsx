@@ -166,12 +166,15 @@ export function exportTableCellsToHTML(
 			);
 			cellElem.innerHTML = cellHTMLCache.get(cell.json) || "";
 			rowElem.appendChild(cellElem);
+			cellElem.setAttribute("class", `html_cell`);
 		}
 		tBody.appendChild(rowElem);
 	}
 
 	table.appendChild(colGroup);
 	table.appendChild(tBody);
+	table.setAttribute("class", `html_table`);
+
 	return table;
 }
 

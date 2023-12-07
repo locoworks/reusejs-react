@@ -22,6 +22,7 @@ type Props = {
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	wrapperClass?: string;
 	editable: boolean;
+	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 	prePopulate?: () => void;
 };
 
@@ -31,6 +32,7 @@ const TextEditor = ({
 	onChangeCallback,
 	wrapperClass,
 	editable,
+	setEditable,
 	prePopulate,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
@@ -64,6 +66,7 @@ const TextEditor = ({
 							useMentionLookupService={useMentionLookupService}
 							onChangeCallback={onChangeCallback}
 							editState={editable}
+							setEditable={setEditable}
 							editorRef={editorRef}
 						/>
 					</div>
