@@ -1,5 +1,16 @@
 # @locoworks/reusejs-react-text-editor
 
+## 0.1.3
+
+### Patch Changes
+
+- b1f6553: Changes:
+
+  - Implemented multiple File Upload in Image
+  - updated prop for multiple file upload
+  - table rows and columns inversion issue fixed
+  - updated styles
+
 ## 0.1.2
 
 ### Patch Changes
