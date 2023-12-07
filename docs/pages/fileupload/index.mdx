@@ -1,0 +1,92 @@
+---
+HEAD OBJECT
+title: "ReuseJS file-upload"
+author: "Ayush Nautiyal"
+---
+
+## Table of contents
+
+## Installation
+
+To install the `HeadlessDatePicker` component, use npm or yarn:
+
+
+```bash
+npm install @locoworks/reusejs-react-file-upload
+# or
+yarn add @locoworks/reusejs-react-file-upload
+```
+
+
+import FileUploadSample from "../../components/file-upload/FileUpload/FileUploadSample.tsx"
+import ReuseFileUploadSample from "../../components/file-upload/ReuseFileUploadSample/ReuseFileUploadSample.tsx"
+
+
+
+## HeadlessFileUpload
+
+```jsx
+import React from "react";
+// Import New Component created here
+// import <component-name> from "@locoworks/remark-folder-<component-name>"
+import { HeadLessFileUpload } from "@locoworks/reusejs-react-file-upload";
+
+const FileUploadSample = () => {
+	return (
+		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
+			<HeadLessFileUpload />
+		</div>
+	);
+};
+
+export default FileUploadSample;
+
+```
+
+### Example
+<FileUploadSample/>
+------
+
+## ReuseFileUpload
+
+```jsx
+import React from "react";
+import { ReuseFileUpload } from "@locoworks/reusejs-react-file-upload";
+import { useRef } from "react";
+import { ReuseButton } from "@locoworks/reusejs-react-button";
+
+const ReuseFileUploadSample = () => {
+	const ref = useRef(null);
+	return (
+		<div>
+			<ReuseFileUpload
+				ref={ref}
+				allowsMultiple
+				baseClassName="hidden"
+				showChildren
+				onSelect={(e) => {
+					console.log(e);
+				}}
+			>
+				<ReuseButton
+					className="border border-black px-2 py-1 cursor-pointer rounded-xl text-black"
+					onClick={() => {
+						ref.current?.click();
+					}}
+				>
+					Browse
+				</ReuseButton>
+			</ReuseFileUpload>
+		</div>
+	);
+};
+
+export default ReuseFileUploadSample;
+
+```
+
+## Examples
+
+<ReuseFileUploadSample/>
+
+
