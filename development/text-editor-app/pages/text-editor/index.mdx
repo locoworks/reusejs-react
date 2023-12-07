@@ -45,7 +45,7 @@ import { TextEditor } from "@locoworks/reusejs-react-text-editor";
 The `TextEditor` component accepts the following props:
 
 - `useMentionLookupService`: A function to handle mention lookup and return results.
-- `convertFileToImageUrl`: A function to convert files to image URLs and return imageUrls.
+- `convertFilesToImageUrl`: A function to convert files to image URLs and return Array of imageUrls.
 - `onChangeCallback`: An optional callback for editor reference changes and payload.
 - `wrapperClass`: An optional class for styling the editor wrapper.
 - `editable`: A boolean indicating the edit state of the editor.
@@ -83,7 +83,7 @@ import "@locoworks/reusejs-react-text-editor/css";
 | Prop                  | Type                                 | Description                                                                                                       |
 | --------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | `useMentionLookupService` | `(mentionString: string \| null) => Array<{ mentionName: string; label: string; }>`                             | A function to handle mention lookup and return results.                                                           |
-| `convertFileToImageUrl`   | `(files: FileList \| null) => string \| null`                             | A function to convert files to image URLs and return image URLs.                                                  |
+| `convertFilesToImageUrl`   | `(files: FileList \| null) => Array<string> \| null`                             | A function to convert files to image URLs and return image URLs.                                                  |
 | `onChangeCallback`       | `(editorRef: LexicalEditor \| null, payload: any) => void`                             | An optional callback for editor reference changes and payload.                                                    |
 | `wrapperClass`           | `String`                               | An optional class for styling the editor wrapper.                                                                  |
 | `editable`               | `Boolean`                              | A boolean indicating the edit state of the editor.                                                                |
