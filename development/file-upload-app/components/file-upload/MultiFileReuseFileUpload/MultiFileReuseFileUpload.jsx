@@ -16,7 +16,7 @@ const MultiFileReuseFileUpload = () => {
 				<ReuseButton
 					className="border border-black px-2 py-1 cursor-pointer rounded-xl text-black"
 					onClick={() => {
-						ref.current?.click();
+						alert("use mutliple files");
 					}}
 				>
 					Browse

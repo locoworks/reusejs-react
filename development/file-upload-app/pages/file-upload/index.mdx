@@ -4,11 +4,21 @@ title: "ReuseJS file-upload"
 author: "Ayush Nautiyal"
 ---
 
-## Table of contents
 
-## Installation
+import HeadLessFileUploadSample from "../../components/file-upload/HeadLessFileUploadSample/HeadLessFileUploadSample.tsx"
+import ReuseFileUploadSample from "../../components/file-upload/ReuseFileUploadSample/ReuseFileUploadSample.tsx"
+import BeforeAfterHookFileUpload from "../../components/file-upload/BeforeAfterHookFileUpload/BeforeAfterHookFileUpload.tsx"
+import MultiFileReuseFileUpload from "../../components/file-upload/MultiFileReuseFileUpload/MultiFileReuseFileUpload"
+import AcceptFileUpload from "../../components/file-upload/AcceptFileUpload/AcceptFileUpload"
 
-To install the `HeadlessDatePicker` component, use npm or yarn:
+## File Upload
+
+## Overview
+
+The `HeadlessFileUpload` component is a versatile File Upload component for React applications. It allows for File Uploading and Provides Custom Implemnetation Possiblilties.
+
+
+To install the `HeadlessFileUpload` component, use npm or yarn:
 
 
 ```bash
@@ -17,271 +27,119 @@ npm install @locoworks/reusejs-react-file-upload
 yarn add @locoworks/reusejs-react-file-upload
 ```
 
+## External Dependencies
 
-import FileUploadSample from "../../components/file-upload/FileUpload/FileUploadSample.tsx"
-import ReuseFileUploadSample from "../../components/file-upload/ReuseFileUploadSample/ReuseFileUploadSample.tsx"
-import BeforeAfterHookFileUpload from "../../components/file-upload/BeforeAfterHookFileUpload/BeforeAfterHookFileUpload.tsx"
-import MultiFileReuseFileUpload from "../../components/file-upload/MultiFileReuseFileUpload/MultiFileReuseFileUpload"
-import AcceptFileUpload from "../../components/file-upload/AcceptFileUpload/AcceptFileUpload"
+There is no External Dependencies.
 
 
+## Importing
 
-## HeadlessFileUpload
+Import the `HeadlessFileUpload` component into your React application as follows:
 
 ```jsx
-import React from "react";
-// Import New Component created here
-// import <component-name> from "@locoworks/remark-folder-<component-name>"
-import { HeadLessFileUpload } from "@locoworks/reusejs-react-file-upload";
-
-const FileUploadSample = () => {
-	return (
-		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-			<HeadLessFileUpload />
-		</div>
-	);
-};
-
-export default FileUploadSample;
-
+import { HeadlessFileUpload  } from "@locoworks/reusejs-react-file-upload";
 ```
- Example
-<FileUploadSample/>
 
-
-## ReuseFileUpload
+Import the `ReuseFileUpload` component into your React application as follows:
 
 ```jsx
-import React from "react";
-import { ReuseFileUpload } from "@locoworks/reusejs-react-file-upload";
-import { useRef } from "react";
-import { ReuseButton } from "@locoworks/reusejs-react-button";
-
-const ReuseFileUploadSample = () => {
-	const ref = useRef(null);
-	return (
-		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-			<ReuseFileUpload
-				ref={ref}
-				allowsMultiple
-				baseClassName="hidden"
-				showChildren
-				onSelect={(e) => {
-					console.log(e);
-				}}
-			>
-				<ReuseButton
-					className="border border-black px-2 py-1 cursor-pointer rounded-xl text-black"
-					onClick={() => {
-						ref.current?.click();
-					}}
-				>
-					Browse
-				</ReuseButton>
-			</ReuseFileUpload>
-		</div>
-	);
-};
-
-export default ReuseFileUploadSample;
-
+import { ReuseFileUpload  } from "@locoworks/reusejs-react-file-upload";
 ```
 
-Examples
+
+## Types/ Exported Components
+
+The component exports the following types and components:
+
+- `HeadlessFileUpload` : The Base component to create a File Uploader
+- `ReuseFileUpload` : A customized file Uploader which provides you with many custom option to create the file uploader.
+
+## Props
+
+The `HeadlessFileUpload` component accepts the following props:
+
+- `acceptedFileTypes` : Accepted File Type.
+- `allowsMultiple`: File Uploader allows multiple file upload or not.
+- `handleAfterFileUploadHook`: Function to ran as a callback or after the file is loaded. This function will be Recieve with all the loaded files as a prop.
+- `children`: Child component.
+- `className: CSS Classes for the input.
+
+
+The `ReuseFileUpload` component accepts the following props:
+All the Props of the `HeadlessFileUpload` can be passed to the `ReuseFileUpload`.
+
+- `baseClassName`: CSS classes for the base input. 
+- `wrapperClassName`: CSS classes for the Wrapper div.
+- showChildren: Whether to Show the Children or Not. 
+- handleBeforeFileUploadHook: Async Function to run before upload of files.
+- handleAfterFileUploadHook : Async Function to run after the upload of files. This function will be Recieve with all the loaded files as a prop.
+- children: Child Components.
+- loaderStyles: CSS Styles for the loader.
+- customLoader: Custom Loader.
+- fileSize: Size of the file to be uploaded.
+- setCustomError: Error object.
+
+
+
+## Usage/Examples 
+
+
+### HeadlessFileUpload
+<HeadLessFileUploadSample/>
+
+```jsx path=../../components/file-upload/HeadLessFileUploadSample name=HeadLessFileUploadSample
+```
+
+
+### ReuseFileUpload
 
 <ReuseFileUploadSample/>
+```jsx path=../../components/file-upload/ReuseFileUploadSample name=ReuseFileUploadSample
+```
 
 
 
 
 ## BeforeAfterHookFileUpload
 
-```jsx
-import React from "react";
-import { ReuseFileUpload } from "@locoworks/reusejs-react-file-upload";
-import { useRef } from "react";
-import { ReuseButton } from "@locoworks/reusejs-react-button";
-
-const BeforeAfterHookFileUpload = () => {
-	const ref = useRef<HTMLInputElement>(null);
-	return (
-		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-			<ReuseFileUpload
-				ref={ref}
-				allowsMultiple
-				handleBeforeFileUploadHook={async () => {
-					await new Promise<void>((resolve) => {
-						setTimeout(() => {
-							console.log("inside the user function");
-							resolve();
-						}, 2000);
-					});
-				}}
-				handleAfterFileUploadHook={async () => {
-					await new Promise<void>((resolve) => {
-						setTimeout(() => {
-							console.log("after the function is running");
-							resolve();
-						}, 2000);
-					});
-				}}
-				// Inside ReuseFileUploadSample component
-				baseClassName="hidden"
-				showChildren
-				onSelect={(e) => {
-					console.log(e);
-				}}
-			>
-				<ReuseButton
-					className="border border-black px-2 py-1 cursor-pointer rounded-xl text-black"
-					onClick={() => {
-						console.log(ref.current);
-						ref.current?.click();
-					}}
-				>
-					Browse
-				</ReuseButton>
-			</ReuseFileUpload>
-		</div>
-	);
-};
-
-export default BeforeAfterHookFileUpload;
-
-
-```
-
-Examples
-
 <BeforeAfterHookFileUpload/>
-
-
-
-
-
-## MultiFileReuseFileUpload
-
-```jsx
-import React from "react";
-import { ReuseFileUpload } from "@locoworks/reusejs-react-file-upload";
-import { useRef } from "react";
-import { ReuseButton } from "@locoworks/reusejs-react-button";
-
-const MultiFileReuseFileUpload = () => {
-	const ref = useRef<HTMLInputElement>(null);
-	return (
-		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-			<ReuseFileUpload
-				ref={ref}
-				allowsMultiple
-				handleBeforeFileUploadHook={async () => {
-					await new Promise<void>((resolve) => {
-						setTimeout(() => {
-							console.log("inside the user function");
-							resolve();
-						}, 2000);
-					});
-				}}
-				handleAfterFileUploadHook={async () => {
-					await new Promise<void>((resolve) => {
-						setTimeout(() => {
-							console.log("after the function is running");
-							resolve();
-						}, 2000);
-					});
-				}}
-				// Inside ReuseFileUploadSample component
-				baseClassName="hidden"
-				showChildren
-				onSelect={(e) => {
-					console.log(e);
-				}}
-			>
-				<ReuseButton
-					className="border border-black px-2 py-1 cursor-pointer rounded-xl text-black"
-					onClick={() => {
-						console.log(ref.current);
-						ref.current?.click();
-					}}
-				>
-					Browse
-				</ReuseButton>
-			</ReuseFileUpload>
-		</div>
-	);
-};
-
-export default MultiFileReuseFileUpload;
-
-
+```jsx path=../../components/file-upload/BeforeAfterHookFileUpload name=BeforeAfterHookFileUpload
 ```
 
- Examples
+
+
+
+### MultiFileReuseFileUpload
 
 <MultiFileReuseFileUpload/>
-
-
-## AcceptFileUpload
-
-```jsx
-import React from "react";
-import { ReuseFileUpload } from "@locoworks/reusejs-react-file-upload";
-import { useRef } from "react";
-import { ReuseButton } from "@locoworks/reusejs-react-button";
-
-const AcceptFileUpload = () => {
-	const ref = useRef<HTMLInputElement>(null);
-	return (
-		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-			<ReuseFileUpload
-				ref={ref}
-				allowsMultiple
-				handleBeforeFileUploadHook={async () => {
-					await new Promise<void>((resolve) => {
-						setTimeout(() => {
-							console.log("inside the user function");
-							resolve();
-						}, 2000);
-					});
-				}}
-				handleAfterFileUploadHook={async () => {
-					await new Promise<void>((resolve) => {
-						setTimeout(() => {
-							console.log("after the function is running");
-							resolve();
-						}, 2000);
-					});
-				}}
-				// Inside ReuseFileUploadSample component
-				baseClassName="hidden"
-				showChildren
-				onSelect={(e) => {
-					console.log(e);
-				}}
-			>
-				<ReuseButton
-					className="border border-black px-2 py-1 cursor-pointer rounded-xl text-black"
-					onClick={() => {
-						console.log(ref.current);
-						ref.current?.click();
-					}}
-				>
-					Browse
-				</ReuseButton>
-			</ReuseFileUpload>
-		</div>
-	);
-};
-
-export default AcceptFileUpload;
-
-
+```jsx path=../../components/file-upload/MultiFileReuseFileUpload name=MultiFileReuseFileUpload
 ```
 
- Examples
+
+
+### AcceptFileUpload
 
 <AcceptFileUpload/>
+```jsx path=../../components/file-upload/AcceptFileUpload name=AcceptFileUpload
+```
 
 
+## Styling
+
+You can style the component using Tailwind CSS and CSS. Feel free to customize the component's appearance as per your project's requirements.
 
 
+### `HeadlessFileUploadProps`
+
+| Prop                 | Type               | Default Value      | Description                                                        |
+|----------------------|--------------------|--------------------|--------------------------------------------------------------------|
+| `className`          |   `String`         | `""`               | Pass this prop to style the base input of headless component.
+
+
+### `ReuseFileUploadProps`
+
+| Prop                 | Type               | Default Value      | Description                                                        |
+|----------------------|--------------------|--------------------|--------------------------------------------------------------------|
+| `baseClassName`      |   `String`         | `""`               | styles the base input of headless component.
+| `wrapperClassName`   |   `String`         | `""`               | styles the Wrapper div of the ReuseFileUpload.
+| `loaderStyles`       |   `String`         | `""`               | styles the default loader.
