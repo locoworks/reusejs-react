@@ -18,7 +18,7 @@ type Props = {
 		mentionName: string;
 		label: string;
 	}>;
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	wrapperClass?: string;
 	editable: boolean;
@@ -28,7 +28,7 @@ type Props = {
 
 const TextEditor = ({
 	useMentionLookupService,
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 	onChangeCallback,
 	wrapperClass,
 	editable,
@@ -62,7 +62,7 @@ const TextEditor = ({
 				<TableContext>
 					<div className="editor-shell">
 						<Editor
-							convertFileToImageUrl={convertFileToImageUrl}
+							convertFilesToImageUrl={convertFilesToImageUrl}
 							useMentionLookupService={useMentionLookupService}
 							onChangeCallback={onChangeCallback}
 							editState={editable}
