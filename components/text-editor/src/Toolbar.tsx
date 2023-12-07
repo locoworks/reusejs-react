@@ -119,10 +119,10 @@ function Divider(): JSX.Element {
 	return <div className="divider" />;
 }
 export default function ToolbarPlugin({
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 	setEditable,
 }: {
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
@@ -327,7 +327,7 @@ export default function ToolbarPlugin({
 							<InsertImageDialog
 								activeEditor={activeEditor}
 								onClose={onClose}
-								convertFileToImageUrl={convertFileToImageUrl}
+								convertFilesToImageUrl={convertFilesToImageUrl}
 							/>
 						));
 					}}

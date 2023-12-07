@@ -73,12 +73,19 @@ const Example = () => {
 		return results;
 	}
 
-	function convertFileToImageUrl(files: FileList | null) {
-		if (files) {
-			const imgUrl = URL.createObjectURL(files[0]);
-			return imgUrl;
+	function convertFilesToImageUrl(files: FileList | null) {
+		if (!files || files.length === 0) {
+			return null;
 		}
-		return null;
+		const imageUrls = [];
+
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+
+			const imageUrl = URL.createObjectURL(file);
+			imageUrls.push(imageUrl);
+		}
+		return imageUrls.length > 0 ? imageUrls : null;
 	}
 
 	function onChange(_editorRef: LexicalEditor | null, payload: any) {
@@ -91,7 +98,7 @@ const Example = () => {
 				editable={editable}
 				setEditable={setEditable}
 				useMentionLookupService={useMentionLookupService}
-				convertFileToImageUrl={convertFileToImageUrl}
+				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
 			/>
 			{!editable && (

@@ -302,6 +302,7 @@
   padding: 0;
   margin: 0;
   list-style-position: inside;
+  list-style-type: decimal;
 }
 .EditorTheme__ol2 {
   padding: 0;
@@ -737,6 +738,7 @@ button.item.dropdown-item-active i {
 
 .button {
   margin: 2px;
+  cursor: pointer;
   padding: 0.5rem 1rem;
   font-weight: 600;
   color: #333;
@@ -748,6 +750,9 @@ button.item.dropdown-item-active i {
 }
 .button:hover {
   background-color: #f4f4f4;
+}
+.button:disabled {
+  cursor: not-allowed;
 }
 
 .editor-scroller {
@@ -967,6 +972,11 @@ button.item.dropdown-item-active i {
 .Modal__content {
   padding: 20px;
   padding-bottom: unset;
+}
+.Modal__buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 .ImageNode__contentEditable {

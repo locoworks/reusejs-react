@@ -36,7 +36,7 @@ type EditorProps = {
 		mentionName: string;
 		label: string;
 	}>;
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 };
 function Editor({
@@ -44,7 +44,7 @@ function Editor({
 	editState,
 	setEditable,
 	useMentionLookupService,
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 	onChangeCallback,
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
@@ -103,7 +103,7 @@ function Editor({
 			{isEditable && (
 				<div className="editor-container">
 					<ToolbarPlugin
-						convertFileToImageUrl={convertFileToImageUrl}
+						convertFilesToImageUrl={convertFilesToImageUrl}
 						setEditable={setEditable}
 					/>
 					<ListPlugin />
