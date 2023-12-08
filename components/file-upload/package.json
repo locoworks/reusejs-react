@@ -18,7 +18,6 @@
     "dev": "rollup -c -w --bundleConfigAsCjs"
   },
   "dependencies": {
-    "rollup-plugin-livereload": "^2.0.5",
     "tailwind-merge": "^1.12.0"
   },
   "devDependencies": {

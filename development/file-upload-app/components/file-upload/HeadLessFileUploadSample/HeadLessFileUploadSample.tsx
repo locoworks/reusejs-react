@@ -1,12 +1,12 @@
 import React from "react";
-import { HeadLessFileUpload } from "@locoworks/reusejs-react-file-upload";
+import { HeadlessFileUpload } from "@locoworks/reusejs-react-file-upload";
 
-const HeadLessFileUploadSample = () => {
+const HeadlessFileUploadSample = () => {
 	return (
 		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10 border rounded bg-gray-50">
-			<HeadLessFileUpload />
+			<HeadlessFileUpload />
 		</div>
 	);
 };
 
-export default HeadLessFileUploadSample;
+export default HeadlessFileUploadSample;

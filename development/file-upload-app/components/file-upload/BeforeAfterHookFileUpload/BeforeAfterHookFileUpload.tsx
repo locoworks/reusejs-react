@@ -24,9 +24,6 @@ const BeforeAfterHookFileUpload = () => {
 				}}
 				baseClassName="hidden"
 				showChildren
-				onSelect={(e) => {
-					console.log(e);
-				}}
 			>
 				<ReuseButton
 					className="border border-black px-2 py-1 cursor-pointer rounded-xl text-black"
