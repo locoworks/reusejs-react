@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -8,7 +7,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import LexicalClickableLinkPlugin from "@lexical/react/LexicalClickableLinkPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { $generateHtmlFromNodes } from "@lexical/html";
+import { $generateHtmlFromNodes, $generateNodesFromDOM } from "@lexical/html";
 import {
 	AutoLinkPlugin,
 	createLinkMatcherWithRegExp,
@@ -18,7 +17,7 @@ import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { EditorState, LexicalEditor } from "lexical";
+import { $getRoot, $insertNodes, EditorState, LexicalEditor } from "lexical";
 
 import { EditorTheme } from "../theme";
 import { MentionNode } from "../plugins/MentionPlugin/MentionNode";
@@ -39,6 +38,7 @@ type EditorProps = {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	placeholderText?: string;
+	htmlData?: string;
 };
 function Editor({
 	editorRef,
@@ -48,6 +48,7 @@ function Editor({
 	convertFilesToImageUrl,
 	onChangeCallback,
 	placeholderText = "Start Typing...",
+	htmlData,
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
@@ -69,6 +70,21 @@ function Editor({
 		return (editorRef.current = editor);
 	};
 
+	useEffect(() => {
+		editor.update(() => {
+			if (htmlData) {
+				const parser = new DOMParser();
+				const dom = parser.parseFromString(htmlData, "text/html");
+
+				if ($getRoot().getFirstChild() === null) {
+					const nodes = $generateNodesFromDOM(editor, dom);
+					$getRoot().select();
+					$insertNodes(nodes);
+				}
+			}
+		});
+	}, []);
+
 	const URL_REGEX =
 		/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
 	const EMAIL_REGEX =
@@ -82,6 +98,7 @@ function Editor({
 			return `mailto:${text}`;
 		}),
 	];
+
 	const cellEditorConfig = {
 		namespace: "Table",
 		nodes: [
@@ -108,7 +125,6 @@ function Editor({
 						setEditable={setEditable}
 					/>
 					<ListPlugin />
-					<AutoFocusPlugin />
 					<RichTextPlugin
 						contentEditable={
 							<div className="editor-scroller">
@@ -122,12 +138,10 @@ function Editor({
 					/>
 					<HistoryPlugin />
 					<AutoLinkPlugin matchers={MATCHERS} />
-					<AutoFocusPlugin />
 					<TabIndentationPlugin />
 					<ImagesPlugin />
 					<MentionPlugin useMentionLookupService={useMentionLookupService} />
 					<NewTablePlugin cellEditorConfig={cellEditorConfig}>
-						<AutoFocusPlugin />
 						<RichTextPlugin
 							contentEditable={
 								<ContentEditable className="TableNode__contentEditable" />
@@ -138,7 +152,6 @@ function Editor({
 						<HistoryPlugin />
 						<LexicalClickableLinkPlugin />
 					</NewTablePlugin>
-
 					{isEditable && <LexicalClickableLinkPlugin />}
 					<OnChangePlugin onChange={onChange} />
 				</div>
