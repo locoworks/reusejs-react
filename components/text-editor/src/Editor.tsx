@@ -65,8 +65,10 @@ function Editor({
 			const htmlString = $generateHtmlFromNodes(editor, null);
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
+
 			onChangeCallback?.(editorRef.current, payload);
 		});
+
 		return (editorRef.current = editor);
 	};
 
