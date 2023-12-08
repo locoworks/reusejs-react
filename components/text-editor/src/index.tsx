@@ -23,8 +23,8 @@ type Props = {
 	wrapperClass?: string;
 	editable: boolean;
 	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
-	prePopulate?: () => void;
 	placeholderText?: string;
+	htmlData?: string;
 };
 
 const TextEditor = ({
@@ -34,12 +34,13 @@ const TextEditor = ({
 	wrapperClass,
 	editable,
 	setEditable,
-	prePopulate,
 	placeholderText,
+	htmlData,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
+
 	const initialConfig = {
-		editorState: prePopulate || null,
+		editorState: null,
 		namespace: "Editor",
 		theme: EditorTheme,
 		onError: (error: Error) => {
@@ -64,6 +65,7 @@ const TextEditor = ({
 				<TableContext>
 					<div className="editor-shell">
 						<Editor
+							htmlData={htmlData}
 							convertFilesToImageUrl={convertFilesToImageUrl}
 							useMentionLookupService={useMentionLookupService}
 							onChangeCallback={onChangeCallback}
