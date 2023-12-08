@@ -38,6 +38,7 @@ type EditorProps = {
 	}>;
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
+	placeholderText?: string;
 };
 function Editor({
 	editorRef,
@@ -46,6 +47,7 @@ function Editor({
 	useMentionLookupService,
 	convertFilesToImageUrl,
 	onChangeCallback,
+	placeholderText = "Start Typing...",
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
@@ -54,8 +56,7 @@ function Editor({
 		editor.setEditable(editState);
 	}, [editState, editor]);
 
-	const text = "Enter some text";
-	const placeholder = <div className="placeholder">{text}</div>;
+	const placeholder = <div className="placeholder">{placeholderText}</div>;
 
 	const onChange = (_editorState: EditorState, editor: LexicalEditor) => {
 		editor.update(() => {

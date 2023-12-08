@@ -51,6 +51,7 @@ The `TextEditor` component accepts the following props:
 - `editable`: A boolean indicating the edit state of the editor.
 - `setEditable`: A function to set the editable state of the editor. It is a React state setter function that accepts a boolean value.
 - `prePopulate`: An optional function to set the intialState of the editor.
+- `placeholderText`: An optional string for the placeholder inside the editor. Its value is "Start Typing..." by default.
 
 ## Usage/Examples
 
@@ -89,6 +90,7 @@ import "@locoworks/reusejs-react-text-editor/css";
 | `editable`               | `Boolean`                              | A boolean indicating the edit state of the editor.                                                                |
 | `setEditable`            | `React.Dispatch<React.SetStateAction<boolean>>`                             | Sets the editable state of the editor.                        |
 | `prePopulate`            | `() => void`                             | An optional function to set the initial state of the editor.                                                       |
+| `placeholderText`            | `string`                             | An optional string for the placeholder inside the editor. Its value is "Start Typing..." by default                                                       |
 
 ## Notes
 >The TextEditor component uses the Lexical library for rich text editing.

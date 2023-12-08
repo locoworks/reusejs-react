@@ -24,6 +24,7 @@ type Props = {
 	editable: boolean;
 	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 	prePopulate?: () => void;
+	placeholderText?: string;
 };
 
 const TextEditor = ({
@@ -34,6 +35,7 @@ const TextEditor = ({
 	editable,
 	setEditable,
 	prePopulate,
+	placeholderText,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
 	const initialConfig = {
@@ -68,6 +70,7 @@ const TextEditor = ({
 							editState={editable}
 							setEditable={setEditable}
 							editorRef={editorRef}
+							placeholderText={placeholderText}
 						/>
 					</div>
 				</TableContext>
