@@ -1,5 +1,14 @@
 # @locoworks/reusejs-react-text-editor
 
+## 0.1.4
+
+### Patch Changes
+
+- d7871ed: Changes:
+
+  - Added prop for prepopulation of editor using htmlData.
+  - Removed AutoFocusPlugin
+
 ## 0.1.3
 
 ### Patch Changes
