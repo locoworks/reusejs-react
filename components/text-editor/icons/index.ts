@@ -1,11 +1,13 @@
 export { default as BoldIcon } from "./BoldIcon";
 export { default as BulletListIcon } from "./BulletListIcon";
-export { default as HeadingIcon } from "./HeadingIcon";
+export { default as ChevronDownIcon } from "./ChevronDown";
+export { default as CloseIcon } from "./CloseIcon";
 export { default as ImageIcon } from "./ImageIcon";
 export { default as ItalicIcon } from "./ItalicIcon";
-export { default as ParagraphIcon } from "./ParagraphIcon";
+export { default as NumberedListIcon } from "./NumberedListIcon";
 export { default as PlusIcon } from "./PlusIcon";
 export { default as RedoIcon } from "./RedoIcon";
+export { default as SaveIcon } from "./SaveIcon";
 export { default as TableIcon } from "./TableIcon";
 export { default as UnderlineIcon } from "./UnderlineIcon";
 export { default as UndoIcon } from "./UndoIcon";

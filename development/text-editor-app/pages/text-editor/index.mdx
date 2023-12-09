@@ -4,6 +4,7 @@ title: "ReuseJS text-editor"
 author: "Upneet Kaur Hunjan"
 ---
 import Example from "../../components/text-editor/Example/Example.tsx";
+import PrepopulatedTextEditor from "../../components/text-editor/PrepopulatedTextEditor/PrepopulatedTextEditor.tsx";
 
 ## Text-Editor
 
@@ -23,12 +24,12 @@ yarn add @locoworks/reusejs-react-text-editor
 
 ## External Dependencies
 
-The `TextEditor` component relies on external dependencies such as `lexical` and `@lexical/react`.
+The `TextEditor` component relies on external dependencies - `tailwind-merge`, `lexical` and `@lexical/react`.
 
 ```bash
-npm install lexical @lexical/react
+npm install lexical @lexical/react tailwind-merge
 # or
-yarn add lexical @lexical/react
+yarn add lexical @lexical/react tailwind-merge
 ```
 
 ## Importing
@@ -44,15 +45,24 @@ import { TextEditor } from "@locoworks/reusejs-react-text-editor";
 The `TextEditor` component accepts the following props:
 
 - `useMentionLookupService`: A function to handle mention lookup and return results.
-- `convertFileToImageUrl`: A function to convert files to image URLs and return imageUrls.
+- `convertFilesToImageUrl`: A function to convert files to image URLs and return Array of imageUrls.
 - `onChangeCallback`: An optional callback for editor reference changes and payload.
 - `wrapperClass`: An optional class for styling the editor wrapper.
+- `editable`: A boolean indicating the edit state of the editor.
+- `setEditable`: A function to set the editable state of the editor. It is a React state setter function that accepts a boolean value.
+- `htmlData`: An optional string to set the intialState of the editor. You can pass the html data directly to the editor as its initial state.
+- `placeholderText`: An optional string for the placeholder inside the editor. Its value is "Start Typing..." by default.
 
 ## Usage/Examples
 
-### TextEditor demo Code
+### TextEditor demo
 <Example/>
 ```js path=../../components/text-editor/Example name=Example
+```
+
+### PrepopulatedTextEditor
+<PrepopulatedTextEditor/>
+```js path=../../components/text-editor/PrepopulatedTextEditor name=PrepopulatedTextEditor
 ```
 
 ## Styling
@@ -71,12 +81,16 @@ import "@locoworks/reusejs-react-text-editor/css";
 
 ## Props Table
 
-| Prop                      | Type                                                               | Description                                                                                                                            |
-| ------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `useMentionLookupService` | `(mentionString: string \| null) => Array<{ mentionName: string; label: string; }>` | Function to handle mention lookup and return results.                                                                                                   |
-| `convertFileToImageUrl`   | `(files: FileList \| null) => string \| null`                     | Function to convert files to image URLs and return imageUrls.                                                                                              |
-| `onChangeCallback`       | `onChangeCallback?: onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;`                       | Optional callback for editor reference changes.                                                                                     |
-| `wrapperClass`            | `string`                                                           | Optional class for styling the editor wrapper.                                                                                        |
+| Prop                  | Type                                 | Description                                                                                                       |
+| --------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| `useMentionLookupService` | `(mentionString: string \| null) => Array<{ mentionName: string; label: string; }>`                             | A function to handle mention lookup and return results.                                                           |
+| `convertFilesToImageUrl`   | `(files: FileList \| null) => Array<string> \| null`                             | A function to convert files to image URLs and return image URLs.                                                  |
+| `onChangeCallback`       | `(editorRef: LexicalEditor \| null, payload: any) => void`                             | An optional callback for editor reference changes and payload.                                                    |
+| `wrapperClass`           | `String`                               | An optional class for styling the editor wrapper.                                                                  |
+| `editable`               | `Boolean`                              | A boolean indicating the edit state of the editor.                                                                |
+| `setEditable`            | `React.Dispatch<React.SetStateAction<boolean>>`                             | Sets the editable state of the editor.                        |
+| `htmlData`            | `string`                             | An optional string to set the initial state of the editor.                                                       |
+| `placeholderText`            | `string`                             | An optional string for the placeholder inside the editor. Its value is "Start Typing..." by default                                                       |
 
 ## Notes
 >The TextEditor component uses the Lexical library for rich text editing.

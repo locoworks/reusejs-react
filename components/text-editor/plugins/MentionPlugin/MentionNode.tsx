@@ -97,6 +97,7 @@ export class MentionNode extends TextNode {
 		const element = document.createElement("span");
 		element.setAttribute("data-lexical-mention", "true");
 		element.setAttribute("data-lexical-user", this.__mention);
+		element.setAttribute("class", "html_mention");
 		element.textContent = this.__label;
 		return { element };
 	}

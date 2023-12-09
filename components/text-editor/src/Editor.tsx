@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
+import React, { useEffect } from "react";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -8,7 +7,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import LexicalClickableLinkPlugin from "@lexical/react/LexicalClickableLinkPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { $generateHtmlFromNodes } from "@lexical/html";
+import { $generateHtmlFromNodes, $generateNodesFromDOM } from "@lexical/html";
 import {
 	AutoLinkPlugin,
 	createLinkMatcherWithRegExp,
@@ -18,7 +17,7 @@ import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { EditorState, LexicalEditor } from "lexical";
+import { $getRoot, $insertNodes, EditorState, LexicalEditor } from "lexical";
 
 import { EditorTheme } from "../theme";
 import { MentionNode } from "../plugins/MentionPlugin/MentionNode";
@@ -31,34 +30,34 @@ import ToolbarPlugin from "./Toolbar";
 type EditorProps = {
 	editorRef: React.MutableRefObject<LexicalEditor | null>;
 	editState: boolean;
+	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
 	useMentionLookupService: (mentionString: string | null) => Array<{
 		mentionName: string;
 		label: string;
 	}>;
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
+	placeholderText?: string;
+	htmlData?: string;
 };
 function Editor({
 	editorRef,
 	editState,
+	setEditable,
 	useMentionLookupService,
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 	onChangeCallback,
+	placeholderText = "Start Typing...",
+	htmlData,
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
-	const [data, setData] = useState<string>("");
 
 	useEffect(() => {
 		editor.setEditable(editState);
 	}, [editState, editor]);
 
-	const text = "Enter some text";
-	const placeholder = (
-		<div className="absolute inline-block overflow-hidden text-sm text-gray-600 truncate pointer-events-none select-none top-20 left-6 whitespace-nowrap ">
-			{text}
-		</div>
-	);
+	const placeholder = <div className="placeholder">{placeholderText}</div>;
 
 	const onChange = (_editorState: EditorState, editor: LexicalEditor) => {
 		editor.update(() => {
@@ -66,11 +65,27 @@ function Editor({
 			const htmlString = $generateHtmlFromNodes(editor, null);
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
-			setData(payload["html"]);
+
 			onChangeCallback?.(editorRef.current, payload);
 		});
+
 		return (editorRef.current = editor);
 	};
+
+	useEffect(() => {
+		editor.update(() => {
+			if (htmlData) {
+				const parser = new DOMParser();
+				const dom = parser.parseFromString(htmlData, "text/html");
+
+				if ($getRoot().getFirstChild() === null) {
+					const nodes = $generateNodesFromDOM(editor, dom);
+					$getRoot().select();
+					$insertNodes(nodes);
+				}
+			}
+		});
+	}, []);
 
 	const URL_REGEX =
 		/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
@@ -85,6 +100,7 @@ function Editor({
 			return `mailto:${text}`;
 		}),
 	];
+
 	const cellEditorConfig = {
 		namespace: "Table",
 		nodes: [
@@ -104,16 +120,18 @@ function Editor({
 
 	return (
 		<>
-			{isEditable ? (
+			{isEditable && (
 				<div className="editor-container">
-					<ToolbarPlugin convertFileToImageUrl={convertFileToImageUrl} />
+					<ToolbarPlugin
+						convertFilesToImageUrl={convertFilesToImageUrl}
+						setEditable={setEditable}
+					/>
 					<ListPlugin />
-					<AutoFocusPlugin />
 					<RichTextPlugin
 						contentEditable={
 							<div className="editor-scroller">
 								<div className="editor">
-									<ContentEditable className="min-h-[100px] p-6" />
+									<ContentEditable className="editor-contentEditable" />
 								</div>
 							</div>
 						}
@@ -122,15 +140,13 @@ function Editor({
 					/>
 					<HistoryPlugin />
 					<AutoLinkPlugin matchers={MATCHERS} />
-					<AutoFocusPlugin />
 					<TabIndentationPlugin />
 					<ImagesPlugin />
 					<MentionPlugin useMentionLookupService={useMentionLookupService} />
 					<NewTablePlugin cellEditorConfig={cellEditorConfig}>
-						<AutoFocusPlugin />
 						<RichTextPlugin
 							contentEditable={
-								<ContentEditable className="EditorTheme__table" />
+								<ContentEditable className="TableNode__contentEditable" />
 							}
 							placeholder={null}
 							ErrorBoundary={LexicalErrorBoundary}
@@ -138,12 +154,9 @@ function Editor({
 						<HistoryPlugin />
 						<LexicalClickableLinkPlugin />
 					</NewTablePlugin>
-
 					{isEditable && <LexicalClickableLinkPlugin />}
 					<OnChangePlugin onChange={onChange} />
 				</div>
-			) : (
-				<div dangerouslySetInnerHTML={{ __html: data }} />
 			)}
 		</>
 	);

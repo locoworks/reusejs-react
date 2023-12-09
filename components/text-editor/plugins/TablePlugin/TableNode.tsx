@@ -166,12 +166,15 @@ export function exportTableCellsToHTML(
 			);
 			cellElem.innerHTML = cellHTMLCache.get(cell.json) || "";
 			rowElem.appendChild(cellElem);
+			cellElem.setAttribute("class", `html_cell`);
 		}
 		tBody.appendChild(rowElem);
 	}
 
 	table.appendChild(colGroup);
 	table.appendChild(tBody);
+	table.setAttribute("class", `html_table`);
+
 	return table;
 }
 
@@ -401,10 +404,10 @@ export function $createTableNodeWithDimensions(
 	includeHeaders = true,
 ): TableNode {
 	const rows: Rows = [];
-	for (let y = 0; y < columnCount; y++) {
+	for (let y = 0; y < rowCount; y++) {
 		const row: Row = createRow();
 		rows.push(row);
-		for (let x = 0; x < rowCount; x++) {
+		for (let x = 0; x < columnCount; x++) {
 			row.cells.push(
 				createCell(
 					includeHeaders === true && (y === 0 || x === 0) ? "header" : "normal",

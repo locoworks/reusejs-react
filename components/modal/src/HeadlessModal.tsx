@@ -22,8 +22,10 @@ const DEFAULTMODALANIMATION = {
 const HeadlessModal = (config: any, unmountDelay = 200, mountingNode?: any) => {
 	const ModalBase: any = React.forwardRef((props: any, ref: any) => {
 		const visRef = useOutsideClicker(() => {
-			setOpen(false);
-			props.onAction(false);
+			if (!config?.disableOutsideClick) {
+				setOpen(false);
+				props.onAction(false);
+			}
 		});
 		const [open, setOpen] = useState(true);
 

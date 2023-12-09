@@ -1,5 +1,6 @@
 import React, { ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { CloseIcon } from "../icons";
 
 function PortalImpl({
 	onClose,
@@ -65,7 +66,7 @@ function PortalImpl({
 					type="button"
 					onClick={onClose}
 				>
-					X
+					<CloseIcon />
 				</button>
 				<div className="Modal__content">{children}</div>
 			</div>
