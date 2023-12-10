@@ -1,5 +1,13 @@
 # @locoworks/reusejs-react-date-picker
 
+## 3.1.0
+
+### Minor Changes
+
+- 3d6ce17: -Added Month Selector Component
+  -Added Year Selector Component
+  and related props
+
 ## 3.0.2
 
 ### Patch Changes
