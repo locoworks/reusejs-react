@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import YearSelector from "./YearSelector";
+import MonthSelector from "./MonthSelector";
 
 const calendardefaultClasses = {
 	defaultSelectableTextStyle: "bg-white hover:bg-gray-100 ",
@@ -23,7 +25,7 @@ export interface CalendarBaseClassesProps {
 	calendarWeeksClasses?: string;
 	headerButtonClasses?: string;
 	singleCalenderSectionWrapper?: string;
-	monthNameClasses?: string;
+	calendarHeaderClasses?: string;
 	weekNameWrapper?: string;
 	weekNameClasses?: string;
 	selectableClasses?: string;
@@ -33,6 +35,14 @@ export interface CalendarBaseClassesProps {
 	selectedTextClasses?: string;
 	selectableTextClasses?: string;
 	todayButNotSelectedClasses?: string;
+	yearSelectorWrapperClasses?: string;
+	yearSelectorHeaderWrapperClasses?: string;
+	yearSelectorHeaderClasses?: string;
+	yearsContainerClasses?: string;
+	yearClasses?: string;
+	monthSelectorWrapperClasses?: string;
+	monthsContainerClasses?: string;
+	monthClasses?: string;
 }
 
 const monthNamesShort = [
@@ -53,23 +63,36 @@ const weekdayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 export interface CalenderProps {
 	calendars?: any;
+	year: number;
+	handleYearChange: (year: number) => void;
+	handleMonthChange: (month: number) => void;
 	getBackProps?: any;
 	getForwardProps?: any;
 	getDateProps?: any;
 	prevMonthLabel?: React.ReactNode;
 	nextMonthLabel?: React.ReactNode;
+	prevYearLabel?: React.ReactNode;
+	nextYearLabel?: React.ReactNode;
 	calendarBaseClasses?: CalendarBaseClassesProps;
 }
 
 export default function Calendar({
 	calendars,
+	year,
+	handleYearChange,
+	handleMonthChange,
 	getBackProps,
 	getForwardProps,
 	getDateProps,
 	calendarBaseClasses,
 	prevMonthLabel = "Back",
 	nextMonthLabel = "Next",
+	prevYearLabel = "Prev",
+	nextYearLabel = "Next",
 }: CalenderProps) {
+	const [showYearSelector, setShowYearSelector] = useState(false);
+	const [showMonthSelector, setShowMonthSelector] = useState(false);
+
 	if (calendars.length) {
 		return (
 			<div
@@ -108,122 +131,175 @@ export default function Calendar({
 					>
 						<div
 							className={twMerge(
-								"text-center",
-								calendarBaseClasses?.monthNameClasses,
+								"flex gap-2 justify-center hover:bg-gray-100",
+								calendarBaseClasses?.calendarHeaderClasses,
 							)}
 						>
-							{monthNamesShort[calendar.month]} {calendar.year}
+							<span
+								className="cursor-pointer"
+								onClick={() => {
+									setShowMonthSelector((prev) => !prev);
+									setShowYearSelector(false);
+								}}
+							>
+								{monthNamesShort[calendar.month]}
+							</span>
+							<span
+								className="cursor-pointer"
+								onClick={() => {
+									setShowYearSelector((prev) => !prev);
+									setShowMonthSelector(false);
+								}}
+							>
+								{calendar.year}
+							</span>
 						</div>
 
-						<div
-							className={twMerge(
-								"grid grid-cols-7",
-								calendarBaseClasses?.weekNameWrapper,
-							)}
-						>
-							{weekdayNamesShort.map((weekday) => (
+						{showYearSelector && (
+							<YearSelector
+								year={year}
+								prevYearLabel={prevYearLabel}
+								nextYearLabel={nextYearLabel}
+								onYearChange={handleYearChange}
+								setShowYearSelector={setShowYearSelector}
+								yearSelectorWrapperClasses={
+									calendarBaseClasses?.yearSelectorWrapperClasses
+								}
+								yearSelectorHeaderClasses={
+									calendarBaseClasses?.yearSelectorHeaderClasses
+								}
+								yearsContainerClasses={
+									calendarBaseClasses?.yearsContainerClasses
+								}
+								yearClasses={calendarBaseClasses?.yearClasses}
+							/>
+						)}
+						{showMonthSelector && (
+							<MonthSelector
+								onMonthChange={handleMonthChange}
+								setShowMonthSelector={setShowMonthSelector}
+								monthSelectorWrapperClasses={
+									calendarBaseClasses?.monthSelectorWrapperClasses
+								}
+								monthsContainerClasses={
+									calendarBaseClasses?.monthsContainerClasses
+								}
+								monthClasses={calendarBaseClasses?.monthClasses}
+							/>
+						)}
+						{!showMonthSelector && !showYearSelector && (
+							<>
 								<div
-									key={`${calendar.month}${calendar.year}${weekday}`}
 									className={twMerge(
-										"inline-block text-center bg-transparent border-none",
-										calendarBaseClasses?.weekNameClasses,
+										"grid grid-cols-7",
+										calendarBaseClasses?.weekNameWrapper,
 									)}
 								>
-									{weekday}
-								</div>
-							))}
-						</div>
-						<div
-							className={twMerge(
-								"grid grid-cols-7",
-								calendarBaseClasses?.calendarWeeksClasses,
-							)}
-						>
-							{calendar.weeks.map((week: any, weekIndex: any) =>
-								week.map((dateObj: any, dayIdx: any) => {
-									const key = `${calendar.month}${calendar.year}${weekIndex}${dayIdx}`;
-									if (!dateObj) {
-										return (
-											<div
-												key={key}
-												className="inline-block px-2 bg-transparent border-none"
-											/>
-										);
-									}
-									const {
-										date,
-										selected,
-										selectable,
-										today,
-										prevMonth,
-										nextMonth,
-									} = dateObj;
-
-									const isCurrentMonth = !prevMonth && !nextMonth;
-
-									return (
-										<button
-											key={key}
-											{...getDateProps({ dateObj })}
+									{weekdayNamesShort.map((weekday) => (
+										<div
+											key={`${calendar.month}${calendar.year}${weekday}`}
 											className={twMerge(
-												calendardefaultClasses.defaultDateButtonStyle,
-
-												selectable &&
-													twMerge(
-														calendarBaseClasses?.selectableClasses,
-														calendardefaultClasses.defaultSelectableTextStyle,
-													),
-												(selected || today) &&
-													twMerge(
-														calendarBaseClasses?.selectedOrTodayClasses,
-														calendardefaultClasses.selectedOrTodayStyles,
-													),
-												selected &&
-													twMerge(
-														calendarBaseClasses?.selectedTextClasses,
-														calendardefaultClasses.selectedTextStyles,
-													),
-												today &&
-													!selected &&
-													twMerge(
-														calendarBaseClasses?.todayButNotSelectedClasses,
-														calendardefaultClasses.todayButNotSelectedStyles,
-													),
-												selectable &&
-													twMerge(
-														calendarBaseClasses?.selectableTextClasses,
-														calendardefaultClasses.selectableTextStyles,
-													),
-												(dayIdx == 0 || dayIdx == 6) &&
-													twMerge(
-														calendarBaseClasses?.weekendClasses,
-														calendardefaultClasses.weekendStyles,
-													),
-												weekIndex === 0 &&
-													dayIdx === 0 &&
-													calendardefaultClasses.topLeftBorderStyles,
-												weekIndex === 0 &&
-													dayIdx === 6 &&
-													calendardefaultClasses.topRightBorderStyles,
-												weekIndex === calendar.weeks.length - 1 &&
-													dayIdx === 0 &&
-													calendardefaultClasses.bottomLeftBorderStyles,
-												weekIndex === calendar.weeks.length - 1 &&
-													dayIdx === 6 &&
-													calendardefaultClasses.bottomRightBorderStyles,
-												!isCurrentMonth &&
-													twMerge(
-														calendarBaseClasses?.notCurrentMonthClasses,
-														calendardefaultClasses.notCurrentMonthStyles,
-													),
+												"inline-block text-center bg-transparent border-none",
+												calendarBaseClasses?.weekNameClasses,
 											)}
 										>
-											{selectable ? date.getDate() : "X"}
-										</button>
-									);
-								}),
-							)}
-						</div>
+											{weekday}
+										</div>
+									))}
+								</div>
+								<div
+									className={twMerge(
+										"grid grid-cols-7",
+										calendarBaseClasses?.calendarWeeksClasses,
+									)}
+								>
+									{calendar.weeks.map((week: any, weekIndex: any) =>
+										week.map((dateObj: any, dayIdx: any) => {
+											const key = `${calendar.month}${calendar.year}${weekIndex}${dayIdx}`;
+											if (!dateObj) {
+												return (
+													<div
+														key={key}
+														className="inline-block px-2 bg-transparent border-none"
+													/>
+												);
+											}
+											const {
+												date,
+												selected,
+												selectable,
+												today,
+												prevMonth,
+												nextMonth,
+											} = dateObj;
+
+											const isCurrentMonth = !prevMonth && !nextMonth;
+
+											return (
+												<button
+													key={key}
+													{...getDateProps({ dateObj })}
+													className={twMerge(
+														calendardefaultClasses.defaultDateButtonStyle,
+
+														selectable &&
+															twMerge(
+																calendarBaseClasses?.selectableClasses,
+																calendardefaultClasses.defaultSelectableTextStyle,
+															),
+														(selected || today) &&
+															twMerge(
+																calendarBaseClasses?.selectedOrTodayClasses,
+																calendardefaultClasses.selectedOrTodayStyles,
+															),
+														selected &&
+															twMerge(
+																calendarBaseClasses?.selectedTextClasses,
+																calendardefaultClasses.selectedTextStyles,
+															),
+														today &&
+															!selected &&
+															twMerge(
+																calendarBaseClasses?.todayButNotSelectedClasses,
+																calendardefaultClasses.todayButNotSelectedStyles,
+															),
+														selectable &&
+															twMerge(
+																calendarBaseClasses?.selectableTextClasses,
+																calendardefaultClasses.selectableTextStyles,
+															),
+														(dayIdx == 0 || dayIdx == 6) &&
+															twMerge(
+																calendarBaseClasses?.weekendClasses,
+																calendardefaultClasses.weekendStyles,
+															),
+														weekIndex === 0 &&
+															dayIdx === 0 &&
+															calendardefaultClasses.topLeftBorderStyles,
+														weekIndex === 0 &&
+															dayIdx === 6 &&
+															calendardefaultClasses.topRightBorderStyles,
+														weekIndex === calendar.weeks.length - 1 &&
+															dayIdx === 0 &&
+															calendardefaultClasses.bottomLeftBorderStyles,
+														weekIndex === calendar.weeks.length - 1 &&
+															dayIdx === 6 &&
+															calendardefaultClasses.bottomRightBorderStyles,
+														!isCurrentMonth &&
+															twMerge(
+																calendarBaseClasses?.notCurrentMonthClasses,
+																calendardefaultClasses.notCurrentMonthStyles,
+															),
+													)}
+												>
+													{selectable ? date.getDate() : "X"}
+												</button>
+											);
+										}),
+									)}
+								</div>
+							</>
+						)}
 					</div>
 				))}
 			</div>
