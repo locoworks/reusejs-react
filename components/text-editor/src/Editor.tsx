@@ -79,14 +79,18 @@ function Editor({
 				const parser = new DOMParser();
 				const dom = parser.parseFromString(htmlData, "text/html");
 
+				const nodes = $generateNodesFromDOM(editor, dom);
 				if ($getRoot().getFirstChild() === null) {
-					const nodes = $generateNodesFromDOM(editor, dom);
+					$getRoot().select();
+					$insertNodes(nodes);
+				} else {
+					$getRoot().clear();
 					$getRoot().select();
 					$insertNodes(nodes);
 				}
 			}
 		});
-	}, []);
+	}, [htmlData]);
 
 	const URL_REGEX =
 		/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
