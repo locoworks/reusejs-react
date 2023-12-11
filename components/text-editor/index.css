@@ -636,6 +636,7 @@ button.item.dropdown-item-active i {
   background: #fff;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
+  z-index: 50;
 }
 
 .typeahead-popover ul {
@@ -729,6 +730,7 @@ button.item.dropdown-item-active i {
 
 .mentions-menu {
   width: 250px;
+  position: absolute;
 }
 
 .mention:focus {

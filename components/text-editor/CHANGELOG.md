@@ -1,5 +1,15 @@
 # @locoworks/reusejs-react-text-editor
 
+## 0.1.5
+
+### Patch Changes
+
+- 80c40bd: Changes:
+
+  - Added Table AutoFocus
+  - htmlData updates the editor whenever it changes
+  - mention plugin limit for suggestions removed.
+
 ## 0.1.4
 
 ### Patch Changes
