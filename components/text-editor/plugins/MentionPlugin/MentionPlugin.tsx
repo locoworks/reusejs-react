@@ -60,8 +60,6 @@ const AtSignMentionsRegexAliasRegex = new RegExp(
 		")$",
 );
 
-const SUGGESTION_LIST_LENGTH_LIMIT = 5;
-
 function checkForAtSignMentions(
 	text: string,
 	minMatchLength: number,
@@ -159,20 +157,18 @@ export default function NewMentionsPlugin({
 
 	const options = useMemo(
 		() =>
-			results
-				.map(
-					(result) =>
-						new MentionTypeaheadOption(
-							result.mentionName,
-							(
-								<i className="icon">
-									<UserIcon />
-								</i>
-							),
-							result.label,
+			results.map(
+				(result) =>
+					new MentionTypeaheadOption(
+						result.mentionName,
+						(
+							<i className="icon">
+								<UserIcon />
+							</i>
 						),
-				)
-				.slice(0, SUGGESTION_LIST_LENGTH_LIMIT),
+						result.label,
+					),
+			),
 		[results],
 	);
 

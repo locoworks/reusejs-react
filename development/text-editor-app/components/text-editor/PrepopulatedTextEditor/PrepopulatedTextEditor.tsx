@@ -1,10 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LexicalEditor } from "lexical";
 import { TextEditor } from "@locoworks/reusejs-react-text-editor";
 import "@locoworks/reusejs-react-text-editor/css";
 
 const PrepopulatedTextEditor = () => {
-	const htmlData: string = `<p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">Delivery was increasing prior to 2020 and became particularly important during the COVID-19 pandemic. The Delivery Experience tracker helps Chick-fil-A identify best in class delivery brands in and out of the QSR industry. This research also helps Chick-fil-A determine drivers of excellent delivery experiences across QSRs and then track Chick-fil-A performance vs competitors on those drivers over time.</span></p><table class="html_table"><colgroup><col><col><col><col><col></colgroup><tbody><tr><th class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">fsdjhfksfdsf</span></p></th><th class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">dsdddd</span></p></th><th class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">sdsakjdsn</span></p></th><th class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">dsdsadasdas</span></p></th><th class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">dadsadas</span></p></th></tr><tr><th class="html_cell"><p class="EditorTheme__paragraph"><span style="white-space: pre-wrap;">fsdjhfksfdsf</span></p></th><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">dsadbmnad</span></p></td><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">dsadbmnad</span></p></td><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">dsadbmnad</span></p></td><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">dsadbmnad</span></p></td></tr><tr><th class="html_cell"><p class="EditorTheme__paragraph"><span style="white-space: pre-wrap;">fsdjhfksfdsf</span></p></th><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">sdadad</span></p></td><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">sdadad</span></p></td><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">sdadad</span></p></td><td class="html_cell"><p class="EditorTheme__paragraph" dir="ltr"><span style="white-space: pre-wrap;">sdadad</span></p></td></tr></tbody></table><p class="EditorTheme__paragraph"><img src="https://plus.unsplash.com/premium_photo-1668104454442-a251cc42ee58?q=80&amp;w=1887&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="random" width="205" height="307.55126876831054"></p>`;
+	const payload: string = `<table>
+	 	<tr>
+	 	  <th>Company</th>
+	 	  <th>Contact</th>
+	 	  <th>Country</th>
+	 	</tr>
+	 	<tr>
+	 	  <td>Alfreds Futterkiste</td>
+	 	  <td>Maria Anders</td>
+	 	  <td>Germany</td>
+	 	</tr>
+	 	<tr>
+	 	  <td>Centro comercial Moctezuma</td>
+	 	  <td>Francisco Chang</td>
+	 	  <td>Mexico</td>
+	 	</tr>
+	 	<tr>
+	 	  <td>Ernst Handel</td>
+	 	  <td>Roland Mendel</td>
+	 	  <td>Austria</td>
+	 	</tr>
+	 	<tr>
+	 	  <td>Island Trading</td>
+	 	  <td>Helen Bennett</td>
+	 	  <td>UK</td>
+	 	</tr>
+	 	<tr>
+	 	  <td>Laughing Bacchus Winecellars</td>
+	 	  <td>Yoshi Tannamuri</td>
+	 	  <td>Canada</td>
+	 	</tr>
+	 	<tr>
+	 	  <td>Magazzini Alimentari Riuniti</td>
+	 	  <td>Giovanni Rovelli</td>
+	 	  <td>Italy</td>
+	 	</tr>
+	   </table>
+	  `;
+	const [htmlData, setHtmlData] = useState(`<p>Here hello</p>`);
+
+	setTimeout(() => {
+		setHtmlData(payload);
+	}, 3000);
+
+	useEffect(() => {
+		setData(htmlData);
+	}, [htmlData]);
 
 	const [editable, setEditable] = useState<boolean>(false);
 	const [data, setData] = useState<string | TrustedHTML>(htmlData);
@@ -13,6 +59,9 @@ const PrepopulatedTextEditor = () => {
 		return [
 			{ mentionName: "user_xxx", label: "xxx" },
 			{ mentionName: "user_yyy", label: "yyy" },
+			{ mentionName: "user_zzz", label: "zzz" },
+			{ mentionName: "user_www", label: "www" },
+			{ mentionName: "user_vvv", label: "vvv" },
 		];
 	}
 
