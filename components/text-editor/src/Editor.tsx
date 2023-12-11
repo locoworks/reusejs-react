@@ -26,6 +26,7 @@ import { TablePlugin as NewTablePlugin } from "../plugins/TablePlugin/TablePlugi
 import MentionPlugin from "../plugins/MentionPlugin/MentionPlugin";
 import ImagesPlugin from "../plugins/ImagePlugin/ImagePlugin";
 import ToolbarPlugin from "./Toolbar";
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 
 type EditorProps = {
 	editorRef: React.MutableRefObject<LexicalEditor | null>;
@@ -152,6 +153,7 @@ function Editor({
 							ErrorBoundary={LexicalErrorBoundary}
 						/>
 						<HistoryPlugin />
+						<AutoFocusPlugin />
 						<LexicalClickableLinkPlugin />
 					</NewTablePlugin>
 					{isEditable && <LexicalClickableLinkPlugin />}
