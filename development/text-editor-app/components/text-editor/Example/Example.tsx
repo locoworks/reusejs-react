@@ -39,23 +39,13 @@ const Example = () => {
 		label: name,
 	}));
 
-	const dummyLookupService = {
-		search(
-			string: string,
-			callback: (
-				results: Array<{ mentionName: string; label: string }>,
-			) => void,
-		): void {
-			setTimeout(() => {
-				const results = dummyMentionsData.filter((mention) =>
-					mention.label.toLowerCase().includes(string.toLowerCase()),
-				);
-				callback(results);
-			}, 500);
-		},
-	};
-
-	function useMentionLookupService(mentionString: string | null) {
+	function useMentionLookupService(
+		mentionString: string | null,
+		mentionsData: Array<{
+			mentionName: string;
+			label: string;
+		}>,
+	) {
 		const [results, setResults] = useState<
 			Array<{ mentionName: string; label: string }>
 		>([]);
@@ -64,9 +54,11 @@ const Example = () => {
 			if (mentionString === null) {
 				setResults([]);
 			} else {
-				dummyLookupService.search(mentionString, (newResults) => {
-					setResults(newResults);
-				});
+				setResults(
+					mentionsData.filter((mention) =>
+						mention.label.toLowerCase().includes(mentionString.toLowerCase()),
+					),
+				);
 			}
 		}, [mentionString]);
 
@@ -97,6 +89,7 @@ const Example = () => {
 			<TextEditor
 				editable={editable}
 				setEditable={setEditable}
+				mentionsData={dummyMentionsData}
 				useMentionLookupService={useMentionLookupService}
 				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
