@@ -83,7 +83,7 @@ const PrepopulatedTextEditor = () => {
 		<div className="flex flex-col items-center justify-center py-10 mt-10 bg-gray-100 border rounded gap-x-3">
 			<TextEditor
 				htmlData={htmlData}
-				editable={true}
+				editable={editable}
 				setEditable={setEditable}
 				mentionsData={dummyData}
 				convertFilesToImageUrl={convertFilesToImageUrl}
