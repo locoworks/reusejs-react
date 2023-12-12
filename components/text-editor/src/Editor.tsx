@@ -17,7 +17,7 @@ import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getRoot, $insertNodes, EditorState, LexicalEditor } from "lexical";
+import { $getRoot, $nodesOfType, EditorState, LexicalEditor } from "lexical";
 
 import { EditorTheme } from "../theme";
 import { MentionNode } from "../plugins/MentionPlugin/MentionNode";
@@ -31,8 +31,18 @@ import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 type EditorProps = {
 	editorRef: React.MutableRefObject<LexicalEditor | null>;
 	editState: boolean;
-	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
-	useMentionLookupService: (mentionString: string | null) => Array<{
+	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
+	mentionsData: Array<{
+		mentionName: string;
+		label: string;
+	}>;
+	useMentionLookupService?: (
+		mentionString: string | null,
+		mentionsData: Array<{
+			mentionName: string;
+			label: string;
+		}>,
+	) => Array<{
 		mentionName: string;
 		label: string;
 	}>;
@@ -45,6 +55,7 @@ function Editor({
 	editorRef,
 	editState,
 	setEditable,
+	mentionsData,
 	useMentionLookupService,
 	convertFilesToImageUrl,
 	onChangeCallback,
@@ -55,7 +66,7 @@ function Editor({
 	const isEditable = useLexicalEditable();
 
 	useEffect(() => {
-		editor.setEditable(editState);
+		if (setEditable) editor.setEditable(editState);
 	}, [editState, editor]);
 
 	const placeholder = <div className="placeholder">{placeholderText}</div>;
@@ -66,6 +77,7 @@ function Editor({
 			const htmlString = $generateHtmlFromNodes(editor, null);
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
+			payload["mentions"] = $nodesOfType(MentionNode);
 
 			onChangeCallback?.(editorRef.current, payload);
 		});
@@ -80,14 +92,10 @@ function Editor({
 				const dom = parser.parseFromString(htmlData, "text/html");
 
 				const nodes = $generateNodesFromDOM(editor, dom);
-				if ($getRoot().getFirstChild() === null) {
-					$getRoot().select();
-					$insertNodes(nodes);
-				} else {
+				if ($getRoot().getFirstChild() !== null) {
 					$getRoot().clear();
-					$getRoot().select();
-					$insertNodes(nodes);
 				}
+				$getRoot().append(...nodes);
 			}
 		});
 	}, [htmlData]);
@@ -147,7 +155,10 @@ function Editor({
 					<AutoLinkPlugin matchers={MATCHERS} />
 					<TabIndentationPlugin />
 					<ImagesPlugin />
-					<MentionPlugin useMentionLookupService={useMentionLookupService} />
+					<MentionPlugin
+						mentionsData={mentionsData}
+						useMentionLookupService={useMentionLookupService}
+					/>
 					<NewTablePlugin cellEditorConfig={cellEditorConfig}>
 						<RichTextPlugin
 							contentEditable={
