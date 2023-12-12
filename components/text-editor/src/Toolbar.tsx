@@ -123,7 +123,7 @@ export default function ToolbarPlugin({
 	setEditable,
 }: {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
-	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
+	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
@@ -205,7 +205,7 @@ export default function ToolbarPlugin({
 	useEffect(() => {
 		return mergeRegister(
 			editor.registerEditableListener((editable) => {
-				setEditable(editable);
+				setEditable && setEditable(editable);
 			}),
 			activeEditor.registerUpdateListener(({ editorState }) => {
 				editorState.read(() => {
@@ -235,7 +235,7 @@ export default function ToolbarPlugin({
 		<div className="toolbar__wrapper">
 			<div className="toolbar">
 				<button
-					disabled={!canUndo}
+					disabled={!canUndo && !editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
 					}}
@@ -247,7 +247,7 @@ export default function ToolbarPlugin({
 					</i>
 				</button>
 				<button
-					disabled={!canRedo}
+					disabled={!canRedo && !editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(REDO_COMMAND, undefined);
 					}}
@@ -265,11 +265,13 @@ export default function ToolbarPlugin({
 							blockType={blockType}
 							rootType={rootType}
 							editor={editor}
+							disabled={!editor.isEditable()}
 						/>
 						<Divider />
 					</>
 				)}
 				<button
+					disabled={!editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
 					}}
@@ -281,6 +283,7 @@ export default function ToolbarPlugin({
 					</i>
 				</button>
 				<button
+					disabled={!editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
 					}}
@@ -292,6 +295,7 @@ export default function ToolbarPlugin({
 					</i>
 				</button>
 				<button
+					disabled={!editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
 					}}
@@ -304,6 +308,7 @@ export default function ToolbarPlugin({
 				</button>
 				<Divider />
 				<button
+					disabled={!editor.isEditable() || activeEditor !== editor}
 					className="toolbar-item"
 					onClick={() => {
 						showModal("Insert Table", (onClose) => (
@@ -321,6 +326,7 @@ export default function ToolbarPlugin({
 				</button>
 				<Divider />
 				<button
+					disabled={!editor.isEditable() || activeEditor !== editor}
 					className="toolbar-item"
 					onClick={() => {
 						showModal("Insert Image", (onClose) => (
@@ -338,19 +344,22 @@ export default function ToolbarPlugin({
 					<span className="text">Image</span>
 				</button>
 			</div>
-			<div className="toolbar">
-				<button
-					className="toolbar-item"
-					onClick={() => {
-						setEditable(false);
-					}}
-				>
-					<i className="icon ">
-						<SaveIcon />
-					</i>
-					<span className="text">Save</span>
-				</button>
-			</div>
+			{setEditable && (
+				<div className="toolbar">
+					<button
+						disabled={!editor.isEditable()}
+						className="toolbar-item"
+						onClick={() => {
+							setEditable && setEditable(false);
+						}}
+					>
+						<i className="icon ">
+							<SaveIcon />
+						</i>
+						<span className="text">Save</span>
+					</button>
+				</div>
+			)}
 			{modal}
 		</div>
 	);
