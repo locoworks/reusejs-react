@@ -6,6 +6,7 @@ import React, {
 	useState,
 } from "react";
 import {
+	$createParagraphNode,
 	$insertNodes,
 	COMMAND_PRIORITY_EDITOR,
 	createCommand,
@@ -185,7 +186,7 @@ export function TablePlugin({
 					Number(columns),
 					includeHeaders,
 				);
-				$insertNodes([tableNode]);
+				$insertNodes([tableNode, $createParagraphNode()]);
 				return true;
 			},
 			COMMAND_PRIORITY_EDITOR,
