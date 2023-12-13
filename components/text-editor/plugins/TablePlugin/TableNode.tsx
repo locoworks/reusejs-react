@@ -373,7 +373,7 @@ export class TableNode extends DecoratorNode<JSX.Element> {
 
 	decorate(_: LexicalEditor, config: EditorConfig): JSX.Element {
 		return (
-			<Suspense>
+			<Suspense fallback={null}>
 				<TableComponent
 					nodeKey={this.__key}
 					theme={config.theme}
@@ -404,10 +404,10 @@ export function $createTableNodeWithDimensions(
 	includeHeaders = true,
 ): TableNode {
 	const rows: Rows = [];
-	for (let y = 0; y < columnCount; y++) {
+	for (let y = 0; y < rowCount; y++) {
 		const row: Row = createRow();
 		rows.push(row);
-		for (let x = 0; x < rowCount; x++) {
+		for (let x = 0; x < columnCount; x++) {
 			row.cells.push(
 				createCell(
 					includeHeaders === true && (y === 0 || x === 0) ? "header" : "normal",

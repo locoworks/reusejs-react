@@ -23,8 +23,8 @@ export function InsertImageUriDialogBody({
 }: {
 	onClick: (payload: InsertImagePayload) => void;
 }) {
-	const [src, setSrc] = useState("");
-	const [altText, setAltText] = useState("");
+	const [src, setSrc] = useState<string>("");
+	const [altText, setAltText] = useState<string>("");
 
 	const isDisabled = src === "";
 
@@ -58,7 +58,7 @@ export function InsertImageUriDialogBody({
 				/>
 			</div>
 
-			<div className="flex justify-end mt-5">
+			<div className="Modal__buttonWrapper">
 				<button
 					disabled={isDisabled}
 					className="button"
@@ -76,35 +76,45 @@ export function InsertImageUriDialogBody({
 
 export function InsertImageUploadedDialogBody({
 	onClick,
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 }: {
 	onClick: (payload: InsertImagePayload) => void;
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 }) {
-	const [src, setSrc] = useState("");
-	const [altText, setAltText] = useState("");
-
-	const isDisabled = src === "";
+	const [imageUrls, setImageUrls] = useState<Array<string> | null>(null);
+	const [altText, setAltText] = useState<string>("");
+	const isDisabled = imageUrls === null;
 
 	const loadImage = (files: FileList | null) => {
 		if (files && files.length > 0) {
-			const imageUrl = convertFileToImageUrl(files);
-			if (imageUrl) setSrc(imageUrl);
-			else {
+			const convertedImageUrls = convertFilesToImageUrl(files);
+			if (convertedImageUrls !== null) {
+				setImageUrls(convertedImageUrls);
+			} else {
 				throw new Error("Could not find image url");
 			}
 		}
 	};
 
+	const handleClick = () => {
+		if (imageUrls !== null) {
+			imageUrls.map((src) => {
+				onClick({ altText, src });
+			});
+		} else {
+			throw new Error("Image Urls not found");
+		}
+	};
+
 	return (
 		<>
-			<div className="flex items-center mb-2.5">
-				<label className="flex-1 text-gray-600">Image Upload</label>
+			<div className="Input__wrapper">
+				<label className="Input__label">Image Upload</label>
 				<input
 					type="file"
-					multiple={false}
+					multiple={true}
 					accept="image/*"
-					className="flex-1 min-w-0 px-5 py-2 text-base border rounded-md"
+					className="cursor-pointer Input__input"
 					onChange={(e) => loadImage(e.target.files)}
 					data-test-id="image-modal-file-upload"
 				/>
@@ -123,11 +133,12 @@ export function InsertImageUploadedDialogBody({
 				/>
 			</div>
 
-			<div className="flex justify-end mt-5">
+			<div className="Modal__buttonWrapper">
 				<button
+					className="button"
 					data-test-id="image-modal-file-upload-btn"
 					disabled={isDisabled}
-					onClick={() => onClick({ altText, src })}
+					onClick={handleClick}
 				>
 					Confirm
 				</button>
@@ -139,11 +150,11 @@ export function InsertImageUploadedDialogBody({
 export function InsertImageDialog({
 	activeEditor,
 	onClose,
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 }: {
 	activeEditor: LexicalEditor;
 	onClose: () => void;
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 }): JSX.Element {
 	const [mode, setMode] = useState<null | "url" | "file">(null);
 	const hasModifier = useRef(false);
@@ -189,7 +200,7 @@ export function InsertImageDialog({
 			{mode === "file" && (
 				<InsertImageUploadedDialogBody
 					onClick={onClick}
-					convertFileToImageUrl={convertFileToImageUrl}
+					convertFilesToImageUrl={convertFilesToImageUrl}
 				/>
 			)}
 		</>

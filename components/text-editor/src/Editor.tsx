@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -8,7 +7,7 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import LexicalClickableLinkPlugin from "@lexical/react/LexicalClickableLinkPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { $generateHtmlFromNodes } from "@lexical/html";
+import { $generateHtmlFromNodes, $generateNodesFromDOM } from "@lexical/html";
 import {
 	AutoLinkPlugin,
 	createLinkMatcherWithRegExp,
@@ -18,7 +17,7 @@ import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { EditorState, LexicalEditor } from "lexical";
+import { $getRoot, $nodesOfType, EditorState, LexicalEditor } from "lexical";
 
 import { EditorTheme } from "../theme";
 import { MentionNode } from "../plugins/MentionPlugin/MentionNode";
@@ -27,35 +26,50 @@ import { TablePlugin as NewTablePlugin } from "../plugins/TablePlugin/TablePlugi
 import MentionPlugin from "../plugins/MentionPlugin/MentionPlugin";
 import ImagesPlugin from "../plugins/ImagePlugin/ImagePlugin";
 import ToolbarPlugin from "./Toolbar";
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 
 type EditorProps = {
 	editorRef: React.MutableRefObject<LexicalEditor | null>;
 	editState: boolean;
-	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
-	useMentionLookupService: (mentionString: string | null) => Array<{
+	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
+	mentionsData: Array<{
 		mentionName: string;
 		label: string;
 	}>;
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	useMentionLookupService?: (
+		mentionString: string | null,
+		mentionsData: Array<{
+			mentionName: string;
+			label: string;
+		}>,
+	) => Array<{
+		mentionName: string;
+		label: string;
+	}>;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
+	placeholderText?: string;
+	htmlData?: string;
 };
 function Editor({
 	editorRef,
 	editState,
 	setEditable,
+	mentionsData,
 	useMentionLookupService,
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 	onChangeCallback,
+	placeholderText = "Start Typing...",
+	htmlData,
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
 
 	useEffect(() => {
-		editor.setEditable(editState);
+		if (setEditable) editor.setEditable(editState);
 	}, [editState, editor]);
 
-	const text = "Enter some text";
-	const placeholder = <div className="placeholder">{text}</div>;
+	const placeholder = <div className="placeholder">{placeholderText}</div>;
 
 	const onChange = (_editorState: EditorState, editor: LexicalEditor) => {
 		editor.update(() => {
@@ -63,10 +77,28 @@ function Editor({
 			const htmlString = $generateHtmlFromNodes(editor, null);
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
+			payload["mentions"] = $nodesOfType(MentionNode);
+
 			onChangeCallback?.(editorRef.current, payload);
 		});
+
 		return (editorRef.current = editor);
 	};
+
+	useEffect(() => {
+		editor.update(() => {
+			if (htmlData) {
+				const parser = new DOMParser();
+				const dom = parser.parseFromString(htmlData, "text/html");
+
+				const nodes = $generateNodesFromDOM(editor, dom);
+				if ($getRoot().getFirstChild() !== null) {
+					$getRoot().clear();
+				}
+				$getRoot().append(...nodes);
+			}
+		});
+	}, [htmlData]);
 
 	const URL_REGEX =
 		/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|http:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|http:\/\/www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
@@ -81,6 +113,7 @@ function Editor({
 			return `mailto:${text}`;
 		}),
 	];
+
 	const cellEditorConfig = {
 		namespace: "Table",
 		nodes: [
@@ -103,11 +136,10 @@ function Editor({
 			{isEditable && (
 				<div className="editor-container">
 					<ToolbarPlugin
-						convertFileToImageUrl={convertFileToImageUrl}
+						convertFilesToImageUrl={convertFilesToImageUrl}
 						setEditable={setEditable}
 					/>
 					<ListPlugin />
-					<AutoFocusPlugin />
 					<RichTextPlugin
 						contentEditable={
 							<div className="editor-scroller">
@@ -121,12 +153,13 @@ function Editor({
 					/>
 					<HistoryPlugin />
 					<AutoLinkPlugin matchers={MATCHERS} />
-					<AutoFocusPlugin />
 					<TabIndentationPlugin />
 					<ImagesPlugin />
-					<MentionPlugin useMentionLookupService={useMentionLookupService} />
+					<MentionPlugin
+						mentionsData={mentionsData}
+						useMentionLookupService={useMentionLookupService}
+					/>
 					<NewTablePlugin cellEditorConfig={cellEditorConfig}>
-						<AutoFocusPlugin />
 						<RichTextPlugin
 							contentEditable={
 								<ContentEditable className="TableNode__contentEditable" />
@@ -135,9 +168,9 @@ function Editor({
 							ErrorBoundary={LexicalErrorBoundary}
 						/>
 						<HistoryPlugin />
+						<AutoFocusPlugin />
 						<LexicalClickableLinkPlugin />
 					</NewTablePlugin>
-
 					{isEditable && <LexicalClickableLinkPlugin />}
 					<OnChangePlugin onChange={onChange} />
 				</div>

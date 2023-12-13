@@ -1,5 +1,35 @@
 # @locoworks/reusejs-react-text-editor
 
+## 0.1.5
+
+### Patch Changes
+
+- 80c40bd: Changes:
+
+  - Added Table AutoFocus
+  - htmlData updates the editor whenever it changes
+  - mention plugin limit for suggestions removed.
+
+## 0.1.4
+
+### Patch Changes
+
+- d7871ed: Changes:
+
+  - Added prop for prepopulation of editor using htmlData.
+  - Removed AutoFocusPlugin
+
+## 0.1.3
+
+### Patch Changes
+
+- b1f6553: Changes:
+
+  - Implemented multiple File Upload in Image
+  - updated prop for multiple file upload
+  - table rows and columns inversion issue fixed
+  - updated styles
+
 ## 0.1.2
 
 ### Patch Changes

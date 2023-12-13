@@ -38,39 +38,37 @@ const Example = () => {
 		label: name,
 	}));
 
-	const dummyLookupService = {
-		search(string, callback) {
-			setTimeout(() => {
-				const results = dummyMentionsData.filter((mention) =>
-					mention.label.toLowerCase().includes(string.toLowerCase()),
-				);
-				callback(results);
-			}, 500);
-		},
-	};
-
-	function useMentionLookupService(mentionString) {
+	function useMentionLookupService(mentionString, mentionsData) {
 		const [results, setResults] = useState([]);
 
 		useEffect(() => {
 			if (mentionString === null) {
 				setResults([]);
 			} else {
-				dummyLookupService.search(mentionString, (newResults) => {
-					setResults(newResults);
-				});
+				setResults(
+					mentionsData.filter((mention) =>
+						mention.label.toLowerCase().includes(mentionString.toLowerCase()),
+					),
+				);
 			}
 		}, [mentionString]);
 
 		return results;
 	}
 
-	function convertFileToImageUrl(files) {
-		if (files) {
-			const imgUrl = URL.createObjectURL(files[0]);
-			return imgUrl;
+	function convertFilesToImageUrl(files) {
+		if (!files || files.length === 0) {
+			return null;
 		}
-		return null;
+		const imageUrls = [];
+
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+
+			const imageUrl = URL.createObjectURL(file);
+			imageUrls.push(imageUrl);
+		}
+		return imageUrls.length > 0 ? imageUrls : null;
 	}
 
 	function onChange(_editorRef, payload) {
@@ -82,8 +80,9 @@ const Example = () => {
 			<TextEditor
 				editable={editable}
 				setEditable={setEditable}
+				mentionsData={dummyMentionsData}
 				useMentionLookupService={useMentionLookupService}
-				convertFileToImageUrl={convertFileToImageUrl}
+				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
 			/>
 			{!editable && (

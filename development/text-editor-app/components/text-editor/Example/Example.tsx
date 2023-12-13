@@ -39,23 +39,13 @@ const Example = () => {
 		label: name,
 	}));
 
-	const dummyLookupService = {
-		search(
-			string: string,
-			callback: (
-				results: Array<{ mentionName: string; label: string }>,
-			) => void,
-		): void {
-			setTimeout(() => {
-				const results = dummyMentionsData.filter((mention) =>
-					mention.label.toLowerCase().includes(string.toLowerCase()),
-				);
-				callback(results);
-			}, 500);
-		},
-	};
-
-	function useMentionLookupService(mentionString: string | null) {
+	function useMentionLookupService(
+		mentionString: string | null,
+		mentionsData: Array<{
+			mentionName: string;
+			label: string;
+		}>,
+	) {
 		const [results, setResults] = useState<
 			Array<{ mentionName: string; label: string }>
 		>([]);
@@ -64,21 +54,30 @@ const Example = () => {
 			if (mentionString === null) {
 				setResults([]);
 			} else {
-				dummyLookupService.search(mentionString, (newResults) => {
-					setResults(newResults);
-				});
+				setResults(
+					mentionsData.filter((mention) =>
+						mention.label.toLowerCase().includes(mentionString.toLowerCase()),
+					),
+				);
 			}
 		}, [mentionString]);
 
 		return results;
 	}
 
-	function convertFileToImageUrl(files: FileList | null) {
-		if (files) {
-			const imgUrl = URL.createObjectURL(files[0]);
-			return imgUrl;
+	function convertFilesToImageUrl(files: FileList | null) {
+		if (!files || files.length === 0) {
+			return null;
 		}
-		return null;
+		const imageUrls = [];
+
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+
+			const imageUrl = URL.createObjectURL(file);
+			imageUrls.push(imageUrl);
+		}
+		return imageUrls.length > 0 ? imageUrls : null;
 	}
 
 	function onChange(_editorRef: LexicalEditor | null, payload: any) {
@@ -90,8 +89,9 @@ const Example = () => {
 			<TextEditor
 				editable={editable}
 				setEditable={setEditable}
+				mentionsData={dummyMentionsData}
 				useMentionLookupService={useMentionLookupService}
-				convertFileToImageUrl={convertFileToImageUrl}
+				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
 			/>
 			{!editable && (

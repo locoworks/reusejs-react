@@ -14,30 +14,43 @@ import { TableContext } from "../plugins/TablePlugin/TablePlugin";
 import { ImageNode } from "../plugins/ImagePlugin/ImageNode";
 
 type Props = {
-	useMentionLookupService: (mentionString: string | null) => Array<{
+	mentionsData: Array<{
 		mentionName: string;
 		label: string;
 	}>;
-	convertFileToImageUrl: (files: FileList | null) => string | null;
+	useMentionLookupService?: (
+		mentionString: string | null,
+		mentionsData: Array<{
+			mentionName: string;
+			label: string;
+		}>,
+	) => Array<{
+		mentionName: string;
+		label: string;
+	}>;
+	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	wrapperClass?: string;
 	editable: boolean;
-	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
-	prePopulate?: () => void;
+	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
+	placeholderText?: string;
+	htmlData?: string;
 };
 
 const TextEditor = ({
+	mentionsData,
 	useMentionLookupService,
-	convertFileToImageUrl,
+	convertFilesToImageUrl,
 	onChangeCallback,
 	wrapperClass,
 	editable,
 	setEditable,
-	prePopulate,
+	placeholderText,
+	htmlData,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
+
 	const initialConfig = {
-		editorState: prePopulate || null,
 		namespace: "Editor",
 		theme: EditorTheme,
 		onError: (error: Error) => {
@@ -62,12 +75,15 @@ const TextEditor = ({
 				<TableContext>
 					<div className="editor-shell">
 						<Editor
-							convertFileToImageUrl={convertFileToImageUrl}
+							htmlData={htmlData}
+							convertFilesToImageUrl={convertFilesToImageUrl}
+							mentionsData={mentionsData}
 							useMentionLookupService={useMentionLookupService}
 							onChangeCallback={onChangeCallback}
 							editState={editable}
 							setEditable={setEditable}
 							editorRef={editorRef}
+							placeholderText={placeholderText}
 						/>
 					</div>
 				</TableContext>
