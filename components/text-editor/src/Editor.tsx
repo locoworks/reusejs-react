@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { TabIndentationPlugin } from "@lexical/react/LexicalTabIndentationPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -17,7 +17,14 @@ import { HeadingNode } from "@lexical/rich-text";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkNode, AutoLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getRoot, $nodesOfType, EditorState, LexicalEditor } from "lexical";
+import {
+	$getRoot,
+	$isElementNode,
+	$nodesOfType,
+	EditorState,
+	LexicalEditor,
+	LexicalNode,
+} from "lexical";
 
 import { EditorTheme } from "../theme";
 import { MentionNode } from "../plugins/MentionPlugin/MentionNode";
@@ -27,6 +34,8 @@ import MentionPlugin from "../plugins/MentionPlugin/MentionPlugin";
 import ImagesPlugin from "../plugins/ImagePlugin/ImagePlugin";
 import ToolbarPlugin from "./Toolbar";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
+import { $isTableNode, Cell } from "../plugins/TablePlugin/TableNode";
+import { DraggableBlockPlugin } from "../plugins/DraggableBlockPlugin/DraggableBlock";
 
 type EditorProps = {
 	editorRef: React.MutableRefObject<LexicalEditor | null>;
@@ -64,6 +73,14 @@ function Editor({
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
+	const [floatingAnchorElem, setFloatingAnchorElem] =
+		useState<HTMLDivElement | null>(null);
+
+	const onRef = (_floatingAnchorElem: HTMLDivElement) => {
+		if (_floatingAnchorElem !== null) {
+			setFloatingAnchorElem(_floatingAnchorElem);
+		}
+	};
 
 	useEffect(() => {
 		if (setEditable) editor.setEditable(editState);
@@ -71,6 +88,39 @@ function Editor({
 
 	const placeholder = <div className="placeholder">{placeholderText}</div>;
 
+	function getTextContent(rootNode: LexicalNode) {
+		let textContent = "";
+		if ($isTableNode(rootNode)) {
+			let tableContent = "";
+			rootNode.__rows.map((row) => {
+				let rowContent = "";
+				row.cells.map((cell: Cell) => {
+					rowContent += cell.text + " ";
+				});
+				tableContent += rowContent;
+			});
+			textContent += tableContent;
+		} else {
+			const children = rootNode.getChildren();
+			const childrenLength = children.length;
+			for (let i = 0; i < childrenLength; i++) {
+				const child = children[i];
+
+				if ($isElementNode(child) && !child.isInline()) {
+					textContent += getTextContent(child) + " , ";
+				} else {
+					textContent += child.getTextContent();
+				}
+			}
+		}
+		return textContent;
+	}
+
+	function getTableTextContent() {
+		const rootNodes = $getRoot().getChildren();
+		const rootTexts = rootNodes.map(getTextContent);
+		return rootTexts;
+	}
 	const onChange = (_editorState: EditorState, editor: LexicalEditor) => {
 		editor.update(() => {
 			const payload: any = {};
@@ -78,6 +128,7 @@ function Editor({
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
 			payload["mentions"] = $nodesOfType(MentionNode);
+			payload["content"] = getTableTextContent();
 
 			onChangeCallback?.(editorRef.current, payload);
 		});
@@ -143,7 +194,7 @@ function Editor({
 					<RichTextPlugin
 						contentEditable={
 							<div className="editor-scroller">
-								<div className="editor">
+								<div className="editor" ref={onRef}>
 									<ContentEditable className="editor-contentEditable" />
 								</div>
 							</div>
@@ -171,7 +222,10 @@ function Editor({
 						<AutoFocusPlugin />
 						<LexicalClickableLinkPlugin />
 					</NewTablePlugin>
-					{isEditable && <LexicalClickableLinkPlugin />}
+					<LexicalClickableLinkPlugin />
+					{floatingAnchorElem && (
+						<DraggableBlockPlugin anchorElem={floatingAnchorElem} />
+					)}
 					<OnChangePlugin onChange={onChange} />
 				</div>
 			)}
