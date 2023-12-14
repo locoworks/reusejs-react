@@ -116,9 +116,11 @@ function Editor({
 		return textContent;
 	}
 
-	function getTableTextContent() {
+	function getCustomTextContent() {
 		const rootNodes = $getRoot().getChildren();
-		const rootTexts = rootNodes.map(getTextContent);
+		const rootTexts = rootNodes
+			.map(getTextContent)
+			.filter((text) => text !== "");
 		return rootTexts;
 	}
 	const onChange = (_editorState: EditorState, editor: LexicalEditor) => {
@@ -128,7 +130,7 @@ function Editor({
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
 			payload["mentions"] = $nodesOfType(MentionNode);
-			payload["content"] = getTableTextContent();
+			payload["content"] = getCustomTextContent();
 
 			onChangeCallback?.(editorRef.current, payload);
 		});
