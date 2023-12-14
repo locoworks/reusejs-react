@@ -5,6 +5,7 @@ import {
 } from "@locoworks/reusejs-react-video-recorder";
 
 const Example = () => {
+	const videoRecorderRef = useRef<HeadlessVideoRecorderRef>(null);
 	const mediaConstraints = {
 		video: {
 			width: { ideal: 440, max: 440 },
@@ -12,7 +13,7 @@ const Example = () => {
 		},
 		audio: false,
 	};
-	const videoRecorderRef = useRef<HeadlessVideoRecorderRef>(null);
+
 	const showPreview = () => {
 		if (videoRecorderRef.current) {
 			videoRecorderRef.current.showPreview();
