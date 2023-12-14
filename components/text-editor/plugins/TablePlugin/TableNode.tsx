@@ -18,7 +18,7 @@ export type Cell = {
 	type: "normal" | "header";
 	id: string;
 	width: number | null;
-	text: string | null;
+	text: string;
 };
 
 export type Row = {
