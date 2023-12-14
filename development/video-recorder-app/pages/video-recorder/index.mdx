@@ -1,7 +1,7 @@
 ---
 HEAD OBJECT
 title: "ReuseJS video-recorder"
-author: "Upneet Kaur"
+author: "Upneet Kaur Hunjan"
 ---
 
 import Example from "../../components/video-recorder/Example/Example.tsx"
@@ -34,7 +34,13 @@ import { HeadlessVideoRecorder, HeadlessVideoRecorderRef, VideoState } from "@lo
 
 ## External Dependencies
 
-The `useTimer` hook to achieve functionality of timer that we see for the video recording. Need to install useTimer hook
+The VideoRecorder uses the `useTimer` hook to achieve functionality of timer that we see for the video recording. Thus, make sure to install the `@locoworks/reusejs-toolkit-react-hooks` module.
+
+```bash
+npm install @locoworks/reusejs-toolkit-react-hooks
+or
+yarn add @locoworks/reusejs-toolkit-react-hooks
+```
 
 ## Types/Exported Components
 
@@ -43,6 +49,7 @@ The `useTimer` hook to achieve functionality of timer that we see for the video 
   - recording: Current state of the video recording ("`inactive`" | "`preview`" | "`recording`" | "`recorded`").
   - handleDownload: Function to trigger the download of the recorded video.
   - showPreview: Function to display the video preview.
+
 ```jsx
 interface HeadlessVideoRecorderRef {
 	recording: VideoState;
@@ -50,7 +57,9 @@ interface HeadlessVideoRecorderRef {
 	showPreview: () => void;
 }
 ```
+
 - `VideoState` type is an enum that defines the possible states of the video recorder.
+
 ```jsx
 type VideoState = "inactive" | "preview" | "recording" | "recorded";
 ```
