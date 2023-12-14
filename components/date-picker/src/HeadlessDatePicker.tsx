@@ -16,6 +16,7 @@ interface Props {
 	datePickerWrapperClasses?: string;
 	label?: React.ReactNode;
 	inputWrapperClasses?: string;
+	labelClasses?: string;
 	inputClasses?: string;
 	invalidDateClasses?: string;
 	suffixWrapperClasses?: string;
@@ -24,17 +25,24 @@ interface Props {
 	helperText?: React.ReactNode;
 	errorText?: React.ReactNode;
 	calendarBaseClasses?: CalendarBaseClassesProps;
+	dateCallback?: (date: Date) => void;
+	prevMonthLabel?: React.ReactNode;
+	nextMonthLabel?: React.ReactNode;
+	prevYearLabel?: React.ReactNode;
+	nextYearLabel?: React.ReactNode;
 }
+
 const HeadlessDatePicker = ({
 	defaultValue = new Date(),
 	minDate = new Date("1000,0,1"),
 	maxDate,
 	dateFormat = "MM/dd/yyyy",
-	label = "Select Date",
+	label = <></>,
 	suffix = <></>,
 	helperText = <></>,
 	errorText = <></>,
 	wrapperClasses,
+	labelClasses,
 	inputWrapperClasses,
 	inputClasses,
 	suffixWrapperClasses,
@@ -42,6 +50,11 @@ const HeadlessDatePicker = ({
 	calendarContainerClasses,
 	invalidDateClasses,
 	calendarBaseClasses,
+	prevMonthLabel,
+	nextMonthLabel,
+	prevYearLabel,
+	nextYearLabel,
+	dateCallback,
 }: Props) => {
 	const { isValidDate, getFormattedDate, parseCustomDate } = useDateHelpers();
 
@@ -78,7 +91,9 @@ const HeadlessDatePicker = ({
 		if (isValidDate(value, dateFormat)) {
 			newState.invalidDate = false;
 			newState.currentSelected = parseCustomDate(value, dateFormat);
-			onChangeCallback(newState.currentSelected);
+			if (newState?.currentSelected) {
+				onChangeCallback(newState.currentSelected);
+			}
 		}
 
 		setInvalidDate(newState.invalidDate);
@@ -86,23 +101,26 @@ const HeadlessDatePicker = ({
 	};
 
 	return (
-		<div className={`relative ${wrapperClasses}`}>
+		<div className={twMerge("relative", wrapperClasses)}>
 			<div className="relative" ref={datePickerRef}>
 				<div
-					className={datePickerWrapperClasses || ""}
+					className={datePickerWrapperClasses}
 					onClick={() => setIsOpen(true)}
 				>
-					<label>{label}</label>
+					<label className={labelClasses}>{label}</label>
 
-					<div className={`relative ${inputWrapperClasses || ""}`}>
+					<div
+						className={twMerge(
+							"relative",
+							inputWrapperClasses,
+							invalidDate && invalidDateClasses,
+						)}
+					>
 						<input
 							type="text"
 							name="date"
 							placeholder={dateFormat}
-							className={twMerge(
-								inputClasses,
-								invalidDate && invalidDateClasses,
-							)}
+							className={inputClasses}
 							value={tempDate}
 							onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
 								updateDate(event)
@@ -135,10 +153,14 @@ const HeadlessDatePicker = ({
 						calendarBaseClasses={calendarBaseClasses}
 						onChange={(d: Date) => {
 							onChangeCallback(d);
-							setIsOpen(false);
+							dateCallback && dateCallback(d);
 						}}
 						maxDate={maxDate}
 						minDate={minDate}
+						prevMonthLabel={prevMonthLabel}
+						nextMonthLabel={nextMonthLabel}
+						prevYearLabel={prevYearLabel}
+						nextYearLabel={nextYearLabel}
 					/>
 				</div>
 			)}

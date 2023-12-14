@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-select-dropdown
 
+## 0.2.0
+
+### Minor Changes
+
+- e33d015: Added selected valeues to be returned on Change
+
 ## 0.1.1
 
 ### Patch Changes

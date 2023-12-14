@@ -4,6 +4,7 @@ title: "ReuseJS date-picker"
 author: "Upneet Kaur"
 ---
 import Example  from "../../components/date-picker/Example/Example.tsx"
+import CustomDatePicker from "../../components/date-picker/CustomDatePicker/CustomDatePicker.tsx"
 
 ## Date Picker
 
@@ -51,22 +52,28 @@ The `HeadlessDatePicker` component accepts the following props:
 - `label` (optional): The label for the date picker.
 - `inputWrapperClasses` (optional): Additional classes for the input wrapper.
 - `inputClasses` (optional): Additional classes for the input field.
+- `labelClasses` (optional): Additional classes for styling label field.
 - `suffix` (optional): A React node to be displayed as a suffix in the input field.
 - `suffixWrapperClasses` (optional): Additional classes for the suffix wrapper.
 - `calendarContainerClasses` (optional): Additional classes for the calendar container.
 - `invalidDateClasses` (optional): Additional classes for the input when the date is invalid.
+- `prevMonthLabel` (optional): A React Component on calendar for navigating to previous month.
+- `nextMonthLabel` (optional): A React Component on calendar for navigating to next month.
+- `prevYearLabel` (optional): A React component used in the calendar to navigate to the previous set of 10 years.
+- `nextYearLabel` (optional): A React component used in the calendar to navigate to the next set of 10 years.
+- `dateCallback` (optional): A callback function for accessing the selected date.
 - `calendarBaseClasses` (optional): Props for customizing the calendar appearance.
 
 ### `CalendarBaseClassesProps` Props
 
-`CalendarBaseClassesProps` is an interface that allows you to customize the appearance of the calendar. It includes the following props:
+`CalendarBaseClassesProps` is an interface that allows you to customize the appearance of the calendar, including the year and month selector components. It includes the following props:
 
 - `calendarWrapperClasses` : CSS classes for the calendar wrapper.
 - `calendarHeaderButtonsWrapper` : CSS classes for the header buttons wrapper.
 - `headerButtonClasses` : CSS classes for the header buttons.
 - `singleCalenderSectionWrapper` : CSS classes for the single calendar section wrapper.
 - `calendarWeeksClasses` : CSS classes for the calendar weeks section .
-- `monthNameClasses` : CSS classes for the month name.
+- `calendarHeaderClasses` : CSS classes for the month name.
 - `weekNameWrapper` : CSS classes for the week name wrapper.
 - `weekNameClasses` : CSS classes for the week name.
 - `selectableClasses` : CSS classes for selectable dates.
@@ -76,11 +83,26 @@ The `HeadlessDatePicker` component accepts the following props:
 - `selectedTextClasses` : CSS classes for the selected date text.
 - `selectableTextClasses` : CSS classes for the selectable date text.
 - `todayButNotSelectedClasses` : CSS classes for today's date when not selected.
+#### Year and Month Selector Props
+- `yearSelectorWrapperClasses` : CSS classes for styling the year selector wrapper.
+- `yearSelectorHeaderWrapperClasses` : CSS classes for styling the header wrapper of the year selector.
+- `yearSelectorHeaderClasses` : CSS classes for styling the header of the year selector.
+- `yearsContainerClasses` : CSS classes for styling the container of the selectable years.
+- `yearClasses` : CSS classes for styling individual years.
+- `monthSelectorWrapperClasses` : CSS classes for styling the month selector wrapper.
+- `monthsContainerClasses` : CSS classes for styling the container of the selectable months.
+- `monthClasses` : CSS classes for styling individual months.
 
 ## Usage/Examples 
 
+### Sample Code Demo
 <Example/>
 ```js path=../../components/date-picker/Example name=Example
+```
+
+### Customised Date Picker
+<CustomDatePicker/>
+```js path=../../components/date-picker/CustomDatePicker name=CustomDatePicker
 ```
 
 ## Styling
@@ -102,6 +124,12 @@ You can style the component using Tailwind CSS and CSS. Feel free to customize t
 | `suffixWrapperClasses` | `string` (optional) | -              | Additional classes for the suffix wrapper.                         |
 | `calendarContainerClasses` | `string` (optional) | -      | Additional classes for the calendar container.                    |
 | `invalidDateClasses` | `string` (optional) | -                 | Additional classes for the input when the date is invalid.        |
+| `labelClasses` | `string` (optional) | -                 | Additional classes for the label field.        |
+| `prevMonthLabel` | `ReactNode` (optional) | -                 | The label for previous month in the calendar.        |
+| `nextMonthLabel` | `ReactNode` (optional) | -                 | The label for next month in the calendar.        |
+| `prevNextLabel` | `ReactNode` (optional) | -                 | The label for previous year range in the calendar.        |
+| `nextNextLabel` | `ReactNode` (optional) | -                 | The label for next year range in the calendar.        |
+| `dateCallback` | `(Date) => void` (optional) | -                 | A callback function for accessing the selected date.        |
 | `calendarBaseClasses` | `CalendarBaseClassesProps` (optional) | - | Props for customizing the calendar appearance.                  |
 
 ### `CalendarBaseClassesProps` Props
@@ -114,7 +142,7 @@ You can style the component using Tailwind CSS and CSS. Feel free to customize t
 | `calendarHeaderButtonsWrapper` | `string` | -             | CSS classes for the header buttons wrapper.         |
 | `headerButtonClasses`       | `string`   | -             | CSS classes for the header buttons.                   |
 | `singleCalenderSectionWrapper` | `string` | -            | CSS classes for the single calendar section wrapper. |
-| `monthNameClasses`          | `string`   | -             | CSS classes for the month name.                       |
+| `calendarHeaderClasses`          | `string`   | -             | CSS classes for the month name.                       |
 | `weekNameWrapper`           | `string`   | -             | CSS classes for the week name wrapper.                |
 | `calendarWeeksClasses`      | `string`   | -             | CSS classes for the calendar weeks wrapper.                |
 | `weekNameClasses`           | `string`   | -             | CSS classes for the week name.                        |
@@ -125,6 +153,14 @@ You can style the component using Tailwind CSS and CSS. Feel free to customize t
 | `selectedTextClasses`       | `string`   | -             | CSS classes for the selected date text.               |
 | `selectableTextClasses`     | `string`   | -             | CSS classes for the selectable date text.             |
 | `todayButNotSelectedClasses` | `string`  | -            | CSS classes for today's date when not selected.        |
+| `yearSelectorWrapperClasses` | `string`  | -             | CSS classes for styling the year selector wrapper.      |
+| `yearSelectorHeaderWrapperClasses` | `string` | -       | CSS classes for styling the header wrapper of the year selector. |
+| `yearSelectorHeaderClasses` | `string`   | -             | CSS classes for styling the header of the year selector. |
+| `yearsContainerClasses`     | `string`   | -             | CSS classes for styling the container of the selectable years. |
+| `yearClasses`               | `string`   | -             | CSS classes for styling individual years.               |
+| `monthSelectorWrapperClasses` | `string` | -             | CSS classes for styling the month selector wrapper.     |
+| `monthsContainerClasses`    | `string`   | -             | CSS classes for styling the container of the selectable months. |
+| `monthClasses`              | `string`   | -             | CSS classes for styling individual months.              |
 
 
 ## Notes

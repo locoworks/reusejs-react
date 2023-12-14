@@ -3,6 +3,7 @@ import remarkToc from "remark-toc";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import codeImport from "@locoworks/remark-folder-import";
+import remarkGfm from "remark-gfm";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
@@ -10,7 +11,7 @@ const withMDX = createMDX({
     // If you use remark-gfm, you'll need to use next.config.mjs
     // as the package is ESM only
     // https://github.com/remarkjs/remark-gfm#install
-    remarkPlugins: [remarkToc, codeImport],
+    remarkPlugins: [remarkToc, codeImport,remarkGfm],
     rehypePlugins: [
       rehypeSlug,
       [

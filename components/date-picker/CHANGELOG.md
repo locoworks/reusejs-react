@@ -1,5 +1,44 @@
 # @locoworks/reusejs-react-date-picker
 
+## 3.1.0
+
+### Minor Changes
+
+- 3d6ce17: -Added Month Selector Component
+  -Added Year Selector Component
+  and related props
+
+## 3.0.2
+
+### Patch Changes
+
+- 19ec0bb: Fixed Types path for new bundle
+
+## 3.0.1
+
+### Patch Changes
+
+- 3ecf021: Changes:
+
+  - Custom Buttons for prev and next months
+  - Top Label: (Hide, Pass Custom Text, Pass Custom Component)
+  - Call back for getting new selected date.
+
+- 303a559: - Implemented usage of twMerge in Calendar and HeadlessDatePicker
+
+## 3.0.0
+
+### Major Changes
+
+- 19f3501: - Resolved the error related to the missing declaration file for the '@locoworks/reusejs-react-date-picker' module.
+  - Removed the inclusion of the hook from the tsconfig configuration.
+
+## 2.0.1
+
+### Patch Changes
+
+- 17c646c: Added Grid layout to datepicker
+
 ## 2.0.0
 
 ### Major Changes
