@@ -14,10 +14,12 @@ import { TableContext } from "../plugins/TablePlugin/TablePlugin";
 import { ImageNode } from "../plugins/ImagePlugin/ImageNode";
 
 type Props = {
-	mentionsData: Array<{
-		mentionName: string;
-		label: string;
-	}>;
+	mentionsData?:
+		| Array<{
+				mentionName: string;
+				label: string;
+		  }>
+		| false;
 	useMentionLookupService?: (
 		mentionString: string | null,
 		mentionsData: Array<{
@@ -38,7 +40,7 @@ type Props = {
 };
 
 const TextEditor = ({
-	mentionsData,
+	mentionsData = false,
 	useMentionLookupService,
 	convertFilesToImageUrl,
 	onChangeCallback,

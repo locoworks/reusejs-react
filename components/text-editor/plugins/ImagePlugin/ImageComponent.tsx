@@ -88,7 +88,7 @@ function LazyImage({
 				maxWidth,
 				width,
 			}}
-			draggable="false"
+			draggable="true"
 		/>
 	);
 }

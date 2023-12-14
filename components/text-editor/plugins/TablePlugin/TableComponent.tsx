@@ -214,10 +214,14 @@ function $updateCells(
 			cellEditor.update(fn, { discrete: true });
 			cellEditor._headless = false;
 			const newJSON = JSON.stringify(cellEditor.getEditorState());
+			const newText = cellEditor
+				.getEditorState()
+				.read(() => $getRoot().getTextContent());
+
 			updateTableNode((tableNode) => {
 				const [x, y] = cellCoordMap.get(id) as [number, number];
 				$addUpdateTag("history-push");
-				tableNode.updateCellJSON(x, y, newJSON);
+				tableNode.updateCellJSON(x, y, newJSON, newText);
 			});
 		}
 	}
@@ -850,6 +854,10 @@ export default function TableComponent({
 	const saveEditorToJSON = useCallback(() => {
 		if (cellEditor !== null && primarySelectedCellID !== null) {
 			const json = JSON.stringify(cellEditor.getEditorState());
+			const text = cellEditor
+				.getEditorState()
+				.read(() => $getRoot().getTextContent());
+
 			updateTableNode((tableNode) => {
 				const coords = cellCoordMap.get(primarySelectedCellID);
 				if (coords === undefined) {
@@ -857,7 +865,7 @@ export default function TableComponent({
 				}
 				$addUpdateTag("history-push");
 				const [x, y] = coords;
-				tableNode.updateCellJSON(x, y, json);
+				tableNode.updateCellJSON(x, y, json, text);
 			});
 		}
 	}, [cellCoordMap, cellEditor, primarySelectedCellID, updateTableNode]);
@@ -1155,7 +1163,6 @@ export default function TableComponent({
 		} else if (isSelected) {
 			updateTableNode((tableNode) => {
 				$addUpdateTag("history-push");
-				tableNode.selectNext();
 				tableNode.remove();
 			});
 		}
