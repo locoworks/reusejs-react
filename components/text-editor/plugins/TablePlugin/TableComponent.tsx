@@ -1155,7 +1155,6 @@ export default function TableComponent({
 		} else if (isSelected) {
 			updateTableNode((tableNode) => {
 				$addUpdateTag("history-push");
-				tableNode.selectNext();
 				tableNode.remove();
 			});
 		}
