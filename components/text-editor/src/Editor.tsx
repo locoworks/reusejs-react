@@ -41,10 +41,12 @@ type EditorProps = {
 	editorRef: React.MutableRefObject<LexicalEditor | null>;
 	editState: boolean;
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
-	mentionsData: Array<{
-		mentionName: string;
-		label: string;
-	}>;
+	mentionsData?:
+		| Array<{
+				mentionName: string;
+				label: string;
+		  }>
+		| false;
 	useMentionLookupService?: (
 		mentionString: string | null,
 		mentionsData: Array<{
@@ -64,7 +66,7 @@ function Editor({
 	editorRef,
 	editState,
 	setEditable,
-	mentionsData,
+	mentionsData = false,
 	useMentionLookupService,
 	convertFilesToImageUrl,
 	onChangeCallback,
@@ -129,7 +131,7 @@ function Editor({
 			const htmlString = $generateHtmlFromNodes(editor, null);
 			payload["html"] = htmlString;
 			payload["json"] = JSON.stringify(editor.getEditorState());
-			payload["mentions"] = $nodesOfType(MentionNode);
+			if (mentionsData) payload["mentions"] = $nodesOfType(MentionNode);
 			payload["content"] = getCustomTextContent();
 
 			onChangeCallback?.(editorRef.current, payload);
@@ -208,10 +210,12 @@ function Editor({
 					<AutoLinkPlugin matchers={MATCHERS} />
 					<TabIndentationPlugin />
 					<ImagesPlugin />
-					<MentionPlugin
-						mentionsData={mentionsData}
-						useMentionLookupService={useMentionLookupService}
-					/>
+					{mentionsData && (
+						<MentionPlugin
+							mentionsData={mentionsData}
+							useMentionLookupService={useMentionLookupService}
+						/>
+					)}
 					<NewTablePlugin cellEditorConfig={cellEditorConfig}>
 						<RichTextPlugin
 							contentEditable={
