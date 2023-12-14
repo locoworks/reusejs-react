@@ -2,6 +2,7 @@ export { default as BoldIcon } from "./BoldIcon";
 export { default as BulletListIcon } from "./BulletListIcon";
 export { default as ChevronDownIcon } from "./ChevronDown";
 export { default as CloseIcon } from "./CloseIcon";
+export { default as DraggableBlockIcon } from "./DraggableBlockIcon";
 export { default as ImageIcon } from "./ImageIcon";
 export { default as ItalicIcon } from "./ItalicIcon";
 export { default as NumberedListIcon } from "./NumberedListIcon";
