@@ -54,13 +54,6 @@ const PrepopulatedTextEditor = () => {
 
 	const [editable, setEditable] = useState<boolean>(false);
 	const [data, setData] = useState<string | TrustedHTML>(htmlData);
-	const dummyData = [
-		{ mentionName: "user_xxx", label: "xxx" },
-		{ mentionName: "user_yyy", label: "yyy" },
-		{ mentionName: "user_zzz", label: "zzz" },
-		{ mentionName: "user_www", label: "www" },
-		{ mentionName: "user_vvv", label: "vvv" },
-	];
 
 	function convertFilesToImageUrl(files: FileList | null) {
 		if (!files || files.length === 0) {
@@ -87,7 +80,6 @@ const PrepopulatedTextEditor = () => {
 				htmlData={htmlData}
 				editable={editable}
 				setEditable={setEditable}
-				mentionsData={dummyData}
 				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
 			/>
