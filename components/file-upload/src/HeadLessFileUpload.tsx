@@ -31,7 +31,6 @@ function HeadlessFileUpload(
 			className={className}
 			accept={acceptAttribute}
 			onChange={async (e: any) => {
-				console.log("on change is running");
 				await handleAfterFileUploadHook?.(e);
 			}}
 			multiple={allowsMultiple}
