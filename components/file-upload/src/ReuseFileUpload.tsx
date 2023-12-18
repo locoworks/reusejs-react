@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, useState } from "react";
+import React, { ForwardedRef, forwardRef, useEffect, useState } from "react";
 import { HeadlessFileUploadProps } from "./HeadlessFileUpload";
 import HeadlessFileUpload from "./HeadlessFileUpload";
 import { twMerge } from "tailwind-merge";
@@ -13,6 +13,7 @@ export interface ReuseFileUploadProps extends HeadlessFileUploadProps {
 	customLoader?: React.ReactNode | React.ReactNode[];
 	fileSize?: number;
 	setCustomError?: (e: any) => void;
+	enableDragAndDrop?: boolean;
 }
 
 function ReuseFileUpload(
@@ -20,6 +21,9 @@ function ReuseFileUpload(
 	ref: ForwardedRef<HTMLInputElement>,
 ) {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isDraggedOver, setIsDraggedOver] = useState<boolean>(false);
+
+	useState<any>(false);
 	const {
 		baseClassName = "",
 		wrapperClassName = "",
@@ -31,28 +35,31 @@ function ReuseFileUpload(
 		customLoader = null,
 		fileSize = 5242880, //5mb
 		setCustomError = () => {},
+		enableDragAndDrop = false,
 		...rest
 	} = props;
 
-	const readFile = (file: File) => {
-		return new Promise<string | ArrayBuffer | null>((resolve) => {
-			const reader = new FileReader();
-			reader.onloadend = () => resolve(reader.result);
-			reader.readAsDataURL(file);
-		});
-	};
-	const loadFile = async (files: FileList) => {
-		try {
-			for (let i = 0; i < files.length; i++) {
-				await readFile(files[i]);
+	useEffect(() => {
+		console.log({ enableDragAndDrop });
+	}, [enableDragAndDrop]);
+
+	const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDraggedOver(false);
+		if (enableDragAndDrop) {
+			if (typeof ref === "object" && ref !== null && ref.current !== null) {
+				ref.current.files = e.dataTransfer.files;
+				const event = new Event("change", { bubbles: true });
+				ref.current.dispatchEvent(event);
 			}
-		} catch (error) {
-			console.log(error);
-			setCustomError(error);
-		} finally {
-			setIsLoading(false);
 		}
 	};
+
+	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDraggedOver(true);
+	};
+
 	const LoaderFunction = async (e: any) => {
 		if (typeof ref === "object" && ref !== null && ref.current !== null) {
 			const files = e.target.files;
@@ -62,9 +69,6 @@ function ReuseFileUpload(
 					const isValid = await validateInput(e, files);
 					if (!isValid) {
 						e.target.value = "";
-					}
-					if (isValid) {
-						await loadFile(files);
 					}
 					setIsLoading(false);
 				} catch (error) {
@@ -145,7 +149,12 @@ function ReuseFileUpload(
 	);
 
 	return (
-		<div className={wrapperClassName}>
+		<div
+			className={wrapperClassName}
+			onDragOver={handleDragOver}
+			onDrop={handleDrop}
+		>
+			{isDraggedOver ? "Drop it here" : ""}
 			{isLoading ? (
 				customLoader ? (
 					customLoader

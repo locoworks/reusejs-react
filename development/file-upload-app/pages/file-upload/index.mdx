@@ -10,6 +10,9 @@ import ReuseFileUploadSample from "../../components/file-upload/ReuseFileUploadS
 import BeforeAfterHookFileUpload from "../../components/file-upload/BeforeAfterHookFileUpload/BeforeAfterHookFileUpload.tsx"
 import MultiFileReuseFileUpload from "../../components/file-upload/MultiFileReuseFileUpload/MultiFileReuseFileUpload"
 import AcceptFileUpload from "../../components/file-upload/AcceptFileUpload/AcceptFileUpload"
+import DragAndDrop from "../../components/file-upload/DragAndDrop/DragAndDrop"
+
+
 
 ## File Upload
 
@@ -80,6 +83,7 @@ All the Props of the `HeadlessFileUpload` can be passed to the `ReuseFileUpload`
 - customLoader: Custom Loader.
 - fileSize: Size of the file to be uploaded.
 - setCustomError: Error object.
+- enableDragAndDrop: If you want to Enable the DragAndDrop import of files.
 
 
 
@@ -123,6 +127,14 @@ All the Props of the `HeadlessFileUpload` can be passed to the `ReuseFileUpload`
 
 <AcceptFileUpload/>
 ```jsx path=../../components/file-upload/AcceptFileUpload name=AcceptFileUpload
+```
+
+
+
+### DragAndDrop
+
+<DragAndDrop/>
+```jsx path=../../components/file-upload/DragAndDrop name=DragAndDrop
 ```
 
 
