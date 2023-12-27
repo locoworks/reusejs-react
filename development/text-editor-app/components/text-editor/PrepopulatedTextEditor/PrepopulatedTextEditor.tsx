@@ -46,7 +46,7 @@ const PrepopulatedTextEditor = () => {
 
 	setTimeout(() => {
 		setHtmlData(payload);
-	}, 3000);
+	}, 5000);
 
 	useEffect(() => {
 		setData(htmlData);
@@ -54,16 +54,6 @@ const PrepopulatedTextEditor = () => {
 
 	const [editable, setEditable] = useState<boolean>(false);
 	const [data, setData] = useState<string | TrustedHTML>(htmlData);
-
-	function useMentionLookupService() {
-		return [
-			{ mentionName: "user_xxx", label: "xxx" },
-			{ mentionName: "user_yyy", label: "yyy" },
-			{ mentionName: "user_zzz", label: "zzz" },
-			{ mentionName: "user_www", label: "www" },
-			{ mentionName: "user_vvv", label: "vvv" },
-		];
-	}
 
 	function convertFilesToImageUrl(files: FileList | null) {
 		if (!files || files.length === 0) {
@@ -90,7 +80,6 @@ const PrepopulatedTextEditor = () => {
 				htmlData={htmlData}
 				editable={editable}
 				setEditable={setEditable}
-				useMentionLookupService={useMentionLookupService}
 				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
 			/>

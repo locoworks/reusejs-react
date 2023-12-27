@@ -28,8 +28,6 @@ import {
 import { useCallback, useEffect, useState } from "react";
 
 import useModal from "../utils/useModal";
-import { getSelectedNode } from "../utils/getSelectedNode";
-import { $isTableNode } from "../plugins/TablePlugin/TableNode";
 import { InsertNewTableDialog } from "../plugins/TablePlugin/TablePlugin";
 import { InsertImageDialog } from "../plugins/ImagePlugin/ImagePlugin";
 import {
@@ -51,11 +49,6 @@ const blockTypeToBlockName = {
 	number: "Numbered List",
 };
 
-const rootTypeToRootName = {
-	root: "Root",
-	table: "Table",
-};
-
 function buttonActiveClass(active: boolean) {
 	if (active) return "active dropdown-item-active";
 	else return "";
@@ -64,12 +57,9 @@ function buttonActiveClass(active: boolean) {
 function BlockTextFormat({
 	editor,
 	blockType,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	rootType,
 	disabled = false,
 }: {
 	blockType: keyof typeof blockTypeToBlockName;
-	rootType: keyof typeof rootTypeToRootName;
 	editor: LexicalEditor;
 	disabled?: boolean;
 }): JSX.Element {
@@ -118,19 +108,18 @@ function BlockTextFormat({
 function Divider(): JSX.Element {
 	return <div className="divider" />;
 }
+
 export default function ToolbarPlugin({
 	convertFilesToImageUrl,
 	setEditable,
 }: {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
-	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
+	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
 	const [blockType, setBlockType] =
 		useState<keyof typeof blockTypeToBlockName>("paragraph");
-	const [rootType, setRootType] =
-		useState<keyof typeof rootTypeToRootName>("root");
 
 	const [isBold, setIsBold] = useState(false);
 	const [isItalic, setIsItalic] = useState(false);
@@ -161,14 +150,6 @@ export default function ToolbarPlugin({
 			setIsBold(selection.hasFormat("bold"));
 			setIsItalic(selection.hasFormat("italic"));
 			setIsUnderline(selection.hasFormat("underline"));
-
-			const node = getSelectedNode(selection);
-			const tableNode = $findMatchingParent(node, $isTableNode);
-			if ($isTableNode(tableNode)) {
-				setRootType("table");
-			} else {
-				setRootType("root");
-			}
 
 			if (elementDOM !== null) {
 				if ($isListNode(element)) {
@@ -205,7 +186,7 @@ export default function ToolbarPlugin({
 	useEffect(() => {
 		return mergeRegister(
 			editor.registerEditableListener((editable) => {
-				setEditable(editable);
+				setEditable && setEditable(editable);
 			}),
 			activeEditor.registerUpdateListener(({ editorState }) => {
 				editorState.read(() => {
@@ -235,7 +216,7 @@ export default function ToolbarPlugin({
 		<div className="toolbar__wrapper">
 			<div className="toolbar">
 				<button
-					disabled={!canUndo}
+					disabled={!canUndo || !editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
 					}}
@@ -247,7 +228,7 @@ export default function ToolbarPlugin({
 					</i>
 				</button>
 				<button
-					disabled={!canRedo}
+					disabled={!canRedo || !editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(REDO_COMMAND, undefined);
 					}}
@@ -263,13 +244,14 @@ export default function ToolbarPlugin({
 					<>
 						<BlockTextFormat
 							blockType={blockType}
-							rootType={rootType}
 							editor={editor}
+							disabled={!editor.isEditable()}
 						/>
 						<Divider />
 					</>
 				)}
 				<button
+					disabled={!editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
 					}}
@@ -281,6 +263,7 @@ export default function ToolbarPlugin({
 					</i>
 				</button>
 				<button
+					disabled={!editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
 					}}
@@ -292,6 +275,7 @@ export default function ToolbarPlugin({
 					</i>
 				</button>
 				<button
+					disabled={!editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
 					}}
@@ -304,6 +288,7 @@ export default function ToolbarPlugin({
 				</button>
 				<Divider />
 				<button
+					disabled={!editor.isEditable() || activeEditor !== editor}
 					className="toolbar-item"
 					onClick={() => {
 						showModal("Insert Table", (onClose) => (
@@ -321,6 +306,7 @@ export default function ToolbarPlugin({
 				</button>
 				<Divider />
 				<button
+					disabled={!editor.isEditable() || activeEditor !== editor}
 					className="toolbar-item"
 					onClick={() => {
 						showModal("Insert Image", (onClose) => (
@@ -338,19 +324,22 @@ export default function ToolbarPlugin({
 					<span className="text">Image</span>
 				</button>
 			</div>
-			<div className="toolbar">
-				<button
-					className="toolbar-item"
-					onClick={() => {
-						setEditable(false);
-					}}
-				>
-					<i className="icon ">
-						<SaveIcon />
-					</i>
-					<span className="text">Save</span>
-				</button>
-			</div>
+			{setEditable && (
+				<div className="toolbar">
+					<button
+						disabled={!editor.isEditable()}
+						className="toolbar-item"
+						onClick={() => {
+							setEditable && setEditable(false);
+						}}
+					>
+						<i className="icon ">
+							<SaveIcon />
+						</i>
+						<span className="text">Save</span>
+					</button>
+				</div>
+			)}
 			{modal}
 		</div>
 	);

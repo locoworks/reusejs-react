@@ -14,7 +14,19 @@ import { TableContext } from "../plugins/TablePlugin/TablePlugin";
 import { ImageNode } from "../plugins/ImagePlugin/ImageNode";
 
 type Props = {
-	useMentionLookupService: (mentionString: string | null) => Array<{
+	mentionsData?:
+		| Array<{
+				mentionName: string;
+				label: string;
+		  }>
+		| false;
+	useMentionLookupService?: (
+		mentionString: string | null,
+		mentionsData: Array<{
+			mentionName: string;
+			label: string;
+		}>,
+	) => Array<{
 		mentionName: string;
 		label: string;
 	}>;
@@ -22,12 +34,13 @@ type Props = {
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	wrapperClass?: string;
 	editable: boolean;
-	setEditable: React.Dispatch<React.SetStateAction<boolean>>;
+	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 	placeholderText?: string;
 	htmlData?: string;
 };
 
 const TextEditor = ({
+	mentionsData = false,
 	useMentionLookupService,
 	convertFilesToImageUrl,
 	onChangeCallback,
@@ -40,7 +53,6 @@ const TextEditor = ({
 	const editorRef = useRef<LexicalEditor>(null);
 
 	const initialConfig = {
-		editorState: null,
 		namespace: "Editor",
 		theme: EditorTheme,
 		onError: (error: Error) => {
@@ -67,6 +79,7 @@ const TextEditor = ({
 						<Editor
 							htmlData={htmlData}
 							convertFilesToImageUrl={convertFilesToImageUrl}
+							mentionsData={mentionsData}
 							useMentionLookupService={useMentionLookupService}
 							onChangeCallback={onChangeCallback}
 							editState={editable}

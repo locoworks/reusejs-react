@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, {
+	useState,
+	useMemo,
+	useCallback,
+	useRef,
+	useEffect,
+} from "react";
 import * as ReactDOM from "react-dom";
 import { TextNode } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
@@ -139,18 +145,70 @@ function MentionsTypeaheadMenuItem({
 		</li>
 	);
 }
+
+function defaultLookupService(
+	mentionString: string | null,
+	mentionsData: Array<{
+		mentionName: string;
+		label: string;
+	}>,
+) {
+	const [results, setResults] = useState<
+		Array<{ mentionName: string; label: string }>
+	>([]);
+
+	function defaultSearch(
+		string: string,
+		callback: (results: Array<{ mentionName: string; label: string }>) => void,
+	): void {
+		setTimeout(() => {
+			const results = mentionsData.filter((mention) =>
+				mention.label.toLowerCase().includes(string.toLowerCase()),
+			);
+			callback(results);
+		}, 500);
+	}
+
+	useEffect(() => {
+		if (mentionString === null) {
+			setResults([]);
+		} else {
+			defaultSearch(mentionString, (newResults) => {
+				setResults(newResults);
+			});
+		}
+	}, [mentionString]);
+
+	return results;
+}
+
 type Props = {
-	useMentionLookupService: (mentionString: string | null) => Array<{
+	mentionsData: Array<{
+		mentionName: string;
+		label: string;
+	}>;
+	useMentionLookupService?: (
+		mentionString: string | null,
+		mentionsData: Array<{
+			mentionName: string;
+			label: string;
+		}>,
+	) => Array<{
 		mentionName: string;
 		label: string;
 	}>;
 };
+
 export default function NewMentionsPlugin({
+	mentionsData,
 	useMentionLookupService,
 }: Props): JSX.Element | null {
 	const [editor] = useLexicalComposerContext();
+	const dropDownRef = useRef<null | HTMLDivElement>(null);
 	const [searchquery, setSearchquery] = useState<string | null>(null);
-	const results = useMentionLookupService(searchquery);
+	const results = useMentionLookupService
+		? useMentionLookupService(searchquery, mentionsData)
+		: defaultLookupService(searchquery, mentionsData);
 	const checkForSlashTriggerMatch = useBasicTypeaheadTriggerMatch("/", {
 		minLength: 0,
 	});
@@ -219,32 +277,35 @@ export default function NewMentionsPlugin({
 				menuRenderFn={(
 					anchorElementRef,
 					{ selectedIndex, selectOptionAndCleanUp, setHighlightedIndex },
-				) =>
-					anchorElementRef.current && results.length
-						? ReactDOM.createPortal(
-								<div className="typeahead-popover mentions-menu">
-									<ul>
-										{options.map((option, i: number) => (
-											<MentionsTypeaheadMenuItem
-												index={i}
-												isSelected={selectedIndex === i}
-												onClick={() => {
-													setHighlightedIndex(i);
-													selectOptionAndCleanUp(option);
-												}}
-												onMouseEnter={() => {
-													setHighlightedIndex(i);
-												}}
-												key={option.key}
-												option={option}
-											/>
-										))}
-									</ul>
-								</div>,
-								anchorElementRef.current,
-						  )
-						: null
-				}
+				) => {
+					if (anchorElementRef.current && results.length) {
+						return ReactDOM.createPortal(
+							<div
+								className="typeahead-popover mentions-menu"
+								ref={dropDownRef}
+							>
+								<ul>
+									{options.map((option, i: number) => (
+										<MentionsTypeaheadMenuItem
+											index={i}
+											isSelected={selectedIndex === i}
+											onClick={() => {
+												setHighlightedIndex(i);
+												selectOptionAndCleanUp(option);
+											}}
+											onMouseEnter={() => {
+												setHighlightedIndex(i);
+											}}
+											key={option.key}
+											option={option}
+										/>
+									))}
+								</ul>
+							</div>,
+							anchorElementRef.current,
+						);
+					} else return null;
+				}}
 			/>
 		);
 	else {
