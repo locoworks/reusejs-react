@@ -1,9 +1,12 @@
 {
   "Components": [
+    "Banner",
     "Button",
     "Data Table",
+    "Date Picker",
     "Input",
     "Input Group",
+    "Modal",
     "Otp Input",
     "Progress Bar",
     "Select Dropdown",
@@ -14,6 +17,7 @@
     "UseBetaForm",
     "UseClosableComponent",
     "UseDataTable",
+    "UseDateHelper",
     "UseDebounceEffect",
     "UseDidMountEffect",
     "UseHeadlessSelectHook",
@@ -23,8 +27,5 @@
     "UseProgress",
     "UseSlider"
   ],
-  "Utils": [
-    "DataLoaderOrchestrator",
-    "env"
-  ]
+  "Utils": ["DataLoaderOrchestrator", "env"]
 }

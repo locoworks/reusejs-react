@@ -14,7 +14,7 @@ const ToastWrapper: any = ({ timeout, component }: HeadlessToastProps) => {
 		return (
 			<div
 				key={JSON.stringify(new Date())}
-				className="fixed h-full top-0 left-0 w-screen h-screen pointer-events-none"
+				className="fixed h-full top-0 left-0 w-screen h-screen pointer-events-none z-[99999]"
 			>
 				{component}
 			</div>

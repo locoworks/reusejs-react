@@ -1,0 +1,125 @@
+---
+HEAD OBJECT
+title: "ReuseJS Modal"
+author: "Shrey Dhyani"
+---
+
+import SiteWrapper from "../../components/support/SiteWrapper.tsx"
+import toc from "../../../data/modal-toc.json" 
+import Example from "../../components/modal/Example/Example.tsx"
+import ConfirmExample from "../../components/modal/ConfirmExample/ConfirmExample.tsx"
+import AlertExample from "../../components/modal/AlertExample/AlertExample.tsx"
+import SuccessExample from "../../components/modal/SuccessExample/SuccessExample.tsx"
+import InputModal from "../../components/modal/InputModal/InputModal.tsx"
+import BottomModal from "../../components/modal/BottomModal/BottomModal.tsx"
+
+# ReuseJS Modal
+
+## Overview
+A **Modal** component is a user interface element that appears as a popup or dialog box over the main content of a web page. Modals are commonly used to display additional information, forms, alerts, or other types of content that require user attention or interaction.
+
+A **Headless Modal** is a component that provides the functionality and behaviour of a modal without dictating its appearance or presentation. It is "headless" because it doesn't come with any pre-defined styles or visuals, leaving the responsibility of styling and rendering entirely to the developer. This approach gives you more flexibility and control over how the modal looks and behaves in your application.
+
+## Installation
+To use the `HeadlessModal` component, you need to install the following dependencies:
+
+- `@locoworks/reusejs-toolkit-react-hooks`: This package provides several reusable React hooks, including `useOutsideClicker`, `useMountComponent`, and `useClosableComponent`.
+- `tailwind-merge`: A utility library for merging Tailwind CSS classes.
+- `framer-motion`: A library for adding animations to React components.
+
+Make sure you have these packages installed in your project by running the following command:
+
+```
+npm install @locoworks/reusejs-react-modal
+      //or
+yarn add @locoworks/reusejs-react-modal
+```
+
+## External Dependencies
+This code relies on the following external packages:
+
+- `@locoworks/reusejs-toolkit-react-hooks`
+- `tailwind-merge`
+- `framer-motion`
+
+Ensure that you have these packages available in your project to use the `HeadlessModal` component.
+
+```
+yarn add @locoworks/reusejs-toolkit-react-hooks tailwind-merge framer-motion
+      //or
+npm install @locoworks/reusejs-toolkit-react-hooks tailwind-merge framer-motion
+```
+
+## Importing
+To use the `HeadlessModal` component, import it into your React components as follows:
+
+```jsx
+import { HeadlessModal } from '@locoworks/reusejs-react-modal';
+```
+
+## Types/ Exported Components
+The `HeadlessModal` function takes several parameters and returns a headless modal component. It has the following signature:
+
+```typescript
+function HeadlessModal(config: any, unmountDelay = 200, mountingNode?: any): React.ComponentType<any>;
+```
+
+The `config` parameter is an object that provides configuration options for the modal component. The `unmountDelay` parameter is optional and specifies the delay (in milliseconds) before the modal unmounts. The `mountingNode` parameter is also optional and determines where the modal should be mounted in the DOM.
+
+## Props
+The `HeadlessModal` component takes in the following props for styling the backdrop and the modal-wrapper which is used to apply animations to the modal component.
+
+- `modalWrapperClasses`(string): [Optional].  These are style classes which will be appplied to the modal wrapper element. These classes will be merged with the default classes.
+- `backdropClasses`(string): [Optional] These are tailwind styles which will be applied to the backdrop component which acts as a layer between the main page UI and Modal.
+- `animations`(object): [Optional] HeadlessModal comes with some predefined animation for backdrop and modal. These animations can be furthur customised by the user using this prop. `animation` prop accept two key value pairs of backdrop and modal, where *backdrop* and *modal* are the key and value will be an object with following keys:
+      - *initial*: For enter animation
+      - *animate*: For normal position
+      - *exit*: for exit animation
+      - *transition*: for specifying which animation should be used for showing animation.
+- `component`: This is the component passed to the HeadlessModal wrapper. This component will be render as the modal and hence you can control exactly how the modal will look by passing your own custom component.
+> Modal use framer-motion for animation hence accepts its key:value pairs to create animations. Thus we can use framer-motion 
+
+## Examples and Usage 
+
+### Headless Modal Example
+<Example/>
+```js path=../../components/modal/Example name=Example
+```
+
+### Confirm Modal Example
+<ConfirmExample/>
+```js path=../../components/modal/ConfirmExample name=ConfirmExample
+```
+
+### Alert Modal Example
+<AlertExample/>
+```js path=../../components/modal/AlertExample name=AlertExample
+```
+
+### Success Modal Example
+<SuccessExample/>
+```js path=../../components/modal/SuccessExample name=SuccessExample
+```
+
+### Input Modal Example
+<InputModal/>
+```js path=../../components/modal/InputModal name=InputModal
+```
+
+### Bottom Modal Example
+<BottomModal/>
+```js path=../../components/modal/BottomModal name=BottomModal
+```
+
+## Styling
+The modal backdrop uses default tailwind CSS classes for styling, but you can customize it by passing additional classes through the `backdropClasses` property in the `modalConfig` object.
+
+The modal content can be styled within the `ModalContent` component using regular CSS or any styling library of your choice.
+
+## Best Practices
+- Ensure that the `@locoworks/reusejs-toolkit-react-hooks`, `tailwind-merge`, and `framer-motion` dependencies are installed and available in your project.
+- Avoid directly modifying the `props` object received by the `ModalContent` component, as it may contain configuration options for the modal.
+
+export default ({ children }) => {
+  return <SiteWrapper toc={toc}><div className="prose max-w-full mx-4 pb-10" >{children}</div></SiteWrapper>
+};

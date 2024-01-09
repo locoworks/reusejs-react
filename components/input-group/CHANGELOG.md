@@ -1,5 +1,12 @@
 # @locoworks/reusejs-react-input-group
 
+## 0.2.2
+
+### Patch Changes
+
+- b9b35af: Types target change
+- b9b35af: Types target change
+
 ## 0.2.0
 
 ### Minor Changes

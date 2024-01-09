@@ -2,7 +2,7 @@ import React, { FC, ButtonHTMLAttributes } from "react";
 
 export interface HeadlessButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement> {
-	busyText?: string;
+	busyText?: React.ReactNode | string;
 	busy?: boolean;
 	buttonPrefix?: React.ReactNode;
 	buttonSuffix?: React.ReactNode;
