@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-text-editor
 
+## 0.2.0
+
+### Minor Changes
+
+- ba75d24: Added props to handle toolbar and fixed placeholder position. Added border in TextEditor
+
 ## 0.1.7
 
 ### Patch Changes
