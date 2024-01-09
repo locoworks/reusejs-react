@@ -55,7 +55,7 @@ The `TextEditor` component accepts the following props:
 - `setEditable`: An optional function to set the editable state of the editor. It is a React state setter function that accepts a boolean value.
 - `htmlData`: An optional string to set the intialState of the editor. You can pass the html data directly to the editor as its initial state.
 - `placeholderText`: An optional string for the placeholder inside the editor. Its value is "Start Typing..." by default.
-- `hideToolbar`: A boolean value either `true` or `false`, by default value is `falase`.
+- `hideToolbar`: A boolean value either `true` or `false`, by default value is `false`.
 
 #### Exported properties
 The onChange function within the `TextEditor` component serves as a callback, providing access to the editorRef and a payload object. This payload encapsulates various properties derived from the editor's state, including HTML content, JSON representation, text content, and, if mentions are enabled, a reference to the mentions array.
@@ -111,7 +111,7 @@ import "@locoworks/reusejs-react-text-editor/css";
 | `setEditable`            | `React.Dispatch<React.SetStateAction<boolean>>`                             | An optional function to set the editable state of the editor.                        |
 | `htmlData`            | `string`                             | An optional string to set the initial state of the editor.                                                       |
 | `placeholderText`            | `string`                             | An optional string for the placeholder inside the editor. Its value is "Start Typing..." by default                                                       |
-| `hideToolbar`            | `boolean`                             | It accepts either true or false by default it is false.                                                     |
+| `hideToolbar`            | `boolean`                             | It accepts either `true` or `false` by default it is `false`.                                                     |
 
 ## Notes
 >The TextEditor component uses the Lexical library for rich text editing.
