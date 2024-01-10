@@ -1,0 +1,83 @@
+---
+HEAD OBJECT
+title: "ReuseJS Timer"
+author: "Upneet Kaur Hunjan"
+---
+
+## Overview
+The `useTimer` hook is a custom React hook designed to manage and control timers within a React application. It provides functionality to start, stop, and reset a timer, allowing developers to easily integrate timer features into their React components.
+
+## Installation
+To use the `useTimer` hook, you can install it via your preferred package manager:
+
+```bash
+npm install @locoworks/reusejs-toolkit-react-hooks
+# or
+yarn add @locoworks/reusejs-toolkit-react-hooks
+```
+
+## External dependencies
+The `useTimer` hook has no external dependencies.
+
+## Importing
+
+Import `useTimer` hook to your react project.
+
+```jsx
+import { useTimer } from '@locoworks/reusejs-toolkit-react-hooks';
+```
+
+## Input Parameters
+The useTimer hook takes no explicit input parameters.
+
+## Return Types
+
+The hook returns an object with the following properties:
+- `start` : (value: number) => void: Function to start the timer with an initial value.
+- `stop` : () => void: Function to stop the timer.
+- `startFromZero` : () => void: Function to start the timer from zero, counting up.
+- `value`: number: The current value of the timer.
+- `hasStopped`: boolean: A boolean indicating whether the timer has been stopped.
+
+## Usage/Example
+
+```jsx
+import React from "react";
+import { useTimer } from '@locoworks/reusejs-toolkit-react-hooks';
+
+const TimerComponent = () => {
+  const timer = useTimer();
+
+  return (
+    <div>
+      <p>Timer Value: {timer.value}</p>
+      <button onClick={() => timer.start(60)}>Start Timer</button>
+      <button onClick={timer.stop}>Stop Timer</button>
+      <button onClick={timer.startFromZero}>Start from Zero</button>
+    </div>
+  );
+};
+
+```
+
+## Best Practices
+-It's recommended to handle the state changes and UI updates based on the values returned by the hook.
+-Ensure to call the stop function when the timer is no longer needed to prevent unnecessary computations.
+
+## Input/Return Types Table
+
+| Function         | Parameters       | Return Type | Description                                     |
+| ---------------- | ----------------- | ----------- | ----------------------------------------------- |
+| `start`          | `value: number`  | `void`      | Start the timer with the specified initial value. |
+| `stop`           | -                 | `void`      | Stop the timer.                                 |
+| `startFromZero`  | -                 | `void`      | Start the timer from zero, counting up.         |
+| `value`          | -                 | `number`    | The current value of the timer.                  |
+| `hasStopped`     | -                 | `boolean`   | Indicates whether the timer has been stopped.   |
+
+## Notes
+- The timer interval is set to 1000 milliseconds (1 second) in both counting up and counting down scenarios.
+- Make sure to handle potential side effects, such as component unmounting, when using this hook in complex scenarios.
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
