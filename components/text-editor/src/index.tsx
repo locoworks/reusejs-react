@@ -38,6 +38,7 @@ type Props = {
 	placeholderText?: string;
 	htmlData?: string;
 	hideToolbar?: boolean;
+	showToolbarText?: boolean;
 };
 
 const TextEditor = ({
@@ -51,6 +52,7 @@ const TextEditor = ({
 	placeholderText,
 	htmlData,
 	hideToolbar = false,
+	showToolbarText = false,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
 
@@ -89,6 +91,7 @@ const TextEditor = ({
 							editorRef={editorRef}
 							placeholderText={placeholderText}
 							hideToolbar={hideToolbar}
+							showToolbarText={showToolbarText}
 						/>
 					</div>
 				</TableContext>
