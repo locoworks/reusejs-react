@@ -58,10 +58,12 @@ function BlockTextFormat({
 	editor,
 	blockType,
 	disabled = false,
+	showToolbarText,
 }: {
 	blockType: keyof typeof blockTypeToBlockName;
 	editor: LexicalEditor;
 	disabled?: boolean;
+	showToolbarText?: boolean;
 }): JSX.Element {
 	const formatBulletList = () => {
 		if (blockType !== "bullet") {
@@ -89,7 +91,7 @@ function BlockTextFormat({
 				<i className="icon ">
 					<BulletListIcon />
 				</i>
-				<span className="text">Bullet List</span>
+				{showToolbarText && <span className="text">Bullet List</span>}
 			</button>
 			<button
 				disabled={disabled}
@@ -99,7 +101,7 @@ function BlockTextFormat({
 				<i className="icon ">
 					<NumberedListIcon />
 				</i>
-				<span className="text">Numbered List</span>
+				{showToolbarText && <span className="text">Numbered List</span>}
 			</button>
 		</>
 	);
@@ -112,9 +114,11 @@ function Divider(): JSX.Element {
 export default function ToolbarPlugin({
 	convertFilesToImageUrl,
 	setEditable,
+	showToolbarText,
 }: {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
+	showToolbarText: boolean;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
@@ -246,6 +250,7 @@ export default function ToolbarPlugin({
 							blockType={blockType}
 							editor={editor}
 							disabled={!editor.isEditable()}
+							showToolbarText={showToolbarText}
 						/>
 						<Divider />
 					</>
@@ -302,7 +307,7 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<TableIcon />
 					</i>
-					<span className="text">Table</span>
+					{showToolbarText && <span className="text">Table</span>}
 				</button>
 				<Divider />
 				<button
@@ -321,7 +326,7 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<ImageIcon />
 					</i>
-					<span className="text">Image</span>
+					{showToolbarText && <span className="text">Image</span>}
 				</button>
 			</div>
 			{setEditable && (
@@ -336,7 +341,7 @@ export default function ToolbarPlugin({
 						<i className="icon ">
 							<SaveIcon />
 						</i>
-						<span className="text">Save</span>
+						{showToolbarText && <span className="text">Save</span>}
 					</button>
 				</div>
 			)}

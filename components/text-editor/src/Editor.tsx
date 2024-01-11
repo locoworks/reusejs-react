@@ -62,6 +62,7 @@ type EditorProps = {
 	placeholderText?: string;
 	htmlData?: string;
 	hideToolbar?: boolean;
+	showToolbarText?: boolean;
 };
 function Editor({
 	editorRef,
@@ -74,6 +75,7 @@ function Editor({
 	placeholderText = "Start Typing...",
 	htmlData,
 	hideToolbar = false,
+	showToolbarText = false,
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
@@ -196,6 +198,7 @@ function Editor({
 						<ToolbarPlugin
 							convertFilesToImageUrl={convertFilesToImageUrl}
 							setEditable={setEditable}
+							showToolbarText={showToolbarText}
 						/>
 					)}
 
