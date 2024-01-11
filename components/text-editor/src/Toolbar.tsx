@@ -89,7 +89,6 @@ function BlockTextFormat({
 				<i className="icon ">
 					<BulletListIcon />
 				</i>
-				<span className="text">Bullet List</span>
 			</button>
 			<button
 				disabled={disabled}
@@ -99,7 +98,6 @@ function BlockTextFormat({
 				<i className="icon ">
 					<NumberedListIcon />
 				</i>
-				<span className="text">Numbered List</span>
 			</button>
 		</>
 	);
@@ -302,7 +300,6 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<TableIcon />
 					</i>
-					<span className="text">Table</span>
 				</button>
 				<Divider />
 				<button
@@ -321,7 +318,6 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<ImageIcon />
 					</i>
-					<span className="text">Image</span>
 				</button>
 			</div>
 			{setEditable && (
