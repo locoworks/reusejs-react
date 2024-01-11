@@ -32,6 +32,8 @@ const Example = () => {
 				setEditable={setEditable}
 				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
+				hideToolbar={false}
+				showToolbarText={true}
 			/>
 			{!editable && (
 				<div
