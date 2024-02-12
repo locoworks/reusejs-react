@@ -15,6 +15,7 @@ export interface ReuseFileUploadProps extends HeadLessFileUploadProps {
 	setCustomError?: (e: any) => void;
 	enableDragAndDrop?: boolean;
 	dragAndDropRef?: any;
+	setIsDraggedOver?: (value: boolean) => any;
 }
 
 function ReuseFileUpload(
@@ -22,7 +23,6 @@ function ReuseFileUpload(
 	ref: ForwardedRef<HTMLInputElement>,
 ) {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const [isDraggedOver, setIsDraggedOver] = useState<boolean>(false);
 
 	const {
 		baseClassName = "",
@@ -37,6 +37,7 @@ function ReuseFileUpload(
 		setCustomError = () => {},
 		enableDragAndDrop = false,
 		dragAndDropRef,
+		setIsDraggedOver,
 		...rest
 	} = props;
 
@@ -54,7 +55,7 @@ function ReuseFileUpload(
 
 	const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
-		setIsDraggedOver(false);
+		setIsDraggedOver && setIsDraggedOver(false);
 		if (enableDragAndDrop) {
 			if (typeof ref === "object" && ref !== null && ref.current !== null) {
 				ref.current.files = e.dataTransfer.files;
@@ -66,11 +67,11 @@ function ReuseFileUpload(
 
 	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
-		setIsDraggedOver(true);
+		setIsDraggedOver && setIsDraggedOver(true);
 	};
 	const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
 		e.preventDefault();
-		setIsDraggedOver(false);
+		setIsDraggedOver && setIsDraggedOver(false);
 	};
 
 	const LoaderFunction = async (e: any) => {
@@ -168,7 +169,6 @@ function ReuseFileUpload(
 			onDrop={handleDrop}
 			onDragLeave={handleDragLeave}
 		>
-			{isDraggedOver ? "Drop it here" : ""}
 			{isLoading ? (
 				customLoader ? (
 					customLoader
