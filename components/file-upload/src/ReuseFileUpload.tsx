@@ -15,7 +15,7 @@ export interface ReuseFileUploadProps extends HeadLessFileUploadProps {
 	setCustomError?: (e: any) => void;
 	enableDragAndDrop?: boolean;
 	dragAndDropRef?: any;
-	setIsDraggedOver?: (value: boolean) => any;
+	setIsDraggedOver?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ReuseFileUpload(
