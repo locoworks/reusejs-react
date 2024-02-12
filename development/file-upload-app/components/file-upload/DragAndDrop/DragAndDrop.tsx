@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReuseFileUpload } from "@locoworks/reusejs-react-file-upload";
 import { useRef } from "react";
 import { ReuseButton } from "@locoworks/reusejs-react-button";
@@ -6,6 +6,8 @@ import { ReuseButton } from "@locoworks/reusejs-react-button";
 const DragAndDrop = () => {
 	const ref = useRef<HTMLInputElement>(null);
 	const dragAndDropRef = useRef<HTMLInputElement>(null);
+	const [isDraggedOver, setIsDraggedOver] = useState(false);
+
 	return (
 		<div className="flex flex-col items-center gap-x-3 justify-center py-10 mt-10  rounded bg-gray-50">
 			<div
@@ -20,6 +22,7 @@ const DragAndDrop = () => {
 					showChildren
 					acceptedFileTypes={["image/png", "image/svg", "application/pdf"]}
 					enableDragAndDrop={true}
+					setIsDraggedOver={setIsDraggedOver}
 					handleAfterFileUploadHook={async (e) => {
 						console.log(e);
 					}}
@@ -30,6 +33,7 @@ const DragAndDrop = () => {
 							ref.current?.click();
 						}}
 					>
+						{isDraggedOver ? "Drop Your File Here " : ""}
 						Browse
 					</ReuseButton>
 				</ReuseFileUpload>
