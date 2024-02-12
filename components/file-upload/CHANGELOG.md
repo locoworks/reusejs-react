@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-file-upload
 
+## 0.3.0
+
+### Minor Changes
+
+- 50abdd3: Added the setIsDraggedOver prop for the drag and drop feature.
+
 ## 0.2.0
 
 ### Minor Changes
