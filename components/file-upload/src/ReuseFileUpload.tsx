@@ -1,8 +1,8 @@
 import React, { ForwardedRef, forwardRef, useEffect, useState } from "react";
-import { HeadlessFileUploadProps } from "./HeadLessFileUpload";
-import HeadlessFileUpload from "./HeadLessFileUpload";
+import { HeadLessFileUploadProps } from "./HeadLessFileUpload";
+import HeadLessFileUpload from "./HeadLessFileUpload";
 import { twMerge } from "tailwind-merge";
-export interface ReuseFileUploadProps extends HeadlessFileUploadProps {
+export interface ReuseFileUploadProps extends HeadLessFileUploadProps {
 	baseClassName?: string;
 	wrapperClassName?: string;
 	showChildren?: boolean;
@@ -188,7 +188,7 @@ function ReuseFileUpload(
 			) : (
 				<>
 					{showChildren ? childrenWithProps : <></>}
-					<HeadlessFileUpload
+					<HeadLessFileUpload
 						ref={ref}
 						className={twMerge("hidden " + baseClassName)}
 						handleAfterFileUploadHook={prepareOnChange}
