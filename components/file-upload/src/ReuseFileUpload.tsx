@@ -24,7 +24,6 @@ function ReuseFileUpload(
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [isDraggedOver, setIsDraggedOver] = useState<boolean>(false);
 
-	useState<any>(false);
 	const {
 		baseClassName = "",
 		wrapperClassName = "",
