@@ -66,6 +66,8 @@ const CustomDatePicker: React.FC = () => {
 				invalidDateClasses="outline outline-red-500"
 				nextMonthLabel={NextIcon}
 				prevMonthLabel={PrevIcon}
+				prevYearLabel={PrevIcon}
+				nextYearLabel={NextIcon}
 			/>
 		</div>
 	);

@@ -28,10 +28,12 @@ interface Props {
 	dateCallback?: (date: Date) => void;
 	prevMonthLabel?: React.ReactNode;
 	nextMonthLabel?: React.ReactNode;
+	prevYearLabel?: React.ReactNode;
+	nextYearLabel?: React.ReactNode;
 }
 
 const HeadlessDatePicker = ({
-	defaultValue = new Date(),
+	defaultValue,
 	minDate = new Date("1000,0,1"),
 	maxDate,
 	dateFormat = "MM/dd/yyyy",
@@ -50,14 +52,18 @@ const HeadlessDatePicker = ({
 	calendarBaseClasses,
 	prevMonthLabel,
 	nextMonthLabel,
+	prevYearLabel,
+	nextYearLabel,
 	dateCallback,
 }: Props) => {
 	const { isValidDate, getFormattedDate, parseCustomDate } = useDateHelpers();
 
-	const [selectedDate, setSelectedDate] = useState<Date>(defaultValue);
+	const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+		defaultValue,
+	);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [tempDate, setTempDate] = useState<string>(
-		getFormattedDate(selectedDate, dateFormat),
+		selectedDate ? getFormattedDate(selectedDate, dateFormat) : "",
 	);
 	const [invalidDate, setInvalidDate] = useState<boolean>(false);
 
@@ -149,13 +155,14 @@ const HeadlessDatePicker = ({
 						calendarBaseClasses={calendarBaseClasses}
 						onChange={(d: Date) => {
 							onChangeCallback(d);
-							setIsOpen(false);
 							dateCallback && dateCallback(d);
 						}}
 						maxDate={maxDate}
 						minDate={minDate}
 						prevMonthLabel={prevMonthLabel}
 						nextMonthLabel={nextMonthLabel}
+						prevYearLabel={prevYearLabel}
+						nextYearLabel={nextYearLabel}
 					/>
 				</div>
 			)}

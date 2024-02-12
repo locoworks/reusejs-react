@@ -18,6 +18,7 @@ export type Cell = {
 	type: "normal" | "header";
 	id: string;
 	width: number | null;
+	text: string;
 };
 
 export type Row = {
@@ -55,6 +56,7 @@ function createCell(type: "normal" | "header"): Cell {
 		json: emptyEditorJSON,
 		type,
 		width: null,
+		text: "",
 	};
 }
 
@@ -90,6 +92,7 @@ export function extractRowsFromHTML(tableElem: HTMLTableElement): Rows {
 			cell.json = plainTextEditorJSON(
 				JSON.stringify(cellElem.innerText.replace(/\n/g, " ")),
 			);
+			cell.text = cellElem.innerText;
 			cells.push(cell);
 		}
 		const row = createRow();
@@ -119,6 +122,7 @@ function convertTableElement(domNode: HTMLElement): null | DOMConversionOutput {
 			cell.json = plainTextEditorJSON(
 				JSON.stringify(cellElem.innerText.replace(/\n/g, " ")),
 			);
+			cell.text = cellElem.innerText;
 			cells.push(cell);
 		}
 		const row = createRow();
@@ -166,12 +170,15 @@ export function exportTableCellsToHTML(
 			);
 			cellElem.innerHTML = cellHTMLCache.get(cell.json) || "";
 			rowElem.appendChild(cellElem);
+			cellElem.setAttribute("class", `html_cell`);
 		}
 		tBody.appendChild(rowElem);
 	}
 
 	table.appendChild(colGroup);
 	table.appendChild(tBody);
+	table.setAttribute("class", `html_table`);
+
 	return table;
 }
 
@@ -243,6 +250,7 @@ export class TableNode extends DecoratorNode<JSX.Element> {
 				const cellClone = {
 					...cell,
 					json: mergeCell.json,
+					text: mergeCell.text,
 					type: mergeCell.type,
 				};
 				cellsClone[x] = cellClone;
@@ -251,14 +259,14 @@ export class TableNode extends DecoratorNode<JSX.Element> {
 		}
 	}
 
-	updateCellJSON(x: number, y: number, json: string): void {
+	updateCellJSON(x: number, y: number, json: string, text: string): void {
 		const self = this.getWritable();
 		const rows = self.__rows;
 		const row = rows[y];
 		const cells = row.cells;
 		const cell = cells[x];
 		const cellsClone = Array.from(cells);
-		const cellClone = { ...cell, json };
+		const cellClone = { ...cell, json, text };
 		const rowClone = { ...row, cells: cellsClone };
 		cellsClone[x] = cellClone;
 		rows[y] = rowClone;
@@ -370,7 +378,7 @@ export class TableNode extends DecoratorNode<JSX.Element> {
 
 	decorate(_: LexicalEditor, config: EditorConfig): JSX.Element {
 		return (
-			<Suspense>
+			<Suspense fallback={null}>
 				<TableComponent
 					nodeKey={this.__key}
 					theme={config.theme}
@@ -401,10 +409,10 @@ export function $createTableNodeWithDimensions(
 	includeHeaders = true,
 ): TableNode {
 	const rows: Rows = [];
-	for (let y = 0; y < columnCount; y++) {
+	for (let y = 0; y < rowCount; y++) {
 		const row: Row = createRow();
 		rows.push(row);
-		for (let x = 0; x < rowCount; x++) {
+		for (let x = 0; x < columnCount; x++) {
 			row.cells.push(
 				createCell(
 					includeHeaders === true && (y === 0 || x === 0) ? "header" : "normal",

@@ -157,3 +157,7 @@ You can style the component using Tailwind CSS and CSS. Feel free to customize t
 | `baseClassName`      |   `String`         | `""`               | styles the base input of headless component.
 | `wrapperClassName`   |   `String`         | `""`               | styles the Wrapper div of the ReuseFileUpload.
 | `loaderStyles`       |   `String`         | `""`               | styles the default loader.
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};

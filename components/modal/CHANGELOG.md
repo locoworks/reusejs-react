@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-modal
 
+## 0.2.2
+
+### Patch Changes
+
+- 48ddc24: Added disableOutsideClick prop to prevent modal closing on outside click"
+
 ## 0.2.0
 
 ### Minor Changes

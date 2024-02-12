@@ -13,13 +13,15 @@ type DateObj = {
 
 export interface SingleDatePickerProps {
 	onChange: (date: Date) => void;
-	selected: Date;
+	selected?: Date;
 	maxDate?: Date;
 	minDate?: Date;
 	showOutsideDays?: boolean;
 	calendarBaseClasses?: CalendarBaseClassesProps;
 	prevMonthLabel?: React.ReactNode;
 	nextMonthLabel?: React.ReactNode;
+	prevYearLabel?: React.ReactNode;
+	nextYearLabel?: React.ReactNode;
 }
 
 export default function SingleDatePicker({
@@ -31,8 +33,25 @@ export default function SingleDatePicker({
 	calendarBaseClasses,
 	prevMonthLabel,
 	nextMonthLabel,
+	prevYearLabel,
+	nextYearLabel,
 }: SingleDatePickerProps) {
 	const [selectedDate, setSelectedDate] = useState<Date>(selected);
+	const [selectedYear, setSelectedYear] = useState<number>(
+		selectedDate.getFullYear(),
+	);
+
+	const handleYearChange = (year: number) => {
+		setSelectedYear(year);
+		const date = new Date(selectedDate.setFullYear(year));
+		setSelectedDate(date);
+		onChange(date);
+	};
+
+	const handleMonthChange = (monthIndex: number) => {
+		setSelectedDate(new Date(selectedDate.setMonth(monthIndex)));
+		onChange(selectedDate);
+	};
 
 	const handleOnDateSelected = (date: DateObj): void => {
 		setSelectedDate(date.date);
@@ -55,9 +74,14 @@ export default function SingleDatePicker({
 	return (
 		<Calendar
 			{...dayzedData}
+			year={selectedYear}
+			handleYearChange={handleYearChange}
+			handleMonthChange={handleMonthChange}
 			calendarBaseClasses={calendarBaseClasses}
 			prevMonthLabel={prevMonthLabel}
 			nextMonthLabel={nextMonthLabel}
+			prevYearLabel={prevYearLabel}
+			nextYearLabel={nextYearLabel}
 		/>
 	);
 }
