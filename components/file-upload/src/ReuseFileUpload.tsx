@@ -42,10 +42,6 @@ function ReuseFileUpload(
 	} = props;
 
 	useEffect(() => {
-		console.log({ enableDragAndDrop });
-	}, [enableDragAndDrop]);
-
-	useEffect(() => {
 		if (
 			enableDragAndDrop &&
 			dragAndDropRef !== undefined &&
