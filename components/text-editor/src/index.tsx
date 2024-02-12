@@ -14,10 +14,12 @@ import { TableContext } from "../plugins/TablePlugin/TablePlugin";
 import { ImageNode } from "../plugins/ImagePlugin/ImageNode";
 
 type Props = {
-	mentionsData: Array<{
-		mentionName: string;
-		label: string;
-	}>;
+	mentionsData?:
+		| Array<{
+				mentionName: string;
+				label: string;
+		  }>
+		| false;
 	useMentionLookupService?: (
 		mentionString: string | null,
 		mentionsData: Array<{
@@ -35,10 +37,12 @@ type Props = {
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 	placeholderText?: string;
 	htmlData?: string;
+	hideToolbar?: boolean;
+	showToolbarText?: boolean;
 };
 
 const TextEditor = ({
-	mentionsData,
+	mentionsData = false,
 	useMentionLookupService,
 	convertFilesToImageUrl,
 	onChangeCallback,
@@ -47,6 +51,8 @@ const TextEditor = ({
 	setEditable,
 	placeholderText,
 	htmlData,
+	hideToolbar = false,
+	showToolbarText = false,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
 
@@ -84,6 +90,8 @@ const TextEditor = ({
 							setEditable={setEditable}
 							editorRef={editorRef}
 							placeholderText={placeholderText}
+							hideToolbar={hideToolbar}
+							showToolbarText={showToolbarText}
 						/>
 					</div>
 				</TableContext>

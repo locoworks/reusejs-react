@@ -1,5 +1,38 @@
 # @locoworks/reusejs-react-text-editor
 
+## 0.3.0
+
+### Minor Changes
+
+- 80628eb: updated text props
+
+## 0.2.0
+
+### Minor Changes
+
+- ba75d24: Added props to handle toolbar and fixed placeholder position. Added border in TextEditor
+
+## 0.1.7
+
+### Patch Changes
+
+- d770316: Changes:
+
+  - Prop added for mentionsData.
+  - optional Prop added for mentionLookupservice , setup a default lookup service inside plugin.
+  - Changes setEditable to optional.
+  - Added Paragraph node after inserting table.
+  - Fixed error occuring when creating lists at start.
+
+- 022c545: Changes:
+
+  - updated prop for mentions plugin to be optional.
+  - extracting textContent of the editor in the payload.
+  - refactored toolbar rootType.
+  - updated TableNode for table etxt extraction.
+  - Added Draggable Block Plugin
+  - Fixed select All error with table
+
 ## 0.1.5
 
 ### Patch Changes

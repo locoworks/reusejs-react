@@ -18,6 +18,7 @@ export type Cell = {
 	type: "normal" | "header";
 	id: string;
 	width: number | null;
+	text: string;
 };
 
 export type Row = {
@@ -55,6 +56,7 @@ function createCell(type: "normal" | "header"): Cell {
 		json: emptyEditorJSON,
 		type,
 		width: null,
+		text: "",
 	};
 }
 
@@ -90,6 +92,7 @@ export function extractRowsFromHTML(tableElem: HTMLTableElement): Rows {
 			cell.json = plainTextEditorJSON(
 				JSON.stringify(cellElem.innerText.replace(/\n/g, " ")),
 			);
+			cell.text = cellElem.innerText;
 			cells.push(cell);
 		}
 		const row = createRow();
@@ -119,6 +122,7 @@ function convertTableElement(domNode: HTMLElement): null | DOMConversionOutput {
 			cell.json = plainTextEditorJSON(
 				JSON.stringify(cellElem.innerText.replace(/\n/g, " ")),
 			);
+			cell.text = cellElem.innerText;
 			cells.push(cell);
 		}
 		const row = createRow();
@@ -246,6 +250,7 @@ export class TableNode extends DecoratorNode<JSX.Element> {
 				const cellClone = {
 					...cell,
 					json: mergeCell.json,
+					text: mergeCell.text,
 					type: mergeCell.type,
 				};
 				cellsClone[x] = cellClone;
@@ -254,14 +259,14 @@ export class TableNode extends DecoratorNode<JSX.Element> {
 		}
 	}
 
-	updateCellJSON(x: number, y: number, json: string): void {
+	updateCellJSON(x: number, y: number, json: string, text: string): void {
 		const self = this.getWritable();
 		const rows = self.__rows;
 		const row = rows[y];
 		const cells = row.cells;
 		const cell = cells[x];
 		const cellsClone = Array.from(cells);
-		const cellClone = { ...cell, json };
+		const cellClone = { ...cell, json, text };
 		const rowClone = { ...row, cells: cellsClone };
 		cellsClone[x] = cellClone;
 		rows[y] = rowClone;

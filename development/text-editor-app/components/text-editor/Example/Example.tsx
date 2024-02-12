@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LexicalEditor } from "lexical";
 import { TextEditor } from "@locoworks/reusejs-react-text-editor";
 import "@locoworks/reusejs-react-text-editor/css";
@@ -6,64 +6,6 @@ import "@locoworks/reusejs-react-text-editor/css";
 const Example = () => {
 	const [editable, setEditable] = useState<boolean>(false);
 	const [data, setData] = useState<string | TrustedHTML>("Here");
-
-	const dummyMentionsData = [
-		"Aayla Secura",
-		"Adi Gallia",
-		"Niima the Hutt",
-		"Nines",
-		"Norra Wexley",
-		"Nute Gunray",
-		"Val Beckett",
-		"Vanden Willard",
-		"Vice Admiral Amilyn Holdo",
-		"Vober Dand",
-		"WAC-47",
-		"Wedge Antilles",
-		"Wes Janson",
-		"Wicket W. Warrick",
-		"Wilhuff Tarkin",
-		"Wollivan",
-		"Wuher",
-		"Wullf Yularen",
-		"Xamuel Lennox",
-		"Yaddle",
-		"Yarael Poof",
-		"Yoda",
-		"Zam Wesell",
-		"Zev Senesca",
-		"Ziro the Hutt",
-		"Zuckuss",
-	].map((name) => ({
-		mentionName: `user_${name}`,
-		label: name,
-	}));
-
-	function useMentionLookupService(
-		mentionString: string | null,
-		mentionsData: Array<{
-			mentionName: string;
-			label: string;
-		}>,
-	) {
-		const [results, setResults] = useState<
-			Array<{ mentionName: string; label: string }>
-		>([]);
-
-		useEffect(() => {
-			if (mentionString === null) {
-				setResults([]);
-			} else {
-				setResults(
-					mentionsData.filter((mention) =>
-						mention.label.toLowerCase().includes(mentionString.toLowerCase()),
-					),
-				);
-			}
-		}, [mentionString]);
-
-		return results;
-	}
 
 	function convertFilesToImageUrl(files: FileList | null) {
 		if (!files || files.length === 0) {
@@ -89,10 +31,10 @@ const Example = () => {
 			<TextEditor
 				editable={editable}
 				setEditable={setEditable}
-				mentionsData={dummyMentionsData}
-				useMentionLookupService={useMentionLookupService}
 				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
+				hideToolbar={false}
+				showToolbarText={false}
 			/>
 			{!editable && (
 				<div

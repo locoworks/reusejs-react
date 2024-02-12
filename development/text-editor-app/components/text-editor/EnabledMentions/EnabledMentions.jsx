@@ -2,9 +2,41 @@ import React, { useState } from "react";
 import { TextEditor } from "@locoworks/reusejs-react-text-editor";
 import "@locoworks/reusejs-react-text-editor/css";
 
-const Example = () => {
+const EnabledMentions = () => {
 	const [editable, setEditable] = useState(false);
 	const [data, setData] = useState("Here");
+
+	const dummyMentionsData = [
+		"Aayla Secura",
+		"Adi Gallia",
+		"Niima the Hutt",
+		"Nines",
+		"Norra Wexley",
+		"Nute Gunray",
+		"Val Beckett",
+		"Vanden Willard",
+		"Vice Admiral Amilyn Holdo",
+		"Vober Dand",
+		"WAC-47",
+		"Wedge Antilles",
+		"Wes Janson",
+		"Wicket W. Warrick",
+		"Wilhuff Tarkin",
+		"Wollivan",
+		"Wuher",
+		"Wullf Yularen",
+		"Xamuel Lennox",
+		"Yaddle",
+		"Yarael Poof",
+		"Yoda",
+		"Zam Wesell",
+		"Zev Senesca",
+		"Ziro the Hutt",
+		"Zuckuss",
+	].map((name) => ({
+		mentionName: `user_${name}`,
+		label: name,
+	}));
 
 	function convertFilesToImageUrl(files) {
 		if (!files || files.length === 0) {
@@ -30,10 +62,9 @@ const Example = () => {
 			<TextEditor
 				editable={editable}
 				setEditable={setEditable}
+				mentionsData={dummyMentionsData}
 				convertFilesToImageUrl={convertFilesToImageUrl}
 				onChangeCallback={onChange}
-				hideToolbar={false}
-				showToolbarText={true}
 			/>
 			{!editable && (
 				<div
@@ -48,4 +79,4 @@ const Example = () => {
 	);
 };
 
-export default Example;
+export default EnabledMentions;

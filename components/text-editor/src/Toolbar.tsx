@@ -28,8 +28,6 @@ import {
 import { useCallback, useEffect, useState } from "react";
 
 import useModal from "../utils/useModal";
-import { getSelectedNode } from "../utils/getSelectedNode";
-import { $isTableNode } from "../plugins/TablePlugin/TableNode";
 import { InsertNewTableDialog } from "../plugins/TablePlugin/TablePlugin";
 import { InsertImageDialog } from "../plugins/ImagePlugin/ImagePlugin";
 import {
@@ -51,11 +49,6 @@ const blockTypeToBlockName = {
 	number: "Numbered List",
 };
 
-const rootTypeToRootName = {
-	root: "Root",
-	table: "Table",
-};
-
 function buttonActiveClass(active: boolean) {
 	if (active) return "active dropdown-item-active";
 	else return "";
@@ -64,14 +57,13 @@ function buttonActiveClass(active: boolean) {
 function BlockTextFormat({
 	editor,
 	blockType,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	rootType,
 	disabled = false,
+	showToolbarText,
 }: {
 	blockType: keyof typeof blockTypeToBlockName;
-	rootType: keyof typeof rootTypeToRootName;
 	editor: LexicalEditor;
 	disabled?: boolean;
+	showToolbarText?: boolean;
 }): JSX.Element {
 	const formatBulletList = () => {
 		if (blockType !== "bullet") {
@@ -99,7 +91,7 @@ function BlockTextFormat({
 				<i className="icon ">
 					<BulletListIcon />
 				</i>
-				<span className="text">Bullet List</span>
+				{showToolbarText && <span className="text">Bullet List</span>}
 			</button>
 			<button
 				disabled={disabled}
@@ -109,7 +101,7 @@ function BlockTextFormat({
 				<i className="icon ">
 					<NumberedListIcon />
 				</i>
-				<span className="text">Numbered List</span>
+				{showToolbarText && <span className="text">Numbered List</span>}
 			</button>
 		</>
 	);
@@ -118,19 +110,20 @@ function BlockTextFormat({
 function Divider(): JSX.Element {
 	return <div className="divider" />;
 }
+
 export default function ToolbarPlugin({
 	convertFilesToImageUrl,
 	setEditable,
+	showToolbarText,
 }: {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
+	showToolbarText: boolean;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
 	const [blockType, setBlockType] =
 		useState<keyof typeof blockTypeToBlockName>("paragraph");
-	const [rootType, setRootType] =
-		useState<keyof typeof rootTypeToRootName>("root");
 
 	const [isBold, setIsBold] = useState(false);
 	const [isItalic, setIsItalic] = useState(false);
@@ -161,14 +154,6 @@ export default function ToolbarPlugin({
 			setIsBold(selection.hasFormat("bold"));
 			setIsItalic(selection.hasFormat("italic"));
 			setIsUnderline(selection.hasFormat("underline"));
-
-			const node = getSelectedNode(selection);
-			const tableNode = $findMatchingParent(node, $isTableNode);
-			if ($isTableNode(tableNode)) {
-				setRootType("table");
-			} else {
-				setRootType("root");
-			}
 
 			if (elementDOM !== null) {
 				if ($isListNode(element)) {
@@ -235,7 +220,7 @@ export default function ToolbarPlugin({
 		<div className="toolbar__wrapper">
 			<div className="toolbar">
 				<button
-					disabled={!canUndo && !editor.isEditable()}
+					disabled={!canUndo || !editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(UNDO_COMMAND, undefined);
 					}}
@@ -247,7 +232,7 @@ export default function ToolbarPlugin({
 					</i>
 				</button>
 				<button
-					disabled={!canRedo && !editor.isEditable()}
+					disabled={!canRedo || !editor.isEditable()}
 					onClick={() => {
 						activeEditor.dispatchCommand(REDO_COMMAND, undefined);
 					}}
@@ -263,9 +248,9 @@ export default function ToolbarPlugin({
 					<>
 						<BlockTextFormat
 							blockType={blockType}
-							rootType={rootType}
 							editor={editor}
 							disabled={!editor.isEditable()}
+							showToolbarText={showToolbarText}
 						/>
 						<Divider />
 					</>
@@ -322,7 +307,7 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<TableIcon />
 					</i>
-					<span className="text">Table</span>
+					{showToolbarText && <span className="text">Table</span>}
 				</button>
 				<Divider />
 				<button
@@ -341,7 +326,7 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<ImageIcon />
 					</i>
-					<span className="text">Image</span>
+					{showToolbarText && <span className="text">Image</span>}
 				</button>
 			</div>
 			{setEditable && (
@@ -356,7 +341,7 @@ export default function ToolbarPlugin({
 						<i className="icon ">
 							<SaveIcon />
 						</i>
-						<span className="text">Save</span>
+						{showToolbarText && <span className="text">Save</span>}
 					</button>
 				</div>
 			)}
