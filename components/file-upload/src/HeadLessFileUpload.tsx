@@ -8,7 +8,7 @@ export interface HeadlessFileUploadProps {
 	className?: string;
 }
 
-function HeadlessFileUpload(
+function HeadLessFileUpload(
 	props: HeadlessFileUploadProps,
 	ref: ForwardedRef<HTMLInputElement>,
 ) {
@@ -39,4 +39,4 @@ function HeadlessFileUpload(
 	);
 }
 
-export default forwardRef(HeadlessFileUpload);
+export default forwardRef(HeadLessFileUpload);
