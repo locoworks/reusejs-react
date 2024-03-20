@@ -1,6 +1,6 @@
 import React, { ForwardedRef, forwardRef } from "react";
 
-export interface HeadlessFileUploadProps {
+export interface HeadLessFileUploadProps {
 	acceptedFileTypes?: Array<string>;
 	allowsMultiple?: boolean;
 	handleAfterFileUploadHook?: (files: FileList | null) => Promise<void>;
@@ -8,8 +8,8 @@ export interface HeadlessFileUploadProps {
 	className?: string;
 }
 
-function HeadlessFileUpload(
-	props: HeadlessFileUploadProps,
+function HeadLessFileUpload(
+	props: HeadLessFileUploadProps,
 	ref: ForwardedRef<HTMLInputElement>,
 ) {
 	const {
@@ -39,4 +39,4 @@ function HeadlessFileUpload(
 	);
 }
 
-export default forwardRef(HeadlessFileUpload);
+export default forwardRef(HeadLessFileUpload);

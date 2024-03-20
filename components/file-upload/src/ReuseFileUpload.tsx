@@ -1,8 +1,8 @@
-import React, { ForwardedRef, forwardRef, useState } from "react";
-import { HeadlessFileUploadProps } from "./HeadlessFileUpload";
-import HeadlessFileUpload from "./HeadlessFileUpload";
+import React, { ForwardedRef, forwardRef, useEffect, useState } from "react";
+import { HeadLessFileUploadProps } from "./HeadLessFileUpload";
+import HeadLessFileUpload from "./HeadLessFileUpload";
 import { twMerge } from "tailwind-merge";
-export interface ReuseFileUploadProps extends HeadlessFileUploadProps {
+export interface ReuseFileUploadProps extends HeadLessFileUploadProps {
 	baseClassName?: string;
 	wrapperClassName?: string;
 	showChildren?: boolean;
@@ -13,6 +13,9 @@ export interface ReuseFileUploadProps extends HeadlessFileUploadProps {
 	customLoader?: React.ReactNode | React.ReactNode[];
 	fileSize?: number;
 	setCustomError?: (e: any) => void;
+	enableDragAndDrop?: boolean;
+	dragAndDropRef?: any;
+	setIsDraggedOver?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ReuseFileUpload(
@@ -20,6 +23,7 @@ function ReuseFileUpload(
 	ref: ForwardedRef<HTMLInputElement>,
 ) {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	const {
 		baseClassName = "",
 		wrapperClassName = "",
@@ -31,28 +35,45 @@ function ReuseFileUpload(
 		customLoader = null,
 		fileSize = 5242880, //5mb
 		setCustomError = () => {},
+		enableDragAndDrop = false,
+		dragAndDropRef,
+		setIsDraggedOver,
 		...rest
 	} = props;
 
-	const readFile = (file: File) => {
-		return new Promise<string | ArrayBuffer | null>((resolve) => {
-			const reader = new FileReader();
-			reader.onloadend = () => resolve(reader.result);
-			reader.readAsDataURL(file);
-		});
-	};
-	const loadFile = async (files: FileList) => {
-		try {
-			for (let i = 0; i < files.length; i++) {
-				await readFile(files[i]);
+	useEffect(() => {
+		if (
+			enableDragAndDrop &&
+			dragAndDropRef !== undefined &&
+			dragAndDropRef?.current
+		) {
+			dragAndDropRef.current.ondragover = handleDragOver;
+			dragAndDropRef.current.ondragleave = handleDragLeave;
+			dragAndDropRef.current.ondrop = handleDrop;
+		}
+	}, [enableDragAndDrop, enableDragAndDrop]);
+
+	const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDraggedOver && setIsDraggedOver(false);
+		if (enableDragAndDrop) {
+			if (typeof ref === "object" && ref !== null && ref.current !== null) {
+				ref.current.files = e.dataTransfer.files;
+				const event = new Event("change", { bubbles: true });
+				ref.current.dispatchEvent(event);
 			}
-		} catch (error) {
-			console.log(error);
-			setCustomError(error);
-		} finally {
-			setIsLoading(false);
 		}
 	};
+
+	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDraggedOver && setIsDraggedOver(true);
+	};
+	const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		setIsDraggedOver && setIsDraggedOver(false);
+	};
+
 	const LoaderFunction = async (e: any) => {
 		if (typeof ref === "object" && ref !== null && ref.current !== null) {
 			const files = e.target.files;
@@ -62,9 +83,6 @@ function ReuseFileUpload(
 					const isValid = await validateInput(e, files);
 					if (!isValid) {
 						e.target.value = "";
-					}
-					if (isValid) {
-						await loadFile(files);
 					}
 					setIsLoading(false);
 				} catch (error) {
@@ -145,7 +163,12 @@ function ReuseFileUpload(
 	);
 
 	return (
-		<div className={wrapperClassName}>
+		<div
+			className={wrapperClassName}
+			onDragOver={handleDragOver}
+			onDrop={handleDrop}
+			onDragLeave={handleDragLeave}
+		>
 			{isLoading ? (
 				customLoader ? (
 					customLoader
@@ -160,7 +183,7 @@ function ReuseFileUpload(
 			) : (
 				<>
 					{showChildren ? childrenWithProps : <></>}
-					<HeadlessFileUpload
+					<HeadLessFileUpload
 						ref={ref}
 						className={twMerge("hidden " + baseClassName)}
 						handleAfterFileUploadHook={prepareOnChange}

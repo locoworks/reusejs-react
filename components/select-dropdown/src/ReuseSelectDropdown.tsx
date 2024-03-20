@@ -33,6 +33,9 @@ export interface ReuseSelectProps {
 	selectButtonStyles?: string | CSSProperties;
 	selectButtonOverflowWrappper?: string | CSSProperties;
 	inputStyles?: string | CSSProperties;
+	activeStyles?: string | CSSProperties;
+	inactiveStyles?: string | CSSProperties;
+	borderStyles?: string | CSSProperties;
 	refresh?: any;
 }
 
@@ -144,6 +147,9 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<
 		selectButtonOverflowWrappper = "",
 		inputStyles = "",
 		refresh,
+		activeStyles = "",
+		inactiveStyles = "",
+		borderStyles = "",
 	},
 	ref,
 ) => {
@@ -272,6 +278,9 @@ const ReuseSelectDropDown: React.ForwardRefRenderFunction<
 												filteredOptions={filteredOptions}
 												addOrRemove={addOrRemove}
 												multiple={multiple}
+												activeStyles={activeStyles}
+												inactiveStyles={inactiveStyles}
+												borderStyles={borderStyles}
 											/>
 										);
 									},

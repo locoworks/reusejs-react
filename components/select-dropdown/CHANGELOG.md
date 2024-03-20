@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-select-dropdown
 
+## 0.3.0
+
+### Minor Changes
+
+- c36d8eb: added props to ReuseSelectDropDown component.
+
 ## 0.2.0
 
 ### Minor Changes
