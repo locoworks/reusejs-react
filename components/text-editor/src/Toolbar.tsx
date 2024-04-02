@@ -8,6 +8,10 @@ import {
 } from "@lexical/list";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
+	$getSelectionStyleValueForProperty,
+	$patchStyleText,
+} from "@lexical/selection";
+import {
 	$findMatchingParent,
 	$getNearestNodeOfType,
 	mergeRegister,
@@ -26,13 +30,16 @@ import {
 	UNDO_COMMAND,
 } from "lexical";
 import { useCallback, useEffect, useState } from "react";
+import DropdownColorPicker from "./DropdownColorPicker";
 
 import useModal from "../utils/useModal";
 import { InsertNewTableDialog } from "../plugins/TablePlugin/TablePlugin";
 import { InsertImageDialog } from "../plugins/ImagePlugin/ImagePlugin";
 import {
+	BgColor,
 	BoldIcon,
 	BulletListIcon,
+	FontColor,
 	ImageIcon,
 	ItalicIcon,
 	NumberedListIcon,
@@ -115,10 +122,18 @@ export default function ToolbarPlugin({
 	convertFilesToImageUrl,
 	setEditable,
 	showToolbarText,
+	textColor,
+	bgColor,
+	setTextColor,
+	setBgColor,
 }: {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 	showToolbarText: boolean;
+	textColor: string;
+	bgColor: string;
+	setTextColor: (color: string) => void;
+	setBgColor: (color: string) => void;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
@@ -154,6 +169,16 @@ export default function ToolbarPlugin({
 			setIsBold(selection.hasFormat("bold"));
 			setIsItalic(selection.hasFormat("italic"));
 			setIsUnderline(selection.hasFormat("underline"));
+			setTextColor(
+				$getSelectionStyleValueForProperty(selection, "color", "#000"),
+			);
+			setBgColor(
+				$getSelectionStyleValueForProperty(
+					selection,
+					"background-color",
+					"#fff",
+				),
+			);
 
 			if (elementDOM !== null) {
 				if ($isListNode(element)) {
@@ -174,6 +199,47 @@ export default function ToolbarPlugin({
 			}
 		}
 	}, [activeEditor]);
+
+	const applyStyleText = useCallback(
+		(styles: Record<string, string>, skipHistoryStack?: boolean) => {
+			activeEditor.update(
+				() => {
+					const selection = $getSelection();
+					if (selection !== null) {
+						// Check if the selection is a RangeSelection or GridSelection
+						if ("anchor" in selection && "focus" in selection) {
+							// It's safe to call $patchStyleText with a RangeSelection or GridSelection
+							$patchStyleText(selection, styles);
+						} else {
+							// Handle the case where the selection is a NodeSelection
+							// This is a placeholder for handling NodeSelection
+							// You might need to implement specific logic based on your application's needs
+							console.warn(
+								"Unsupported selection type for applying styles:",
+								selection,
+							);
+						}
+					}
+				},
+				skipHistoryStack ? { tag: "historic" } : {},
+			);
+		},
+		[activeEditor],
+	);
+
+	const onFontColorSelect = useCallback(
+		(value: string, skipHistoryStack: boolean) => {
+			applyStyleText({ color: value }, skipHistoryStack);
+		},
+		[applyStyleText],
+	);
+
+	const onBgColorSelect = useCallback(
+		(value: string, skipHistoryStack: boolean) => {
+			applyStyleText({ "background-color": value }, skipHistoryStack);
+		},
+		[applyStyleText],
+	);
 
 	useEffect(() => {
 		return editor.registerCommand(
@@ -328,6 +394,27 @@ export default function ToolbarPlugin({
 					</i>
 					{showToolbarText && <span className="text">Image</span>}
 				</button>
+				<Divider />
+				<DropdownColorPicker
+					disabled={!editor.isEditable()}
+					buttonClassName="toolbar-item color-picker"
+					buttonAriaLabel="Formatting text color"
+					buttonIconClassName="icon font-color"
+					color={textColor}
+					onChange={onFontColorSelect}
+					title="text color"
+					icon={<FontColor />}
+				/>
+				<DropdownColorPicker
+					disabled={!editor.isEditable()}
+					buttonClassName="toolbar-item color-picker"
+					buttonAriaLabel="Formatting background color"
+					buttonIconClassName="icon bg-color"
+					color={bgColor}
+					onChange={onBgColorSelect}
+					title="bg color"
+					icon={<BgColor />}
+				/>
 			</div>
 			{setEditable && (
 				<div className="toolbar">

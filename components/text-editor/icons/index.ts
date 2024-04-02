@@ -13,3 +13,5 @@ export { default as TableIcon } from "./TableIcon";
 export { default as UnderlineIcon } from "./UnderlineIcon";
 export { default as UndoIcon } from "./UndoIcon";
 export { default as UserIcon } from "./UserIcon";
+export { default as FontColor } from "./FontColor";
+export { default as BgColor } from "./BgColor";
