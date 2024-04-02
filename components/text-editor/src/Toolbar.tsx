@@ -206,14 +206,9 @@ export default function ToolbarPlugin({
 				() => {
 					const selection = $getSelection();
 					if (selection !== null) {
-						// Check if the selection is a RangeSelection or GridSelection
 						if ("anchor" in selection && "focus" in selection) {
-							// It's safe to call $patchStyleText with a RangeSelection or GridSelection
 							$patchStyleText(selection, styles);
 						} else {
-							// Handle the case where the selection is a NodeSelection
-							// This is a placeholder for handling NodeSelection
-							// You might need to implement specific logic based on your application's needs
 							console.warn(
 								"Unsupported selection type for applying styles:",
 								selection,
