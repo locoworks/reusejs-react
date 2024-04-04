@@ -1,6 +1,6 @@
 {
   "name": "@locoworks/reusejs-react-text-editor",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/types/index.d.ts",
