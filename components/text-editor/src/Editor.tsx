@@ -79,6 +79,8 @@ function Editor({
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
+	const [textColor, setTextColor] = useState("#000000");
+	const [bgColor, setBgColor] = useState<string>("#fff");
 	const [floatingAnchorElem, setFloatingAnchorElem] =
 		useState<HTMLDivElement | null>(null);
 
@@ -137,7 +139,6 @@ function Editor({
 			payload["json"] = JSON.stringify(editor.getEditorState());
 			if (mentionsData) payload["mentions"] = $nodesOfType(MentionNode);
 			payload["content"] = getCustomTextContent();
-
 			onChangeCallback?.(editorRef.current, payload);
 		});
 
@@ -199,15 +200,25 @@ function Editor({
 							convertFilesToImageUrl={convertFilesToImageUrl}
 							setEditable={setEditable}
 							showToolbarText={showToolbarText}
+							textColor={textColor}
+							bgColor={bgColor}
+							setTextColor={setTextColor}
+							setBgColor={setBgColor}
 						/>
 					)}
 
 					<ListPlugin />
 					<RichTextPlugin
 						contentEditable={
-							<div className="editor-scroller border border-gray-300">
+							<div
+								className="editor-scroller border border-gray-300"
+								style={{ color: textColor }}
+							>
 								<div className="editor" ref={onRef}>
-									<ContentEditable className="editor-contentEditable" />
+									<ContentEditable
+										className="editor-contentEditable"
+										onClick={(e: any) => e.stopPropagation()}
+									/>
 								</div>
 							</div>
 						}
