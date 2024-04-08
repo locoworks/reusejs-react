@@ -122,18 +122,10 @@ export default function ToolbarPlugin({
 	convertFilesToImageUrl,
 	setEditable,
 	showToolbarText,
-	textColor,
-	bgColor,
-	setTextColor,
-	setBgColor,
 }: {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 	showToolbarText: boolean;
-	textColor: string;
-	bgColor: string;
-	setTextColor: (color: string) => void;
-	setBgColor: (color: string) => void;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
@@ -143,6 +135,8 @@ export default function ToolbarPlugin({
 	const [isBold, setIsBold] = useState(false);
 	const [isItalic, setIsItalic] = useState(false);
 	const [isUnderline, setIsUnderline] = useState(false);
+	const [fontColor, setFontColor] = useState("#000000");
+	const [bgColor, setBgColor] = useState<string>("#fff");
 	const [canUndo, setCanUndo] = useState(false);
 	const [canRedo, setCanRedo] = useState(false);
 	const [modal, showModal] = useModal();
@@ -169,7 +163,8 @@ export default function ToolbarPlugin({
 			setIsBold(selection.hasFormat("bold"));
 			setIsItalic(selection.hasFormat("italic"));
 			setIsUnderline(selection.hasFormat("underline"));
-			setTextColor(
+
+			setFontColor(
 				$getSelectionStyleValueForProperty(selection, "color", "#000"),
 			);
 			setBgColor(
@@ -395,7 +390,7 @@ export default function ToolbarPlugin({
 					buttonClassName="toolbar-item color-picker"
 					buttonAriaLabel="Formatting text color"
 					buttonIconClassName="icon font-color"
-					color={textColor}
+					color={fontColor}
 					onChange={onFontColorSelect}
 					title="text color"
 					icon={<FontColor />}
