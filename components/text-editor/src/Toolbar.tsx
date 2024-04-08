@@ -164,6 +164,17 @@ export default function ToolbarPlugin({
 			setIsItalic(selection.hasFormat("italic"));
 			setIsUnderline(selection.hasFormat("underline"));
 
+			setFontColor(
+				$getSelectionStyleValueForProperty(selection, "color", "#000"),
+			);
+			setBgColor(
+				$getSelectionStyleValueForProperty(
+					selection,
+					"background-color",
+					"#fff",
+				),
+			);
+
 			if (elementDOM !== null) {
 				if ($isListNode(element)) {
 					const parentList = $getNearestNodeOfType<ListNode>(
@@ -181,17 +192,6 @@ export default function ToolbarPlugin({
 					}
 				}
 			}
-
-			setFontColor(
-				$getSelectionStyleValueForProperty(selection, "color", "#000"),
-			);
-			setBgColor(
-				$getSelectionStyleValueForProperty(
-					selection,
-					"background-color",
-					"#fff",
-				),
-			);
 		}
 	}, [activeEditor]);
 
