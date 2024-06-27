@@ -1,5 +1,14 @@
 # @locoworks/reusejs-toolkit-react-hooks
 
+## 3.0.0
+
+### Major Changes
+
+- 5e9f41a: useTimer Hook:
+
+  - A custom React hook for managing and displaying timer values.
+  - To create and manage timers, making it easy to implement countdowns or time tracking features as used in HeadlessVideoRecorder.
+
 ## 2.1.0
 
 ### Minor Changes
