@@ -7,8 +7,8 @@
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
-  top: 4rem;
-  left: 1.5rem;
+  top: 0.5rem;
+  left: 1.75rem;
 }
 .editor-shell .editor-container {
   background: #fff;
@@ -21,6 +21,7 @@
   position: relative;
   z-index: -1;
   height: inherit;
+  border: 1px solid rgb(187, 187, 187);
 }
 
 .editor-contentEditable {
@@ -773,12 +774,13 @@ button.item.dropdown-item-active i {
   overflow: hidden;
 }
 .editor-shell {
-  margin: 20px auto;
+  padding: 20px auto;
   border-radius: 2px;
   color: #000;
   position: relative;
   line-height: 1.7;
   font-weight: 400;
+  border: #666;
 }
 .editor-shell span.editor-image {
   cursor: default;

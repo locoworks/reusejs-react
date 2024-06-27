@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-date-picker
 
+## 3.1.1
+
+### Patch Changes
+
+- 9ad33a7: Added support for empty default date
+
 ## 3.1.0
 
 ### Minor Changes

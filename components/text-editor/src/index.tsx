@@ -37,6 +37,8 @@ type Props = {
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 	placeholderText?: string;
 	htmlData?: string;
+	hideToolbar?: boolean;
+	showToolbarText?: boolean;
 };
 
 const TextEditor = ({
@@ -49,6 +51,8 @@ const TextEditor = ({
 	setEditable,
 	placeholderText,
 	htmlData,
+	hideToolbar = false,
+	showToolbarText = false,
 }: Props) => {
 	const editorRef = useRef<LexicalEditor>(null);
 
@@ -86,6 +90,8 @@ const TextEditor = ({
 							setEditable={setEditable}
 							editorRef={editorRef}
 							placeholderText={placeholderText}
+							hideToolbar={hideToolbar}
+							showToolbarText={showToolbarText}
 						/>
 					</div>
 				</TableContext>

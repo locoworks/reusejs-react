@@ -13,7 +13,7 @@ type DateObj = {
 
 export interface SingleDatePickerProps {
 	onChange: (date: Date) => void;
-	selected: Date;
+	selected?: Date;
 	maxDate?: Date;
 	minDate?: Date;
 	showOutsideDays?: boolean;

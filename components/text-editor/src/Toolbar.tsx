@@ -8,6 +8,10 @@ import {
 } from "@lexical/list";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
+	$getSelectionStyleValueForProperty,
+	$patchStyleText,
+} from "@lexical/selection";
+import {
 	$findMatchingParent,
 	$getNearestNodeOfType,
 	mergeRegister,
@@ -26,13 +30,16 @@ import {
 	UNDO_COMMAND,
 } from "lexical";
 import { useCallback, useEffect, useState } from "react";
+import DropdownColorPicker from "./DropdownColorPicker";
 
 import useModal from "../utils/useModal";
 import { InsertNewTableDialog } from "../plugins/TablePlugin/TablePlugin";
 import { InsertImageDialog } from "../plugins/ImagePlugin/ImagePlugin";
 import {
+	BgColor,
 	BoldIcon,
 	BulletListIcon,
+	FontColor,
 	ImageIcon,
 	ItalicIcon,
 	NumberedListIcon,
@@ -58,10 +65,12 @@ function BlockTextFormat({
 	editor,
 	blockType,
 	disabled = false,
+	showToolbarText,
 }: {
 	blockType: keyof typeof blockTypeToBlockName;
 	editor: LexicalEditor;
 	disabled?: boolean;
+	showToolbarText?: boolean;
 }): JSX.Element {
 	const formatBulletList = () => {
 		if (blockType !== "bullet") {
@@ -89,7 +98,7 @@ function BlockTextFormat({
 				<i className="icon ">
 					<BulletListIcon />
 				</i>
-				<span className="text">Bullet List</span>
+				{showToolbarText && <span className="text">Bullet List</span>}
 			</button>
 			<button
 				disabled={disabled}
@@ -99,7 +108,7 @@ function BlockTextFormat({
 				<i className="icon ">
 					<NumberedListIcon />
 				</i>
-				<span className="text">Numbered List</span>
+				{showToolbarText && <span className="text">Numbered List</span>}
 			</button>
 		</>
 	);
@@ -112,9 +121,11 @@ function Divider(): JSX.Element {
 export default function ToolbarPlugin({
 	convertFilesToImageUrl,
 	setEditable,
+	showToolbarText,
 }: {
 	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
+	showToolbarText: boolean;
 }): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const [activeEditor, setActiveEditor] = useState(editor);
@@ -124,6 +135,8 @@ export default function ToolbarPlugin({
 	const [isBold, setIsBold] = useState(false);
 	const [isItalic, setIsItalic] = useState(false);
 	const [isUnderline, setIsUnderline] = useState(false);
+	const [fontColor, setFontColor] = useState("#000000");
+	const [bgColor, setBgColor] = useState<string>("#fff");
 	const [canUndo, setCanUndo] = useState(false);
 	const [canRedo, setCanRedo] = useState(false);
 	const [modal, showModal] = useModal();
@@ -151,6 +164,17 @@ export default function ToolbarPlugin({
 			setIsItalic(selection.hasFormat("italic"));
 			setIsUnderline(selection.hasFormat("underline"));
 
+			setFontColor(
+				$getSelectionStyleValueForProperty(selection, "color", "#000"),
+			);
+			setBgColor(
+				$getSelectionStyleValueForProperty(
+					selection,
+					"background-color",
+					"#fff",
+				),
+			);
+
 			if (elementDOM !== null) {
 				if ($isListNode(element)) {
 					const parentList = $getNearestNodeOfType<ListNode>(
@@ -170,6 +194,42 @@ export default function ToolbarPlugin({
 			}
 		}
 	}, [activeEditor]);
+
+	const applyStyleText = useCallback(
+		(styles: Record<string, string>, skipHistoryStack?: boolean) => {
+			activeEditor.update(
+				() => {
+					const selection = $getSelection();
+					if (selection !== null) {
+						if ("anchor" in selection && "focus" in selection) {
+							$patchStyleText(selection, styles);
+						} else {
+							console.warn(
+								"Unsupported selection type for applying styles:",
+								selection,
+							);
+						}
+					}
+				},
+				skipHistoryStack ? { tag: "historic" } : {},
+			);
+		},
+		[activeEditor],
+	);
+
+	const onFontColorSelect = useCallback(
+		(value: string, skipHistoryStack: boolean) => {
+			applyStyleText({ color: value }, skipHistoryStack);
+		},
+		[applyStyleText],
+	);
+
+	const onBgColorSelect = useCallback(
+		(value: string, skipHistoryStack: boolean) => {
+			applyStyleText({ "background-color": value }, skipHistoryStack);
+		},
+		[applyStyleText],
+	);
 
 	useEffect(() => {
 		return editor.registerCommand(
@@ -246,6 +306,7 @@ export default function ToolbarPlugin({
 							blockType={blockType}
 							editor={editor}
 							disabled={!editor.isEditable()}
+							showToolbarText={showToolbarText}
 						/>
 						<Divider />
 					</>
@@ -302,7 +363,7 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<TableIcon />
 					</i>
-					<span className="text">Table</span>
+					{showToolbarText && <span className="text">Table</span>}
 				</button>
 				<Divider />
 				<button
@@ -321,8 +382,29 @@ export default function ToolbarPlugin({
 					<i className="icon ">
 						<ImageIcon />
 					</i>
-					<span className="text">Image</span>
+					{showToolbarText && <span className="text">Image</span>}
 				</button>
+				<Divider />
+				<DropdownColorPicker
+					disabled={!editor.isEditable()}
+					buttonClassName="toolbar-item color-picker"
+					buttonAriaLabel="Formatting text color"
+					buttonIconClassName="icon font-color"
+					color={fontColor}
+					onChange={onFontColorSelect}
+					title="text color"
+					icon={<FontColor />}
+				/>
+				<DropdownColorPicker
+					disabled={!editor.isEditable()}
+					buttonClassName="toolbar-item color-picker"
+					buttonAriaLabel="Formatting background color"
+					buttonIconClassName="icon bg-color"
+					color={bgColor}
+					onChange={onBgColorSelect}
+					title="bg color"
+					icon={<BgColor />}
+				/>
 			</div>
 			{setEditable && (
 				<div className="toolbar">
@@ -336,7 +418,7 @@ export default function ToolbarPlugin({
 						<i className="icon ">
 							<SaveIcon />
 						</i>
-						<span className="text">Save</span>
+						{showToolbarText && <span className="text">Save</span>}
 					</button>
 				</div>
 			)}

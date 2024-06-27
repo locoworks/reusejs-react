@@ -61,6 +61,8 @@ type EditorProps = {
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	placeholderText?: string;
 	htmlData?: string;
+	hideToolbar?: boolean;
+	showToolbarText?: boolean;
 };
 function Editor({
 	editorRef,
@@ -72,6 +74,8 @@ function Editor({
 	onChangeCallback,
 	placeholderText = "Start Typing...",
 	htmlData,
+	hideToolbar = false,
+	showToolbarText = false,
 }: EditorProps): JSX.Element {
 	const [editor] = useLexicalComposerContext();
 	const isEditable = useLexicalEditable();
@@ -133,7 +137,6 @@ function Editor({
 			payload["json"] = JSON.stringify(editor.getEditorState());
 			if (mentionsData) payload["mentions"] = $nodesOfType(MentionNode);
 			payload["content"] = getCustomTextContent();
-
 			onChangeCallback?.(editorRef.current, payload);
 		});
 
@@ -190,16 +193,23 @@ function Editor({
 		<>
 			{isEditable && (
 				<div className="editor-container">
-					<ToolbarPlugin
-						convertFilesToImageUrl={convertFilesToImageUrl}
-						setEditable={setEditable}
-					/>
+					{hideToolbar === false && (
+						<ToolbarPlugin
+							convertFilesToImageUrl={convertFilesToImageUrl}
+							setEditable={setEditable}
+							showToolbarText={showToolbarText}
+						/>
+					)}
+
 					<ListPlugin />
 					<RichTextPlugin
 						contentEditable={
-							<div className="editor-scroller">
+							<div className="editor-scroller border border-gray-300">
 								<div className="editor" ref={onRef}>
-									<ContentEditable className="editor-contentEditable" />
+									<ContentEditable
+										className="editor-contentEditable"
+										onClick={(e: any) => e.stopPropagation()}
+									/>
 								</div>
 							</div>
 						}
@@ -219,7 +229,10 @@ function Editor({
 					<NewTablePlugin cellEditorConfig={cellEditorConfig}>
 						<RichTextPlugin
 							contentEditable={
-								<ContentEditable className="TableNode__contentEditable" />
+								<ContentEditable
+									className="TableNode__contentEditable"
+									onClick={(e: any) => e.stopPropagation()}
+								/>
 							}
 							placeholder={null}
 							ErrorBoundary={LexicalErrorBoundary}
