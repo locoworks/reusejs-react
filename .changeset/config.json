@@ -23,7 +23,7 @@
     "text-editor-app",
     "toast-app",
     "toolkits-app",
-    "video-recorder-app"
+    "video-recorder-app",
     "file-upload-app"
   ]
 }
