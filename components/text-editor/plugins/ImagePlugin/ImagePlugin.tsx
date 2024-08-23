@@ -12,7 +12,6 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { $wrapNodeInElement, mergeRegister } from "@lexical/utils";
 
 import { $createImageNode, ImageNode, ImagePayload } from "./ImageNode";
-
 export type InsertImagePayload = Readonly<ImagePayload>;
 
 export const INSERT_IMAGE_COMMAND: LexicalCommand<InsertImagePayload> =
@@ -79,26 +78,26 @@ export function InsertImageUploadedDialogBody({
 	convertFilesToImageUrl,
 }: {
 	onClick: (payload: InsertImagePayload) => void;
-	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
+	convertFilesToImageUrl: (
+		files: FileList | null,
+	) => Promise<Array<string> | null> | Array<string> | null;
 }) {
-	const [imageUrls, setImageUrls] = useState<Array<string> | null>(null);
 	const [altText, setAltText] = useState<string>("");
-	const isDisabled = imageUrls === null;
+	const [files, setFiles] = useState<FileList | null>(null);
+	const isDisabled = files === null;
 
 	const loadImage = (files: FileList | null) => {
 		if (files && files.length > 0) {
-			const convertedImageUrls = convertFilesToImageUrl(files);
-			if (convertedImageUrls !== null) {
-				setImageUrls(convertedImageUrls);
-			} else {
-				throw new Error("Could not find image url");
-			}
+			setFiles(files);
+		} else {
+			throw new Error("Could not find image");
 		}
 	};
 
-	const handleClick = () => {
-		if (imageUrls !== null) {
-			imageUrls.map((src) => {
+	const handleClick = async () => {
+		const convertedImageUrls = await convertFilesToImageUrl(files);
+		if (convertedImageUrls !== null) {
+			convertedImageUrls.map((src) => {
 				onClick({ altText, src });
 			});
 		} else {
@@ -138,7 +137,7 @@ export function InsertImageUploadedDialogBody({
 					className="button"
 					data-test-id="image-modal-file-upload-btn"
 					disabled={isDisabled}
-					onClick={handleClick}
+					onClick={async () => await handleClick()}
 				>
 					Confirm
 				</button>
@@ -154,7 +153,9 @@ export function InsertImageDialog({
 }: {
 	activeEditor: LexicalEditor;
 	onClose: () => void;
-	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
+	convertFilesToImageUrl: (
+		files: FileList | null,
+	) => Promise<Array<string> | null> | Array<string> | null;
 }): JSX.Element {
 	const [mode, setMode] = useState<null | "url" | "file">(null);
 	const hasModifier = useRef(false);

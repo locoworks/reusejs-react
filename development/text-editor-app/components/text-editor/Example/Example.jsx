@@ -6,10 +6,11 @@ const Example = () => {
 	const [editable, setEditable] = useState(false);
 	const [data, setData] = useState("Here");
 
-	function convertFilesToImageUrl(files) {
+	async function convertFilesToImageUrl(files) {
 		if (!files || files.length === 0) {
 			return null;
 		}
+
 		const imageUrls = [];
 
 		for (let i = 0; i < files.length; i++) {
