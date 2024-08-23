@@ -57,7 +57,9 @@ type EditorProps = {
 		mentionName: string;
 		label: string;
 	}>;
-	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
+	convertFilesToImageUrl: (
+		files: FileList | null,
+	) => Promise<Array<string> | null>;
 	onChangeCallback?: (editorRef: LexicalEditor | null, payload: any) => void;
 	placeholderText?: string;
 	htmlData?: string;

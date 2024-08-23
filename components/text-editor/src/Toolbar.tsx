@@ -123,7 +123,9 @@ export default function ToolbarPlugin({
 	setEditable,
 	showToolbarText,
 }: {
-	convertFilesToImageUrl: (files: FileList | null) => Array<string> | null;
+	convertFilesToImageUrl: (
+		files: FileList | null,
+	) => Promise<Array<string> | null>;
 	setEditable?: React.Dispatch<React.SetStateAction<boolean>>;
 	showToolbarText: boolean;
 }): JSX.Element {
