@@ -8,6 +8,10 @@ import {
 } from "@lexical/list";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
+	$getSelectionStyleValueForProperty,
+	$patchStyleText,
+} from "@lexical/selection";
+import {
 	$findMatchingParent,
 	$getNearestNodeOfType,
 	mergeRegister,
@@ -26,13 +30,16 @@ import {
 	UNDO_COMMAND,
 } from "lexical";
 import { useCallback, useEffect, useState } from "react";
+import DropdownColorPicker from "./DropdownColorPicker";
 
 import useModal from "../utils/useModal";
 import { InsertNewTableDialog } from "../plugins/TablePlugin/TablePlugin";
 import { InsertImageDialog } from "../plugins/ImagePlugin/ImagePlugin";
 import {
+	BgColor,
 	BoldIcon,
 	BulletListIcon,
+	FontColor,
 	ImageIcon,
 	ItalicIcon,
 	NumberedListIcon,
@@ -128,6 +135,8 @@ export default function ToolbarPlugin({
 	const [isBold, setIsBold] = useState(false);
 	const [isItalic, setIsItalic] = useState(false);
 	const [isUnderline, setIsUnderline] = useState(false);
+	const [fontColor, setFontColor] = useState("#000000");
+	const [bgColor, setBgColor] = useState<string>("#fff");
 	const [canUndo, setCanUndo] = useState(false);
 	const [canRedo, setCanRedo] = useState(false);
 	const [modal, showModal] = useModal();
@@ -155,6 +164,17 @@ export default function ToolbarPlugin({
 			setIsItalic(selection.hasFormat("italic"));
 			setIsUnderline(selection.hasFormat("underline"));
 
+			setFontColor(
+				$getSelectionStyleValueForProperty(selection, "color", "#000"),
+			);
+			setBgColor(
+				$getSelectionStyleValueForProperty(
+					selection,
+					"background-color",
+					"#fff",
+				),
+			);
+
 			if (elementDOM !== null) {
 				if ($isListNode(element)) {
 					const parentList = $getNearestNodeOfType<ListNode>(
@@ -174,6 +194,42 @@ export default function ToolbarPlugin({
 			}
 		}
 	}, [activeEditor]);
+
+	const applyStyleText = useCallback(
+		(styles: Record<string, string>, skipHistoryStack?: boolean) => {
+			activeEditor.update(
+				() => {
+					const selection = $getSelection();
+					if (selection !== null) {
+						if ("anchor" in selection && "focus" in selection) {
+							$patchStyleText(selection, styles);
+						} else {
+							console.warn(
+								"Unsupported selection type for applying styles:",
+								selection,
+							);
+						}
+					}
+				},
+				skipHistoryStack ? { tag: "historic" } : {},
+			);
+		},
+		[activeEditor],
+	);
+
+	const onFontColorSelect = useCallback(
+		(value: string, skipHistoryStack: boolean) => {
+			applyStyleText({ color: value }, skipHistoryStack);
+		},
+		[applyStyleText],
+	);
+
+	const onBgColorSelect = useCallback(
+		(value: string, skipHistoryStack: boolean) => {
+			applyStyleText({ "background-color": value }, skipHistoryStack);
+		},
+		[applyStyleText],
+	);
 
 	useEffect(() => {
 		return editor.registerCommand(
@@ -328,6 +384,27 @@ export default function ToolbarPlugin({
 					</i>
 					{showToolbarText && <span className="text">Image</span>}
 				</button>
+				<Divider />
+				<DropdownColorPicker
+					disabled={!editor.isEditable()}
+					buttonClassName="toolbar-item color-picker"
+					buttonAriaLabel="Formatting text color"
+					buttonIconClassName="icon font-color"
+					color={fontColor}
+					onChange={onFontColorSelect}
+					title="text color"
+					icon={<FontColor />}
+				/>
+				<DropdownColorPicker
+					disabled={!editor.isEditable()}
+					buttonClassName="toolbar-item color-picker"
+					buttonAriaLabel="Formatting background color"
+					buttonIconClassName="icon bg-color"
+					color={bgColor}
+					onChange={onBgColorSelect}
+					title="bg color"
+					icon={<BgColor />}
+				/>
 			</div>
 			{setEditable && (
 				<div className="toolbar">

@@ -137,7 +137,6 @@ function Editor({
 			payload["json"] = JSON.stringify(editor.getEditorState());
 			if (mentionsData) payload["mentions"] = $nodesOfType(MentionNode);
 			payload["content"] = getCustomTextContent();
-
 			onChangeCallback?.(editorRef.current, payload);
 		});
 
@@ -207,7 +206,10 @@ function Editor({
 						contentEditable={
 							<div className="editor-scroller border border-gray-300">
 								<div className="editor" ref={onRef}>
-									<ContentEditable className="editor-contentEditable" />
+									<ContentEditable
+										className="editor-contentEditable"
+										onClick={(e: any) => e.stopPropagation()}
+									/>
 								</div>
 							</div>
 						}
@@ -227,7 +229,10 @@ function Editor({
 					<NewTablePlugin cellEditorConfig={cellEditorConfig}>
 						<RichTextPlugin
 							contentEditable={
-								<ContentEditable className="TableNode__contentEditable" />
+								<ContentEditable
+									className="TableNode__contentEditable"
+									onClick={(e: any) => e.stopPropagation()}
+								/>
 							}
 							placeholder={null}
 							ErrorBoundary={LexicalErrorBoundary}

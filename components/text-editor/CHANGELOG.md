@@ -1,5 +1,17 @@
 # @locoworks/reusejs-react-text-editor
 
+## 1.1.0
+
+### Minor Changes
+
+- f5cce0e: added color codes for table
+
+## 1.0.0
+
+### Major Changes
+
+- 260ce69: Added color codes to existing Text Editor, for better user experience.
+
 ## 0.3.0
 
 ### Minor Changes
