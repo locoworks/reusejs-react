@@ -7,7 +7,7 @@ const Example = () => {
 	const [editable, setEditable] = useState<boolean>(false);
 	const [data, setData] = useState<string | TrustedHTML>("Here");
 
-	function convertFilesToImageUrl(files: FileList | null) {
+	const convertFilesToImageUrl: any = async (files: FileList | null) => {
 		if (!files || files.length === 0) {
 			return null;
 		}
@@ -20,7 +20,7 @@ const Example = () => {
 			imageUrls.push(imageUrl);
 		}
 		return imageUrls.length > 0 ? imageUrls : null;
-	}
+	};
 
 	function onChange(_editorRef: LexicalEditor | null, payload: any) {
 		setData(payload["html"]);

@@ -1,5 +1,11 @@
 # @locoworks/reusejs-react-text-editor
 
+## 2.0.0
+
+### Major Changes
+
+- 1545009: Text Editor Props updated to accept Async function which returns promises.
+
 ## 1.1.0
 
 ### Minor Changes
