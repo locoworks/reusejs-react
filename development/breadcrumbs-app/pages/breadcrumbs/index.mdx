@@ -1,0 +1,94 @@
+---
+HEAD OBJECT
+title: "ReuseJS breadcrumbs"
+author: "Md Amir Sohail"
+---
+import BreadcrumbsWithIcons from "../../components/breadcrumbs/BreadcrumbsWithIcons/BreadcrumbsWithIcons.tsx"
+import SimpleBreadcrumbs from "../../components/breadcrumbs/SimpleBreadcrumbs/SimpleBreadcrumbs.tsx"
+import SimpleBreadcrumbsTwo from "../../components/breadcrumbs/SimpleBreadcrumbsTwo/SimpleBreadcrumbsTwo.tsx"
+import SimpleBreadcrumbsThree from "../../components/breadcrumbs/SimpleBreadcrumbsThree/SimpleBreadcrumbsThree.tsx"
+import SimpleBreadcrumbsFour from "../../components/breadcrumbs/SimpleBreadcrumbsFour/SimpleBreadcrumbsFour.tsx"
+
+## Overview
+The `HeadlessBreadcrumbs/ReusejsBreadcrumbs` component is a React component that allows you to create `breadcrumbs` for better `navigation` and `user experience` in your web application. `Breadcrumbs` are a series of links that indicate the current page's location within a hierarchy of content.
+With this component, you can create `breadcrumb` trails that show the hierarchical path to the current page, making it easier for `users to understand their location within your application`.
+
+The `ReusejsBreadcrumbs` component is a versatile and customizable `breadcrumb` navigation system designed for use in React applications. The main difference is that the `HeadlessBreadcrumbs` is fully customizable, while the `ReusejsBreadcrumbs` component has some limitations in customization.
+
+In the `ReusejsBreadcrumbs`, the `HomeIcon` is fixed and cannot be overridden with a custom icon. However, developers can still customize other aspects of the component, such as `styles`, `interaction behavior`, and the `separator icon` used between breadcrumb items.
+
+## Installation
+To use the `HeadlessBreadcrumbs` component, you need to have React and the required install `@locoworks/reusejs-react-breadcrumbs` by running below command in terminal.
+
+```js
+yarn add @locoworks/reusejs-react-breadcrumbs
+or
+npm install @locoworks/reusejs-react-breadcrumbs
+```
+
+
+
+## Importing
+You can import the HeadlessBreadcrumbs component using the following import statement.
+```js
+import { HeadlessBreadcrumbs } from "@locoworks/reusejs-react-breadcrumbs";
+or 
+import { ReusejsBreadcrumbs } from "@locoworks/reusejs-react-breadcrumbs";
+```
+
+## Usage/Examples
+The first two example demonstrates how to use ReusejsBreadcrumbs, while the rest of the examples are for HeadlessBreadcrumbs.
+
+<SimpleBreadcrumbs />
+```js path=../../components/breadcrumbs/SimpleBreadcrumbs name=SimpleBreadcrumbs
+```
+
+<SimpleBreadcrumbsTwo />
+```js path=../../components/breadcrumbs/SimpleBreadcrumbsTwo name=SimpleBreadcrumbsTwo
+```
+
+<SimpleBreadcrumbsThree />
+```js path=../../components/breadcrumbs/SimpleBreadcrumbsThree name=SimpleBreadcrumbsThree
+```
+
+<SimpleBreadcrumbsFour />
+```js path=../../components/breadcrumbs/SimpleBreadcrumbsFour name=SimpleBreadcrumbsFour
+```
+
+<BreadcrumbsWithIcons />
+```js path=../../components/breadcrumbs/BreadcrumbsWithIcons name=BreadcrumbsWithIcons
+```
+## Best Practices
+- `Use Components in Breadcrumbs`: When possible, pass an array of React components instead of simple strings in the breadcrumbs prop. This allows you to add interactivity and more sophisticated visual elements to the breadcrumb trail, enhancing the overall user experience.
+- `Breadcrumb Interactivity (Optional)`: Depending on your application's complexity, you may consider adding interactivity to the breadcrumb items. For example, clicking on a breadcrumb item could trigger an action, such as returning to a specific page or category to achieve this kind of interactivity pass Array of component in breadcrumbs prop.
+
+## Props Table HeadlessBreadcrumbs
+| Prop                            | Type                            | Required | Description                                                                                                                                                                                                         |
+|---------------------------------|---------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| breadcrumbs                     | component or string array      | Yes      | An array of components or strings representing the breadcrumb items to be displayed.                                                                                                                              |
+| separator                       | component or string            | Yes      | A React node or string representing the separator between each breadcrumb item.                                                                                                                                     |
+| breadcrumbsClasses?             | string \| CSSProperties?       | No       | Additional CSS classes or inline styles to be applied to the container of the breadcrumbs.                                                                                                                        |
+| breadcrumbsContainerClasses?    | string \| CSSProperties?       | No       | Additional CSS classes or inline styles to be applied to each individual breadcrumb item container.                                                                                                               |
+| separatorClasses?               | string \| CSSProperties?       | No       | Additional CSS classes or inline styles to be applied to the separator element.         
+| maxItems?                       | number                       | No      | The maximum number of breadcrumbs items to be shown, the rest colapsed into a single spreadable item. By default, it will display all breadcrumbs items.                                               |
+| left?                           | number                       | No      | The Maximum number of breadcrumbs shown from left side |
+| rigth?                          | number                       | No      | The Maximum number of breadcrumbs shown from the right side |
+
+
+## Props Table ReusejsBreadcrumbs
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| breadcrumbs | React.ReactNode[] \| string[] | Yes | An array of React nodes or strings representing the breadcrumb items to be displayed. |
+| separator | React.ReactNode \| string | No | A React node or string representing the separator between each breadcrumb item. If not provided, a default separator icon will be used. |
+| containerClasses | string \| CSSProperties | No | Additional CSS classes or inline styles to be applied to the container of the entire breadcrumb component. |
+| maxItems | number | No | The maximum number of breadcrumbs items to be shown before collapsing the rest into a single spreadable item. By default, it will display all breadcrumb items. |                                                                                                                    |
+| iconClasses | string \| CSSProperties | No | You Can handle the Icon position and it style with this props.|                                                                                                                    |
+| left?                           | number                       | No      | The Maximum number of breadcrumbs shown from left side |
+| rigth?                          | number                       | No      | The Maximum number of breadcrumbs shown from the right side |
+
+**Note**
+MaxItems Prop: If there are more breadcrumb items than you can handle, you can choose how many you want to display using the MaxItems prop, as demonstrated in the [Examples](#usageexamples).
+
+export default ({ children }) => {
+  return <div className="prose max-w-full mx-4 pb-10" >{children}</div>
+};
